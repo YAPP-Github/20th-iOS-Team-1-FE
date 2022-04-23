@@ -18,6 +18,7 @@
 		37912C9C2814480C0087B95E /* NSLayoutConstraint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37912C9B2814480C0087B95E /* NSLayoutConstraint+Extension.swift */; };
 		37912CA0281449230087B95E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37912C9F281449230087B95E /* Coordinator.swift */; };
 		37912CA2281449610087B95E /* SceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37912CA1281449610087B95E /* SceneCoordinator.swift */; };
+		37912CA628144A530087B95E /* TabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37912CA528144A530087B95E /* TabCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		37912C9B2814480C0087B95E /* NSLayoutConstraint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Extension.swift"; sourceTree = "<group>"; };
 		37912C9F281449230087B95E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		37912CA1281449610087B95E /* SceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCoordinator.swift; sourceTree = "<group>"; };
+		37912CA528144A530087B95E /* TabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,10 +177,27 @@
 		37912C9E281449120087B95E /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
+				37912CA428144A310087B95E /* TabCoordinator */,
+				37912CA328144A260087B95E /* Protocol */,
 				37912C9F281449230087B95E /* Coordinator.swift */,
 				37912CA1281449610087B95E /* SceneCoordinator.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		37912CA328144A260087B95E /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		37912CA428144A310087B95E /* TabCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				37912CA528144A530087B95E /* TabCoordinator.swift */,
+			);
+			path = TabCoordinator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -312,6 +331,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				37912C9A281447C40087B95E /* Array+Extension.swift in Sources */,
+				37912CA628144A530087B95E /* TabCoordinator.swift in Sources */,
 				37912C9C2814480C0087B95E /* NSLayoutConstraint+Extension.swift in Sources */,
 				37912CA0281449230087B95E /* Coordinator.swift in Sources */,
 				37912CA2281449610087B95E /* SceneCoordinator.swift in Sources */,
