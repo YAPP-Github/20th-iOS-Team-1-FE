@@ -14,6 +14,8 @@
 		37912C7C281445AD0087B95E /* AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37912C7B281445AD0087B95E /* AppTests.swift */; };
 		37912C86281445AD0087B95E /* AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37912C85281445AD0087B95E /* AppUITests.swift */; };
 		37912C88281445AD0087B95E /* AppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37912C87281445AD0087B95E /* AppUITestsLaunchTests.swift */; };
+		37912C9A281447C40087B95E /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37912C99281447C40087B95E /* Array+Extension.swift */; };
+		37912C9C2814480C0087B95E /* NSLayoutConstraint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37912C9B2814480C0087B95E /* NSLayoutConstraint+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +47,8 @@
 		37912C81281445AD0087B95E /* AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		37912C85281445AD0087B95E /* AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUITests.swift; sourceTree = "<group>"; };
 		37912C87281445AD0087B95E /* AppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		37912C99281447C40087B95E /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
+		37912C9B2814480C0087B95E /* NSLayoutConstraint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +135,7 @@
 		37912C952814470B0087B95E /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				37912C98281447A80087B95E /* Extension */,
 				37912C962814475A0087B95E /* Application */,
 			);
 			path = Sources;
@@ -143,6 +148,15 @@
 				37912C66281445AC0087B95E /* SceneDelegate.swift */,
 			);
 			path = Application;
+			sourceTree = "<group>";
+		};
+		37912C98281447A80087B95E /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				37912C99281447C40087B95E /* Array+Extension.swift */,
+				37912C9B2814480C0087B95E /* NSLayoutConstraint+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -275,6 +289,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37912C9A281447C40087B95E /* Array+Extension.swift in Sources */,
+				37912C9C2814480C0087B95E /* NSLayoutConstraint+Extension.swift in Sources */,
 				37912C65281445AC0087B95E /* AppDelegate.swift in Sources */,
 				37912C67281445AC0087B95E /* SceneDelegate.swift in Sources */,
 			);
