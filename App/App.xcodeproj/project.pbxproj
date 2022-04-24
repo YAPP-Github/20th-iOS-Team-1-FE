@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		375FD9422814FE3A00AFAA2A /* ReactorKit in Frameworks */ = {isa = PBXBuildFile; productRef = 375FD9412814FE3A00AFAA2A /* ReactorKit */; };
 		37912C65281445AC0087B95E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37912C64281445AC0087B95E /* AppDelegate.swift */; };
 		37912C67281445AC0087B95E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37912C66281445AC0087B95E /* SceneDelegate.swift */; };
 		37912C6E281445AD0087B95E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37912C6D281445AD0087B95E /* Assets.xcassets */; };
@@ -62,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				375FD9422814FE3A00AFAA2A /* ReactorKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,6 +218,9 @@
 			dependencies = (
 			);
 			name = App;
+			packageProductDependencies = (
+				375FD9412814FE3A00AFAA2A /* ReactorKit */,
+			);
 			productName = App;
 			productReference = 37912C61281445AC0087B95E /* App.app */;
 			productType = "com.apple.product-type.application";
@@ -288,6 +293,9 @@
 				Base,
 			);
 			mainGroup = 37912C58281445AC0087B95E;
+			packageReferences = (
+				375FD9402814FE3A00AFAA2A /* XCRemoteSwiftPackageReference "ReactorKit" */,
+			);
 			productRefGroup = 37912C62281445AC0087B95E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -664,6 +672,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		375FD9402814FE3A00AFAA2A /* XCRemoteSwiftPackageReference "ReactorKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactorKit/ReactorKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		375FD9412814FE3A00AFAA2A /* ReactorKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 375FD9402814FE3A00AFAA2A /* XCRemoteSwiftPackageReference "ReactorKit" */;
+			productName = ReactorKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 37912C59281445AC0087B95E /* Project object */;
 }
