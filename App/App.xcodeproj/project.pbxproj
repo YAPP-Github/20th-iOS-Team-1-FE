@@ -9,6 +9,14 @@
 /* Begin PBXBuildFile section */
 		37453D7E281DAE0900423CF0 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37453D7D281DAE0900423CF0 /* BaseViewController.swift */; };
 		375FD9422814FE3A00AFAA2A /* ReactorKit in Frameworks */ = {isa = PBXBuildFile; productRef = 375FD9412814FE3A00AFAA2A /* ReactorKit */; };
+		378F347A281DBDF10063CE4F /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F3478281DBDF10063CE4F /* AuthViewController.swift */; };
+		378F347B281DBDF10063CE4F /* AuthReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F3479281DBDF10063CE4F /* AuthReactor.swift */; };
+		378F347E281DBE070063CE4F /* GatherListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F347C281DBE070063CE4F /* GatherListViewController.swift */; };
+		378F347F281DBE070063CE4F /* GatherListReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F347D281DBE070063CE4F /* GatherListReactor.swift */; };
+		378F3482281DBE140063CE4F /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F3480281DBE140063CE4F /* ChattingViewController.swift */; };
+		378F3483281DBE140063CE4F /* ChattingReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F3481281DBE140063CE4F /* ChattingReactor.swift */; };
+		378F3486281DBE210063CE4F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F3484281DBE210063CE4F /* ProfileViewController.swift */; };
+		378F3487281DBE210063CE4F /* ProfileReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F3485281DBE210063CE4F /* ProfileReactor.swift */; };
 		37912C65281445AC0087B95E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37912C64281445AC0087B95E /* AppDelegate.swift */; };
 		37912C67281445AC0087B95E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37912C66281445AC0087B95E /* SceneDelegate.swift */; };
 		37912C6E281445AD0087B95E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37912C6D281445AD0087B95E /* Assets.xcassets */; };
@@ -45,6 +53,14 @@
 
 /* Begin PBXFileReference section */
 		37453D7D281DAE0900423CF0 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		378F3478281DBDF10063CE4F /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		378F3479281DBDF10063CE4F /* AuthReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthReactor.swift; sourceTree = "<group>"; };
+		378F347C281DBE070063CE4F /* GatherListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListViewController.swift; sourceTree = "<group>"; };
+		378F347D281DBE070063CE4F /* GatherListReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListReactor.swift; sourceTree = "<group>"; };
+		378F3480281DBE140063CE4F /* ChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
+		378F3481281DBE140063CE4F /* ChattingReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingReactor.swift; sourceTree = "<group>"; };
+		378F3484281DBE210063CE4F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		378F3485281DBE210063CE4F /* ProfileReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileReactor.swift; sourceTree = "<group>"; };
 		37912C61281445AC0087B95E /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37912C64281445AC0087B95E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37912C66281445AC0087B95E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +114,53 @@
 				37453D7D281DAE0900423CF0 /* BaseViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		378F3473281DBCFC0063CE4F /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				378F3476281DBDB10063CE4F /* AuthScene */,
+				378F3475281DBD4C0063CE4F /* GatherListScene */,
+				378F3474281DBD230063CE4F /* ChattingScene */,
+				378F3477281DBDC30063CE4F /* ProfileScene */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		378F3474281DBD230063CE4F /* ChattingScene */ = {
+			isa = PBXGroup;
+			children = (
+				378F3480281DBE140063CE4F /* ChattingViewController.swift */,
+				378F3481281DBE140063CE4F /* ChattingReactor.swift */,
+			);
+			path = ChattingScene;
+			sourceTree = "<group>";
+		};
+		378F3475281DBD4C0063CE4F /* GatherListScene */ = {
+			isa = PBXGroup;
+			children = (
+				378F347C281DBE070063CE4F /* GatherListViewController.swift */,
+				378F347D281DBE070063CE4F /* GatherListReactor.swift */,
+			);
+			path = GatherListScene;
+			sourceTree = "<group>";
+		};
+		378F3476281DBDB10063CE4F /* AuthScene */ = {
+			isa = PBXGroup;
+			children = (
+				378F3478281DBDF10063CE4F /* AuthViewController.swift */,
+				378F3479281DBDF10063CE4F /* AuthReactor.swift */,
+			);
+			path = AuthScene;
+			sourceTree = "<group>";
+		};
+		378F3477281DBDC30063CE4F /* ProfileScene */ = {
+			isa = PBXGroup;
+			children = (
+				378F3484281DBE210063CE4F /* ProfileViewController.swift */,
+				378F3485281DBE210063CE4F /* ProfileReactor.swift */,
+			);
+			path = ProfileScene;
 			sourceTree = "<group>";
 		};
 		37912C58281445AC0087B95E = {
@@ -159,9 +222,10 @@
 		37912C952814470B0087B95E /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				37912C9D281448F70087B95E /* Common */,
-				37912C98281447A80087B95E /* Extension */,
 				37912C962814475A0087B95E /* Application */,
+				37912C98281447A80087B95E /* Extension */,
+				37912C9D281448F70087B95E /* Common */,
+				378F3473281DBCFC0063CE4F /* Scenes */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -359,13 +423,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				378F3487281DBE210063CE4F /* ProfileReactor.swift in Sources */,
 				37912C9A281447C40087B95E /* Array+Extension.swift in Sources */,
+				378F347E281DBE070063CE4F /* GatherListViewController.swift in Sources */,
 				37912CA628144A530087B95E /* TabCoordinator.swift in Sources */,
 				37912C9C2814480C0087B95E /* NSLayoutConstraint+Extension.swift in Sources */,
 				37912CA0281449230087B95E /* Coordinator.swift in Sources */,
+				378F347F281DBE070063CE4F /* GatherListReactor.swift in Sources */,
+				378F3483281DBE140063CE4F /* ChattingReactor.swift in Sources */,
 				37912CA2281449610087B95E /* SceneCoordinator.swift in Sources */,
 				37453D7E281DAE0900423CF0 /* BaseViewController.swift in Sources */,
+				378F3482281DBE140063CE4F /* ChattingViewController.swift in Sources */,
+				378F347B281DBDF10063CE4F /* AuthReactor.swift in Sources */,
 				37912C65281445AC0087B95E /* AppDelegate.swift in Sources */,
+				378F3486281DBE210063CE4F /* ProfileViewController.swift in Sources */,
+				378F347A281DBDF10063CE4F /* AuthViewController.swift in Sources */,
 				37912C67281445AC0087B95E /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
