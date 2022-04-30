@@ -45,7 +45,7 @@ final class GatherListViewController: BaseViewController {
     }
     
     private func configureUI() {
-        
+        view.backgroundColor = .red
     }
     
     private func bindAction(with reactor: GatherListReactor) {

@@ -45,7 +45,7 @@ final class ChattingViewController: BaseViewController {
     }
     
     private func configureUI() {
-        
+        view.backgroundColor = .green
     }
     
     private func bindAction(with reactor: ChattingReactor) {

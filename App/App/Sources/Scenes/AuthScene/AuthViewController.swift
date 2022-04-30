@@ -45,7 +45,7 @@ final class AuthViewController: BaseViewController {
     }
     
     private func configureUI() {
-        
+        view.backgroundColor = .blue
     }
     
     private func bindAction(with reactor: AuthReactor) {
