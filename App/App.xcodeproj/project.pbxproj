@@ -181,8 +181,6 @@
 			children = (
 				37912CA428144A310087B95E /* TabCoordinator */,
 				37912CA328144A260087B95E /* Protocol */,
-				37912C9F281449230087B95E /* Coordinator.swift */,
-				37912CA1281449610087B95E /* SceneCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -190,6 +188,8 @@
 		37912CA328144A260087B95E /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
+				37912C9F281449230087B95E /* Coordinator.swift */,
+				37912CA1281449610087B95E /* SceneCoordinator.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
