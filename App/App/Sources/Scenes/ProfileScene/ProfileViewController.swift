@@ -45,7 +45,7 @@ final class ProfileViewController: BaseViewController {
     }
     
     private func configureUI() {
-        
+        view.backgroundColor = .brown
     }
     
     private func bindAction(with reactor: ProfileReactor) {
