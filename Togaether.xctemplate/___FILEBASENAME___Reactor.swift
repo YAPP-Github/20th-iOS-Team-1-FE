@@ -5,7 +5,7 @@ import UIKit
 import ReactorKit
 import RxSwift
 
-final class ___FILEBASENAMEIDENTIFIER___: Reactor {
+final class ___FILEBASENAMEASIDENTIFIER___: Reactor {
     enum Action {
         
     }
@@ -21,13 +21,9 @@ final class ___FILEBASENAMEIDENTIFIER___: Reactor {
     let initialState = State()
     
     func mutate(action: Action) -> Observable<Mutation> {
-        let newMutation = Observable<Mutation>
-        
         switch action {
             
         }
-        
-        return newMutation
     }
     
     func reduce(state: State, mutation: Mutation) -> State {
