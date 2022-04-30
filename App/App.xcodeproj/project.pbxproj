@@ -17,6 +17,10 @@
 		378F3483281DBE140063CE4F /* ChattingReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F3481281DBE140063CE4F /* ChattingReactor.swift */; };
 		378F3486281DBE210063CE4F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F3484281DBE210063CE4F /* ProfileViewController.swift */; };
 		378F3487281DBE210063CE4F /* ProfileReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F3485281DBE210063CE4F /* ProfileReactor.swift */; };
+		378F3489281DBFF20063CE4F /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F3488281DBFF20063CE4F /* AuthCoordinator.swift */; };
+		378F348B281DC0560063CE4F /* GatherListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F348A281DC0560063CE4F /* GatherListCoordinator.swift */; };
+		378F348D281DC0660063CE4F /* ChattingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F348C281DC0660063CE4F /* ChattingCoordinator.swift */; };
+		378F348F281DC0770063CE4F /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F348E281DC0760063CE4F /* ProfileCoordinator.swift */; };
 		37912C65281445AC0087B95E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37912C64281445AC0087B95E /* AppDelegate.swift */; };
 		37912C67281445AC0087B95E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37912C66281445AC0087B95E /* SceneDelegate.swift */; };
 		37912C6E281445AD0087B95E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37912C6D281445AD0087B95E /* Assets.xcassets */; };
@@ -61,6 +65,10 @@
 		378F3481281DBE140063CE4F /* ChattingReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingReactor.swift; sourceTree = "<group>"; };
 		378F3484281DBE210063CE4F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		378F3485281DBE210063CE4F /* ProfileReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileReactor.swift; sourceTree = "<group>"; };
+		378F3488281DBFF20063CE4F /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
+		378F348A281DC0560063CE4F /* GatherListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListCoordinator.swift; sourceTree = "<group>"; };
+		378F348C281DC0660063CE4F /* ChattingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingCoordinator.swift; sourceTree = "<group>"; };
+		378F348E281DC0760063CE4F /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		37912C61281445AC0087B95E /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37912C64281445AC0087B95E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37912C66281445AC0087B95E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -132,6 +140,7 @@
 			children = (
 				378F3480281DBE140063CE4F /* ChattingViewController.swift */,
 				378F3481281DBE140063CE4F /* ChattingReactor.swift */,
+				378F348C281DC0660063CE4F /* ChattingCoordinator.swift */,
 			);
 			path = ChattingScene;
 			sourceTree = "<group>";
@@ -141,6 +150,7 @@
 			children = (
 				378F347C281DBE070063CE4F /* GatherListViewController.swift */,
 				378F347D281DBE070063CE4F /* GatherListReactor.swift */,
+				378F348A281DC0560063CE4F /* GatherListCoordinator.swift */,
 			);
 			path = GatherListScene;
 			sourceTree = "<group>";
@@ -150,6 +160,7 @@
 			children = (
 				378F3478281DBDF10063CE4F /* AuthViewController.swift */,
 				378F3479281DBDF10063CE4F /* AuthReactor.swift */,
+				378F3488281DBFF20063CE4F /* AuthCoordinator.swift */,
 			);
 			path = AuthScene;
 			sourceTree = "<group>";
@@ -159,6 +170,7 @@
 			children = (
 				378F3484281DBE210063CE4F /* ProfileViewController.swift */,
 				378F3485281DBE210063CE4F /* ProfileReactor.swift */,
+				378F348E281DC0760063CE4F /* ProfileCoordinator.swift */,
 			);
 			path = ProfileScene;
 			sourceTree = "<group>";
@@ -425,10 +437,13 @@
 			files = (
 				378F3487281DBE210063CE4F /* ProfileReactor.swift in Sources */,
 				37912C9A281447C40087B95E /* Array+Extension.swift in Sources */,
+				378F348D281DC0660063CE4F /* ChattingCoordinator.swift in Sources */,
 				378F347E281DBE070063CE4F /* GatherListViewController.swift in Sources */,
 				37912CA628144A530087B95E /* TabCoordinator.swift in Sources */,
+				378F3489281DBFF20063CE4F /* AuthCoordinator.swift in Sources */,
 				37912C9C2814480C0087B95E /* NSLayoutConstraint+Extension.swift in Sources */,
 				37912CA0281449230087B95E /* Coordinator.swift in Sources */,
+				378F348F281DC0770063CE4F /* ProfileCoordinator.swift in Sources */,
 				378F347F281DBE070063CE4F /* GatherListReactor.swift in Sources */,
 				378F3483281DBE140063CE4F /* ChattingReactor.swift in Sources */,
 				37912CA2281449610087B95E /* SceneCoordinator.swift in Sources */,
@@ -437,6 +452,7 @@
 				378F347B281DBDF10063CE4F /* AuthReactor.swift in Sources */,
 				37912C65281445AC0087B95E /* AppDelegate.swift in Sources */,
 				378F3486281DBE210063CE4F /* ProfileViewController.swift in Sources */,
+				378F348B281DC0560063CE4F /* GatherListCoordinator.swift in Sources */,
 				378F347A281DBDF10063CE4F /* AuthViewController.swift in Sources */,
 				37912C67281445AC0087B95E /* SceneDelegate.swift in Sources */,
 			);

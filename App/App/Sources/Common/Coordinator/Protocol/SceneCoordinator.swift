@@ -15,7 +15,7 @@ protocol SceneCoordinator: Coordinator {
 }
 
 extension SceneCoordinator {
-    internal func remove(childCoordinator: SceneCoordinator) {
+    func remove(childCoordinator: SceneCoordinator) {
         childCoordinators.removeAll(where: { $0 === childCoordinator })
     }
 }
