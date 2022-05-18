@@ -16,6 +16,6 @@ final class AppTests: XCTestCase {
 
     func test_샘플() throws {
         
-        XCTAssertTrue(true)
+        XCTAssertTrue(false)
     }
 }
