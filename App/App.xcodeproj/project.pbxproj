@@ -244,9 +244,9 @@
 		37912C9E281449120087B95E /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
-				37912CA428144A310087B95E /* TabCoordinator */,
-				37912CA328144A260087B95E /* Protocol */,
 				37605DEB28394E0400394929 /* AppCoordinator.swift */,
+				37912CA528144A530087B95E /* TabCoordinator.swift */,
+				37912CA328144A260087B95E /* Protocol */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -258,14 +258,6 @@
 				37912CA1281449610087B95E /* SceneCoordinator.swift */,
 			);
 			path = Protocol;
-			sourceTree = "<group>";
-		};
-		37912CA428144A310087B95E /* TabCoordinator */ = {
-			isa = PBXGroup;
-			children = (
-				37912CA528144A530087B95E /* TabCoordinator.swift */,
-			);
-			path = TabCoordinator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
