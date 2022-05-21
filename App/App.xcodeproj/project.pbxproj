@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		37451F252834245100696B21 /* WeakMapTable in Frameworks */ = {isa = PBXBuildFile; productRef = 37451F242834245100696B21 /* WeakMapTable */; };
 		37453D7E281DAE0900423CF0 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37453D7D281DAE0900423CF0 /* BaseViewController.swift */; };
+		37605DEC28394E0400394929 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37605DEB28394E0400394929 /* AppCoordinator.swift */; };
 		3770FFEE283112E8001960A0 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 3770FFED283112E8001960A0 /* RxCocoa */; };
 		3770FFF0283112E8001960A0 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3770FFEF283112E8001960A0 /* RxSwift */; };
 		3770FFF3283112F4001960A0 /* ReactorKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3770FFF2283112F4001960A0 /* ReactorKit */; };
@@ -48,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		37453D7D281DAE0900423CF0 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		37605DEB28394E0400394929 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		378F3478281DBDF10063CE4F /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		378F3479281DBDF10063CE4F /* AuthReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthReactor.swift; sourceTree = "<group>"; };
 		378F347C281DBE070063CE4F /* GatherListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListViewController.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 			children = (
 				37912CA428144A310087B95E /* TabCoordinator */,
 				37912CA328144A260087B95E /* Protocol */,
+				37605DEB28394E0400394929 /* AppCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -382,6 +385,7 @@
 				378F347E281DBE070063CE4F /* GatherListViewController.swift in Sources */,
 				37912CA628144A530087B95E /* TabCoordinator.swift in Sources */,
 				378F3489281DBFF20063CE4F /* AuthCoordinator.swift in Sources */,
+				37605DEC28394E0400394929 /* AppCoordinator.swift in Sources */,
 				37912C9C2814480C0087B95E /* NSLayoutConstraint+Extension.swift in Sources */,
 				37912CA0281449230087B95E /* Coordinator.swift in Sources */,
 				378F348F281DC0770063CE4F /* ProfileCoordinator.swift in Sources */,
