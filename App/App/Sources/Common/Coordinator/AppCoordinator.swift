@@ -10,13 +10,19 @@ import UIKit
 final class AppCoordinator: Coordinator {
     private let window: UIWindow?
     var childCoordinators = [Coordinator]()
+    var isAlreadyLoggedIn = false
     
     init(window: UIWindow?) {
         self.window = window
     }
     
     func start() {
-        let tabCoordinator = TabCoordinator(window: window)
-        tabCoordinator.start()
+        if isAlreadyLoggedIn {
+            let tabCoordinator = TabCoordinator(window: window)
+            tabCoordinator.start()
+        } else {
+            let authCoordinator = AuthCoordinator(window: window)
+            authCoordinator.start()
+        }
     }
 }
