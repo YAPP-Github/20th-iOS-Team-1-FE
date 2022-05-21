@@ -8,7 +8,7 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-    private var tabCoordinator: TabCoordinator?
+    private var appCoordinator: AppCoordinator?
     var window: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -18,8 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: windowScene)
         
-        tabCoordinator = TabCoordinator(window: window)
-        tabCoordinator?.start()
+        appCoordinator = AppCoordinator(window: window)
+        appCoordinator?.start()
     }
 }
 
