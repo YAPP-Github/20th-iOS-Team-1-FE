@@ -13,15 +13,14 @@
 		3770FFEE283112E8001960A0 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 3770FFED283112E8001960A0 /* RxCocoa */; };
 		3770FFF0283112E8001960A0 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3770FFEF283112E8001960A0 /* RxSwift */; };
 		3770FFF3283112F4001960A0 /* ReactorKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3770FFF2283112F4001960A0 /* ReactorKit */; };
-		378F347A281DBDF10063CE4F /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F3478281DBDF10063CE4F /* AuthViewController.swift */; };
-		378F347B281DBDF10063CE4F /* AuthReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F3479281DBDF10063CE4F /* AuthReactor.swift */; };
+		378F347A281DBDF10063CE4F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F3478281DBDF10063CE4F /* LoginViewController.swift */; };
+		378F347B281DBDF10063CE4F /* LoginReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F3479281DBDF10063CE4F /* LoginReactor.swift */; };
 		378F347E281DBE070063CE4F /* GatherListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F347C281DBE070063CE4F /* GatherListViewController.swift */; };
 		378F347F281DBE070063CE4F /* GatherListReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F347D281DBE070063CE4F /* GatherListReactor.swift */; };
 		378F3482281DBE140063CE4F /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F3480281DBE140063CE4F /* ChattingViewController.swift */; };
 		378F3483281DBE140063CE4F /* ChattingReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F3481281DBE140063CE4F /* ChattingReactor.swift */; };
 		378F3486281DBE210063CE4F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F3484281DBE210063CE4F /* ProfileViewController.swift */; };
 		378F3487281DBE210063CE4F /* ProfileReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F3485281DBE210063CE4F /* ProfileReactor.swift */; };
-		378F3489281DBFF20063CE4F /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F3488281DBFF20063CE4F /* AuthCoordinator.swift */; };
 		378F348B281DC0560063CE4F /* GatherListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F348A281DC0560063CE4F /* GatherListCoordinator.swift */; };
 		378F348D281DC0660063CE4F /* ChattingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F348C281DC0660063CE4F /* ChattingCoordinator.swift */; };
 		378F348F281DC0770063CE4F /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F348E281DC0760063CE4F /* ProfileCoordinator.swift */; };
@@ -50,15 +49,14 @@
 /* Begin PBXFileReference section */
 		37453D7D281DAE0900423CF0 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		37605DEB28394E0400394929 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		378F3478281DBDF10063CE4F /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
-		378F3479281DBDF10063CE4F /* AuthReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthReactor.swift; sourceTree = "<group>"; };
+		378F3478281DBDF10063CE4F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		378F3479281DBDF10063CE4F /* LoginReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginReactor.swift; sourceTree = "<group>"; };
 		378F347C281DBE070063CE4F /* GatherListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListViewController.swift; sourceTree = "<group>"; };
 		378F347D281DBE070063CE4F /* GatherListReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListReactor.swift; sourceTree = "<group>"; };
 		378F3480281DBE140063CE4F /* ChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
 		378F3481281DBE140063CE4F /* ChattingReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingReactor.swift; sourceTree = "<group>"; };
 		378F3484281DBE210063CE4F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		378F3485281DBE210063CE4F /* ProfileReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileReactor.swift; sourceTree = "<group>"; };
-		378F3488281DBFF20063CE4F /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		378F348A281DC0560063CE4F /* GatherListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListCoordinator.swift; sourceTree = "<group>"; };
 		378F348C281DC0660063CE4F /* ChattingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingCoordinator.swift; sourceTree = "<group>"; };
 		378F348E281DC0760063CE4F /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
@@ -107,6 +105,13 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
+		37605DED28394F4400394929 /* LoginScene */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = LoginScene;
+			sourceTree = "<group>";
+		};
 		378F3473281DBCFC0063CE4F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
@@ -141,9 +146,9 @@
 		378F3476281DBDB10063CE4F /* AuthScene */ = {
 			isa = PBXGroup;
 			children = (
-				378F3478281DBDF10063CE4F /* AuthViewController.swift */,
-				378F3479281DBDF10063CE4F /* AuthReactor.swift */,
-				378F3488281DBFF20063CE4F /* AuthCoordinator.swift */,
+				37605DED28394F4400394929 /* LoginScene */,
+				378F3478281DBDF10063CE4F /* LoginViewController.swift */,
+				378F3479281DBDF10063CE4F /* LoginReactor.swift */,
 			);
 			path = AuthScene;
 			sourceTree = "<group>";
@@ -376,7 +381,6 @@
 				378F348D281DC0660063CE4F /* ChattingCoordinator.swift in Sources */,
 				378F347E281DBE070063CE4F /* GatherListViewController.swift in Sources */,
 				37912CA628144A530087B95E /* TabCoordinator.swift in Sources */,
-				378F3489281DBFF20063CE4F /* AuthCoordinator.swift in Sources */,
 				37605DEC28394E0400394929 /* AppCoordinator.swift in Sources */,
 				37912C9C2814480C0087B95E /* NSLayoutConstraint+Extension.swift in Sources */,
 				37912CA0281449230087B95E /* Coordinator.swift in Sources */,
@@ -386,11 +390,11 @@
 				37912CA2281449610087B95E /* SceneCoordinator.swift in Sources */,
 				37453D7E281DAE0900423CF0 /* BaseViewController.swift in Sources */,
 				378F3482281DBE140063CE4F /* ChattingViewController.swift in Sources */,
-				378F347B281DBDF10063CE4F /* AuthReactor.swift in Sources */,
+				378F347B281DBDF10063CE4F /* LoginReactor.swift in Sources */,
 				37912C65281445AC0087B95E /* AppDelegate.swift in Sources */,
 				378F3486281DBE210063CE4F /* ProfileViewController.swift in Sources */,
 				378F348B281DC0560063CE4F /* GatherListCoordinator.swift in Sources */,
-				378F347A281DBDF10063CE4F /* AuthViewController.swift in Sources */,
+				378F347A281DBDF10063CE4F /* LoginViewController.swift in Sources */,
 				37912C67281445AC0087B95E /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

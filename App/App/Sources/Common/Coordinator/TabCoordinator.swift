@@ -18,12 +18,6 @@ final class TabCoordinator: Coordinator {
     }
     
     func start() {
-        let firstCoordinator = AuthCoordinator()
-        childCoordinators.append(firstCoordinator)
-        firstCoordinator.start()
-        let firstViewController = firstCoordinator.navigationController
-        firstViewController.tabBarItem = UITabBarItem(title: "Auth", image: nil, selectedImage: nil)
-        
         let secondCoordinator = GatherListCoordinator()
         childCoordinators.append(secondCoordinator)
         secondCoordinator.start()
@@ -43,7 +37,7 @@ final class TabCoordinator: Coordinator {
         fourthViewController.tabBarItem = UITabBarItem(title: "Profile", image: nil, selectedImage: nil)
         
         let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [firstViewController, secondViewController, thirdViewController, fourthViewController]
+        tabBarController.viewControllers = [secondViewController, thirdViewController, fourthViewController]
         
         window?.rootViewController = tabBarController
     }

@@ -1,5 +1,5 @@
 //
-//  AuthReactor.swift
+//  LoginReactor.swift
 //  App
 //
 //  Created by Hani on 2022/05/01.
@@ -10,7 +10,7 @@ import UIKit
 import ReactorKit
 import RxSwift
 
-final class AuthReactor: Reactor {
+final class LoginReactor: Reactor {
     enum Action {
         
     }
