@@ -7,19 +7,23 @@
 
 import UIKit
 
+import RxSwift
+
 final class AuthCoordinator: Coordinator {
     private let window: UIWindow?
     var childCoordinators = [Coordinator]()
+    var disposeBag = DisposeBag()
     
     init(window: UIWindow?) {
         self.window = window
     }
     
     func start() {
-        let loginReactor = LoginReactor()
-        let loginViewController = LoginViewController(reactor: loginReactor)
+        let loginCoordinator = LoginCoordinator()
+        childCoordinators.append(loginCoordinator)
+        loginCoordinator.start()
         
-        window?.rootViewController = loginViewController
+        window?.rootViewController = loginCoordinator.navigationController
         window?.makeKeyAndVisible()
     }
 }

@@ -16,6 +16,10 @@
 		37605DFB2839FF4A00394929 /* ASAuthorizationAppleIDButton+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37605DFA2839FF4A00394929 /* ASAuthorizationAppleIDButton+Rx.swift */; };
 		37605DFD283A003B00394929 /* ASAuthorizationAppleIDProvider+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37605DFC283A003B00394929 /* ASAuthorizationAppleIDProvider+Rx.swift */; };
 		37605E01283A2AE200394929 /* RxASAuthorizationControllerPresentationContextProvidingProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37605E00283A2AE200394929 /* RxASAuthorizationControllerPresentationContextProvidingProxy.swift */; };
+		37605E05283C12D400394929 /* SignUpAgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37605E03283C12D400394929 /* SignUpAgreementViewController.swift */; };
+		37605E06283C12D400394929 /* SignUpAgreementReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37605E04283C12D400394929 /* SignUpAgreementReactor.swift */; };
+		37605E08283C179A00394929 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37605E07283C179A00394929 /* LoginCoordinator.swift */; };
+		37605E0A283C23FC00394929 /* SignUpAgreementCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37605E09283C23FC00394929 /* SignUpAgreementCoordinator.swift */; };
 		3770FFEE283112E8001960A0 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 3770FFED283112E8001960A0 /* RxCocoa */; };
 		3770FFF0283112E8001960A0 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3770FFEF283112E8001960A0 /* RxSwift */; };
 		3770FFF3283112F4001960A0 /* ReactorKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3770FFF2283112F4001960A0 /* ReactorKit */; };
@@ -62,6 +66,10 @@
 		37605DFA2839FF4A00394929 /* ASAuthorizationAppleIDButton+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ASAuthorizationAppleIDButton+Rx.swift"; sourceTree = "<group>"; };
 		37605DFC283A003B00394929 /* ASAuthorizationAppleIDProvider+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ASAuthorizationAppleIDProvider+Rx.swift"; sourceTree = "<group>"; };
 		37605E00283A2AE200394929 /* RxASAuthorizationControllerPresentationContextProvidingProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxASAuthorizationControllerPresentationContextProvidingProxy.swift; sourceTree = "<group>"; };
+		37605E03283C12D400394929 /* SignUpAgreementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAgreementViewController.swift; sourceTree = "<group>"; };
+		37605E04283C12D400394929 /* SignUpAgreementReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAgreementReactor.swift; sourceTree = "<group>"; };
+		37605E07283C179A00394929 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
+		37605E09283C23FC00394929 /* SignUpAgreementCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAgreementCoordinator.swift; sourceTree = "<group>"; };
 		378F3478281DBDF10063CE4F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		378F3479281DBDF10063CE4F /* LoginReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginReactor.swift; sourceTree = "<group>"; };
 		378F347C281DBE070063CE4F /* GatherListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListViewController.swift; sourceTree = "<group>"; };
@@ -123,6 +131,7 @@
 			children = (
 				378F3478281DBDF10063CE4F /* LoginViewController.swift */,
 				378F3479281DBDF10063CE4F /* LoginReactor.swift */,
+				37605E07283C179A00394929 /* LoginCoordinator.swift */,
 			);
 			path = LoginScene;
 			sourceTree = "<group>";
@@ -153,6 +162,16 @@
 				37605DF82839FDB300394929 /* ASAuthorizationController+Rx.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		37605E02283C126100394929 /* SignUpAgreementScene */ = {
+			isa = PBXGroup;
+			children = (
+				37605E03283C12D400394929 /* SignUpAgreementViewController.swift */,
+				37605E04283C12D400394929 /* SignUpAgreementReactor.swift */,
+				37605E09283C23FC00394929 /* SignUpAgreementCoordinator.swift */,
+			);
+			path = SignUpAgreementScene;
 			sourceTree = "<group>";
 		};
 		378F3473281DBCFC0063CE4F /* Scenes */ = {
@@ -190,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				37605DED28394F4400394929 /* LoginScene */,
+				37605E02283C126100394929 /* SignUpAgreementScene */,
 			);
 			path = AuthScene;
 			sourceTree = "<group>";
@@ -426,18 +446,22 @@
 				378F348D281DC0660063CE4F /* ChattingCoordinator.swift in Sources */,
 				378F347E281DBE070063CE4F /* GatherListViewController.swift in Sources */,
 				37605DEF2839547200394929 /* AuthCoordinator.swift in Sources */,
+				37605E05283C12D400394929 /* SignUpAgreementViewController.swift in Sources */,
 				37605DFB2839FF4A00394929 /* ASAuthorizationAppleIDButton+Rx.swift in Sources */,
 				37912CA628144A530087B95E /* TabCoordinator.swift in Sources */,
+				37605E06283C12D400394929 /* SignUpAgreementReactor.swift in Sources */,
 				37605DEC28394E0400394929 /* AppCoordinator.swift in Sources */,
 				37912C9C2814480C0087B95E /* NSLayoutConstraint+Extension.swift in Sources */,
 				37605DFD283A003B00394929 /* ASAuthorizationAppleIDProvider+Rx.swift in Sources */,
 				37912CA0281449230087B95E /* Coordinator.swift in Sources */,
+				37605E0A283C23FC00394929 /* SignUpAgreementCoordinator.swift in Sources */,
 				378F348F281DC0770063CE4F /* ProfileCoordinator.swift in Sources */,
 				378F347F281DBE070063CE4F /* GatherListReactor.swift in Sources */,
 				37605DF62839FB4100394929 /* RxASAuthorizationControllerDelegateProxy.swift in Sources */,
 				378F3483281DBE140063CE4F /* ChattingReactor.swift in Sources */,
 				37605DF92839FDB300394929 /* ASAuthorizationController+Rx.swift in Sources */,
 				37912CA2281449610087B95E /* SceneCoordinator.swift in Sources */,
+				37605E08283C179A00394929 /* LoginCoordinator.swift in Sources */,
 				37453D7E281DAE0900423CF0 /* BaseViewController.swift in Sources */,
 				378F3482281DBE140063CE4F /* ChattingViewController.swift in Sources */,
 				378F347B281DBDF10063CE4F /* LoginReactor.swift in Sources */,
