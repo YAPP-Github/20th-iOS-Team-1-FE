@@ -53,7 +53,7 @@ final class LoginViewController: BaseViewController {
     }
     
     private func bindAction(with reactor: LoginReactor) {
-        signInWithAppleButton.rx.didTap(scopes: [.email, .fullName])
+        signInWithAppleButton.rx.didTap(scopes: [.email])
             .withUnretained(self)
             .compactMap { (owner, authorization) in owner.email(for: authorization) }
             .map { LoginReactor.Action.signInWithApple(email: $0) }
