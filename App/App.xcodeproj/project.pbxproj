@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		37451F252834245100696B21 /* WeakMapTable in Frameworks */ = {isa = PBXBuildFile; productRef = 37451F242834245100696B21 /* WeakMapTable */; };
 		37453D7E281DAE0900423CF0 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37453D7D281DAE0900423CF0 /* BaseViewController.swift */; };
+		37479B9B283E763B0078386E /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37479B9A283E763B0078386E /* UIColor+Extension.swift */; };
 		37605DEC28394E0400394929 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37605DEB28394E0400394929 /* AppCoordinator.swift */; };
 		37605DEF2839547200394929 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37605DEE2839547200394929 /* AuthCoordinator.swift */; };
 		37605DF62839FB4100394929 /* RxASAuthorizationControllerDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37605DF52839FB4100394929 /* RxASAuthorizationControllerDelegateProxy.swift */; };
@@ -20,6 +21,7 @@
 		37605E06283C12D400394929 /* SignUpAgreementReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37605E04283C12D400394929 /* SignUpAgreementReactor.swift */; };
 		37605E08283C179A00394929 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37605E07283C179A00394929 /* LoginCoordinator.swift */; };
 		37605E0A283C23FC00394929 /* SignUpAgreementCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37605E09283C23FC00394929 /* SignUpAgreementCoordinator.swift */; };
+		37605E11283C56B900394929 /* RxGesture in Frameworks */ = {isa = PBXBuildFile; productRef = 37605E10283C56B900394929 /* RxGesture */; };
 		3770FFEE283112E8001960A0 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 3770FFED283112E8001960A0 /* RxCocoa */; };
 		3770FFF0283112E8001960A0 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3770FFEF283112E8001960A0 /* RxSwift */; };
 		3770FFF3283112F4001960A0 /* ReactorKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3770FFF2283112F4001960A0 /* ReactorKit */; };
@@ -58,6 +60,7 @@
 
 /* Begin PBXFileReference section */
 		37453D7D281DAE0900423CF0 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		37479B9A283E763B0078386E /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		37605DEB28394E0400394929 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		37605DEE2839547200394929 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		37605DF0283967D900394929 /* App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
@@ -103,6 +106,7 @@
 			files = (
 				3770FFF0283112E8001960A0 /* RxSwift in Frameworks */,
 				3770FFF3283112F4001960A0 /* ReactorKit in Frameworks */,
+				37605E11283C56B900394929 /* RxGesture in Frameworks */,
 				37451F252834245100696B21 /* WeakMapTable in Frameworks */,
 				3770FFEE283112E8001960A0 /* RxCocoa in Frameworks */,
 			);
@@ -172,6 +176,13 @@
 				37605E09283C23FC00394929 /* SignUpAgreementCoordinator.swift */,
 			);
 			path = SignUpAgreementScene;
+			sourceTree = "<group>";
+		};
+		37605E0E283C50C800394929 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		378F3473281DBCFC0063CE4F /* Scenes */ = {
@@ -295,6 +306,7 @@
 			children = (
 				37912C99281447C40087B95E /* Array+Extension.swift */,
 				37912C9B2814480C0087B95E /* NSLayoutConstraint+Extension.swift */,
+				37479B9A283E763B0078386E /* UIColor+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -303,6 +315,7 @@
 			isa = PBXGroup;
 			children = (
 				37605DF32839FAF700394929 /* Rx */,
+				37605E0E283C50C800394929 /* View */,
 				37453D7C281DADF800423CF0 /* ViewController */,
 				37912C9E281449120087B95E /* Coordinator */,
 			);
@@ -350,6 +363,7 @@
 				3770FFEF283112E8001960A0 /* RxSwift */,
 				3770FFF2283112F4001960A0 /* ReactorKit */,
 				37451F242834245100696B21 /* WeakMapTable */,
+				37605E10283C56B900394929 /* RxGesture */,
 			);
 			productName = App;
 			productReference = 37912C61281445AC0087B95E /* App.app */;
@@ -405,6 +419,7 @@
 				3770FFEC283112E8001960A0 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				3770FFF1283112F4001960A0 /* XCRemoteSwiftPackageReference "ReactorKit" */,
 				37451F232834245100696B21 /* XCRemoteSwiftPackageReference "WeakMapTable" */,
+				37605E0F283C56B900394929 /* XCRemoteSwiftPackageReference "RxGesture" */,
 			);
 			productRefGroup = 37912C62281445AC0087B95E /* Products */;
 			projectDirPath = "";
@@ -445,6 +460,7 @@
 				37605E01283A2AE200394929 /* RxASAuthorizationControllerPresentationContextProvidingProxy.swift in Sources */,
 				378F348D281DC0660063CE4F /* ChattingCoordinator.swift in Sources */,
 				378F347E281DBE070063CE4F /* GatherListViewController.swift in Sources */,
+				37479B9B283E763B0078386E /* UIColor+Extension.swift in Sources */,
 				37605DEF2839547200394929 /* AuthCoordinator.swift in Sources */,
 				37605E05283C12D400394929 /* SignUpAgreementViewController.swift in Sources */,
 				37605DFB2839FF4A00394929 /* ASAuthorizationAppleIDButton+Rx.swift in Sources */,
@@ -758,6 +774,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		37605E0F283C56B900394929 /* XCRemoteSwiftPackageReference "RxGesture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxGesture";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		3770FFEC283112E8001960A0 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift";
@@ -781,6 +805,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 37451F232834245100696B21 /* XCRemoteSwiftPackageReference "WeakMapTable" */;
 			productName = WeakMapTable;
+		};
+		37605E10283C56B900394929 /* RxGesture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 37605E0F283C56B900394929 /* XCRemoteSwiftPackageReference "RxGesture" */;
+			productName = RxGesture;
 		};
 		3770FFED283112E8001960A0 /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;

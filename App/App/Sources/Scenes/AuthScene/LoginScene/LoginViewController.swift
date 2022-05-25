@@ -49,7 +49,7 @@ final class LoginViewController: BaseViewController {
     }
     
     private func configureUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = .Togaether.background
     }
     
     private func bindAction(with reactor: LoginReactor) {
