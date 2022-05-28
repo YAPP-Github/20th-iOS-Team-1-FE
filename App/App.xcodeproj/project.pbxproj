@@ -29,6 +29,9 @@
 		3770FFF3283112F4001960A0 /* ReactorKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3770FFF2283112F4001960A0 /* ReactorKit */; };
 		3773707F2841B95000D5CCB6 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3773707D2841B95000D5CCB6 /* CheckBox.swift */; };
 		377370842841BE1000D5CCB6 /* UIButton+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377370832841BE1000D5CCB6 /* UIButton+Rx.swift */; };
+		377370882841DE3500D5CCB6 /* SignUpProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377370862841DE3500D5CCB6 /* SignUpProfileViewController.swift */; };
+		377370892841DE3500D5CCB6 /* SignUpProfileReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377370872841DE3500D5CCB6 /* SignUpProfileReactor.swift */; };
+		3773708C2841DE6D00D5CCB6 /* UserAuthentification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3773708B2841DE6D00D5CCB6 /* UserAuthentification.swift */; };
 		378F347A281DBDF10063CE4F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F3478281DBDF10063CE4F /* LoginViewController.swift */; };
 		378F347B281DBDF10063CE4F /* LoginReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F3479281DBDF10063CE4F /* LoginReactor.swift */; };
 		378F347E281DBE070063CE4F /* GatherListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F347C281DBE070063CE4F /* GatherListViewController.swift */; };
@@ -81,6 +84,9 @@
 		37605E09283C23FC00394929 /* SignUpAgreementCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAgreementCoordinator.swift; sourceTree = "<group>"; };
 		3773707D2841B95000D5CCB6 /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		377370832841BE1000D5CCB6 /* UIButton+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Rx.swift"; sourceTree = "<group>"; };
+		377370862841DE3500D5CCB6 /* SignUpProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpProfileViewController.swift; sourceTree = "<group>"; };
+		377370872841DE3500D5CCB6 /* SignUpProfileReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpProfileReactor.swift; sourceTree = "<group>"; };
+		3773708B2841DE6D00D5CCB6 /* UserAuthentification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthentification.swift; sourceTree = "<group>"; };
 		378F3478281DBDF10063CE4F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		378F3479281DBDF10063CE4F /* LoginReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginReactor.swift; sourceTree = "<group>"; };
 		378F347C281DBE070063CE4F /* GatherListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListViewController.swift; sourceTree = "<group>"; };
@@ -195,6 +201,23 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		377370852841DDE300D5CCB6 /* SignUpProfileScene */ = {
+			isa = PBXGroup;
+			children = (
+				377370862841DE3500D5CCB6 /* SignUpProfileViewController.swift */,
+				377370872841DE3500D5CCB6 /* SignUpProfileReactor.swift */,
+			);
+			path = SignUpProfileScene;
+			sourceTree = "<group>";
+		};
+		3773708A2841DE4800D5CCB6 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				3773708B2841DE6D00D5CCB6 /* UserAuthentification.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
 		378F3473281DBCFC0063CE4F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
@@ -229,8 +252,10 @@
 		378F3476281DBDB10063CE4F /* AuthScene */ = {
 			isa = PBXGroup;
 			children = (
+				3773708A2841DE4800D5CCB6 /* Entity */,
 				37605DED28394F4400394929 /* LoginScene */,
 				37605E02283C126100394929 /* SignUpAgreementScene */,
+				377370852841DDE300D5CCB6 /* SignUpProfileScene */,
 			);
 			path = AuthScene;
 			sourceTree = "<group>";
@@ -476,6 +501,7 @@
 				37605DEF2839547200394929 /* AuthCoordinator.swift in Sources */,
 				37605E05283C12D400394929 /* SignUpAgreementViewController.swift in Sources */,
 				37605DFB2839FF4A00394929 /* ASAuthorizationAppleIDButton+Rx.swift in Sources */,
+				377370892841DE3500D5CCB6 /* SignUpProfileReactor.swift in Sources */,
 				37479B9F283EAE140078386E /* UIImage+Extension.swift in Sources */,
 				37912CA628144A530087B95E /* TabCoordinator.swift in Sources */,
 				37605E06283C12D400394929 /* SignUpAgreementReactor.swift in Sources */,
@@ -489,6 +515,7 @@
 				378F347F281DBE070063CE4F /* GatherListReactor.swift in Sources */,
 				37605DF62839FB4100394929 /* RxASAuthorizationControllerDelegateProxy.swift in Sources */,
 				378F3483281DBE140063CE4F /* ChattingReactor.swift in Sources */,
+				3773708C2841DE6D00D5CCB6 /* UserAuthentification.swift in Sources */,
 				37605DF92839FDB300394929 /* ASAuthorizationController+Rx.swift in Sources */,
 				37912CA2281449610087B95E /* SceneCoordinator.swift in Sources */,
 				37605E08283C179A00394929 /* LoginCoordinator.swift in Sources */,
@@ -497,6 +524,7 @@
 				378F3482281DBE140063CE4F /* ChattingViewController.swift in Sources */,
 				378F347B281DBDF10063CE4F /* LoginReactor.swift in Sources */,
 				37912C65281445AC0087B95E /* AppDelegate.swift in Sources */,
+				377370882841DE3500D5CCB6 /* SignUpProfileViewController.swift in Sources */,
 				378F3486281DBE210063CE4F /* ProfileViewController.swift in Sources */,
 				378F348B281DC0560063CE4F /* GatherListCoordinator.swift in Sources */,
 				378F347A281DBDF10063CE4F /* LoginViewController.swift in Sources */,
