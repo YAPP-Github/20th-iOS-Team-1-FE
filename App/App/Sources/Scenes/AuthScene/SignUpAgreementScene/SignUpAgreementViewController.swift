@@ -209,25 +209,29 @@ final class SignUpAgreementViewController: BaseViewController {
         reactor.state
             .map { $0.isAgreementChecked }
             .distinctUntilChanged()
-            .bind(to: agreementCheckBox.rx.isSelected)
+            .asDriver(onErrorJustReturn: false)
+            .drive(agreementCheckBox.rx.isSelected)
             .disposed(by: disposeBag)
         
         reactor.state
             .map { $0.isTermsOfServiceChecked }
             .distinctUntilChanged()
-            .bind(to: termsOfServiceCheckBox.rx.isSelected)
+            .asDriver(onErrorJustReturn: false)
+            .drive(termsOfServiceCheckBox.rx.isSelected)
             .disposed(by: disposeBag)
 
         reactor.state
             .map { $0.isPrivacyPolicyChecked }
             .distinctUntilChanged()
-            .bind(to: privacyPolicyCheckBox.rx.isSelected)
+            .asDriver(onErrorJustReturn: false)
+            .drive(privacyPolicyCheckBox.rx.isSelected)
             .disposed(by: disposeBag)
         
         reactor.state
             .map { $0.isAgreementChecked }
             .distinctUntilChanged()
-            .bind(to: nextButton.rx.isEnabled)
+            .asDriver(onErrorJustReturn: false)
+            .drive(nextButton.rx.isEnabled)
             .disposed(by: disposeBag)
     }
     
