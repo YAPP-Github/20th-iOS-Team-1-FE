@@ -10,20 +10,20 @@ import UIKit
 import RxSwift
 
 final class SignUpAgreementCoordinator: SceneCoordinator {
-    private var component: String
+    private var user: UserAuthentification
     
     var parentCoordinator: SceneCoordinator?
     var navigationController: UINavigationController
     var childCoordinators = [Coordinator]()
     var disposeBag = DisposeBag()
     
-    init(navigationController: UINavigationController, component: String) {
+    init(navigationController: UINavigationController, user: UserAuthentification) {
         self.navigationController = navigationController
-        self.component = component
+        self.user = user
     }
     
     func start() {
-        let signUpAgreementReactor = SignUpAgreementReactor(component: component)
+        let signUpAgreementReactor = SignUpAgreementReactor(user: user)
         let signUpAgreementViewController = SignUpAgreementViewController(reactor: signUpAgreementReactor)
 
         navigationController.pushViewController(signUpAgreementViewController, animated: true)

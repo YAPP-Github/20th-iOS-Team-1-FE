@@ -24,19 +24,19 @@ final class LoginCoordinator: SceneCoordinator {
         let loginViewController = LoginViewController(reactor: loginReactor)
 
         loginViewController.reactor?.state
-            .map { $0.email }
-            .distinctUntilChanged()
+            .map { $0.user }
+            .distinctUntilChanged(==)
             .withUnretained(self)
-            .subscribe(onNext: { (owner, email) in
-                owner.pushSignUpAgreementViewController(with: email)
+            .subscribe(onNext: { (owner, user) in
+                owner.pushSignUpAgreementViewController(with: user)
             })
             .disposed(by: disposeBag)
         
         navigationController.setViewControllers([loginViewController], animated: false)
     }
     
-    private func pushSignUpAgreementViewController(with component: String) {
-        let signUpAgreementCoordinator = SignUpAgreementCoordinator(navigationController: navigationController, component: component)
+    private func pushSignUpAgreementViewController(with user: UserAuthentification) {
+        let signUpAgreementCoordinator = SignUpAgreementCoordinator(navigationController: navigationController, user: user)
         signUpAgreementCoordinator.parentCoordinator = self
         childCoordinators.append(signUpAgreementCoordinator)
         signUpAgreementCoordinator.start()
