@@ -28,7 +28,7 @@ final class SignUpAgreementReactor: Reactor {
     }
     
     struct State {
-        let email: String
+        let user: UserAuthentification
         var isAgreementChecked = false
         var isTermsOfServiceChecked = false
         var isPrivacyPolicyChecked = false
@@ -37,8 +37,8 @@ final class SignUpAgreementReactor: Reactor {
     
     let initialState: State
     
-    init(component: String) {
-        self.initialState = State(email: component)
+    init(user: UserAuthentification) {
+        self.initialState = State(user: user)
     }
     
     func mutate(action: Action) -> Observable<Mutation> {

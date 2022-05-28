@@ -1,34 +1,33 @@
 //
-//  LoginReactor.swift
+//  SignUpProfileReactor.swift
 //  App
 //
-//  Created by Hani on 2022/05/01.
+//  Created by Hani on 2022/05/28.
 //
 
-import Foundation
+import UIKit
 
 import ReactorKit
 import RxSwift
 
-final class LoginReactor: Reactor {
+final class SignUpProfileReactor: Reactor {
     enum Action {
-        case signInWithApple(email: String)
+        
     }
     
     enum Mutation {
-        case change(email: String)
+        
     }
     
     struct State {
-        var user = UserAuthentification()
+        
     }
     
     let initialState = State()
     
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
-        case .signInWithApple(let email):
-            return Observable.just(Mutation.change(email: email))
+            
         }
     }
     
@@ -36,8 +35,7 @@ final class LoginReactor: Reactor {
         var newState = state
         
         switch mutation {
-        case .change(let email):
-            newState.user.email = email
+            
         }
         
         return newState
