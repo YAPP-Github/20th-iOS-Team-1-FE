@@ -28,7 +28,7 @@ extension UIColor {
         static let mainGreen               = UIColor(named: "mainGreen")!
         static let contour                 = UIColor(named: "contour")!
         static let background              = UIColor(named: "background")!
-        static let checkBoxNotHighlighted  = UIColor(named: "checkBoxNotHighlighted")!
+        static let checkBoxDidDeselect     = UIColor(named: "checkBoxDidDeselect")!
         static let buttonDisabled          = UIColor(named: "buttonDisabled")!
     }
 }
