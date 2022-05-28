@@ -24,8 +24,8 @@ final class LoginCoordinator: SceneCoordinator {
         let loginViewController = LoginViewController(reactor: loginReactor)
 
         loginViewController.reactor?.state
-            .map { $0.user }
-            .distinctUntilChanged(==)
+            .map(\.user)
+            .distinctUntilChanged()
             .withUnretained(self)
             .subscribe(onNext: { (owner, user) in
                 owner.pushSignUpAgreementViewController(with: user)
