@@ -10,6 +10,8 @@
 		37451F252834245100696B21 /* WeakMapTable in Frameworks */ = {isa = PBXBuildFile; productRef = 37451F242834245100696B21 /* WeakMapTable */; };
 		37453D7E281DAE0900423CF0 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37453D7D281DAE0900423CF0 /* BaseViewController.swift */; };
 		37479B9B283E763B0078386E /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37479B9A283E763B0078386E /* UIColor+Extension.swift */; };
+		37479B9F283EAE140078386E /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37479B9E283EAE140078386E /* UIImage+Extension.swift */; };
+		37479BA1283EBB220078386E /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37479BA0283EBB220078386E /* UIButton+Extension.swift */; };
 		37605DEC28394E0400394929 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37605DEB28394E0400394929 /* AppCoordinator.swift */; };
 		37605DEF2839547200394929 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37605DEE2839547200394929 /* AuthCoordinator.swift */; };
 		37605DF62839FB4100394929 /* RxASAuthorizationControllerDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37605DF52839FB4100394929 /* RxASAuthorizationControllerDelegateProxy.swift */; };
@@ -25,6 +27,8 @@
 		3770FFEE283112E8001960A0 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 3770FFED283112E8001960A0 /* RxCocoa */; };
 		3770FFF0283112E8001960A0 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3770FFEF283112E8001960A0 /* RxSwift */; };
 		3770FFF3283112F4001960A0 /* ReactorKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3770FFF2283112F4001960A0 /* ReactorKit */; };
+		3773707F2841B95000D5CCB6 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3773707D2841B95000D5CCB6 /* CheckBox.swift */; };
+		377370842841BE1000D5CCB6 /* UIButton+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377370832841BE1000D5CCB6 /* UIButton+Rx.swift */; };
 		378F347A281DBDF10063CE4F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F3478281DBDF10063CE4F /* LoginViewController.swift */; };
 		378F347B281DBDF10063CE4F /* LoginReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F3479281DBDF10063CE4F /* LoginReactor.swift */; };
 		378F347E281DBE070063CE4F /* GatherListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F347C281DBE070063CE4F /* GatherListViewController.swift */; };
@@ -61,6 +65,8 @@
 /* Begin PBXFileReference section */
 		37453D7D281DAE0900423CF0 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		37479B9A283E763B0078386E /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		37479B9E283EAE140078386E /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		37479BA0283EBB220078386E /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		37605DEB28394E0400394929 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		37605DEE2839547200394929 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		37605DF0283967D900394929 /* App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
@@ -73,6 +79,8 @@
 		37605E04283C12D400394929 /* SignUpAgreementReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAgreementReactor.swift; sourceTree = "<group>"; };
 		37605E07283C179A00394929 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		37605E09283C23FC00394929 /* SignUpAgreementCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAgreementCoordinator.swift; sourceTree = "<group>"; };
+		3773707D2841B95000D5CCB6 /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
+		377370832841BE1000D5CCB6 /* UIButton+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Rx.swift"; sourceTree = "<group>"; };
 		378F3478281DBDF10063CE4F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		378F3479281DBDF10063CE4F /* LoginReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginReactor.swift; sourceTree = "<group>"; };
 		378F347C281DBE070063CE4F /* GatherListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListViewController.swift; sourceTree = "<group>"; };
@@ -164,6 +172,7 @@
 				37605DFA2839FF4A00394929 /* ASAuthorizationAppleIDButton+Rx.swift */,
 				37605DFC283A003B00394929 /* ASAuthorizationAppleIDProvider+Rx.swift */,
 				37605DF82839FDB300394929 /* ASAuthorizationController+Rx.swift */,
+				377370832841BE1000D5CCB6 /* UIButton+Rx.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -181,6 +190,7 @@
 		37605E0E283C50C800394929 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3773707D2841B95000D5CCB6 /* CheckBox.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -307,6 +317,8 @@
 				37912C99281447C40087B95E /* Array+Extension.swift */,
 				37912C9B2814480C0087B95E /* NSLayoutConstraint+Extension.swift */,
 				37479B9A283E763B0078386E /* UIColor+Extension.swift */,
+				37479B9E283EAE140078386E /* UIImage+Extension.swift */,
+				37479BA0283EBB220078386E /* UIButton+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -464,10 +476,12 @@
 				37605DEF2839547200394929 /* AuthCoordinator.swift in Sources */,
 				37605E05283C12D400394929 /* SignUpAgreementViewController.swift in Sources */,
 				37605DFB2839FF4A00394929 /* ASAuthorizationAppleIDButton+Rx.swift in Sources */,
+				37479B9F283EAE140078386E /* UIImage+Extension.swift in Sources */,
 				37912CA628144A530087B95E /* TabCoordinator.swift in Sources */,
 				37605E06283C12D400394929 /* SignUpAgreementReactor.swift in Sources */,
 				37605DEC28394E0400394929 /* AppCoordinator.swift in Sources */,
 				37912C9C2814480C0087B95E /* NSLayoutConstraint+Extension.swift in Sources */,
+				37479BA1283EBB220078386E /* UIButton+Extension.swift in Sources */,
 				37605DFD283A003B00394929 /* ASAuthorizationAppleIDProvider+Rx.swift in Sources */,
 				37912CA0281449230087B95E /* Coordinator.swift in Sources */,
 				37605E0A283C23FC00394929 /* SignUpAgreementCoordinator.swift in Sources */,
@@ -479,6 +493,7 @@
 				37912CA2281449610087B95E /* SceneCoordinator.swift in Sources */,
 				37605E08283C179A00394929 /* LoginCoordinator.swift in Sources */,
 				37453D7E281DAE0900423CF0 /* BaseViewController.swift in Sources */,
+				3773707F2841B95000D5CCB6 /* CheckBox.swift in Sources */,
 				378F3482281DBE140063CE4F /* ChattingViewController.swift in Sources */,
 				378F347B281DBDF10063CE4F /* LoginReactor.swift in Sources */,
 				37912C65281445AC0087B95E /* AppDelegate.swift in Sources */,
@@ -486,6 +501,7 @@
 				378F348B281DC0560063CE4F /* GatherListCoordinator.swift in Sources */,
 				378F347A281DBDF10063CE4F /* LoginViewController.swift in Sources */,
 				37912C67281445AC0087B95E /* SceneDelegate.swift in Sources */,
+				377370842841BE1000D5CCB6 /* UIButton+Rx.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

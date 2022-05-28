@@ -13,17 +13,26 @@ final class AuthCoordinator: Coordinator {
     private let window: UIWindow?
     var childCoordinators = [Coordinator]()
     var disposeBag = DisposeBag()
-    
+    var isSimulator = true
+
     init(window: UIWindow?) {
         self.window = window
     }
     
     func start() {
-        let loginCoordinator = LoginCoordinator()
-        childCoordinators.append(loginCoordinator)
-        loginCoordinator.start()
+        if !isSimulator {
+            let loginCoordinator = LoginCoordinator()
+            childCoordinators.append(loginCoordinator)
+            loginCoordinator.start()
+            window?.rootViewController = loginCoordinator.navigationController
+        } else {
+            let navigationController = UINavigationController()
+            let SignUpAgreementCoordinator = SignUpAgreementCoordinator(navigationController: navigationController, component: "Dummy")
+            childCoordinators.append(SignUpAgreementCoordinator)
+            SignUpAgreementCoordinator.start()
+            window?.rootViewController = navigationController
+        }
         
-        window?.rootViewController = loginCoordinator.navigationController
         window?.makeKeyAndVisible()
     }
 }
