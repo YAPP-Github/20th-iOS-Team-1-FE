@@ -12,7 +12,7 @@ import RxCocoa
 import RxSwift
 
 extension Reactive where Base: ASAuthorizationAppleIDButton {
-    public func didTap(scopes: [ASAuthorization.Scope]) -> Observable<ASAuthorization> {
+    public func tap(scopes: [ASAuthorization.Scope]) -> Observable<ASAuthorization> {
         return controlEvent(.touchUpInside)
             .flatMap {
                 ASAuthorizationAppleIDProvider().rx.requestAuthorization(with: scopes, window: base.window!)
