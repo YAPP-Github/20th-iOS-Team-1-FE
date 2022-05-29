@@ -3,13 +3,14 @@
 import UIKit
 
 import ReactorKit
-import RxCocoa
+import RxSwift
 
 final class ___FILEBASENAMEASIDENTIFIER___: BaseViewController {
     var disposeBag = DisposeBag()
     
     init(reactor: ___VARIABLE_productName:identifier___Reactor) {
         super.init(nibName: nil, bundle: nil)
+        
         self.reactor = reactor
     }
     
@@ -20,13 +21,10 @@ final class ___FILEBASENAMEASIDENTIFIER___: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         addSubviews()
         configureLayout()
         configureUI()
-        
-        if let reactor = reactor {
-            bind(reactor: reactor)
-        }
     }
 
     private func addSubviews() {
@@ -44,11 +42,15 @@ final class ___FILEBASENAMEASIDENTIFIER___: BaseViewController {
     }
     
     private func bindAction(with reactor: ___VARIABLE_productName:identifier___Reactor) {
-        
+        disposeBag.insert {
+            
+        }
     }
     
     private func bindState(with reactor: ___VARIABLE_productName:identifier___Reactor) {
-        
+        disposeBag.insert {
+            
+        }
     }
     
     func bind(reactor: ___VARIABLE_productName:identifier___Reactor) {
