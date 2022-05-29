@@ -184,55 +184,51 @@ final class SignUpAgreementViewController: BaseViewController {
     }
     
     private func bindAction(with reactor: Reactor) {
-        agreementCheckBox.rx.tap
-            .map {Reactor.Action.agreementCheckBoxDidTap }
-            .bind(to: reactor.action)
-            .disposed(by: disposeBag)
-        
-        termsOfServiceCheckBox.rx.throttleTap
-            .map { Reactor.Action.termsOfServiceCheckBoxDidTap }
-            .bind(to: reactor.action)
-            .disposed(by: disposeBag)
-        
-        privacyPolicyCheckBox.rx.tap
-            .map { Reactor.Action.privacyPolicyCheckBoxDidTap }
-            .bind(to: reactor.action)
-            .disposed(by: disposeBag)
-        
-        nextButton.rx.throttleTap
-            .map { Reactor.Action.nextButtonDidTap }
-            .bind(to: reactor.action)
-            .disposed(by: disposeBag)
+        disposeBag.insert {
+            agreementCheckBox.rx.tap
+                .map { Reactor.Action.agreementCheckBoxDidTap }
+                .bind(to: reactor.action)
+            
+            termsOfServiceCheckBox.rx.tap
+                .map { Reactor.Action.termsOfServiceCheckBoxDidTap }
+                .bind(to: reactor.action)
+            
+            privacyPolicyCheckBox.rx.tap
+                .map { Reactor.Action.privacyPolicyCheckBoxDidTap }
+                .bind(to: reactor.action)
+            
+            nextButton.rx.throttleTap
+                .map { Reactor.Action.nextButtonDidTap }
+                .bind(to: reactor.action)
+        }
     }
     
     private func bindState(with reactor: Reactor) {
-        reactor.state
-            .map { $0.isAgreementChecked }
-            .distinctUntilChanged()
-            .asDriver(onErrorJustReturn: false)
-            .drive(agreementCheckBox.rx.isSelected)
-            .disposed(by: disposeBag)
-        
-        reactor.state
-            .map { $0.isTermsOfServiceChecked }
-            .distinctUntilChanged()
-            .asDriver(onErrorJustReturn: false)
-            .drive(termsOfServiceCheckBox.rx.isSelected)
-            .disposed(by: disposeBag)
+        disposeBag.insert {
+            reactor.state
+                .map { $0.isAgreementChecked }
+                .distinctUntilChanged()
+                .asDriver(onErrorJustReturn: false)
+                .drive(agreementCheckBox.rx.isSelected)
 
-        reactor.state
-            .map { $0.isPrivacyPolicyChecked }
-            .distinctUntilChanged()
-            .asDriver(onErrorJustReturn: false)
-            .drive(privacyPolicyCheckBox.rx.isSelected)
-            .disposed(by: disposeBag)
-        
-        reactor.state
-            .map { $0.isAgreementChecked }
-            .distinctUntilChanged()
-            .asDriver(onErrorJustReturn: false)
-            .drive(nextButton.rx.isEnabled)
-            .disposed(by: disposeBag)
+            reactor.state
+                .map { $0.isTermsOfServiceChecked }
+                .distinctUntilChanged()
+                .asDriver(onErrorJustReturn: false)
+                .drive(termsOfServiceCheckBox.rx.isSelected)
+
+            reactor.state
+                .map { $0.isPrivacyPolicyChecked }
+                .distinctUntilChanged()
+                .asDriver(onErrorJustReturn: false)
+                .drive(privacyPolicyCheckBox.rx.isSelected)
+
+            reactor.state
+                .map { $0.isAgreementChecked }
+                .distinctUntilChanged()
+                .asDriver(onErrorJustReturn: false)
+                .drive(nextButton.rx.isEnabled)
+        }
     }
     
     func bind(reactor: Reactor) {
