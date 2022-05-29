@@ -1,6 +1,6 @@
 //___FILEHEADER___
 
-import UIKit
+import Foundation
 
 import ReactorKit
 import RxSwift

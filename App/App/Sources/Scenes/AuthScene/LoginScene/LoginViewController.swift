@@ -9,7 +9,7 @@ import AuthenticationServices
 import UIKit
 
 import ReactorKit
-import RxCocoa
+import RxSwift
 
 final class LoginViewController: BaseViewController {
     private var signInWithAppleButton = ASAuthorizationAppleIDButton()
