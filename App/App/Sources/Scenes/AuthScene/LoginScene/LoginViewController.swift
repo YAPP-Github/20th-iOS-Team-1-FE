@@ -31,10 +31,6 @@ final class LoginViewController: BaseViewController {
         addSubviews()
         configureLayout()
         configureUI()
-        
-        if let reactor = reactor {
-            bind(reactor: reactor)
-        }
     }
 
     private func addSubviews() {
@@ -54,7 +50,7 @@ final class LoginViewController: BaseViewController {
     
     private func bindAction(with reactor: LoginReactor) {
         disposeBag.insert {
-            signInWithAppleButton.rx.didTap(scopes: [.email])
+            signInWithAppleButton.rx.tap(scopes: [.email])
                 .withUnretained(self)
                 .compactMap { (owner, authorization) in owner.email(for: authorization) }
                 .map { LoginReactor.Action.signInWithApple(email: $0) }

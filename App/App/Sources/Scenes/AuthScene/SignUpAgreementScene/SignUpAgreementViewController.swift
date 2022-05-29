@@ -107,13 +107,10 @@ final class SignUpAgreementViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         addSubviews()
         configureLayout()
         configureUI()
-        
-        if let reactor = reactor {
-            bind(reactor: reactor)
-        }
     }
 
     private func addSubviews() {
