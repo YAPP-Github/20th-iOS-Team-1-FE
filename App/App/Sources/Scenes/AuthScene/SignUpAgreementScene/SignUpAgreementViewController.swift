@@ -80,13 +80,9 @@ final class SignUpAgreementViewController: BaseViewController {
         return contour
     }()
 
-    private var nextButton: UIButton = {
-        let button = UIButton()
-        button.layer.cornerRadius = 10
+    private var nextButton: EnableButton = {
+        let button = EnableButton()
         button.setTitle("다음", for: .normal)
-        button.setBackgroundColor(.Togaether.mainGreen, for: .normal)
-        button.setTitle("다음", for: .disabled)
-        button.setBackgroundColor(.Togaether.buttonDisabled, for: .disabled)
         button.isEnabled = false
         
         return button
