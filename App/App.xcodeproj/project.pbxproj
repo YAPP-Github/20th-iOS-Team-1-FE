@@ -12,6 +12,10 @@
 		37479B9B283E763B0078386E /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37479B9A283E763B0078386E /* UIColor+Extension.swift */; };
 		37479B9F283EAE140078386E /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37479B9E283EAE140078386E /* UIImage+Extension.swift */; };
 		37479BA1283EBB220078386E /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37479BA0283EBB220078386E /* UIButton+Extension.swift */; };
+		376006C228487FFE00B27015 /* SignUpProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376006C128487FFE00B27015 /* SignUpProfileCoordinator.swift */; };
+		376006C528489A2B00B27015 /* RegularExpressionValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376006C428489A2B00B27015 /* RegularExpressionValidator.swift */; };
+		376006C82848A16400B27015 /* RegularExpressionValidatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376006C72848A16400B27015 /* RegularExpressionValidatable.swift */; };
+		376006CA28490EFD00B27015 /* EnableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376006C928490EFD00B27015 /* EnableButton.swift */; };
 		37605DEC28394E0400394929 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37605DEB28394E0400394929 /* AppCoordinator.swift */; };
 		37605DEF2839547200394929 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37605DEE2839547200394929 /* AuthCoordinator.swift */; };
 		37605DF62839FB4100394929 /* RxASAuthorizationControllerDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37605DF52839FB4100394929 /* RxASAuthorizationControllerDelegateProxy.swift */; };
@@ -70,6 +74,10 @@
 		37479B9A283E763B0078386E /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		37479B9E283EAE140078386E /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		37479BA0283EBB220078386E /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
+		376006C128487FFE00B27015 /* SignUpProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpProfileCoordinator.swift; sourceTree = "<group>"; };
+		376006C428489A2B00B27015 /* RegularExpressionValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularExpressionValidator.swift; sourceTree = "<group>"; };
+		376006C72848A16400B27015 /* RegularExpressionValidatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularExpressionValidatable.swift; sourceTree = "<group>"; };
+		376006C928490EFD00B27015 /* EnableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnableButton.swift; sourceTree = "<group>"; };
 		37605DEB28394E0400394929 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		37605DEE2839547200394929 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		37605DF0283967D900394929 /* App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
@@ -144,6 +152,23 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
+		376006C3284899FA00B27015 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				376006C62848A14300B27015 /* RegularExpression */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		376006C62848A14300B27015 /* RegularExpression */ = {
+			isa = PBXGroup;
+			children = (
+				376006C428489A2B00B27015 /* RegularExpressionValidator.swift */,
+				376006C72848A16400B27015 /* RegularExpressionValidatable.swift */,
+			);
+			path = RegularExpression;
+			sourceTree = "<group>";
+		};
 		37605DED28394F4400394929 /* LoginScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -197,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				3773707D2841B95000D5CCB6 /* CheckBox.swift */,
+				376006C928490EFD00B27015 /* EnableButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -206,6 +232,7 @@
 			children = (
 				377370862841DE3500D5CCB6 /* SignUpProfileViewController.swift */,
 				377370872841DE3500D5CCB6 /* SignUpProfileReactor.swift */,
+				376006C128487FFE00B27015 /* SignUpProfileCoordinator.swift */,
 			);
 			path = SignUpProfileScene;
 			sourceTree = "<group>";
@@ -351,6 +378,7 @@
 		37912C9D281448F70087B95E /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				376006C3284899FA00B27015 /* Service */,
 				37605DF32839FAF700394929 /* Rx */,
 				37605E0E283C50C800394929 /* View */,
 				37453D7C281DADF800423CF0 /* ViewController */,
@@ -499,6 +527,7 @@
 				378F347E281DBE070063CE4F /* GatherListViewController.swift in Sources */,
 				37479B9B283E763B0078386E /* UIColor+Extension.swift in Sources */,
 				37605DEF2839547200394929 /* AuthCoordinator.swift in Sources */,
+				376006C228487FFE00B27015 /* SignUpProfileCoordinator.swift in Sources */,
 				37605E05283C12D400394929 /* SignUpAgreementViewController.swift in Sources */,
 				37605DFB2839FF4A00394929 /* ASAuthorizationAppleIDButton+Rx.swift in Sources */,
 				377370892841DE3500D5CCB6 /* SignUpProfileReactor.swift in Sources */,
@@ -512,9 +541,11 @@
 				37912CA0281449230087B95E /* Coordinator.swift in Sources */,
 				37605E0A283C23FC00394929 /* SignUpAgreementCoordinator.swift in Sources */,
 				378F348F281DC0770063CE4F /* ProfileCoordinator.swift in Sources */,
+				376006C82848A16400B27015 /* RegularExpressionValidatable.swift in Sources */,
 				378F347F281DBE070063CE4F /* GatherListReactor.swift in Sources */,
 				37605DF62839FB4100394929 /* RxASAuthorizationControllerDelegateProxy.swift in Sources */,
 				378F3483281DBE140063CE4F /* ChattingReactor.swift in Sources */,
+				376006C528489A2B00B27015 /* RegularExpressionValidator.swift in Sources */,
 				3773708C2841DE6D00D5CCB6 /* UserAuthentification.swift in Sources */,
 				37605DF92839FDB300394929 /* ASAuthorizationController+Rx.swift in Sources */,
 				37912CA2281449610087B95E /* SceneCoordinator.swift in Sources */,
@@ -525,6 +556,7 @@
 				378F347B281DBDF10063CE4F /* LoginReactor.swift in Sources */,
 				37912C65281445AC0087B95E /* AppDelegate.swift in Sources */,
 				377370882841DE3500D5CCB6 /* SignUpProfileViewController.swift in Sources */,
+				376006CA28490EFD00B27015 /* EnableButton.swift in Sources */,
 				378F3486281DBE210063CE4F /* ProfileViewController.swift in Sources */,
 				378F348B281DC0560063CE4F /* GatherListCoordinator.swift in Sources */,
 				378F347A281DBDF10063CE4F /* LoginViewController.swift in Sources */,
