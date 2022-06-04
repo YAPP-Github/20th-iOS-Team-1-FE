@@ -21,35 +21,14 @@ final class SearchViewController: BaseViewController {
         let button = CircularButton()
         button.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
         button.tintColor = .white
-        button.backgroundColor = UIColor(named: "Jump YR")
+        button.backgroundColor = UIColor.Togaether.mainYellow
         return button
     }()
     
-    private var navigationView: UIView = {
-        let view = UIView()
-        return view
-    }()
-    
-    private var titleLogoImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(named: "Logo_S")
-        return imageView
-    }()
-    
-    private var notificationButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: "Notification"), for: .normal)
-        button.adjustsImageWhenHighlighted = false
-        button.tintColor = .gray
-        return button
-    }()
-    
-    private var settingButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: "Menu"), for: .normal)
-        button.tintColor = .label
-        return button
+    private var notificationItem: UIBarButtonItem = {
+        let barButtonItem = UIBarButtonItem(image: UIImage(systemName: "bell"), style: .plain, target: SearchViewController.self, action: nil)
+        barButtonItem.tintColor = .label
+        return barButtonItem
     }()
     
     var disposeBag = DisposeBag()
@@ -77,24 +56,13 @@ final class SearchViewController: BaseViewController {
 
     private func addSubviews() {
         view.addSubview(mapView)
-        view.addSubview(navigationView)
         mapView.addSubview(searchButton)
-        
-        navigationView.addSubview(titleLogoImageView)
-        navigationView.addSubview(notificationButton)
-        navigationView.addSubview(settingButton)
-        
     }
     
     private func configureLayout() {
         NSLayoutConstraint.useAndActivateConstraints([
-            // navigationView
-            navigationView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            navigationView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            navigationView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            navigationView.heightAnchor.constraint(equalTo: navigationView.widthAnchor, multiplier: 1/7),
             //mapView
-            mapView.topAnchor.constraint(equalTo: navigationView.bottomAnchor),
+            mapView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             mapView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             mapView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             mapView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
@@ -103,27 +71,17 @@ final class SearchViewController: BaseViewController {
             searchButton.widthAnchor.constraint(equalToConstant: 56),
             searchButton.topAnchor.constraint(equalTo: mapView.topAnchor, constant: 22),
             searchButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -22),
-            //titleLogoImageView
-            titleLogoImageView.topAnchor.constraint(equalTo: navigationView.topAnchor, constant: 4),
-            titleLogoImageView.leadingAnchor.constraint(equalTo: navigationView.leadingAnchor,constant: 20),
-            titleLogoImageView.bottomAnchor.constraint(equalTo: navigationView.bottomAnchor, constant: -7),
-            titleLogoImageView.widthAnchor.constraint(equalTo: titleLogoImageView.heightAnchor, multiplier: 60/44),
-            //settingButton
-            settingButton.topAnchor.constraint(equalTo: navigationView.topAnchor, constant: 12),
-            settingButton.bottomAnchor.constraint(equalTo: navigationView.bottomAnchor, constant: -11),
-            settingButton.trailingAnchor.constraint(equalTo: navigationView.trailingAnchor, constant: -12),
-            settingButton.widthAnchor.constraint(equalTo: settingButton.heightAnchor),
             //notificationButton
-            notificationButton.topAnchor.constraint(equalTo: navigationView.topAnchor, constant: 15),
-            notificationButton.bottomAnchor.constraint(equalTo: navigationView.bottomAnchor, constant: -14),
-            notificationButton.trailingAnchor.constraint(equalTo: settingButton.leadingAnchor, constant: -10),
-            notificationButton.widthAnchor.constraint(equalTo: notificationButton.heightAnchor)
+//            notificationButton.topAnchor.constraint(equalTo: navigationView.topAnchor, constant: 15),
+//            notificationButton.bottomAnchor.constraint(equalTo: navigationView.bottomAnchor, constant: -14),
+//            notificationButton.trailingAnchor.constraint(equalTo: settingButton.leadingAnchor, constant: -10),
+//            notificationButton.widthAnchor.constraint(equalTo: notificationButton.heightAnchor)
         ])
     }
     
     private func configureUI() {
         self.view.backgroundColor = .systemBackground
-        self.navigationController?.navigationBar.isHidden = true
+        self.navigationItem.rightBarButtonItem = notificationItem
     }
     
     private func bindAction(with reactor: SearchReactor) {
