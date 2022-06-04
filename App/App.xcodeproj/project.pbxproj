@@ -19,6 +19,7 @@
 		374380AF284FE13300CB02A5 /* SearchingResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374380AE284FE13300CB02A5 /* SearchingResponseDTO.swift */; };
 		29AE222D284B7DAA00EDF34B /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE222B284B7DAA00EDF34B /* SearchViewController.swift */; };
 		29AE222E284B7DAA00EDF34B /* SearchReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE222C284B7DAA00EDF34B /* SearchReactor.swift */; };
+		29AE2232284B7F1100EDF34B /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2231284B7F1100EDF34B /* UIView+Extension.swift */; };
 		37451F252834245100696B21 /* WeakMapTable in Frameworks */ = {isa = PBXBuildFile; productRef = 37451F242834245100696B21 /* WeakMapTable */; };
 		37453D7E281DAE0900423CF0 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37453D7D281DAE0900423CF0 /* BaseViewController.swift */; };
 		37479B9B283E763B0078386E /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37479B9A283E763B0078386E /* UIColor+Extension.swift */; };
@@ -147,6 +148,7 @@
 		374380AE284FE13300CB02A5 /* SearchingResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchingResponseDTO.swift; sourceTree = "<group>"; };
 		29AE222B284B7DAA00EDF34B /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		29AE222C284B7DAA00EDF34B /* SearchReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchReactor.swift; sourceTree = "<group>"; };
+		29AE2231284B7F1100EDF34B /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		37453D7D281DAE0900423CF0 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		37479B9A283E763B0078386E /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		37479B9E283EAE140078386E /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
@@ -575,6 +577,7 @@
 				37912C99281447C40087B95E /* Array+Extension.swift */,
 				37912C9B2814480C0087B95E /* NSLayoutConstraint+Extension.swift */,
 				37479B9A283E763B0078386E /* UIColor+Extension.swift */,
+				29AE2231284B7F1100EDF34B /* UIView+Extension.swift */,
 				37479B9E283EAE140078386E /* UIImage+Extension.swift */,
 				37479BA0283EBB220078386E /* UIButton+Extension.swift */,
 				FDE6F1472852317F005E4783 /* UITableView+Extension.swift */,
@@ -934,6 +937,7 @@
 				FD8AD70B2851E51300454AC3 /* TagCollectionViewCell.swift in Sources */,
 				37605DEC28394E0400394929 /* AppCoordinator.swift in Sources */,
 				37912C9C2814480C0087B95E /* NSLayoutConstraint+Extension.swift in Sources */,
+				29AE2232284B7F1100EDF34B /* UIView+Extension.swift in Sources */,
 				379B1A7B285A52EA00E58A34 /* AppleLoginRepositoryInterface.swift in Sources */,
 				37479BA1283EBB220078386E /* UIButton+Extension.swift in Sources */,
 				374F41DA2864EB060074F04B /* KeychainUseCase.swift in Sources */,
