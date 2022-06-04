@@ -24,11 +24,11 @@ final class TabCoordinator: Coordinator {
         let secondViewController = secondCoordinator.navigationController
         secondViewController.tabBarItem = UITabBarItem(title: "Gather", image: nil, selectedImage: nil)
         
-        let thirdCoordinator = ChattingCoordinator()
+        let thirdCoordinator = SearchCoordinator()
         childCoordinators.append(thirdCoordinator)
         thirdCoordinator.start()
         let thirdViewController = thirdCoordinator.navigationController
-        thirdViewController.tabBarItem = UITabBarItem(title: "Chatting", image: nil, selectedImage: nil)
+        thirdViewController.tabBarItem = UITabBarItem(title: "Search", image: nil, selectedImage: nil)
         
         let fourthCoordinator = ProfileCoordinator()
         childCoordinators.append(fourthCoordinator)
