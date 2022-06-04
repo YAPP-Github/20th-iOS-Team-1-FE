@@ -23,6 +23,7 @@
 		29AE2234284B829200EDF34B /* CircularButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2233284B829200EDF34B /* CircularButton.swift */; };
 		29AE2236284B867300EDF34B /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2235284B867300EDF34B /* SearchCoordinator.swift */; };
 		29AE2238284B941800EDF34B /* GatherCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2237284B941800EDF34B /* GatherCategory.swift */; };
+		29AE223A284B97DA00EDF34B /* Gather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2239284B97DA00EDF34B /* Gather.swift */; };
 		37451F252834245100696B21 /* WeakMapTable in Frameworks */ = {isa = PBXBuildFile; productRef = 37451F242834245100696B21 /* WeakMapTable */; };
 		37453D7E281DAE0900423CF0 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37453D7D281DAE0900423CF0 /* BaseViewController.swift */; };
 		37479B9B283E763B0078386E /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37479B9A283E763B0078386E /* UIColor+Extension.swift */; };
@@ -155,6 +156,7 @@
 		29AE2233284B829200EDF34B /* CircularButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularButton.swift; sourceTree = "<group>"; };
 		29AE2235284B867300EDF34B /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
 		29AE2237284B941800EDF34B /* GatherCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherCategory.swift; sourceTree = "<group>"; };
+		29AE2239284B97DA00EDF34B /* Gather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gather.swift; sourceTree = "<group>"; };
 		37453D7D281DAE0900423CF0 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		37479B9A283E763B0078386E /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		37479B9E283EAE140078386E /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
@@ -322,6 +324,7 @@
 				29AE222C284B7DAA00EDF34B /* SearchReactor.swift */,
 				29AE2235284B867300EDF34B /* SearchCoordinator.swift */,
 				29AE2237284B941800EDF34B /* GatherCategory.swift */,
+				29AE2239284B97DA00EDF34B /* Gather.swift */,
 			);
 			path = SearchScene;
 			sourceTree = "<group>";
@@ -1000,6 +1003,7 @@
 				374F41D72864E97A0074F04B /* KeychainAccount.swift in Sources */,
 				29AE222D284B7DAA00EDF34B /* SearchViewController.swift in Sources */,
 				377370882841DE3500D5CCB6 /* SignUpProfileViewController.swift in Sources */,
+				29AE223A284B97DA00EDF34B /* Gather.swift in Sources */,
 				376006CA28490EFD00B27015 /* EnableButton.swift in Sources */,
 				379B1A79285A52DA00E58A34 /* AppleLoginRepository.swift in Sources */,
 				378F3486281DBE210063CE4F /* ProfileViewController.swift in Sources */,
