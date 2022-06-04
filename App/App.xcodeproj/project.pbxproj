@@ -22,6 +22,7 @@
 		29AE2232284B7F1100EDF34B /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2231284B7F1100EDF34B /* UIView+Extension.swift */; };
 		29AE2234284B829200EDF34B /* CircularButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2233284B829200EDF34B /* CircularButton.swift */; };
 		29AE2236284B867300EDF34B /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2235284B867300EDF34B /* SearchCoordinator.swift */; };
+		29AE2238284B941800EDF34B /* GatherCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2237284B941800EDF34B /* GatherCategory.swift */; };
 		37451F252834245100696B21 /* WeakMapTable in Frameworks */ = {isa = PBXBuildFile; productRef = 37451F242834245100696B21 /* WeakMapTable */; };
 		37453D7E281DAE0900423CF0 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37453D7D281DAE0900423CF0 /* BaseViewController.swift */; };
 		37479B9B283E763B0078386E /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37479B9A283E763B0078386E /* UIColor+Extension.swift */; };
@@ -153,6 +154,7 @@
 		29AE2231284B7F1100EDF34B /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		29AE2233284B829200EDF34B /* CircularButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularButton.swift; sourceTree = "<group>"; };
 		29AE2235284B867300EDF34B /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
+		29AE2237284B941800EDF34B /* GatherCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherCategory.swift; sourceTree = "<group>"; };
 		37453D7D281DAE0900423CF0 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		37479B9A283E763B0078386E /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		37479B9E283EAE140078386E /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 				29AE222B284B7DAA00EDF34B /* SearchViewController.swift */,
 				29AE222C284B7DAA00EDF34B /* SearchReactor.swift */,
 				29AE2235284B867300EDF34B /* SearchCoordinator.swift */,
+				29AE2237284B941800EDF34B /* GatherCategory.swift */,
 			);
 			path = SearchScene;
 			sourceTree = "<group>";
@@ -915,6 +918,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29AE2238284B941800EDF34B /* GatherCategory.swift in Sources */,
 				378F3487281DBE210063CE4F /* ProfileReactor.swift in Sources */,
 				37912C9A281447C40087B95E /* Array+Extension.swift in Sources */,
 				3743809D284FDB5300CB02A5 /* ExceptionResponseInfoDTO.swift in Sources */,
