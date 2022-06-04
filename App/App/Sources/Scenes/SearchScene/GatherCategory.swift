@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum GatherCategory {
+enum GatherCategory: Codable {
     case walk
     case playground
     case petCafe
