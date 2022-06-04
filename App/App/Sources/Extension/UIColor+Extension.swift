@@ -26,7 +26,7 @@ extension UIColor {
         static let primaryLabel            = UIColor(named: "primaryLabel")!
         static let secondaryLabel          = UIColor(named: "secondaryLabel")!
         static let mainGreen               = UIColor(named: "mainGreen")!
-        static let contour                 = UIColor(named: "contour")!
+        static let divider                 = UIColor(named: "divider")!
         static let background              = UIColor(named: "background")!
         static let checkBoxDidDeselect     = UIColor(named: "checkBoxDidDeselect")!
         static let buttonDisabled          = UIColor(named: "buttonDisabled")!
