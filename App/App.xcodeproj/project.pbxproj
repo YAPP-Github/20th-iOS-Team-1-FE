@@ -20,6 +20,7 @@
 		29AE222D284B7DAA00EDF34B /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE222B284B7DAA00EDF34B /* SearchViewController.swift */; };
 		29AE222E284B7DAA00EDF34B /* SearchReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE222C284B7DAA00EDF34B /* SearchReactor.swift */; };
 		29AE2232284B7F1100EDF34B /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2231284B7F1100EDF34B /* UIView+Extension.swift */; };
+		29AE2234284B829200EDF34B /* CircularButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2233284B829200EDF34B /* CircularButton.swift */; };
 		37451F252834245100696B21 /* WeakMapTable in Frameworks */ = {isa = PBXBuildFile; productRef = 37451F242834245100696B21 /* WeakMapTable */; };
 		37453D7E281DAE0900423CF0 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37453D7D281DAE0900423CF0 /* BaseViewController.swift */; };
 		37479B9B283E763B0078386E /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37479B9A283E763B0078386E /* UIColor+Extension.swift */; };
@@ -149,6 +150,7 @@
 		29AE222B284B7DAA00EDF34B /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		29AE222C284B7DAA00EDF34B /* SearchReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchReactor.swift; sourceTree = "<group>"; };
 		29AE2231284B7F1100EDF34B /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		29AE2233284B829200EDF34B /* CircularButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularButton.swift; sourceTree = "<group>"; };
 		37453D7D281DAE0900423CF0 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		37479B9A283E763B0078386E /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		37479B9E283EAE140078386E /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
@@ -419,6 +421,7 @@
 			isa = PBXGroup;
 			children = (
 				3773707D2841B95000D5CCB6 /* CheckBox.swift */,
+				29AE2233284B829200EDF34B /* CircularButton.swift */,
 				376006C928490EFD00B27015 /* EnableButton.swift */,
 				37AC310728493367003C3FA2 /* ContourView.swift */,
 				FD8AD7082851E2AA00454AC3 /* PaddingLabel.swift */,
@@ -926,6 +929,7 @@
 				37605DFB2839FF4A00394929 /* ASAuthorizationAppleIDButton+Rx.swift in Sources */,
 				29AE222E284B7DAA00EDF34B /* SearchReactor.swift in Sources */,
 				377370892841DE3500D5CCB6 /* SignUpProfileReactor.swift in Sources */,
+				29AE2234284B829200EDF34B /* CircularButton.swift in Sources */,
 				FDE6F14A28523493005E4783 /* UICollectionView+Extension.swift in Sources */,
 				37479B9F283EAE140078386E /* UIImage+Extension.swift in Sources */,
 				FDE6F1482852317F005E4783 /* UITableView+Extension.swift in Sources */,
