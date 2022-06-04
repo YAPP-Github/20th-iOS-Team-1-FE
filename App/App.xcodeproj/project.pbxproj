@@ -57,6 +57,9 @@
 		37912CA0281449230087B95E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37912C9F281449230087B95E /* Coordinator.swift */; };
 		37912CA2281449610087B95E /* SceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37912CA1281449610087B95E /* SceneCoordinator.swift */; };
 		37912CA628144A530087B95E /* TabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37912CA528144A530087B95E /* TabCoordinator.swift */; };
+		37AC3105284930E6003C3FA2 /* SignUpInfomationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AC3103284930E6003C3FA2 /* SignUpInfomationViewController.swift */; };
+		37AC3106284930E6003C3FA2 /* SignUpInfomationReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AC3104284930E6003C3FA2 /* SignUpInfomationReactor.swift */; };
+		37AC310828493367003C3FA2 /* ContourView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AC310728493367003C3FA2 /* ContourView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +122,9 @@
 		37912C9F281449230087B95E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		37912CA1281449610087B95E /* SceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCoordinator.swift; sourceTree = "<group>"; };
 		37912CA528144A530087B95E /* TabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCoordinator.swift; sourceTree = "<group>"; };
+		37AC3103284930E6003C3FA2 /* SignUpInfomationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInfomationViewController.swift; sourceTree = "<group>"; };
+		37AC3104284930E6003C3FA2 /* SignUpInfomationReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInfomationReactor.swift; sourceTree = "<group>"; };
+		37AC310728493367003C3FA2 /* ContourView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContourView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +173,15 @@
 				376006C72848A16400B27015 /* RegularExpressionValidatable.swift */,
 			);
 			path = RegularExpression;
+			sourceTree = "<group>";
+		};
+		376006CB28492F6700B27015 /* SignUpInfomationScene */ = {
+			isa = PBXGroup;
+			children = (
+				37AC3103284930E6003C3FA2 /* SignUpInfomationViewController.swift */,
+				37AC3104284930E6003C3FA2 /* SignUpInfomationReactor.swift */,
+			);
+			path = SignUpInfomationScene;
 			sourceTree = "<group>";
 		};
 		37605DED28394F4400394929 /* LoginScene */ = {
@@ -223,6 +238,7 @@
 			children = (
 				3773707D2841B95000D5CCB6 /* CheckBox.swift */,
 				376006C928490EFD00B27015 /* EnableButton.swift */,
+				37AC310728493367003C3FA2 /* ContourView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -283,6 +299,7 @@
 				37605DED28394F4400394929 /* LoginScene */,
 				37605E02283C126100394929 /* SignUpAgreementScene */,
 				377370852841DDE300D5CCB6 /* SignUpProfileScene */,
+				376006CB28492F6700B27015 /* SignUpInfomationScene */,
 			);
 			path = AuthScene;
 			sourceTree = "<group>";
@@ -525,6 +542,7 @@
 				37605E01283A2AE200394929 /* RxASAuthorizationControllerPresentationContextProvidingProxy.swift in Sources */,
 				378F348D281DC0660063CE4F /* ChattingCoordinator.swift in Sources */,
 				378F347E281DBE070063CE4F /* GatherListViewController.swift in Sources */,
+				37AC310828493367003C3FA2 /* ContourView.swift in Sources */,
 				37479B9B283E763B0078386E /* UIColor+Extension.swift in Sources */,
 				37605DEF2839547200394929 /* AuthCoordinator.swift in Sources */,
 				376006C228487FFE00B27015 /* SignUpProfileCoordinator.swift in Sources */,
@@ -559,8 +577,10 @@
 				376006CA28490EFD00B27015 /* EnableButton.swift in Sources */,
 				378F3486281DBE210063CE4F /* ProfileViewController.swift in Sources */,
 				378F348B281DC0560063CE4F /* GatherListCoordinator.swift in Sources */,
+				37AC3105284930E6003C3FA2 /* SignUpInfomationViewController.swift in Sources */,
 				378F347A281DBDF10063CE4F /* LoginViewController.swift in Sources */,
 				37912C67281445AC0087B95E /* SceneDelegate.swift in Sources */,
+				37AC3106284930E6003C3FA2 /* SignUpInfomationReactor.swift in Sources */,
 				377370842841BE1000D5CCB6 /* UIButton+Rx.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

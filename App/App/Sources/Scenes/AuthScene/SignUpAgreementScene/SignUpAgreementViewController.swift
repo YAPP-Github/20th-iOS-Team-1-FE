@@ -40,7 +40,7 @@ final class SignUpAgreementViewController: BaseViewController {
     
     private lazy var checkBoxContourView: UIView = {
         let contour = UIView()
-        contour.backgroundColor = .Togaether.contour
+        contour.backgroundColor = .Togaether.divider
         
         return contour
     }()
@@ -52,7 +52,7 @@ final class SignUpAgreementViewController: BaseViewController {
         attributedText.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: (text as NSString).range(of: "서비스 이용약관"))
         
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 18)
+        label.adjustsFontSizeToFitWidth = true
         label.textColor = .Togaether.primaryLabel
         label.attributedText = attributedText
         
@@ -75,7 +75,7 @@ final class SignUpAgreementViewController: BaseViewController {
 
     private lazy var nextButtonContourView: UIView = {
         let contour = UIView()
-        contour.backgroundColor = .Togaether.contour
+        contour.backgroundColor = .Togaether.divider
         
         return contour
     }()
@@ -152,7 +152,7 @@ final class SignUpAgreementViewController: BaseViewController {
             termsOfServiceCheckBox.widthAnchor.constraint(equalToConstant: 36),
             termsOfServiceLabel.leadingAnchor.constraint(equalTo: termsOfServiceCheckBox.trailingAnchor, constant: 10),
             termsOfServiceLabel.centerYAnchor.constraint(equalTo: termsOfServiceCheckBox.centerYAnchor),
-
+            termsOfServiceLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -46),
             privacyPolicyCheckBox.topAnchor.constraint(equalTo: termsOfServiceCheckBox.bottomAnchor, constant: 16),
             privacyPolicyCheckBox.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 22),
             privacyPolicyCheckBox.heightAnchor.constraint(equalToConstant: 36),
