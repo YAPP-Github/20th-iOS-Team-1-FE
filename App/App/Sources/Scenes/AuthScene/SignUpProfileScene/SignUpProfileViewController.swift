@@ -74,14 +74,14 @@ final class SignUpProfileViewController: BaseViewController {
     
     private lazy var nicknameContourView: UIView = {
         let contour = UIView()
-        contour.backgroundColor = .Togaether.contour
+        contour.backgroundColor = .Togaether.divider
         
         return contour
     }()
     
     private lazy var nextButtonContourView: UIView = {
         let contour = UIView()
-        contour.backgroundColor = .Togaether.contour
+        contour.backgroundColor = .Togaether.divider
         
         return contour
     }()
