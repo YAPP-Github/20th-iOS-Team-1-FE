@@ -25,7 +25,11 @@ final class KeychainProvider: KeychainProvidable {
         ] as CFDictionary
 
         let status = keychain.create(query)
-    
+        
+        guard status != errSecDuplicateItem else {
+            throw KeychainError.duplicatedItem
+        }
+        
         guard status == noErr else {
             throw KeychainError.unhandledError(status: status)
         }
