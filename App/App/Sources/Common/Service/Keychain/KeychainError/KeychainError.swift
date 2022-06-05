@@ -9,5 +9,6 @@ import Foundation
 
 enum KeychainError: Error, Equatable {
     case noItemFound
+    case duplicatedItem
     case unhandledError(status: OSStatus)
 }

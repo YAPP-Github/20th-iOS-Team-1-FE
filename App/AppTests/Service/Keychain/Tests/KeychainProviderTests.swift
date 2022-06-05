@@ -21,7 +21,21 @@ final class KeychainProviderTests: XCTestCase {
         sut = nil
         keychainQueryRequester = nil
     }
-
+    
+    func test_키체인데이터생성하기_errSecDuplicateItemStatus에러발생해서_실패() throws {
+        // Given
+        let status = errSecDuplicateItem
+        keychainQueryRequester.createStatus = status
+        sut = KeychainProvider(keyChain: keychainQueryRequester)
+        
+        // When
+        XCTAssertThrowsError(try sut.create(Dummy.data, service: Dummy.service, account: Dummy.account)) { error in
+            
+            // Then
+            XCTAssertEqual(error as? KeychainError, KeychainError.duplicatedItem)
+        }
+    }
+    
     func test_키체인데이터생성하기_핸들링하지않은Status에러발생해서_실패() throws {
         // Given
         let status = Dummy.unknownErrorStatus
