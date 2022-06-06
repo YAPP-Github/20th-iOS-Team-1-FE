@@ -5,6 +5,7 @@
 //  Created by 유한준 on 2022/06/04.
 //
 
+import CoreLocation
 import Foundation
 
 import ReactorKit
@@ -12,7 +13,6 @@ import RxSwift
 
 final class SearchReactor: Reactor {
     enum Action {
-        
     }
     
     enum Mutation {
@@ -20,14 +20,15 @@ final class SearchReactor: Reactor {
     }
     
     struct State {
-        
+        var currentCoordinate: Coordinate = .seoulCityHall
+        var currentSpan: Double = 0.005
     }
     
     let initialState = State()
     
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
-            
+    
         }
     }
     

@@ -14,6 +14,9 @@ import RxCocoa
 final class SearchViewController: BaseViewController {
     private lazy var mapView: MKMapView = {
         let mapView = MKMapView()
+        mapView.delegate = self
+        mapView.showsUserLocation = true
+        mapView.isPitchEnabled = false
         return mapView
     }()
     
@@ -71,11 +74,6 @@ final class SearchViewController: BaseViewController {
             searchButton.widthAnchor.constraint(equalToConstant: 56),
             searchButton.topAnchor.constraint(equalTo: mapView.topAnchor, constant: 22),
             searchButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -22),
-            //notificationButton
-//            notificationButton.topAnchor.constraint(equalTo: navigationView.topAnchor, constant: 15),
-//            notificationButton.bottomAnchor.constraint(equalTo: navigationView.bottomAnchor, constant: -14),
-//            notificationButton.trailingAnchor.constraint(equalTo: settingButton.leadingAnchor, constant: -10),
-//            notificationButton.widthAnchor.constraint(equalTo: notificationButton.heightAnchor)
         ])
     }
     
@@ -85,11 +83,22 @@ final class SearchViewController: BaseViewController {
     }
     
     private func bindAction(with reactor: SearchReactor) {
-        
+        disposeBag.insert(
+        )
     }
     
     private func bindState(with reactor: SearchReactor) {
-        
+        disposeBag.insert(
+            reactor.state
+                .map { MKCoordinateRegion(
+                    center: $0.currentCoordinate.toCLLocationCoordinate2D(),
+                    span: MKCoordinateSpan(
+                        latitudeDelta: $0.currentSpan,
+                        longitudeDelta: $0.currentSpan)
+                ) }
+                .distinctUntilChanged()
+                .bind(to: mapView.rx.region)
+        )
     }
     
     func bind(reactor: SearchReactor) {
@@ -97,3 +106,8 @@ final class SearchViewController: BaseViewController {
         bindState(with: reactor)
     }
 }
+
+extension SearchViewController: MKMapViewDelegate {
+    
+}
+
