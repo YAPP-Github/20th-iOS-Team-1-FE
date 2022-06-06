@@ -14,6 +14,7 @@ final class LocationManager: LocationManageable {
     
     private init() {
         locationManager = CLLocationManager()
+        locationManager?.requestWhenInUseAuthorization()
         locationManager?.desiredAccuracy = kCLLocationAccuracyBest
     }
     

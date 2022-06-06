@@ -51,6 +51,7 @@ final class SearchViewController: BaseViewController {
         addSubviews()
         configureLayout()
         configureUI()
+        reactor?.action.onNext(.viewDidLoad)
         
         if let reactor = reactor {
             bind(reactor: reactor)
