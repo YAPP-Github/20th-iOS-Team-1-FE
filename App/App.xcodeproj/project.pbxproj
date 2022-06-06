@@ -24,11 +24,12 @@
 		29AE2236284B867300EDF34B /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2235284B867300EDF34B /* SearchCoordinator.swift */; };
 		29AE2238284B941800EDF34B /* GatherCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2237284B941800EDF34B /* GatherCategory.swift */; };
 		29AE223A284B97DA00EDF34B /* Gather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2239284B97DA00EDF34B /* Gather.swift */; };
-		29AE223D284D71DC00EDF34B /* Live.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE223C284D71DC00EDF34B /* Live.swift */; };
+		29AE223D284D71DC00EDF34B /* LocationManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE223C284D71DC00EDF34B /* LocationManageable.swift */; };
 		29AE223F284DC1B500EDF34B /* CLLocationCoordinate2D+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE223E284DC1B500EDF34B /* CLLocationCoordinate2D+Extension.swift */; };
 		29AE2244284DF18200EDF34B /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2243284DF18200EDF34B /* Coordinate.swift */; };
 		29AE2246284E02EB00EDF34B /* MKCoordinateRegion+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2245284E02EB00EDF34B /* MKCoordinateRegion+Extension.swift */; };
 		29AE2248284E031C00EDF34B /* MKCoordinateSpan+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2247284E031C00EDF34B /* MKCoordinateSpan+Extension.swift */; };
+		29AE224A284E0A2F00EDF34B /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2249284E0A2F00EDF34B /* LocationManager.swift */; };
 		37451F252834245100696B21 /* WeakMapTable in Frameworks */ = {isa = PBXBuildFile; productRef = 37451F242834245100696B21 /* WeakMapTable */; };
 		37453D7E281DAE0900423CF0 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37453D7D281DAE0900423CF0 /* BaseViewController.swift */; };
 		37479B9B283E763B0078386E /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37479B9A283E763B0078386E /* UIColor+Extension.swift */; };
@@ -162,11 +163,12 @@
 		29AE2235284B867300EDF34B /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
 		29AE2237284B941800EDF34B /* GatherCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherCategory.swift; sourceTree = "<group>"; };
 		29AE2239284B97DA00EDF34B /* Gather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gather.swift; sourceTree = "<group>"; };
-		29AE223C284D71DC00EDF34B /* Live.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Live.swift; sourceTree = "<group>"; };
+		29AE223C284D71DC00EDF34B /* LocationManageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManageable.swift; sourceTree = "<group>"; };
 		29AE223E284DC1B500EDF34B /* CLLocationCoordinate2D+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+Extension.swift"; sourceTree = "<group>"; };
 		29AE2243284DF18200EDF34B /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
 		29AE2245284E02EB00EDF34B /* MKCoordinateRegion+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKCoordinateRegion+Extension.swift"; sourceTree = "<group>"; };
 		29AE2247284E031C00EDF34B /* MKCoordinateSpan+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKCoordinateSpan+Extension.swift"; sourceTree = "<group>"; };
+		29AE2249284E0A2F00EDF34B /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		37453D7D281DAE0900423CF0 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		37479B9A283E763B0078386E /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		37479B9E283EAE140078386E /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
@@ -341,7 +343,8 @@
 		29AE223B284D719800EDF34B /* LocationManager */ = {
 			isa = PBXGroup;
 			children = (
-				29AE223C284D71DC00EDF34B /* Live.swift */,
+				29AE223C284D71DC00EDF34B /* LocationManageable.swift */,
+				29AE2249284E0A2F00EDF34B /* LocationManager.swift */,
 			);
 			path = LocationManager;
 			sourceTree = "<group>";
@@ -960,6 +963,7 @@
 				37605E01283A2AE200394929 /* RxASAuthorizationControllerPresentationContextProvidingProxy.swift in Sources */,
 				378F348D281DC0660063CE4F /* ChattingCoordinator.swift in Sources */,
 				378F347E281DBE070063CE4F /* GatherListViewController.swift in Sources */,
+				29AE224A284E0A2F00EDF34B /* LocationManager.swift in Sources */,
 				37AC310828493367003C3FA2 /* ContourView.swift in Sources */,
 				37479B9B283E763B0078386E /* UIColor+Extension.swift in Sources */,
 				374380AD284FE05100CB02A5 /* SearchingClubDTO.swift in Sources */,
@@ -996,6 +1000,7 @@
 				37C3F4ED284BF4380006CB02 /* KeychainProvidable.swift in Sources */,
 				378F348F281DC0770063CE4F /* ProfileCoordinator.swift in Sources */,
 				376006C82848A16400B27015 /* RegularExpressionValidatable.swift in Sources */,
+				29AE223D284D71DC00EDF34B /* LocationManageable.swift in Sources */,
 				29AE223D284D71DC00EDF34B /* Live.swift in Sources */,
 				FD8AD7072851E28000454AC3 /* GatherListCell.swift in Sources */,
 				37C3F4F8284C70E40006CB02 /* KeychainQueryRequestable.swift in Sources */,
