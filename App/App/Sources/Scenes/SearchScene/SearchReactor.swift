@@ -13,10 +13,11 @@ import RxSwift
 
 final class SearchReactor: Reactor {
     enum Action {
+        case viewDidLoad
     }
     
     enum Mutation {
-        
+        case setCurrentCoordinate
     }
     
     struct State {
@@ -35,6 +36,8 @@ final class SearchReactor: Reactor {
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
     
+        case .viewDidLoad:
+            return Observable.just(.setCurrentCoordinate)
         }
     }
     
@@ -43,6 +46,13 @@ final class SearchReactor: Reactor {
         
         switch mutation {
             
+        case .setCurrentCoordinate:
+            if let newLocation = locationManger.currentLocation() {
+                newState.currentCoordinate = Coordinate(
+                    latitude: newLocation.coordinate.latitude,
+                    longitude: newLocation.coordinate.longitude
+                )
+            }
         }
         
         return newState
