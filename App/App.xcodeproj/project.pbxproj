@@ -25,6 +25,10 @@
 		29AE2238284B941800EDF34B /* GatherCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2237284B941800EDF34B /* GatherCategory.swift */; };
 		29AE223A284B97DA00EDF34B /* Gather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2239284B97DA00EDF34B /* Gather.swift */; };
 		29AE223D284D71DC00EDF34B /* Live.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE223C284D71DC00EDF34B /* Live.swift */; };
+		29AE223F284DC1B500EDF34B /* CLLocationCoordinate2D+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE223E284DC1B500EDF34B /* CLLocationCoordinate2D+Extension.swift */; };
+		29AE2244284DF18200EDF34B /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2243284DF18200EDF34B /* Coordinate.swift */; };
+		29AE2246284E02EB00EDF34B /* MKCoordinateRegion+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2245284E02EB00EDF34B /* MKCoordinateRegion+Extension.swift */; };
+		29AE2248284E031C00EDF34B /* MKCoordinateSpan+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2247284E031C00EDF34B /* MKCoordinateSpan+Extension.swift */; };
 		37451F252834245100696B21 /* WeakMapTable in Frameworks */ = {isa = PBXBuildFile; productRef = 37451F242834245100696B21 /* WeakMapTable */; };
 		37453D7E281DAE0900423CF0 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37453D7D281DAE0900423CF0 /* BaseViewController.swift */; };
 		37479B9B283E763B0078386E /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37479B9A283E763B0078386E /* UIColor+Extension.swift */; };
@@ -159,6 +163,10 @@
 		29AE2237284B941800EDF34B /* GatherCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherCategory.swift; sourceTree = "<group>"; };
 		29AE2239284B97DA00EDF34B /* Gather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gather.swift; sourceTree = "<group>"; };
 		29AE223C284D71DC00EDF34B /* Live.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Live.swift; sourceTree = "<group>"; };
+		29AE223E284DC1B500EDF34B /* CLLocationCoordinate2D+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+Extension.swift"; sourceTree = "<group>"; };
+		29AE2243284DF18200EDF34B /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
+		29AE2245284E02EB00EDF34B /* MKCoordinateRegion+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKCoordinateRegion+Extension.swift"; sourceTree = "<group>"; };
+		29AE2247284E031C00EDF34B /* MKCoordinateSpan+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKCoordinateSpan+Extension.swift"; sourceTree = "<group>"; };
 		37453D7D281DAE0900423CF0 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		37479B9A283E763B0078386E /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		37479B9E283EAE140078386E /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
@@ -322,11 +330,10 @@
 		29AE222A284B7CEC00EDF34B /* SearchScene */ = {
 			isa = PBXGroup;
 			children = (
+				29AE2242284DF14C00EDF34B /* Entity */,
 				29AE222B284B7DAA00EDF34B /* SearchViewController.swift */,
 				29AE222C284B7DAA00EDF34B /* SearchReactor.swift */,
 				29AE2235284B867300EDF34B /* SearchCoordinator.swift */,
-				29AE2237284B941800EDF34B /* GatherCategory.swift */,
-				29AE2239284B97DA00EDF34B /* Gather.swift */,
 			);
 			path = SearchScene;
 			sourceTree = "<group>";
@@ -337,6 +344,16 @@
 				29AE223C284D71DC00EDF34B /* Live.swift */,
 			);
 			path = LocationManager;
+			sourceTree = "<group>";
+		};
+		29AE2242284DF14C00EDF34B /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				29AE2239284B97DA00EDF34B /* Gather.swift */,
+				29AE2237284B941800EDF34B /* GatherCategory.swift */,
+				29AE2243284DF18200EDF34B /* Coordinate.swift */,
+			);
+			path = Entity;
 			sourceTree = "<group>";
 		};
 		37453D7C281DADF800423CF0 /* ViewController */ = {
@@ -603,6 +620,9 @@
 				29AE2231284B7F1100EDF34B /* UIView+Extension.swift */,
 				37479B9E283EAE140078386E /* UIImage+Extension.swift */,
 				37479BA0283EBB220078386E /* UIButton+Extension.swift */,
+				29AE223E284DC1B500EDF34B /* CLLocationCoordinate2D+Extension.swift */,
+				29AE2245284E02EB00EDF34B /* MKCoordinateRegion+Extension.swift */,
+				29AE2247284E031C00EDF34B /* MKCoordinateSpan+Extension.swift */,
 				FDE6F1472852317F005E4783 /* UITableView+Extension.swift */,
 				FDE6F14928523493005E4783 /* UICollectionView+Extension.swift */,
 				FDE6F14B285234A3005E4783 /* NSObject+Extension.swift */,
@@ -962,7 +982,9 @@
 				FD8AD70B2851E51300454AC3 /* TagCollectionViewCell.swift in Sources */,
 				37605DEC28394E0400394929 /* AppCoordinator.swift in Sources */,
 				37912C9C2814480C0087B95E /* NSLayoutConstraint+Extension.swift in Sources */,
+				29AE2248284E031C00EDF34B /* MKCoordinateSpan+Extension.swift in Sources */,
 				29AE2232284B7F1100EDF34B /* UIView+Extension.swift in Sources */,
+				29AE2246284E02EB00EDF34B /* MKCoordinateRegion+Extension.swift in Sources */,
 				379B1A7B285A52EA00E58A34 /* AppleLoginRepositoryInterface.swift in Sources */,
 				37479BA1283EBB220078386E /* UIButton+Extension.swift in Sources */,
 				374F41DA2864EB060074F04B /* KeychainUseCase.swift in Sources */,
@@ -1025,6 +1047,7 @@
 				37AC3105284930E6003C3FA2 /* SignUpInfomationViewController.swift in Sources */,
 				3743809F284FDBB600CB02A5 /* SignInResponseDTO.swift in Sources */,
 				378F347A281DBDF10063CE4F /* LoginViewController.swift in Sources */,
+				29AE2244284DF18200EDF34B /* Coordinate.swift in Sources */,
 				29AE2236284B867300EDF34B /* SearchCoordinator.swift in Sources */,
 				37912C67281445AC0087B95E /* SceneDelegate.swift in Sources */,
 				37C1451D284F9D6500D11CC3 /* NetworkManageable.swift in Sources */,
@@ -1033,6 +1056,7 @@
 				37C14518284DC94A00D11CC3 /* NetworkError.swift in Sources */,
 				37C3F4EF284BF4450006CB02 /* KeychainProvider.swift in Sources */,
 				377370842841BE1000D5CCB6 /* UIButton+Rx.swift in Sources */,
+				29AE223F284DC1B500EDF34B /* CLLocationCoordinate2D+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
