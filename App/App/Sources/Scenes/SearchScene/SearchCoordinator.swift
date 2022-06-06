@@ -17,7 +17,7 @@ final class SearchCoordinator: SceneCoordinator {
     }
     
     func start() {
-        let reactor = SearchReactor()
+        let reactor = SearchReactor(locationManager: LocationManager.shared)
         let viewController = SearchViewController(reactor: reactor)
         
         navigationController.setViewControllers([viewController], animated: false)
