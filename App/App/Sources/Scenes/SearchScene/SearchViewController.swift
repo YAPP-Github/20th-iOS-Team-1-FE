@@ -17,6 +17,7 @@ final class SearchViewController: BaseViewController {
         mapView.delegate = self
         mapView.showsUserLocation = true
         mapView.isPitchEnabled = false
+        mapView.setCameraZoomRange(MKMapView.CameraZoomRange(maxCenterCoordinateDistance: 3000), animated: false)
         return mapView
     }()
     
