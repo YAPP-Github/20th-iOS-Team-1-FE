@@ -24,7 +24,13 @@ final class SearchReactor: Reactor {
         var currentSpan: Double = 0.005
     }
     
-    let initialState = State()
+    private var locationManger: LocationManageable
+    internal let initialState: State
+    
+    init(locationManager: LocationManageable) {
+        self.locationManger = locationManager
+        self.initialState = State()
+    }
     
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
