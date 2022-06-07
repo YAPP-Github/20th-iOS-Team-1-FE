@@ -62,6 +62,8 @@
 		37AC310828493367003C3FA2 /* ContourView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AC310728493367003C3FA2 /* ContourView.swift */; };
 		37C14516284DC90900D11CC3 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C14515284DC90900D11CC3 /* HTTPMethod.swift */; };
 		37C14518284DC94A00D11CC3 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C14517284DC94A00D11CC3 /* NetworkError.swift */; };
+		37C1451B284E06E400D11CC3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C1451A284E06E400D11CC3 /* NetworkManager.swift */; };
+		37C1451D284F9D6500D11CC3 /* NetworkManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C1451C284F9D6500D11CC3 /* NetworkManageable.swift */; };
 		37C3F4ED284BF4380006CB02 /* KeychainProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C3F4EC284BF4380006CB02 /* KeychainProvidable.swift */; };
 		37C3F4EF284BF4450006CB02 /* KeychainProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C3F4EE284BF4450006CB02 /* KeychainProvider.swift */; };
 		37C3F4F8284C70E40006CB02 /* KeychainQueryRequestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C3F4F7284C70E40006CB02 /* KeychainQueryRequestable.swift */; };
@@ -135,6 +137,8 @@
 		37AC310728493367003C3FA2 /* ContourView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContourView.swift; sourceTree = "<group>"; };
 		37C14515284DC90900D11CC3 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		37C14517284DC94A00D11CC3 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		37C1451A284E06E400D11CC3 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		37C1451C284F9D6500D11CC3 /* NetworkManageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManageable.swift; sourceTree = "<group>"; };
 		37C3F4EC284BF4380006CB02 /* KeychainProvidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainProvidable.swift; sourceTree = "<group>"; };
 		37C3F4EE284BF4450006CB02 /* KeychainProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainProvider.swift; sourceTree = "<group>"; };
 		37C3F4F7284C70E40006CB02 /* KeychainQueryRequestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainQueryRequestable.swift; sourceTree = "<group>"; };
@@ -445,6 +449,7 @@
 		37C14512284DC84A00D11CC3 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				37C14519284DF23400D11CC3 /* Network */,
 				37C14514284DC86300D11CC3 /* HTTPMethod */,
 				37C14513284DC85100D11CC3 /* NetworkError */,
 			);
@@ -465,6 +470,15 @@
 				37C14515284DC90900D11CC3 /* HTTPMethod.swift */,
 			);
 			path = HTTPMethod;
+			sourceTree = "<group>";
+		};
+		37C14519284DF23400D11CC3 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				37C1451A284E06E400D11CC3 /* NetworkManager.swift */,
+				37C1451C284F9D6500D11CC3 /* NetworkManageable.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		37C3F4EB284BF4020006CB02 /* Keychain */ = {
@@ -683,6 +697,7 @@
 				376006C528489A2B00B27015 /* RegularExpressionValidator.swift in Sources */,
 				3773708C2841DE6D00D5CCB6 /* UserAuthentification.swift in Sources */,
 				37605DF92839FDB300394929 /* ASAuthorizationController+Rx.swift in Sources */,
+				37C1451B284E06E400D11CC3 /* NetworkManager.swift in Sources */,
 				37912CA2281449610087B95E /* SceneCoordinator.swift in Sources */,
 				37605E08283C179A00394929 /* LoginCoordinator.swift in Sources */,
 				37453D7E281DAE0900423CF0 /* BaseViewController.swift in Sources */,
@@ -697,6 +712,7 @@
 				37AC3105284930E6003C3FA2 /* SignUpInfomationViewController.swift in Sources */,
 				378F347A281DBDF10063CE4F /* LoginViewController.swift in Sources */,
 				37912C67281445AC0087B95E /* SceneDelegate.swift in Sources */,
+				37C1451D284F9D6500D11CC3 /* NetworkManageable.swift in Sources */,
 				37AC3106284930E6003C3FA2 /* SignUpInfomationReactor.swift in Sources */,
 				37C14518284DC94A00D11CC3 /* NetworkError.swift in Sources */,
 				37C3F4EF284BF4450006CB02 /* KeychainProvider.swift in Sources */,
