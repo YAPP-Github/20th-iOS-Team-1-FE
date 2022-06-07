@@ -28,6 +28,10 @@
 		37605E08283C179A00394929 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37605E07283C179A00394929 /* LoginCoordinator.swift */; };
 		37605E0A283C23FC00394929 /* SignUpAgreementCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37605E09283C23FC00394929 /* SignUpAgreementCoordinator.swift */; };
 		37605E11283C56B900394929 /* RxGesture in Frameworks */ = {isa = PBXBuildFile; productRef = 37605E10283C56B900394929 /* RxGesture */; };
+		37654FA8284FBA3600090C3F /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 37654FA7284FBA3600090C3F /* RxBlocking */; };
+		37654FAA284FBA3600090C3F /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 37654FA9284FBA3600090C3F /* RxRelay */; };
+		37654FAC284FBA3600090C3F /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 37654FAB284FBA3600090C3F /* RxSwift */; };
+		37654FAE284FBA3600090C3F /* RxTest in Frameworks */ = {isa = PBXBuildFile; productRef = 37654FAD284FBA3600090C3F /* RxTest */; };
 		3770FFEE283112E8001960A0 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 3770FFED283112E8001960A0 /* RxCocoa */; };
 		3770FFF0283112E8001960A0 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3770FFEF283112E8001960A0 /* RxSwift */; };
 		3770FFF3283112F4001960A0 /* ReactorKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3770FFF2283112F4001960A0 /* ReactorKit */; };
@@ -64,6 +68,8 @@
 		37C14518284DC94A00D11CC3 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C14517284DC94A00D11CC3 /* NetworkError.swift */; };
 		37C1451B284E06E400D11CC3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C1451A284E06E400D11CC3 /* NetworkManager.swift */; };
 		37C1451D284F9D6500D11CC3 /* NetworkManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C1451C284F9D6500D11CC3 /* NetworkManageable.swift */; };
+		37C14522284F9EFB00D11CC3 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C14521284F9EFB00D11CC3 /* MockURLProtocol.swift */; };
+		37C14524284FA17800D11CC3 /* NetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C14523284FA17800D11CC3 /* NetworkManagerTests.swift */; };
 		37C3F4ED284BF4380006CB02 /* KeychainProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C3F4EC284BF4380006CB02 /* KeychainProvidable.swift */; };
 		37C3F4EF284BF4450006CB02 /* KeychainProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C3F4EE284BF4450006CB02 /* KeychainProvider.swift */; };
 		37C3F4F8284C70E40006CB02 /* KeychainQueryRequestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C3F4F7284C70E40006CB02 /* KeychainQueryRequestable.swift */; };
@@ -139,6 +145,8 @@
 		37C14517284DC94A00D11CC3 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		37C1451A284E06E400D11CC3 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		37C1451C284F9D6500D11CC3 /* NetworkManageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManageable.swift; sourceTree = "<group>"; };
+		37C14521284F9EFB00D11CC3 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
+		37C14523284FA17800D11CC3 /* NetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTests.swift; sourceTree = "<group>"; };
 		37C3F4EC284BF4380006CB02 /* KeychainProvidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainProvidable.swift; sourceTree = "<group>"; };
 		37C3F4EE284BF4450006CB02 /* KeychainProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainProvider.swift; sourceTree = "<group>"; };
 		37C3F4F7284C70E40006CB02 /* KeychainQueryRequestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainQueryRequestable.swift; sourceTree = "<group>"; };
@@ -164,6 +172,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37654FAE284FBA3600090C3F /* RxTest in Frameworks */,
+				37654FAC284FBA3600090C3F /* RxSwift in Frameworks */,
+				37654FAA284FBA3600090C3F /* RxRelay in Frameworks */,
+				37654FA8284FBA3600090C3F /* RxBlocking in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,6 +354,7 @@
 				37912C63281445AC0087B95E /* App */,
 				37912C7A281445AD0087B95E /* AppTests */,
 				37912C62281445AC0087B95E /* Products */,
+				37C14525284FB2D000D11CC3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -481,6 +494,38 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		37C1451E284F9EC500D11CC3 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				37C1451F284F9ECB00D11CC3 /* TestDouble */,
+				37C14520284F9ED100D11CC3 /* Tests */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		37C1451F284F9ECB00D11CC3 /* TestDouble */ = {
+			isa = PBXGroup;
+			children = (
+				37C14521284F9EFB00D11CC3 /* MockURLProtocol.swift */,
+			);
+			path = TestDouble;
+			sourceTree = "<group>";
+		};
+		37C14520284F9ED100D11CC3 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				37C14523284FA17800D11CC3 /* NetworkManagerTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		37C14525284FB2D000D11CC3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		37C3F4EB284BF4020006CB02 /* Keychain */ = {
 			isa = PBXGroup;
 			children = (
@@ -520,6 +565,7 @@
 		37C3F627284D19050006CB02 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				37C1451E284F9EC500D11CC3 /* Network */,
 				37C3F628284D19130006CB02 /* Keychain */,
 			);
 			path = Service;
@@ -591,6 +637,12 @@
 				37912C79281445AD0087B95E /* PBXTargetDependency */,
 			);
 			name = AppTests;
+			packageProductDependencies = (
+				37654FA7284FBA3600090C3F /* RxBlocking */,
+				37654FA9284FBA3600090C3F /* RxRelay */,
+				37654FAB284FBA3600090C3F /* RxSwift */,
+				37654FAD284FBA3600090C3F /* RxTest */,
+			);
 			productName = AppTests;
 			productReference = 37912C77281445AD0087B95E /* AppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -724,6 +776,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37C14524284FA17800D11CC3 /* NetworkManagerTests.swift in Sources */,
+				37C14522284F9EFB00D11CC3 /* MockURLProtocol.swift in Sources */,
 				37C3F62C284D194C0006CB02 /* StubKeychainQueryRequester.swift in Sources */,
 				37912C7C281445AD0087B95E /* KeychainProviderTests.swift in Sources */,
 			);
@@ -1042,6 +1096,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 37605E0F283C56B900394929 /* XCRemoteSwiftPackageReference "RxGesture" */;
 			productName = RxGesture;
+		};
+		37654FA7284FBA3600090C3F /* RxBlocking */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3770FFEC283112E8001960A0 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxBlocking;
+		};
+		37654FA9284FBA3600090C3F /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3770FFEC283112E8001960A0 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		37654FAB284FBA3600090C3F /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3770FFEC283112E8001960A0 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		37654FAD284FBA3600090C3F /* RxTest */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3770FFEC283112E8001960A0 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxTest;
 		};
 		3770FFED283112E8001960A0 /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;

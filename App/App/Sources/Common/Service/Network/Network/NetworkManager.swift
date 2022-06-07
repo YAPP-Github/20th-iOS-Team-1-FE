@@ -19,25 +19,25 @@ final class NetworkManager: NetworkManageable {
     }
     
     internal func requestDataTask(with request: URLRequest) -> Single<Data> {
-        return Single.create { [weak self] single in
+        return Single.create { [weak self] observer -> Disposable in
             self?.session.dataTask(with: request) { data, response, error in
                 if let error = error {
-                    single(.failure(NetworkError.transportError(error)))
+                    observer(.failure(NetworkError.transportError(error)))
                     return
                 }
                
                 if let response = response as? HTTPURLResponse,
                     !(200...299).contains(response.statusCode) {
-                    single(.failure(NetworkError.serverError(statusCode: response.statusCode)))
+                    observer(.failure(NetworkError.serverError(statusCode: response.statusCode)))
                     return
                 }
-               
+                
                 guard let data = data else {
-                    single(.failure(NetworkError.noDataError))
+                    observer(.failure(NetworkError.noDataError))
                     return
                 }
                
-                single(.success(data))
+                observer(.success(data))
  
             }.resume()
             
