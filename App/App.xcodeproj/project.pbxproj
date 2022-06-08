@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37438095284FD9BA00CB02A5 /* ExceptionDetailResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37438094284FD9BA00CB02A5 /* ExceptionDetailResponseDTO.swift */; };
+		37438097284FD9F800CB02A5 /* ExceptionResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37438096284FD9F800CB02A5 /* ExceptionResponseDTO.swift */; };
+		3743809D284FDB5300CB02A5 /* ExceptionResponseInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3743809C284FDB5300CB02A5 /* ExceptionResponseInfoDTO.swift */; };
+		3743809F284FDBB600CB02A5 /* SignInResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3743809E284FDBB600CB02A5 /* SignInResponseDTO.swift */; };
+		374380A3284FDCE500CB02A5 /* SexDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374380A2284FDCE500CB02A5 /* SexDTO.swift */; };
+		374380A7284FDD8A00CB02A5 /* SocialTypeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374380A6284FDD8A00CB02A5 /* SocialTypeDTO.swift */; };
+		374380A9284FDDC600CB02A5 /* TokenResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374380A8284FDDC600CB02A5 /* TokenResponseDTO.swift */; };
+		374380AB284FDFDD00CB02A5 /* SearchingRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374380AA284FDFDD00CB02A5 /* SearchingRequestDTO.swift */; };
+		374380AD284FE05100CB02A5 /* SearchingClubDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374380AC284FE05100CB02A5 /* SearchingClubDTO.swift */; };
+		374380AF284FE13300CB02A5 /* SearchingResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374380AE284FE13300CB02A5 /* SearchingResponseDTO.swift */; };
 		37451F252834245100696B21 /* WeakMapTable in Frameworks */ = {isa = PBXBuildFile; productRef = 37451F242834245100696B21 /* WeakMapTable */; };
 		37453D7E281DAE0900423CF0 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37453D7D281DAE0900423CF0 /* BaseViewController.swift */; };
 		37479B9B283E763B0078386E /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37479B9A283E763B0078386E /* UIColor+Extension.swift */; };
@@ -61,6 +71,12 @@
 		37912CA0281449230087B95E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37912C9F281449230087B95E /* Coordinator.swift */; };
 		37912CA2281449610087B95E /* SceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37912CA1281449610087B95E /* SceneCoordinator.swift */; };
 		37912CA628144A530087B95E /* TabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37912CA528144A530087B95E /* TabCoordinator.swift */; };
+		37AA7E142850B15800B4B5C2 /* CategoryDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AA7E132850B15800B4B5C2 /* CategoryDTO.swift */; };
+		37AA7E162850B17600B4B5C2 /* EligibleBreedDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AA7E152850B17600B4B5C2 /* EligibleBreedDTO.swift */; };
+		37AA7E182850B19D00B4B5C2 /* PetSizeTypeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AA7E172850B19D00B4B5C2 /* PetSizeTypeDTO.swift */; };
+		37AA7E1A2850B1B600B4B5C2 /* EligibleSexDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AA7E192850B1B600B4B5C2 /* EligibleSexDTO.swift */; };
+		37AA7E1C2850B1C400B4B5C2 /* StatusDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AA7E1B2850B1C400B4B5C2 /* StatusDTO.swift */; };
+		37AA7E1E2850B37B00B4B5C2 /* Sex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AA7E1D2850B37B00B4B5C2 /* Sex.swift */; };
 		37AC3105284930E6003C3FA2 /* SignUpInfomationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AC3103284930E6003C3FA2 /* SignUpInfomationViewController.swift */; };
 		37AC3106284930E6003C3FA2 /* SignUpInfomationReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AC3104284930E6003C3FA2 /* SignUpInfomationReactor.swift */; };
 		37AC310828493367003C3FA2 /* ContourView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AC310728493367003C3FA2 /* ContourView.swift */; };
@@ -89,6 +105,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		37438094284FD9BA00CB02A5 /* ExceptionDetailResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionDetailResponseDTO.swift; sourceTree = "<group>"; };
+		37438096284FD9F800CB02A5 /* ExceptionResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionResponseDTO.swift; sourceTree = "<group>"; };
+		3743809C284FDB5300CB02A5 /* ExceptionResponseInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionResponseInfoDTO.swift; sourceTree = "<group>"; };
+		3743809E284FDBB600CB02A5 /* SignInResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInResponseDTO.swift; sourceTree = "<group>"; };
+		374380A2284FDCE500CB02A5 /* SexDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SexDTO.swift; sourceTree = "<group>"; };
+		374380A6284FDD8A00CB02A5 /* SocialTypeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialTypeDTO.swift; sourceTree = "<group>"; };
+		374380A8284FDDC600CB02A5 /* TokenResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponseDTO.swift; sourceTree = "<group>"; };
+		374380AA284FDFDD00CB02A5 /* SearchingRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchingRequestDTO.swift; sourceTree = "<group>"; };
+		374380AC284FE05100CB02A5 /* SearchingClubDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchingClubDTO.swift; sourceTree = "<group>"; };
+		374380AE284FE13300CB02A5 /* SearchingResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchingResponseDTO.swift; sourceTree = "<group>"; };
 		37453D7D281DAE0900423CF0 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		37479B9A283E763B0078386E /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		37479B9E283EAE140078386E /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
@@ -138,6 +164,12 @@
 		37912C9F281449230087B95E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		37912CA1281449610087B95E /* SceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCoordinator.swift; sourceTree = "<group>"; };
 		37912CA528144A530087B95E /* TabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCoordinator.swift; sourceTree = "<group>"; };
+		37AA7E132850B15800B4B5C2 /* CategoryDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDTO.swift; sourceTree = "<group>"; };
+		37AA7E152850B17600B4B5C2 /* EligibleBreedDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EligibleBreedDTO.swift; sourceTree = "<group>"; };
+		37AA7E172850B19D00B4B5C2 /* PetSizeTypeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetSizeTypeDTO.swift; sourceTree = "<group>"; };
+		37AA7E192850B1B600B4B5C2 /* EligibleSexDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EligibleSexDTO.swift; sourceTree = "<group>"; };
+		37AA7E1B2850B1C400B4B5C2 /* StatusDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusDTO.swift; sourceTree = "<group>"; };
+		37AA7E1D2850B37B00B4B5C2 /* Sex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sex.swift; sourceTree = "<group>"; };
 		37AC3103284930E6003C3FA2 /* SignUpInfomationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInfomationViewController.swift; sourceTree = "<group>"; };
 		37AC3104284930E6003C3FA2 /* SignUpInfomationReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInfomationReactor.swift; sourceTree = "<group>"; };
 		37AC310728493367003C3FA2 /* ContourView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContourView.swift; sourceTree = "<group>"; };
@@ -182,6 +214,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		37438093284FD8A300CB02A5 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				37438094284FD9BA00CB02A5 /* ExceptionDetailResponseDTO.swift */,
+				37438096284FD9F800CB02A5 /* ExceptionResponseDTO.swift */,
+				3743809E284FDBB600CB02A5 /* SignInResponseDTO.swift */,
+				374380A8284FDDC600CB02A5 /* TokenResponseDTO.swift */,
+				3743809C284FDB5300CB02A5 /* ExceptionResponseInfoDTO.swift */,
+				374380AA284FDFDD00CB02A5 /* SearchingRequestDTO.swift */,
+				374380AC284FE05100CB02A5 /* SearchingClubDTO.swift */,
+				374380AE284FE13300CB02A5 /* SearchingResponseDTO.swift */,
+				374380A2284FDCE500CB02A5 /* SexDTO.swift */,
+				374380A6284FDD8A00CB02A5 /* SocialTypeDTO.swift */,
+				37AA7E132850B15800B4B5C2 /* CategoryDTO.swift */,
+				37AA7E152850B17600B4B5C2 /* EligibleBreedDTO.swift */,
+				37AA7E172850B19D00B4B5C2 /* PetSizeTypeDTO.swift */,
+				37AA7E192850B1B600B4B5C2 /* EligibleSexDTO.swift */,
+				37AA7E1B2850B1C400B4B5C2 /* StatusDTO.swift */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
 		37453D7C281DADF800423CF0 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -291,6 +345,7 @@
 			isa = PBXGroup;
 			children = (
 				3773708B2841DE6D00D5CCB6 /* UserAuthentification.swift */,
+				37AA7E1D2850B37B00B4B5C2 /* Sex.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -462,6 +517,7 @@
 		37C14512284DC84A00D11CC3 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				37438093284FD8A300CB02A5 /* DTO */,
 				37C14519284DF23400D11CC3 /* Network */,
 				37C14514284DC86300D11CC3 /* HTTPMethod */,
 				37C14513284DC85100D11CC3 /* NetworkError */,
@@ -717,11 +773,15 @@
 			files = (
 				378F3487281DBE210063CE4F /* ProfileReactor.swift in Sources */,
 				37912C9A281447C40087B95E /* Array+Extension.swift in Sources */,
+				3743809D284FDB5300CB02A5 /* ExceptionResponseInfoDTO.swift in Sources */,
+				374380A9284FDDC600CB02A5 /* TokenResponseDTO.swift in Sources */,
 				37605E01283A2AE200394929 /* RxASAuthorizationControllerPresentationContextProvidingProxy.swift in Sources */,
 				378F348D281DC0660063CE4F /* ChattingCoordinator.swift in Sources */,
 				378F347E281DBE070063CE4F /* GatherListViewController.swift in Sources */,
 				37AC310828493367003C3FA2 /* ContourView.swift in Sources */,
 				37479B9B283E763B0078386E /* UIColor+Extension.swift in Sources */,
+				374380AD284FE05100CB02A5 /* SearchingClubDTO.swift in Sources */,
+				37AA7E182850B19D00B4B5C2 /* PetSizeTypeDTO.swift in Sources */,
 				37605DEF2839547200394929 /* AuthCoordinator.swift in Sources */,
 				376006C228487FFE00B27015 /* SignUpProfileCoordinator.swift in Sources */,
 				37605E05283C12D400394929 /* SignUpAgreementViewController.swift in Sources */,
@@ -729,6 +789,7 @@
 				377370892841DE3500D5CCB6 /* SignUpProfileReactor.swift in Sources */,
 				37479B9F283EAE140078386E /* UIImage+Extension.swift in Sources */,
 				37912CA628144A530087B95E /* TabCoordinator.swift in Sources */,
+				374380AB284FDFDD00CB02A5 /* SearchingRequestDTO.swift in Sources */,
 				37605E06283C12D400394929 /* SignUpAgreementReactor.swift in Sources */,
 				37605DEC28394E0400394929 /* AppCoordinator.swift in Sources */,
 				37912C9C2814480C0087B95E /* NSLayoutConstraint+Extension.swift in Sources */,
@@ -742,13 +803,20 @@
 				37C3F4F8284C70E40006CB02 /* KeychainQueryRequestable.swift in Sources */,
 				37C14516284DC90900D11CC3 /* HTTPMethod.swift in Sources */,
 				37C3F4FA284C71030006CB02 /* KeychainQueryRequester.swift in Sources */,
+				37AA7E1C2850B1C400B4B5C2 /* StatusDTO.swift in Sources */,
 				378F347F281DBE070063CE4F /* GatherListReactor.swift in Sources */,
 				37605DF62839FB4100394929 /* RxASAuthorizationControllerDelegateProxy.swift in Sources */,
+				374380A3284FDCE500CB02A5 /* SexDTO.swift in Sources */,
+				37AA7E162850B17600B4B5C2 /* EligibleBreedDTO.swift in Sources */,
 				37C3F4FC284C7D8B0006CB02 /* KeychainError.swift in Sources */,
+				37AA7E142850B15800B4B5C2 /* CategoryDTO.swift in Sources */,
 				378F3483281DBE140063CE4F /* ChattingReactor.swift in Sources */,
 				376006C528489A2B00B27015 /* RegularExpressionValidator.swift in Sources */,
 				3773708C2841DE6D00D5CCB6 /* UserAuthentification.swift in Sources */,
 				37605DF92839FDB300394929 /* ASAuthorizationController+Rx.swift in Sources */,
+				374380A7284FDD8A00CB02A5 /* SocialTypeDTO.swift in Sources */,
+				37AA7E1E2850B37B00B4B5C2 /* Sex.swift in Sources */,
+				37438097284FD9F800CB02A5 /* ExceptionResponseDTO.swift in Sources */,
 				37C1451B284E06E400D11CC3 /* NetworkManager.swift in Sources */,
 				37912CA2281449610087B95E /* SceneCoordinator.swift in Sources */,
 				37605E08283C179A00394929 /* LoginCoordinator.swift in Sources */,
@@ -757,14 +825,18 @@
 				378F3482281DBE140063CE4F /* ChattingViewController.swift in Sources */,
 				378F347B281DBDF10063CE4F /* LoginReactor.swift in Sources */,
 				37912C65281445AC0087B95E /* AppDelegate.swift in Sources */,
+				374380AF284FE13300CB02A5 /* SearchingResponseDTO.swift in Sources */,
 				377370882841DE3500D5CCB6 /* SignUpProfileViewController.swift in Sources */,
 				376006CA28490EFD00B27015 /* EnableButton.swift in Sources */,
 				378F3486281DBE210063CE4F /* ProfileViewController.swift in Sources */,
 				378F348B281DC0560063CE4F /* GatherListCoordinator.swift in Sources */,
+				37438095284FD9BA00CB02A5 /* ExceptionDetailResponseDTO.swift in Sources */,
 				37AC3105284930E6003C3FA2 /* SignUpInfomationViewController.swift in Sources */,
+				3743809F284FDBB600CB02A5 /* SignInResponseDTO.swift in Sources */,
 				378F347A281DBDF10063CE4F /* LoginViewController.swift in Sources */,
 				37912C67281445AC0087B95E /* SceneDelegate.swift in Sources */,
 				37C1451D284F9D6500D11CC3 /* NetworkManageable.swift in Sources */,
+				37AA7E1A2850B1B600B4B5C2 /* EligibleSexDTO.swift in Sources */,
 				37AC3106284930E6003C3FA2 /* SignUpInfomationReactor.swift in Sources */,
 				37C14518284DC94A00D11CC3 /* NetworkError.swift in Sources */,
 				37C3F4EF284BF4450006CB02 /* KeychainProvider.swift in Sources */,
