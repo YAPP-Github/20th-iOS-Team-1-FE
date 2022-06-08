@@ -7,10 +7,9 @@
 
 import Foundation
 
-struct UserAuthentification {
+struct UserAuthentification: Equatable {
     var email: String? = nil
     var profileImageData: Data? = nil
     var nickName: String? = nil
+    var sex: Sex?
 }
-
-extension UserAuthentification: Equatable { }
