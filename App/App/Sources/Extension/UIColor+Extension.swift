@@ -30,5 +30,7 @@ extension UIColor {
         static let background              = UIColor(named: "background")!
         static let checkBoxDidDeselect     = UIColor(named: "checkBoxDidDeselect")!
         static let buttonDisabled          = UIColor(named: "buttonDisabled")!
+        static let line                    = UIColor(named: "line")!
+        static let tagLine                 = UIColor(named: "tagLine")!
     }
 }
