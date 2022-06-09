@@ -92,7 +92,6 @@ final class SignUpInfomationViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         addSubviews()
         configureLayout()
         configureUI()
