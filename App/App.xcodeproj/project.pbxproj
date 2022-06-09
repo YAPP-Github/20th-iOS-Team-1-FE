@@ -92,6 +92,14 @@
 		37C3F4FA284C71030006CB02 /* KeychainQueryRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C3F4F9284C71030006CB02 /* KeychainQueryRequester.swift */; };
 		37C3F4FC284C7D8B0006CB02 /* KeychainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C3F4FB284C7D8B0006CB02 /* KeychainError.swift */; };
 		37C3F62C284D194C0006CB02 /* StubKeychainQueryRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C3F62B284D194C0006CB02 /* StubKeychainQueryRequester.swift */; };
+		FD8AD7052851E26200454AC3 /* GatherListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8AD7042851E26200454AC3 /* GatherListTableView.swift */; };
+		FD8AD7072851E28000454AC3 /* GatherListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8AD7062851E28000454AC3 /* GatherListCell.swift */; };
+		FD8AD7092851E2AA00454AC3 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8AD7082851E2AA00454AC3 /* PaddingLabel.swift */; };
+		FD8AD70B2851E51300454AC3 /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8AD70A2851E51300454AC3 /* TagCollectionViewCell.swift */; };
+		FD9D38EE28543409005A0C86 /* SegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9D38ED28543409005A0C86 /* SegmentView.swift */; };
+		FDE6F1482852317F005E4783 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE6F1472852317F005E4783 /* UITableView+Extension.swift */; };
+		FDE6F14A28523493005E4783 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE6F14928523493005E4783 /* UICollectionView+Extension.swift */; };
+		FDE6F14C285234A3005E4783 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE6F14B285234A3005E4783 /* NSObject+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -185,6 +193,14 @@
 		37C3F4F9284C71030006CB02 /* KeychainQueryRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainQueryRequester.swift; sourceTree = "<group>"; };
 		37C3F4FB284C7D8B0006CB02 /* KeychainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainError.swift; sourceTree = "<group>"; };
 		37C3F62B284D194C0006CB02 /* StubKeychainQueryRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubKeychainQueryRequester.swift; sourceTree = "<group>"; };
+		FD8AD7042851E26200454AC3 /* GatherListTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListTableView.swift; sourceTree = "<group>"; };
+		FD8AD7062851E28000454AC3 /* GatherListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListCell.swift; sourceTree = "<group>"; };
+		FD8AD7082851E2AA00454AC3 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
+		FD8AD70A2851E51300454AC3 /* TagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCell.swift; sourceTree = "<group>"; };
+		FD9D38ED28543409005A0C86 /* SegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentView.swift; sourceTree = "<group>"; };
+		FDE6F1472852317F005E4783 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
+		FDE6F14928523493005E4783 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
+		FDE6F14B285234A3005E4783 /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -327,6 +343,7 @@
 				3773707D2841B95000D5CCB6 /* CheckBox.swift */,
 				376006C928490EFD00B27015 /* EnableButton.swift */,
 				37AC310728493367003C3FA2 /* ContourView.swift */,
+				FD8AD7082851E2AA00454AC3 /* PaddingLabel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -374,9 +391,10 @@
 		378F3475281DBD4C0063CE4F /* GatherListScene */ = {
 			isa = PBXGroup;
 			children = (
+				FD8AD7032851E25300454AC3 /* SubComponents */,
+				378F348A281DC0560063CE4F /* GatherListCoordinator.swift */,
 				378F347C281DBE070063CE4F /* GatherListViewController.swift */,
 				378F347D281DBE070063CE4F /* GatherListReactor.swift */,
-				378F348A281DC0560063CE4F /* GatherListCoordinator.swift */,
 			);
 			path = GatherListScene;
 			sourceTree = "<group>";
@@ -478,6 +496,9 @@
 				37479B9A283E763B0078386E /* UIColor+Extension.swift */,
 				37479B9E283EAE140078386E /* UIImage+Extension.swift */,
 				37479BA0283EBB220078386E /* UIButton+Extension.swift */,
+				FDE6F1472852317F005E4783 /* UITableView+Extension.swift */,
+				FDE6F14928523493005E4783 /* UICollectionView+Extension.swift */,
+				FDE6F14B285234A3005E4783 /* NSObject+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -652,6 +673,17 @@
 			path = TestDouble;
 			sourceTree = "<group>";
 		};
+		FD8AD7032851E25300454AC3 /* SubComponents */ = {
+			isa = PBXGroup;
+			children = (
+				FD9D38ED28543409005A0C86 /* SegmentView.swift */,
+				FD8AD7042851E26200454AC3 /* GatherListTableView.swift */,
+				FD8AD7062851E28000454AC3 /* GatherListCell.swift */,
+				FD8AD70A2851E51300454AC3 /* TagCollectionViewCell.swift */,
+			);
+			path = SubComponents;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -787,19 +819,25 @@
 				37605E05283C12D400394929 /* SignUpAgreementViewController.swift in Sources */,
 				37605DFB2839FF4A00394929 /* ASAuthorizationAppleIDButton+Rx.swift in Sources */,
 				377370892841DE3500D5CCB6 /* SignUpProfileReactor.swift in Sources */,
+				FDE6F14A28523493005E4783 /* UICollectionView+Extension.swift in Sources */,
 				37479B9F283EAE140078386E /* UIImage+Extension.swift in Sources */,
+				FDE6F1482852317F005E4783 /* UITableView+Extension.swift in Sources */,
 				37912CA628144A530087B95E /* TabCoordinator.swift in Sources */,
 				374380AB284FDFDD00CB02A5 /* SearchingRequestDTO.swift in Sources */,
 				37605E06283C12D400394929 /* SignUpAgreementReactor.swift in Sources */,
+				FD8AD7092851E2AA00454AC3 /* PaddingLabel.swift in Sources */,
+				FD8AD70B2851E51300454AC3 /* TagCollectionViewCell.swift in Sources */,
 				37605DEC28394E0400394929 /* AppCoordinator.swift in Sources */,
 				37912C9C2814480C0087B95E /* NSLayoutConstraint+Extension.swift in Sources */,
 				37479BA1283EBB220078386E /* UIButton+Extension.swift in Sources */,
 				37605DFD283A003B00394929 /* ASAuthorizationAppleIDProvider+Rx.swift in Sources */,
+				FD8AD7052851E26200454AC3 /* GatherListTableView.swift in Sources */,
 				37912CA0281449230087B95E /* Coordinator.swift in Sources */,
 				37605E0A283C23FC00394929 /* SignUpAgreementCoordinator.swift in Sources */,
 				37C3F4ED284BF4380006CB02 /* KeychainProvidable.swift in Sources */,
 				378F348F281DC0770063CE4F /* ProfileCoordinator.swift in Sources */,
 				376006C82848A16400B27015 /* RegularExpressionValidatable.swift in Sources */,
+				FD8AD7072851E28000454AC3 /* GatherListCell.swift in Sources */,
 				37C3F4F8284C70E40006CB02 /* KeychainQueryRequestable.swift in Sources */,
 				37C14516284DC90900D11CC3 /* HTTPMethod.swift in Sources */,
 				37C3F4FA284C71030006CB02 /* KeychainQueryRequester.swift in Sources */,
@@ -813,6 +851,7 @@
 				378F3483281DBE140063CE4F /* ChattingReactor.swift in Sources */,
 				376006C528489A2B00B27015 /* RegularExpressionValidator.swift in Sources */,
 				3773708C2841DE6D00D5CCB6 /* UserAuthentification.swift in Sources */,
+				FDE6F14C285234A3005E4783 /* NSObject+Extension.swift in Sources */,
 				37605DF92839FDB300394929 /* ASAuthorizationController+Rx.swift in Sources */,
 				374380A7284FDD8A00CB02A5 /* SocialTypeDTO.swift in Sources */,
 				37AA7E1E2850B37B00B4B5C2 /* Sex.swift in Sources */,
@@ -822,6 +861,7 @@
 				37605E08283C179A00394929 /* LoginCoordinator.swift in Sources */,
 				37453D7E281DAE0900423CF0 /* BaseViewController.swift in Sources */,
 				3773707F2841B95000D5CCB6 /* CheckBox.swift in Sources */,
+				FD9D38EE28543409005A0C86 /* SegmentView.swift in Sources */,
 				378F3482281DBE140063CE4F /* ChattingViewController.swift in Sources */,
 				378F347B281DBDF10063CE4F /* LoginReactor.swift in Sources */,
 				37912C65281445AC0087B95E /* AppDelegate.swift in Sources */,
