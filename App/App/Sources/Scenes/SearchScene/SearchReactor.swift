@@ -13,31 +13,29 @@ import RxSwift
 
 final class SearchReactor: Reactor {
     enum Action {
-        case viewDidLoad
+        case mapViewVisibleRegionDidChanged(CLLocationCoordinate2D)
     }
     
     enum Mutation {
-        case setCurrentCoordinate
+        case setVisibleCoordinate(CLLocationCoordinate2D)
     }
     
     struct State {
-        var currentCoordinate: Coordinate = .seoulCityHall
+        var visibleCorrdinate: Coordinate = .seoulCityHall
         var currentSpan: Double = 0.005
     }
-    
-    private var locationManger: LocationManageable
+
     internal let initialState: State
     
-    init(locationManager: LocationManageable) {
-        self.locationManger = locationManager
+    init() {
         self.initialState = State()
     }
     
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
-    
-        case .viewDidLoad:
-            return Observable.just(.setCurrentCoordinate)
+
+        case .mapViewVisibleRegionDidChanged(let newCoordinate):
+            return Observable.just(.setVisibleCoordinate(newCoordinate))
         }
     }
     
@@ -45,14 +43,12 @@ final class SearchReactor: Reactor {
         var newState = state
         
         switch mutation {
-            
-        case .setCurrentCoordinate:
-            if let newLocation = locationManger.currentLocation() {
-                newState.currentCoordinate = Coordinate(
-                    latitude: newLocation.coordinate.latitude,
-                    longitude: newLocation.coordinate.longitude
-                )
-            }
+
+        case .setVisibleCoordinate(let newCoordinate):
+            newState.visibleCorrdinate = Coordinate(
+                latitude: newCoordinate.latitude,
+                longitude: newCoordinate.longitude
+            )
         }
         
         return newState
