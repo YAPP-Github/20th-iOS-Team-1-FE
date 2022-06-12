@@ -30,6 +30,8 @@
 		29AE2246284E02EB00EDF34B /* MKCoordinateRegion+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2245284E02EB00EDF34B /* MKCoordinateRegion+Extension.swift */; };
 		29AE2248284E031C00EDF34B /* MKCoordinateSpan+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2247284E031C00EDF34B /* MKCoordinateSpan+Extension.swift */; };
 		29AE224A284E0A2F00EDF34B /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2249284E0A2F00EDF34B /* LocationManager.swift */; };
+		29AE224C2853711F00EDF34B /* RxMKMapViewDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE224B2853711F00EDF34B /* RxMKMapViewDelegateProxy.swift */; };
+		29AE224E285372B200EDF34B /* Reactive+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE224D285372B200EDF34B /* Reactive+Extension.swift */; };
 		37451F252834245100696B21 /* WeakMapTable in Frameworks */ = {isa = PBXBuildFile; productRef = 37451F242834245100696B21 /* WeakMapTable */; };
 		37453D7E281DAE0900423CF0 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37453D7D281DAE0900423CF0 /* BaseViewController.swift */; };
 		37479B9B283E763B0078386E /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37479B9A283E763B0078386E /* UIColor+Extension.swift */; };
@@ -169,6 +171,8 @@
 		29AE2245284E02EB00EDF34B /* MKCoordinateRegion+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKCoordinateRegion+Extension.swift"; sourceTree = "<group>"; };
 		29AE2247284E031C00EDF34B /* MKCoordinateSpan+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKCoordinateSpan+Extension.swift"; sourceTree = "<group>"; };
 		29AE2249284E0A2F00EDF34B /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		29AE224B2853711F00EDF34B /* RxMKMapViewDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxMKMapViewDelegateProxy.swift; sourceTree = "<group>"; };
+		29AE224D285372B200EDF34B /* Reactive+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reactive+Extension.swift"; sourceTree = "<group>"; };
 		37453D7D281DAE0900423CF0 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		37479B9A283E763B0078386E /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		37479B9E283EAE140078386E /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
@@ -334,6 +338,7 @@
 			children = (
 				29AE2242284DF14C00EDF34B /* Entity */,
 				29AE222B284B7DAA00EDF34B /* SearchViewController.swift */,
+				29AE224B2853711F00EDF34B /* RxMKMapViewDelegateProxy.swift */,
 				29AE222C284B7DAA00EDF34B /* SearchReactor.swift */,
 				29AE2235284B867300EDF34B /* SearchCoordinator.swift */,
 			);
@@ -618,6 +623,7 @@
 			isa = PBXGroup;
 			children = (
 				37912C99281447C40087B95E /* Array+Extension.swift */,
+				29AE224D285372B200EDF34B /* Reactive+Extension.swift */,
 				37912C9B2814480C0087B95E /* NSLayoutConstraint+Extension.swift */,
 				37479B9A283E763B0078386E /* UIColor+Extension.swift */,
 				29AE2231284B7F1100EDF34B /* UIView+Extension.swift */,
@@ -1018,6 +1024,7 @@
 				37AA7E142850B15800B4B5C2 /* CategoryDTO.swift in Sources */,
 				378F3483281DBE140063CE4F /* ChattingReactor.swift in Sources */,
 				376006C528489A2B00B27015 /* RegularExpressionValidator.swift in Sources */,
+				29AE224C2853711F00EDF34B /* RxMKMapViewDelegateProxy.swift in Sources */,
 				374F41CD2864E5250074F04B /* AccountValidationRepository.swift in Sources */,
 				3773708C2841DE6D00D5CCB6 /* UserAuthentification.swift in Sources */,
 				FDE6F14C285234A3005E4783 /* NSObject+Extension.swift in Sources */,
@@ -1061,6 +1068,7 @@
 				37C14518284DC94A00D11CC3 /* NetworkError.swift in Sources */,
 				37C3F4EF284BF4450006CB02 /* KeychainProvider.swift in Sources */,
 				377370842841BE1000D5CCB6 /* UIButton+Rx.swift in Sources */,
+				29AE224E285372B200EDF34B /* Reactive+Extension.swift in Sources */,
 				29AE223F284DC1B500EDF34B /* CLLocationCoordinate2D+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
