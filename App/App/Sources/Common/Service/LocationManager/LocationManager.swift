@@ -7,15 +7,18 @@
 
 import CoreLocation
 
-final class LocationManager: LocationManageable {
+final class LocationManager: NSObject, LocationManageable {
     
     internal static var shared = LocationManager()
     private var locationManager: CLLocationManager?
     
-    private init() {
+    override private init() {
+        super.init()
+        
         locationManager = CLLocationManager()
-        locationManager?.requestWhenInUseAuthorization()
+        
         locationManager?.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager?.delegate = self
     }
     
     internal func requestAuthorization() {
@@ -28,5 +31,14 @@ final class LocationManager: LocationManageable {
     
     internal func currentLocation() -> CLLocation? {
         return locationManager?.location
+    }
+}
+
+extension LocationManager: CLLocationManagerDelegate {
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+//        switch manager.authorizationStatus {
+//        case .authorizedWhenInUse, .authorizedAlways:
+//        default: break
+//        }
     }
 }

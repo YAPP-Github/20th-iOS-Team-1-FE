@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 final class SearchCoordinator: SceneCoordinator {
     weak var parentCoordinator: SceneCoordinator?
@@ -17,8 +18,9 @@ final class SearchCoordinator: SceneCoordinator {
     }
     
     func start() {
-        let reactor = SearchReactor(locationManager: LocationManager.shared)
-        let viewController = SearchViewController(reactor: reactor)
+        let reactor = SearchReactor()
+        let locationManger = CLLocationManager()
+        let viewController = SearchViewController(reactor: reactor, locationManager: locationManger)
         
         navigationController.setViewControllers([viewController], animated: false)
     }
