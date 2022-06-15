@@ -51,22 +51,13 @@ final class LoginViewController: BaseViewController {
     private func bindAction(with reactor: LoginReactor) {
         disposeBag.insert {
             signInWithAppleButton.rx.tap(scopes: [.email])
-                .withUnretained(self)
-                .compactMap { (owner, authorization) in owner.email(for: authorization) }
-                .map { LoginReactor.Action.signInWithApple(email: $0) }
+                .map { LoginReactor.Action.signInWithApple(authorization: $0) }
                 .bind(to: reactor.action)
         }
     }
     
     private func bindState(with reactor: LoginReactor) {
         
-    }
-    
-    private func email(for authorization: ASAuthorization) -> String? {
-        let crendential = authorization.credential as? ASAuthorizationAppleIDCredential
-        let email = crendential?.email
-        
-        return email
     }
     
     func bind(reactor: LoginReactor) {
