@@ -5,6 +5,7 @@
 //  Created by Hani on 2022/05/01.
 //
 
+import AuthenticationServices
 import Foundation
 
 import ReactorKit
@@ -12,23 +13,23 @@ import RxSwift
 
 final class LoginReactor: Reactor {
     enum Action {
-        case signInWithApple(email: String)
+        case signInWithApple(authorization: ASAuthorization)
     }
     
     enum Mutation {
-        case change(email: String)
+        case isLoggedIn
     }
     
     struct State {
-        var user = UserAuthentification()
+        var isReadyToProceedWithSignUp = false
     }
     
     let initialState = State()
     
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
-        case .signInWithApple(let email):
-            return Observable.just(Mutation.change(email: email))
+        case .signInWithApple(authorization: let authorization):
+            return Observable.just(Mutation.isLoggedIn)
         }
     }
     
@@ -36,10 +37,40 @@ final class LoginReactor: Reactor {
         var newState = state
         
         switch mutation {
-        case .change(let email):
-            newState.user.email = email
+        case .isLoggedIn:
+            newState.isReadyToProceedWithSignUp = true
         }
         
         return newState
     }
+    
+    private func requestAppleLogin(for authorization: ASAuthorization) -> AppleCredential? {
+        guard let crendential = authorization.credential as? ASAuthorizationAppleIDCredential,
+              let code = crendential.authorizationCode,
+              let token = crendential.identityToken else {
+            return nil
+        }
+        
+        let appleCredential = AppleCredential(authorizationCode: code, identityToken: token)
+        
+        return appleCredential
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
