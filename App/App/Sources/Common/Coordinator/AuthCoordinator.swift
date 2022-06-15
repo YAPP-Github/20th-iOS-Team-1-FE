@@ -27,7 +27,7 @@ final class AuthCoordinator: Coordinator {
             window?.rootViewController = loginCoordinator.navigationController
         } else {
             let navigationController = UINavigationController()
-            let SignUpAgreementCoordinator = SignUpAgreementCoordinator(navigationController: navigationController, user: UserAuthentification())
+            let SignUpAgreementCoordinator = SignUpAgreementCoordinator(navigationController: navigationController)
             childCoordinators.append(SignUpAgreementCoordinator)
             SignUpAgreementCoordinator.start()
             window?.rootViewController = navigationController
