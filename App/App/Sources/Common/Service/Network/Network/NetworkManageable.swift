@@ -10,5 +10,5 @@ import Foundation
 import RxSwift
 
 protocol NetworkManageable {
-    func requestDataTask(with request: URLRequest) -> Single<Data>
+    func requestDataTask<T: Decodable>(with request: URLRequest) -> Single<T>
 }
