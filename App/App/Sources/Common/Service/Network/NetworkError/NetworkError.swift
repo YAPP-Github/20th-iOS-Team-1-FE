@@ -11,4 +11,5 @@ enum NetworkError: Error {
     case transportError(Error)
     case serverError(statusCode: Int)
     case noDataError
+    case decodeError
 }

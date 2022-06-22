@@ -20,7 +20,10 @@ final class LoginCoordinator: SceneCoordinator {
     }
     
     func start() {
-        let loginReactor = LoginReactor()
+        let networkManager = NetworkManager.shared
+        let appleLoginRepository = AppleLoginRepository(networkManager: networkManager)
+        let keychainProvider = KeychainProvider.shared
+        let loginReactor = LoginReactor(appleLoginRepository: appleLoginRepository, keychainProvider: keychainProvider)
         let loginViewController = LoginViewController(reactor: loginReactor)
 
         loginViewController.reactor?.state
