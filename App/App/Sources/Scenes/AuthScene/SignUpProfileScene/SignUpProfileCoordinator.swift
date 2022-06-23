@@ -23,8 +23,13 @@ final class SignUpProfileCoordinator: SceneCoordinator {
     }
     
     func start() {
+        let networkManager = NetworkManager.shared
+        let accountValidationRepository = AccountValidationRepository(networkManager: networkManager)
+        let keychain = KeychainQueryRequester()
+        let keychainProvider = KeychainProvider(keyChain: keychain)
+        let keychainUseCase = KeychainUsecase(keychainProvider: keychainProvider, networkManager: networkManager)
         let regularExpressionValidator = RegularExpressionValidator()
-        let signUpProfileReactor = SignUpProfileReactor(user: user, regularExpressionValidator: regularExpressionValidator)
+        let signUpProfileReactor = SignUpProfileReactor(user: user, regularExpressionValidator: regularExpressionValidator, accountValidationRepository: accountValidationRepository, keychainUseCase: keychainUseCase)
         let signUpProfileViewController = SignUpProfileViewController(reactor: signUpProfileReactor)
 
         navigationController.pushViewController(signUpProfileViewController, animated: true)

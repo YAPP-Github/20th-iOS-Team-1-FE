@@ -22,6 +22,15 @@
 		37479B9B283E763B0078386E /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37479B9A283E763B0078386E /* UIColor+Extension.swift */; };
 		37479B9F283EAE140078386E /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37479B9E283EAE140078386E /* UIImage+Extension.swift */; };
 		37479BA1283EBB220078386E /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37479BA0283EBB220078386E /* UIButton+Extension.swift */; };
+		374F41CD2864E5250074F04B /* AccountValidationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F41CC2864E5250074F04B /* AccountValidationRepository.swift */; };
+		374F41CF2864E6C60074F04B /* AccountValidationResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F41CE2864E6C60074F04B /* AccountValidationResponseDTO.swift */; };
+		374F41D12864E70F0074F04B /* AccountValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F41D02864E70F0074F04B /* AccountValidation.swift */; };
+		374F41D32864E86F0074F04B /* AccountValidationRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F41D22864E86F0074F04B /* AccountValidationRepositoryInterface.swift */; };
+		374F41D52864E9490074F04B /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F41D42864E9490074F04B /* KeychainService.swift */; };
+		374F41D72864E97A0074F04B /* KeychainAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F41D62864E97A0074F04B /* KeychainAccount.swift */; };
+		374F41DA2864EB060074F04B /* KeychainUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F41D92864EB060074F04B /* KeychainUseCase.swift */; };
+		374F41DC2864ED6E0074F04B /* KeychainTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F41DB2864ED6E0074F04B /* KeychainTokens.swift */; };
+		374F41DE2864F0780074F04B /* KeychainUseCaseInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F41DD2864F0780074F04B /* KeychainUseCaseInterface.swift */; };
 		376006C228487FFE00B27015 /* SignUpProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376006C128487FFE00B27015 /* SignUpProfileCoordinator.swift */; };
 		376006C528489A2B00B27015 /* RegularExpressionValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376006C428489A2B00B27015 /* RegularExpressionValidator.swift */; };
 		376006C82848A16400B27015 /* RegularExpressionValidatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376006C72848A16400B27015 /* RegularExpressionValidatable.swift */; };
@@ -138,6 +147,15 @@
 		37479B9A283E763B0078386E /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		37479B9E283EAE140078386E /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		37479BA0283EBB220078386E /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
+		374F41CC2864E5250074F04B /* AccountValidationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountValidationRepository.swift; sourceTree = "<group>"; };
+		374F41CE2864E6C60074F04B /* AccountValidationResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountValidationResponseDTO.swift; sourceTree = "<group>"; };
+		374F41D02864E70F0074F04B /* AccountValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountValidation.swift; sourceTree = "<group>"; };
+		374F41D22864E86F0074F04B /* AccountValidationRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountValidationRepositoryInterface.swift; sourceTree = "<group>"; };
+		374F41D42864E9490074F04B /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
+		374F41D62864E97A0074F04B /* KeychainAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainAccount.swift; sourceTree = "<group>"; };
+		374F41D92864EB060074F04B /* KeychainUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainUseCase.swift; sourceTree = "<group>"; };
+		374F41DB2864ED6E0074F04B /* KeychainTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainTokens.swift; sourceTree = "<group>"; };
+		374F41DD2864F0780074F04B /* KeychainUseCaseInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainUseCaseInterface.swift; sourceTree = "<group>"; };
 		376006C128487FFE00B27015 /* SignUpProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpProfileCoordinator.swift; sourceTree = "<group>"; };
 		376006C428489A2B00B27015 /* RegularExpressionValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularExpressionValidator.swift; sourceTree = "<group>"; };
 		376006C72848A16400B27015 /* RegularExpressionValidatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularExpressionValidatable.swift; sourceTree = "<group>"; };
@@ -256,6 +274,7 @@
 			isa = PBXGroup;
 			children = (
 				379B1A78285A52DA00E58A34 /* AppleLoginRepository.swift */,
+				374F41CC2864E5250074F04B /* AccountValidationRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -279,6 +298,7 @@
 				37AA7E192850B1B600B4B5C2 /* EligibleSexDTO.swift */,
 				37AA7E1B2850B1C400B4B5C2 /* StatusDTO.swift */,
 				379B1A76285A4F7700E58A34 /* AppleCredentialRequestDTO.swift */,
+				374F41CE2864E6C60074F04B /* AccountValidationResponseDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -289,6 +309,16 @@
 				37453D7D281DAE0900423CF0 /* BaseViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		374F41D82864EAF70074F04B /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				374F41D92864EB060074F04B /* KeychainUseCase.swift */,
+				374F41DB2864ED6E0074F04B /* KeychainTokens.swift */,
+				374F41DD2864F0780074F04B /* KeychainUseCaseInterface.swift */,
+			);
+			path = UseCase;
 			sourceTree = "<group>";
 		};
 		376006C3284899FA00B27015 /* Service */ = {
@@ -387,6 +417,8 @@
 				377370862841DE3500D5CCB6 /* SignUpProfileViewController.swift */,
 				377370872841DE3500D5CCB6 /* SignUpProfileReactor.swift */,
 				376006C128487FFE00B27015 /* SignUpProfileCoordinator.swift */,
+				374F41D02864E70F0074F04B /* AccountValidation.swift */,
+				374F41D22864E86F0074F04B /* AccountValidationRepositoryInterface.swift */,
 			);
 			path = SignUpProfileScene;
 			sourceTree = "<group>";
@@ -542,6 +574,7 @@
 		37912C9D281448F70087B95E /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				374F41D82864EAF70074F04B /* UseCase */,
 				3712C36328636C0600077131 /* Repository */,
 				376006C3284899FA00B27015 /* Service */,
 				37605DF32839FAF700394929 /* Rx */,
@@ -664,6 +697,8 @@
 			children = (
 				37C3F4EC284BF4380006CB02 /* KeychainProvidable.swift */,
 				37C3F4EE284BF4450006CB02 /* KeychainProvider.swift */,
+				374F41D42864E9490074F04B /* KeychainService.swift */,
+				374F41D62864E97A0074F04B /* KeychainAccount.swift */,
 			);
 			path = KeychainProvider;
 			sourceTree = "<group>";
@@ -886,6 +921,7 @@
 				37912C9C2814480C0087B95E /* NSLayoutConstraint+Extension.swift in Sources */,
 				379B1A7B285A52EA00E58A34 /* AppleLoginRepositoryInterface.swift in Sources */,
 				37479BA1283EBB220078386E /* UIButton+Extension.swift in Sources */,
+				374F41DA2864EB060074F04B /* KeychainUseCase.swift in Sources */,
 				37605DFD283A003B00394929 /* ASAuthorizationAppleIDProvider+Rx.swift in Sources */,
 				FD8AD7052851E26200454AC3 /* GatherListTableView.swift in Sources */,
 				37912CA0281449230087B95E /* Coordinator.swift in Sources */,
@@ -900,6 +936,8 @@
 				37C3F4FA284C71030006CB02 /* KeychainQueryRequester.swift in Sources */,
 				37AA7E1C2850B1C400B4B5C2 /* StatusDTO.swift in Sources */,
 				378F347F281DBE070063CE4F /* GatherListReactor.swift in Sources */,
+				374F41D12864E70F0074F04B /* AccountValidation.swift in Sources */,
+				374F41CF2864E6C60074F04B /* AccountValidationResponseDTO.swift in Sources */,
 				37605DF62839FB4100394929 /* RxASAuthorizationControllerDelegateProxy.swift in Sources */,
 				374380A3284FDCE500CB02A5 /* SexDTO.swift in Sources */,
 				37AA7E212851FCA200B4B5C2 /* Authentification.swift in Sources */,
@@ -908,14 +946,18 @@
 				37AA7E142850B15800B4B5C2 /* CategoryDTO.swift in Sources */,
 				378F3483281DBE140063CE4F /* ChattingReactor.swift in Sources */,
 				376006C528489A2B00B27015 /* RegularExpressionValidator.swift in Sources */,
+				374F41CD2864E5250074F04B /* AccountValidationRepository.swift in Sources */,
 				3773708C2841DE6D00D5CCB6 /* UserAuthentification.swift in Sources */,
 				FDE6F14C285234A3005E4783 /* NSObject+Extension.swift in Sources */,
+				374F41D52864E9490074F04B /* KeychainService.swift in Sources */,
 				37605DF92839FDB300394929 /* ASAuthorizationController+Rx.swift in Sources */,
 				374380A7284FDD8A00CB02A5 /* SocialTypeDTO.swift in Sources */,
 				37AA7E1E2850B37B00B4B5C2 /* Sex.swift in Sources */,
 				37438097284FD9F800CB02A5 /* ExceptionResponseDTO.swift in Sources */,
 				37C1451B284E06E400D11CC3 /* NetworkManager.swift in Sources */,
+				374F41DC2864ED6E0074F04B /* KeychainTokens.swift in Sources */,
 				37912CA2281449610087B95E /* SceneCoordinator.swift in Sources */,
+				374F41D32864E86F0074F04B /* AccountValidationRepositoryInterface.swift in Sources */,
 				37605E08283C179A00394929 /* LoginCoordinator.swift in Sources */,
 				37453D7E281DAE0900423CF0 /* BaseViewController.swift in Sources */,
 				3773707F2841B95000D5CCB6 /* CheckBox.swift in Sources */,
@@ -925,12 +967,14 @@
 				378F347B281DBDF10063CE4F /* LoginReactor.swift in Sources */,
 				37912C65281445AC0087B95E /* AppDelegate.swift in Sources */,
 				374380AF284FE13300CB02A5 /* SearchingResponseDTO.swift in Sources */,
+				374F41D72864E97A0074F04B /* KeychainAccount.swift in Sources */,
 				377370882841DE3500D5CCB6 /* SignUpProfileViewController.swift in Sources */,
 				376006CA28490EFD00B27015 /* EnableButton.swift in Sources */,
 				379B1A79285A52DA00E58A34 /* AppleLoginRepository.swift in Sources */,
 				378F3486281DBE210063CE4F /* ProfileViewController.swift in Sources */,
 				378F348B281DC0560063CE4F /* GatherListCoordinator.swift in Sources */,
 				37438095284FD9BA00CB02A5 /* ExceptionDetailResponseDTO.swift in Sources */,
+				374F41DE2864F0780074F04B /* KeychainUseCaseInterface.swift in Sources */,
 				37AC3105284930E6003C3FA2 /* SignUpInfomationViewController.swift in Sources */,
 				3743809F284FDBB600CB02A5 /* SignInResponseDTO.swift in Sources */,
 				378F347A281DBDF10063CE4F /* LoginViewController.swift in Sources */,

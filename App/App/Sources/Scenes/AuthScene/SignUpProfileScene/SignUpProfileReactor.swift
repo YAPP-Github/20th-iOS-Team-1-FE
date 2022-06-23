@@ -18,32 +18,42 @@ final class SignUpProfileReactor: Reactor {
     }
     
     enum Mutation {
-        case checkValidation(String)
-        case checkDuplication
+        case validateNicknameLength(Bool)
+        case updateNickname(String)
+        case checkNicknameDuplication(String?)
         case readyToProceedWithSignUp
     }
     
     struct State {
+        var nickname = ""
         var user: UserAuthentification
         var isNicknameValidationCheckDone = false
         var isNicknameDuplicateCheckDone = false
         var isReadyToProceedWithSignUp = false
     }
     
-    private let regularExpressionValidator: RegularExpressionValidatable
     let initialState: State
     
-    init(user: UserAuthentification, regularExpressionValidator: RegularExpressionValidatable) {
+    private let regularExpressionValidator: RegularExpressionValidatable
+    private let accountValidationRepository: AccountValidationRepositoryInterface
+    private let keychainUseCase: KeychainUseCaseInterface
+    private let disposeBag = DisposeBag()
+    
+    init(user: UserAuthentification, regularExpressionValidator: RegularExpressionValidatable, accountValidationRepository: AccountValidationRepositoryInterface, keychainUseCase: KeychainUseCaseInterface) {
         self.initialState = State(user: user)
         self.regularExpressionValidator = regularExpressionValidator
+        self.accountValidationRepository = accountValidationRepository
+        self.keychainUseCase = keychainUseCase
     }
     
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .textFieldDidEndEditing(let nickname):
-            return Observable.just(Mutation.checkValidation(nickname))
+            let isValid = regularExpressionValidator.validate(nickname: nickname)
+            return Observable.concat([Observable.just(Mutation.validateNicknameLength(isValid)),
+                                      Observable.just(Mutation.updateNickname(nickname))])
         case .duplicateCheckButtonDidTap:
-            return Observable.just(Mutation.checkDuplication)
+            return checkDuplication(nickname: self.currentState.nickname)
         case .nextButtonDidTap:
             return Observable.just(Mutation.readyToProceedWithSignUp)
         }
@@ -53,21 +63,50 @@ final class SignUpProfileReactor: Reactor {
         var newState = state
         
         switch mutation {
-        case .checkValidation(let nickname):
-            let isValid = regularExpressionValidator.validate(nickname: nickname)
-            if isValid {
-                newState.user.nickName = nickname
-            } else {
-                newState.user.nickName = nil
-            }
-            
+        case .validateNicknameLength(let isValid):
             newState.isNicknameValidationCheckDone = isValid
-        case .checkDuplication:
-            newState.isNicknameDuplicateCheckDone = true
+        case .checkNicknameDuplication(let checkedNickname):
+            newState.user.nickName = checkedNickname
+            newState.isNicknameDuplicateCheckDone = (checkedNickname != nil)
         case .readyToProceedWithSignUp:
             newState.isReadyToProceedWithSignUp = true
+        case .updateNickname(let nickname):
+            newState.nickname = nickname
         }
         
         return newState
+    }
+    
+    private func checkDuplication(nickname: String) -> Observable<Mutation> {
+        return Observable.create { [weak self] observer in
+            guard let self = self else {
+                return Disposables.create()
+            }
+            
+            self.keychainUseCase.getAccessToken()
+                .subscribe(with: self,
+                   onSuccess: { this, token in
+                        this.accountValidationRepository.validateDuplicationAndLength(nickname: nickname, accessToken: token)
+                        .subscribe(
+                            onSuccess: { validation in
+                                let result = validation.unique ? nickname : nil
+                                observer.onNext(Mutation.checkNicknameDuplication(result))
+                                return
+                            
+                            }, onFailure: { _ in
+                                observer.onNext(Mutation.checkNicknameDuplication(nil))
+                                return
+                            }
+                        ).disposed(by: self.disposeBag)
+                   },
+                   onFailure: { _,_ in
+                        observer.onNext(Mutation.checkNicknameDuplication(nil))
+                        return
+                   }
+                ).disposed(by: self.disposeBag)
+            
+            
+            return Disposables.create()
+        }
     }
 }
