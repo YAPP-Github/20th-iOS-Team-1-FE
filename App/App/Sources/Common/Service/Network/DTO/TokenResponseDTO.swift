@@ -15,4 +15,10 @@ struct TokenResponseDTO: Codable {
         case accessToken
         case refreshToken
     }
+    
+    func toDomain() -> KeychainTokens {
+        let tokens = KeychainTokens(accessToken: accessToken, refreshToken: refreshToken)
+        
+        return tokens
+    }
 }
