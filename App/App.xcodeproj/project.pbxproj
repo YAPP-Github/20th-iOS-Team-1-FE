@@ -46,6 +46,7 @@
 		374F41DA2864EB060074F04B /* KeychainUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F41D92864EB060074F04B /* KeychainUseCase.swift */; };
 		374F41DC2864ED6E0074F04B /* KeychainTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F41DB2864ED6E0074F04B /* KeychainTokens.swift */; };
 		374F41DE2864F0780074F04B /* KeychainUseCaseInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F41DD2864F0780074F04B /* KeychainUseCaseInterface.swift */; };
+		374F41E1286619C90074F04B /* Area.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F41E0286619C90074F04B /* Area.swift */; };
 		376006C228487FFE00B27015 /* SignUpProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376006C128487FFE00B27015 /* SignUpProfileCoordinator.swift */; };
 		376006C528489A2B00B27015 /* RegularExpressionValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376006C428489A2B00B27015 /* RegularExpressionValidator.swift */; };
 		376006C82848A16400B27015 /* RegularExpressionValidatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376006C72848A16400B27015 /* RegularExpressionValidatable.swift */; };
@@ -186,6 +187,7 @@
 		374F41D92864EB060074F04B /* KeychainUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainUseCase.swift; sourceTree = "<group>"; };
 		374F41DB2864ED6E0074F04B /* KeychainTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainTokens.swift; sourceTree = "<group>"; };
 		374F41DD2864F0780074F04B /* KeychainUseCaseInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainUseCaseInterface.swift; sourceTree = "<group>"; };
+		374F41E0286619C90074F04B /* Area.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Area.swift; sourceTree = "<group>"; };
 		376006C128487FFE00B27015 /* SignUpProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpProfileCoordinator.swift; sourceTree = "<group>"; };
 		376006C428489A2B00B27015 /* RegularExpressionValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularExpressionValidator.swift; sourceTree = "<group>"; };
 		376006C72848A16400B27015 /* RegularExpressionValidatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularExpressionValidatable.swift; sourceTree = "<group>"; };
@@ -382,6 +384,14 @@
 			path = UseCase;
 			sourceTree = "<group>";
 		};
+		374F41DF286619060074F04B /* SignUpAreaScene */ = {
+			isa = PBXGroup;
+			children = (
+				374F41E0286619C90074F04B /* Area.swift */,
+			);
+			path = SignUpAreaScene;
+			sourceTree = "<group>";
+		};
 		376006C3284899FA00B27015 /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -532,6 +542,7 @@
 		378F3476281DBDB10063CE4F /* AuthScene */ = {
 			isa = PBXGroup;
 			children = (
+				374F41DF286619060074F04B /* SignUpAreaScene */,
 				3773708A2841DE4800D5CCB6 /* Entity */,
 				37605DED28394F4400394929 /* LoginScene */,
 				37605E02283C126100394929 /* SignUpAgreementScene */,
@@ -1002,6 +1013,7 @@
 				FD8AD7052851E26200454AC3 /* GatherListTableView.swift in Sources */,
 				37912CA0281449230087B95E /* Coordinator.swift in Sources */,
 				379B1A77285A4F7700E58A34 /* AppleCredentialRequestDTO.swift in Sources */,
+				374F41E1286619C90074F04B /* Area.swift in Sources */,
 				37605E0A283C23FC00394929 /* SignUpAgreementCoordinator.swift in Sources */,
 				37C3F4ED284BF4380006CB02 /* KeychainProvidable.swift in Sources */,
 				378F348F281DC0770063CE4F /* ProfileCoordinator.swift in Sources */,
