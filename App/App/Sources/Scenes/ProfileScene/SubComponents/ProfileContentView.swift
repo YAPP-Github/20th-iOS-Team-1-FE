@@ -74,6 +74,13 @@ final class ProfileContentView: UIView {
         return view
     }()
     
+    private lazy var introduceView: UIView = {
+        let view = IntroduceView()
+        view.layer.cornerRadius = 10
+        
+        return view
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubviews()
@@ -94,6 +101,7 @@ final class ProfileContentView: UIView {
         addSubview(divisionView)
         addSubview(ageLabel)
         addSubview(genderImageView)
+        addSubview(introduceView)
     }
     
     private func configureLayout() {
@@ -128,6 +136,10 @@ final class ProfileContentView: UIView {
             genderImageView.widthAnchor.constraint(equalToConstant: 24),
             genderImageView.heightAnchor.constraint(equalToConstant: 24),
             
+            introduceView.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 20),
+            introduceView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            introduceView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            introduceView.heightAnchor.constraint(equalToConstant: 48)
         ])
     }
     
