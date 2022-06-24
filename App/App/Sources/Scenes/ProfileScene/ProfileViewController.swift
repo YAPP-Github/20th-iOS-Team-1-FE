@@ -13,6 +13,9 @@ import RxCocoa
 final class ProfileViewController: BaseViewController {
     var disposeBag = DisposeBag()
     
+    private lazy var scrollView = UIScrollView()
+    private lazy var contentView = ProfileContentView()
+    
     init(reactor: ProfileReactor) {
         super.init(nibName: nil, bundle: nil)
         self.reactor = reactor
@@ -28,24 +31,28 @@ final class ProfileViewController: BaseViewController {
         addSubviews()
         configureLayout()
         configureUI()
-        
-        if let reactor = reactor {
-            bind(reactor: reactor)
-        }
     }
 
     private func addSubviews() {
-        
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
     }
     
     private func configureLayout() {
         NSLayoutConstraint.useAndActivateConstraints([
-        
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.heightAnchor.constraint(equalToConstant: 500) // 임의설정
         ])
     }
     
     private func configureUI() {
-        view.backgroundColor = .brown
+        view.backgroundColor = .Togaether.background
     }
     
     private func bindAction(with reactor: ProfileReactor) {
