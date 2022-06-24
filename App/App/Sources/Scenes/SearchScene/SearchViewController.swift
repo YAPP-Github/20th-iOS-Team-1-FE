@@ -30,7 +30,7 @@ final class SearchViewController: BaseViewController {
     private lazy var searchButton: CircularButton =  {
         let button = CircularButton()
         
-        button.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+        button.setImage(UIImage.Togaether.magnifyingglass, for: .normal)
         button.tintColor = .white
         button.backgroundColor = UIColor.Togaether.mainYellow
         
@@ -38,14 +38,21 @@ final class SearchViewController: BaseViewController {
     }()
     
     private lazy var notificationItem: UIBarButtonItem = {
-        let barButtonItem = UIBarButtonItem(image: UIImage(systemName: "bell"), style: .plain, target: SearchViewController.self, action: nil)
+        let barButtonItem = UIBarButtonItem(
+            image: UIImage.Togaether.bell,
+            style: .plain,
+            target: SearchViewController.self,
+            action: nil
+        )
+        
         barButtonItem.tintColor = .label
+        
         return barButtonItem
     }()
     
     private lazy var currentLocationButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "target"), for: .normal)
+        button.setImage(UIImage.Togaether.target, for: .normal)
         button.backgroundColor = .white
         button.layer.cornerRadius = 5
         return button
