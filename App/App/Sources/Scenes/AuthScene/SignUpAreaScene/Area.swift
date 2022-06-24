@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Area: String {
+enum Area: String, CaseIterable {
     case seoul = "서울"
     case busan = "부산"
     case daegu = "대구"
@@ -26,7 +26,7 @@ enum Area: String {
     case gyeongsangnam = "경남"
     case jeju = "제주"
     
-    enum Seoul: String {
+    enum Seoul: String, CaseIterable {
         case gangnam = "강남구"
         case gangdong = "강동구"
         case gangbuk = "강북구"
@@ -54,7 +54,7 @@ enum Area: String {
         case jungnang = "중랑구"
     }
     
-    enum Busan: String {
+    enum Busan: String, CaseIterable {
         case gangseo = "강서구"
         case geumjeong = "금정구"
         case gijang = "기장군"
@@ -73,7 +73,7 @@ enum Area: String {
         case haeundae = "해운대구"
     }
     
-    enum Deagu: String {
+    enum Deagu: String, CaseIterable {
         case nam = "남구"
         case dalseo = "달서구"
         case dalseong = "달성군"
@@ -84,7 +84,7 @@ enum Area: String {
         case jung = "중구"
     }
     
-    enum Incheon: String {
+    enum Incheon: String, CaseIterable {
         case ganghwa = "강화군"
         case gyeyang = "계양구"
         case namdong = "남동구"
@@ -97,7 +97,7 @@ enum Area: String {
         case jung = "중구"
     }
     
-    enum Gwangju: String {
+    enum Gwangju: String, CaseIterable {
         case gwangsan = "광산구"
         case nam = "남구"
         case dong = "동구"
@@ -105,7 +105,7 @@ enum Area: String {
         case seo = "서구"
     }
 
-    enum Daejeon: String {
+    enum Daejeon: String, CaseIterable {
         case daedeok = "대덕구"
         case dong = "동구"
         case seo = "서구"
@@ -113,7 +113,7 @@ enum Area: String {
         case jung = "중구"
     }
 
-    enum Ulsan: String {
+    enum Ulsan: String, CaseIterable {
         case nam = "남구"
         case dong = "동구"
         case buk = "북구"
@@ -121,7 +121,7 @@ enum Area: String {
         case jung = "중구"
     }
     
-    enum Gyeonggi: String {
+    enum Gyeonggi: String, CaseIterable {
         case gapyeong = "가평군"
         case deogyang = "고양시 덕양구"
         case ilsandong = "고양시 일산동구"
@@ -166,7 +166,7 @@ enum Area: String {
         case hwaseong = "화성시"
     }
     
-    enum Gangwon: String {
+    enum Gangwon: String, CaseIterable {
         case gangneung = "강릉시"
         case goseong = "고성군"
         case donghae = "동해시"
@@ -187,7 +187,7 @@ enum Area: String {
         case hoengseong = "횡성군"
     }
     
-    enum Chungcheongbuk: String {
+    enum Chungcheongbuk: String, CaseIterable {
         case goesan = "괴산군"
         case danyang = "단양군"
         case boeun = "보은군"
@@ -204,7 +204,7 @@ enum Area: String {
         case chungju = "충주시"
     }
     
-    enum Chungcheongnam: String {
+    enum Chungcheongnam: String, CaseIterable {
         case gyeryong = "계룡시"
         case gongju = "공주시"
         case geumsan = "금산군"
@@ -223,7 +223,7 @@ enum Area: String {
         case hongseong = "홍성군"
     }
     
-    enum Jeollabuk: String {
+    enum Jeollabuk: String, CaseIterable {
         case gochang = "고창군"
         case gunsan = "군산시"
         case gimje = "김제시"
@@ -241,7 +241,7 @@ enum Area: String {
         case jinan = "진안군"
     }
     
-    enum Jeollanam: String {
+    enum Jeollanam: String, CaseIterable {
         case gangjin = "강진군"
         case goheung = "고흥군"
         case gokseong = "곡성군"
@@ -266,7 +266,7 @@ enum Area: String {
         case hwasun = "화순군"
     }
     
-    enum Gyeongsangbuk: String {
+    enum Gyeongsangbuk: String, CaseIterable {
         case gyeongsan = "경산시"
         case gyeongju = "경주시"
         case goryeong = "고령군"
@@ -293,7 +293,7 @@ enum Area: String {
         case buk = "포항시 북구"
     }
     
-    enum Gyeongsangnam: String {
+    enum Gyeongsangnam: String, CaseIterable {
         case geoje = "거제시"
         case geochang = "거창군"
         case goseong = "고성군"
@@ -318,7 +318,7 @@ enum Area: String {
         case hapcheon = "합천군"
     }
     
-    enum Jeju: String {
+    enum Jeju: String, CaseIterable {
         case seogwipo = "서귀포시"
         case jeju = " 제주시"
     }
