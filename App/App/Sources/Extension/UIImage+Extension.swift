@@ -16,5 +16,8 @@ extension UIImage {
         static let target              = UIImage(systemName: "target")!
         static let bell                = UIImage(systemName: "bell")!
         static let magnifyingglass     = UIImage(systemName: "magnifyingglass")!
+        static let genderSignMan       = UIImage(named: "genderMan")!
+        static let profileSetting      = UIImage(named: "profileSetting")!
+        static let rightArrow          = UIImage(systemName: "chevron.right")!
     }
 }
