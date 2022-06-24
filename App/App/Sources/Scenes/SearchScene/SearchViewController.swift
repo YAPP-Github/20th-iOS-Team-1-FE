@@ -20,7 +20,7 @@ final class SearchViewController: BaseViewController {
         mapView.showsUserLocation = true
         mapView.isPitchEnabled = false
         mapView.setCameraZoomRange(
-            MKMapView.CameraZoomRange(maxCenterCoordinateDistance: 3000),
+            MKMapView.CameraZoomRange(maxCenterCoordinateDistance: 10000),
             animated: false
         )
         
@@ -138,25 +138,7 @@ final class SearchViewController: BaseViewController {
     }
     
     private func bindState(with reactor: SearchReactor) {
-        disposeBag.insert(
-            reactor.state
-                .map { MKCoordinateRegion(
-                    center: $0.visibleCorrdinate.toCLLocationCoordinate2D(),
-                    span: MKCoordinateSpan(
-                        latitudeDelta: $0.currentSpan,
-                        longitudeDelta: $0.currentSpan
-                    )
-                ) }
-                .distinctUntilChanged()
-                .asDriver(onErrorJustReturn: .init(
-                    center: Coordinate.seoulCityHall.toCLLocationCoordinate2D(),
-                    span: MKCoordinateSpan(
-                        latitudeDelta: 0.005,
-                        longitudeDelta: 0.005
-                    )
-                ))
-                .drive(mapView.rx.region)
-        )
+        
     }
     
     func bind(reactor: SearchReactor) {
