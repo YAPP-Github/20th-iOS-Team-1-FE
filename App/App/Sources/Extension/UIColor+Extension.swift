@@ -28,7 +28,9 @@ extension UIColor {
         static let mainGreen               = UIColor(named: "mainGreen")!
         static let mainYellow              = UIColor(named: "mainYellow")!
         static let divider                 = UIColor(named: "divider")!
+        static let introduceViewDivider    = UIColor(named: "introduceViewDivider")!
         static let background              = UIColor(named: "background")!
+        static let introduceViewBackground = UIColor(named: "introduceViewBackground")!
         static let checkBoxDidDeselect     = UIColor(named: "checkBoxDidDeselect")!
         static let buttonDisabled          = UIColor(named: "buttonDisabled")!
         static let line                    = UIColor(named: "line")!
