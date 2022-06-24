@@ -5,6 +5,7 @@
 //  Created by Hani on 2022/05/28.
 //
 
+import PhotosUI
 import UIKit
 
 import ReactorKit
@@ -94,6 +95,16 @@ final class SignUpProfileViewController: BaseViewController {
         return button
     }()
     
+    private lazy var imagePicker: UIImagePickerController = {
+        let picker = UIImagePickerController()
+        picker.modalPresentationStyle = .fullScreen
+        picker.sourceType = .photoLibrary
+        picker.allowsEditing = false
+        picker.delegate = self
+    
+        return picker
+    }()
+    
     var disposeBag = DisposeBag()
     
     init(reactor: SignUpProfileReactor) {
@@ -111,6 +122,7 @@ final class SignUpProfileViewController: BaseViewController {
         addSubviews()
         configureLayout()
         configureUI()
+        imagePicker.delegate = self
     }
 
     private func addSubviews() {
@@ -138,10 +150,9 @@ final class SignUpProfileViewController: BaseViewController {
             guidanceLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             
             profileImageView.topAnchor.constraint(equalTo: guidanceLabel.bottomAnchor, constant: 72),
-            profileImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 94),
-            profileImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -94),
-            profileImageView.widthAnchor.constraint(equalTo: profileImageView.heightAnchor),
+            profileImageView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.5),
             profileImageView.heightAnchor.constraint(equalTo: profileImageView.widthAnchor),
+            profileImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             profileRegisterButton.centerXAnchor.constraint(equalTo: profileImageView.centerXAnchor),
             profileRegisterButton.centerYAnchor.constraint(equalTo: profileImageView.centerYAnchor),
@@ -194,6 +205,16 @@ final class SignUpProfileViewController: BaseViewController {
             nextButton.rx.throttleTap
                 .map { Reactor.Action.nextButtonDidTap }
                 .bind(to: reactor.action)
+            
+            profileRegisterButton.rx.tap
+                .asDriver()
+                .drive(onNext: { [weak self] in
+                    guard let self = self else {
+                        return
+                    }
+                    
+                    self.present(self.imagePicker, animated: true)
+                })
         }
     }
     
@@ -216,5 +237,38 @@ final class SignUpProfileViewController: BaseViewController {
     func bind(reactor: SignUpProfileReactor) {
         bindAction(with: reactor)
         bindState(with: reactor)
+    }
+    
+    private func presentAlert() {
+        let alertController = UIAlertController(title: "설정", message: "앨범 접근이 허용되어 있지 않습니다.", preferredStyle: .alert)
+    
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        let confirmAction = UIAlertAction(title: "확인", style: .default) { _ in
+            guard let url = URL(string: UIApplication.openSettingsURLString) else {
+                return
+            }
+            
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    
+        alertController.addAction(cancelAction)
+        alertController.addAction(confirmAction)
+        present(alertController, animated: true, completion: nil)
+    }
+}
+
+extension SignUpProfileViewController: UINavigationControllerDelegate { } // for ImagePicker, not implement
+
+extension SignUpProfileViewController: UIImagePickerControllerDelegate {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            self.profileImageView.image = image
+        }
+        
+        dismiss(animated: true, completion: nil)
     }
 }

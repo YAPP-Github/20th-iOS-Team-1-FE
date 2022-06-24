@@ -12,12 +12,14 @@ import RxSwift
 
 final class SignUpProfileReactor: Reactor {
     enum Action {
+        case profileRegisterButtonDidTap
         case textFieldDidEndEditing(String)
         case duplicateCheckButtonDidTap
         case nextButtonDidTap
     }
     
     enum Mutation {
+        case changeProfileImage(Data?)
         case validateNicknameLength(Bool)
         case updateNickname(String)
         case checkNicknameDuplication(String?)
@@ -48,6 +50,8 @@ final class SignUpProfileReactor: Reactor {
     
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
+        case .profileRegisterButtonDidTap:
+            return checkDuplication(nickname: "temp")
         case .textFieldDidEndEditing(let nickname):
             let isValid = regularExpressionValidator.validate(nickname: nickname)
             return Observable.concat([Observable.just(Mutation.validateNicknameLength(isValid)),
@@ -63,6 +67,8 @@ final class SignUpProfileReactor: Reactor {
         var newState = state
         
         switch mutation {
+        case.changeProfileImage(let data):
+            newState.user.profileImageData = data
         case .validateNicknameLength(let isValid):
             newState.isNicknameValidationCheckDone = isValid
         case .checkNicknameDuplication(let checkedNickname):
@@ -110,3 +116,5 @@ final class SignUpProfileReactor: Reactor {
         }
     }
 }
+
+
