@@ -10,7 +10,7 @@ import UIKit
 final class AppCoordinator: Coordinator {
     private let window: UIWindow?
     var childCoordinators = [Coordinator]()
-    var isAlreadyLoggedIn = true
+    var isAlreadyLoggedIn = false
     
     init(window: UIWindow?) {
         self.window = window

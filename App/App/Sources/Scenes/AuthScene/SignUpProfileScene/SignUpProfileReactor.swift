@@ -57,7 +57,8 @@ final class SignUpProfileReactor: Reactor {
             return Observable.concat([Observable.just(Mutation.validateNicknameLength(isValid)),
                                       Observable.just(Mutation.updateNickname(nickname))])
         case .duplicateCheckButtonDidTap:
-            return checkDuplication(nickname: self.currentState.nickname)
+            //return checkDuplication(nickname: self.currentState.nickname)
+            return Observable.just(.checkNicknameDuplication("aaaa"))
         case .nextButtonDidTap:
             return Observable.just(Mutation.readyToProceedWithSignUp)
         }
