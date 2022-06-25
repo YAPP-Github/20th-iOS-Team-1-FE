@@ -24,7 +24,6 @@ final class SignUpInfomationReactor: Reactor {
         case selectMan
         case selectWoman
         case selectPrivateSex
-        case activateNextButton(Bool)
         case readyToProceedWithSignUp
     }
     
@@ -46,25 +45,13 @@ final class SignUpInfomationReactor: Reactor {
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .ageTextFieldDidEndEditing(let age):
-            return Observable.concat(
-                [Observable.just(.updateAge(Int(age))),
-                Observable.just(.activateNextButton(currentState.user.age != nil))
-            ])
+            return Observable.just(.updateAge(Int(age)))
         case .manButtonDidTap:
-            return Observable.concat([
-                Observable.just(.selectMan),
-                Observable.just(.activateNextButton(currentState.user.age != nil))
-            ])
+            return Observable.just(.selectMan)
         case .womanButtonDidTap:
-            return Observable.concat([
-                Observable.just(.selectWoman),
-                Observable.just(.activateNextButton(currentState.user.age != nil))
-            ])
+            return Observable.just(.selectWoman)
         case .privateSexButtonDidTap:
-            return Observable.concat([
-                Observable.just(.selectPrivateSex),
-                Observable.just(.activateNextButton(currentState.user.age != nil))
-            ])
+            return Observable.just(.selectPrivateSex)
         case .nextButtonDidTap:
             return Observable.just(.readyToProceedWithSignUp)
         }
@@ -76,20 +63,22 @@ final class SignUpInfomationReactor: Reactor {
         switch mutation {
         case .updateAge(let age):
             newState.user.age = age
+            newState.isNextButtonEnabled = newState.user.age != nil && (newState.isManSelected || newState.isWomanSelected || newState.isPrivateSexSelected)
         case .selectMan:
             newState.isManSelected = true
             newState.isWomanSelected = false
             newState.isPrivateSexSelected = false
-       case .selectWoman:
+            newState.isNextButtonEnabled = newState.user.age != nil && (newState.isManSelected || newState.isWomanSelected || newState.isPrivateSexSelected)
+        case .selectWoman:
             newState.isManSelected = false
             newState.isWomanSelected = true
             newState.isPrivateSexSelected = false
+            newState.isNextButtonEnabled = newState.user.age != nil && (newState.isManSelected || newState.isWomanSelected || newState.isPrivateSexSelected)
         case .selectPrivateSex:
             newState.isManSelected = false
             newState.isWomanSelected = false
             newState.isPrivateSexSelected = true
-        case .activateNextButton(let isEnabled):
-            newState.isNextButtonEnabled = isEnabled
+            newState.isNextButtonEnabled = newState.user.age != nil && (newState.isManSelected || newState.isWomanSelected || newState.isPrivateSexSelected)
         case .readyToProceedWithSignUp:
             newState.isReadyToProceedWithSignUp = true
         }

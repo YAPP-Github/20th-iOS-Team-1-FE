@@ -37,7 +37,8 @@ final class LoginReactor: Reactor {
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .signInWithApple(authorization: let authorization):
-            return signInWithApple(authorization: authorization)
+            return Observable.just(.isLoggedIn(true))
+          //  return signInWithApple(authorization: authorization)
         }
     }
     

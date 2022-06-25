@@ -73,7 +73,7 @@ enum Area: String, CaseIterable {
         case haeundae = "해운대구"
     }
     
-    enum Deagu: String, CaseIterable {
+    enum Daegu: String, CaseIterable {
         case nam = "남구"
         case dalseo = "달서구"
         case dalseong = "달성군"
@@ -120,7 +120,10 @@ enum Area: String, CaseIterable {
         case ulju = "울주군"
         case jung = "중구"
     }
-    
+
+    enum Sejong: String, CaseIterable {
+        case none = "세종"
+    }
     enum Gyeonggi: String, CaseIterable {
         case gapyeong = "가평군"
         case deogyang = "고양시 덕양구"
@@ -321,5 +324,48 @@ enum Area: String, CaseIterable {
     enum Jeju: String, CaseIterable {
         case seogwipo = "서귀포시"
         case jeju = " 제주시"
+    }
+
+    static func getSmallCity(bigCity: String) -> [String]? {
+        guard let area = Area(rawValue: bigCity) else {
+            return nil
+        }
+        
+        switch area {
+        case .seoul:
+            return Area.Seoul.allCases.map { $0.rawValue }
+        case .busan:
+            return Area.Busan.allCases.map { $0.rawValue }
+        case .daegu:
+            return Area.Daegu.allCases.map { $0.rawValue }
+        case .incheon:
+            return Area.Incheon.allCases.map { $0.rawValue }
+        case .gwangju:
+            return Area.Gwangju.allCases.map { $0.rawValue }
+        case .daejeon:
+            return Area.Daejeon.allCases.map { $0.rawValue }
+        case .ulsan:
+            return Area.Ulsan.allCases.map { $0.rawValue }
+        case .sejong:
+            return Area.Sejong.allCases.map { $0.rawValue }
+        case .gyeonggi:
+            return Area.Gyeonggi.allCases.map { $0.rawValue }
+        case .gangwon:
+            return Area.Gangwon.allCases.map { $0.rawValue }
+        case .chungcheongbuk:
+            return Area.Chungcheongbuk.allCases.map { $0.rawValue }
+        case .chungcheongnam:
+            return Area.Chungcheongnam.allCases.map { $0.rawValue }
+        case .jeollabuk:
+            return Area.Jeollabuk.allCases.map { $0.rawValue }
+        case .jeollanam:
+            return Area.Jeollanam.allCases.map { $0.rawValue }
+        case .gyeongsangbuk:
+            return Area.Gyeongsangbuk.allCases.map { $0.rawValue }
+        case .gyeongsangnam:
+            return Area.Gyeongsangnam.allCases.map { $0.rawValue }
+        case .jeju:
+            return Area.Jeju.allCases.map { $0.rawValue }
+        }
     }
 }
