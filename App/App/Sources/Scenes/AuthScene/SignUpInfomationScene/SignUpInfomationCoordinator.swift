@@ -31,12 +31,17 @@ final class SignUpInfomationCoordinator: SceneCoordinator {
             .map { $0.user }
             .withUnretained(self)
             .subscribe(onNext: { (this, user) in
-                this.pushSignUpInfomationViewController(with: user)
+                this.pushSignUpAreaViewController(with: user)
             })
             .disposed(by: disposeBag)
         
         navigationController.pushViewController(signUpInfomationViewController, animated: true)
     }
     
-    private func pushSignUpInfomationViewController(with user: UserAuthentification) { } // willMoveToSignUpArea
+    private func pushSignUpAreaViewController(with user: UserAuthentification) {
+        let signUpAreaCoordinator = SignUpAreaCoordinator(navigationController: navigationController, user: user)
+        signUpAreaCoordinator.parentCoordinator = self
+        childCoordinators.append(signUpAreaCoordinator)
+        signUpAreaCoordinator.start()
+    }
 }
