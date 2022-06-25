@@ -32,6 +32,22 @@ final class SignUpProfileCoordinator: SceneCoordinator {
         let signUpProfileReactor = SignUpProfileReactor(user: user, regularExpressionValidator: regularExpressionValidator, accountValidationRepository: accountValidationRepository, keychainUseCase: keychainUseCase)
         let signUpProfileViewController = SignUpProfileViewController(reactor: signUpProfileReactor)
 
+        signUpProfileReactor.state
+            .distinctUntilChanged(\.isReadyToProceedWithSignUp)
+            .map { $0.user }
+            .withUnretained(self)
+            .subscribe(onNext: { (this, user) in
+                this.pushSignUpInfomationViewController(with: user)
+            })
+            .disposed(by: disposeBag)
+        
         navigationController.pushViewController(signUpProfileViewController, animated: true)
+    }
+    
+    private func pushSignUpInfomationViewController(with user: UserAuthentification) {
+        let signUpInfomationCoordinator = SignUpInfomationCoordinator(navigationController: navigationController, user: user)
+        signUpInfomationCoordinator.parentCoordinator = self
+        childCoordinators.append(signUpInfomationCoordinator)
+        signUpInfomationCoordinator.start()
     }
 }
