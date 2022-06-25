@@ -39,6 +39,7 @@ final class SignUpInfomationViewController: BaseViewController {
     private var ageTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "입력해주세요."
+        textField.keyboardType = .numberPad
         
         return textField
     }()
@@ -51,20 +52,30 @@ final class SignUpInfomationViewController: BaseViewController {
         return label
     }()
     
-    private var manButton: EnableButton = {
-        let button = EnableButton()
+    private var manButton: BorderButton = {
+        let button = BorderButton()
         button.setTitle("남자입니다!", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         
         return button
     }()
     
-    private var womanButton: EnableButton = {
-        let button = EnableButton()
+    private var womanButton:BorderButton = {
+        let button = BorderButton()
         button.setTitle("여자입니다!", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         
         return button
+    }()
+    
+    private lazy var sexStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
+        stackView.spacing = 15
+        
+        return stackView
     }()
     
     private lazy var nextButtonContourView = ContourView()
@@ -81,7 +92,6 @@ final class SignUpInfomationViewController: BaseViewController {
     
     init(reactor: SignUpInfomationReactor) {
         super.init(nibName: nil, bundle: nil)
-        
         self.reactor = reactor
     }
     
@@ -105,8 +115,9 @@ final class SignUpInfomationViewController: BaseViewController {
         view.addSubview(ageContourView)
         
         view.addSubview(sexLabel)
-        view.addSubview(manButton)
-        view.addSubview(womanButton)
+        view.addSubview(sexStackView)
+        sexStackView.addArrangedSubview(manButton)
+        sexStackView.addArrangedSubview(womanButton)
         
         view.addSubview(nextButtonContourView)
         view.addSubview(nextButton)
@@ -130,6 +141,11 @@ final class SignUpInfomationViewController: BaseViewController {
             sexLabel.topAnchor.constraint(equalTo: ageContourView.bottomAnchor, constant: 44),
             sexLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             
+            sexStackView.topAnchor.constraint(equalTo: sexLabel.bottomAnchor, constant: 20),
+            sexStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            sexStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            sexStackView.heightAnchor.constraint(equalToConstant: 44),
+            
             nextButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             nextButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -4),
@@ -143,11 +159,25 @@ final class SignUpInfomationViewController: BaseViewController {
     }
     
     private func configureUI() {
-        
+        view.backgroundColor = .Togaether.background
     }
     
     private func bindAction(with reactor: SignUpInfomationReactor) {
         disposeBag.insert {
+            ageTextField.rx.value
+                .orEmpty
+                .distinctUntilChanged()
+                .map { Reactor.Action.ageTextFieldDidEndEditing($0) }
+                .bind(to: reactor.action)
+            
+            manButton.rx.throttleTap
+                .map { Reactor.Action.manButtonDidTap }
+                .bind(to: reactor.action)
+            
+            womanButton.rx.throttleTap
+                .map { Reactor.Action.womanButtonDidTap }
+                .bind(to: reactor.action)
+            
             nextButton.rx.throttleTap
                 .map { Reactor.Action.nextButtonDidTap }
                 .bind(to: reactor.action)
@@ -156,7 +186,23 @@ final class SignUpInfomationViewController: BaseViewController {
     
     private func bindState(with reactor: SignUpInfomationReactor) {
         disposeBag.insert {
-            
+            reactor.state
+                .map { $0.isManSelected }
+                .distinctUntilChanged()
+                .asDriver(onErrorJustReturn: false)
+                .drive(manButton.rx.isSelected)
+        
+            reactor.state
+                .map { $0.isWomanSelected }
+                .distinctUntilChanged()
+                .asDriver(onErrorJustReturn: false)
+                .drive(womanButton.rx.isSelected)
+        
+            reactor.state
+                .map { $0.isNextButtonEnabled }
+                .distinctUntilChanged()
+                .asDriver(onErrorJustReturn: false)
+                .drive(nextButton.rx.isEnabled)
         }
     }
     

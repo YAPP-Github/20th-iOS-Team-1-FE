@@ -11,5 +11,6 @@ struct UserAuthentification: Equatable {
     var email: String? = nil
     var profileImageData: Data? = nil
     var nickName: String? = nil
+    var age: Int? = nil
     var sex: Sex?
 }
