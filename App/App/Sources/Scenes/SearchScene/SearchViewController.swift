@@ -10,6 +10,7 @@ import MapKit
 
 import ReactorKit
 import RxCocoa
+import AVFAudio
 
 final class SearchViewController: BaseViewController {
     private let locationManager: CLLocationManager!
@@ -119,6 +120,11 @@ final class SearchViewController: BaseViewController {
         locationManager.delegate = self
         
         locationManager.requestWhenInUseAuthorization()
+        if let currentLocation = locationManager.location {
+            mapView.centerCoordinate = currentLocation.coordinate
+        } else {
+            mapView.centerCoordinate = Coordinate.seoulCityHall.toCLLocationCoordinate2D()
+        }
     }
     
     private func bindAction(with reactor: SearchReactor) {
