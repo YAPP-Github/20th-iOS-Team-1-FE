@@ -29,15 +29,14 @@ final class NetworkManager: NetworkManageable {
                     observer(.failure(NetworkError.transportError(error)))
                     return
                 }
-               
-                if let response = response as? HTTPURLResponse,
-                    !(200...299).contains(response.statusCode) {
-                    observer(.failure(NetworkError.serverError(statusCode: response.statusCode)))
+                guard let data = data else {
+                    observer(.failure(NetworkError.noDataError))
                     return
                 }
                 
-                guard let data = data else {
-                    observer(.failure(NetworkError.noDataError))
+                if let response = response as? HTTPURLResponse,
+                    !(200...299).contains(response.statusCode) {
+                    observer(.failure(NetworkError.serverError(statusCode: response.statusCode)))
                     return
                 }
                 
@@ -45,7 +44,16 @@ final class NetworkManager: NetworkManageable {
                     observer(.failure(NetworkError.decodeError))
                     return
                 }
-               
+//                guard let data = data else {
+//                    observer(.failure(NetworkError.noDataError))
+//                    return
+//                }
+//                
+//                guard let decodedData = try? JSONDecoder().decode(T.self, from: data) else {
+//                    observer(.failure(NetworkError.decodeError))
+//                    return
+//                }
+//               
                 observer(.success(decodedData))
  
             }

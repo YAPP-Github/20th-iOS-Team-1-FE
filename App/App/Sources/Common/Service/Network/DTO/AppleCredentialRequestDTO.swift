@@ -9,15 +9,12 @@ import Foundation
 
 struct AppleCredentialRequestDTO: Codable {
     private enum CodingKeys: String, CodingKey {
-        case authorizationCode
-        case identityToken
+        case idToken
     }
     
-    internal let authorizationCode: Data
-    internal let identityToken: Data
+    internal let idToken: String
     
     init(appleCredential: AppleCredential) {
-        self.authorizationCode = appleCredential.authorizationCode
-        self.identityToken = appleCredential.identityToken
+        self.idToken = String(decoding: appleCredential.identityToken, as: UTF8.self)
     }
 }
