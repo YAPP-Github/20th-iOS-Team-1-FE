@@ -139,6 +139,8 @@
 		FD9D38EE28543409005A0C86 /* SegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9D38ED28543409005A0C86 /* SegmentView.swift */; };
 		FDBC12042866858900FCADF4 /* ProfileContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC12032866858900FCADF4 /* ProfileContentView.swift */; };
 		FDBC12062866867600FCADF4 /* IntroduceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC12052866867600FCADF4 /* IntroduceView.swift */; };
+		FDBC120C2868BF6200FCADF4 /* InitialIntroductionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC120B2868BF6200FCADF4 /* InitialIntroductionView.swift */; };
+		FDBC12102868CD4C00FCADF4 /* DogTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC120F2868CD4C00FCADF4 /* DogTableViewCell.swift */; };
 		FDE6F146285215BD005E4783 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE6F145285215BD005E4783 /* UIFont+Extension.swift */; };
 		FDE6F1482852317F005E4783 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE6F1472852317F005E4783 /* UITableView+Extension.swift */; };
 		FDE6F14A28523493005E4783 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE6F14928523493005E4783 /* UICollectionView+Extension.swift */; };
@@ -283,6 +285,8 @@
 		FD9D38ED28543409005A0C86 /* SegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentView.swift; sourceTree = "<group>"; };
 		FDBC12032866858900FCADF4 /* ProfileContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileContentView.swift; sourceTree = "<group>"; };
 		FDBC12052866867600FCADF4 /* IntroduceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroduceView.swift; sourceTree = "<group>"; };
+		FDBC120B2868BF6200FCADF4 /* InitialIntroductionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialIntroductionView.swift; sourceTree = "<group>"; };
+		FDBC120F2868CD4C00FCADF4 /* DogTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogTableViewCell.swift; sourceTree = "<group>"; };
 		FDE6F145285215BD005E4783 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		FDE6F1472852317F005E4783 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		FDE6F14928523493005E4783 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
@@ -873,6 +877,8 @@
 			children = (
 				FDBC12032866858900FCADF4 /* ProfileContentView.swift */,
 				FDBC12052866867600FCADF4 /* IntroduceView.swift */,
+				FDBC120B2868BF6200FCADF4 /* InitialIntroductionView.swift */,
+				FDBC120F2868CD4C00FCADF4 /* DogTableViewCell.swift */,
 			);
 			path = SubComponents;
 			sourceTree = "<group>";
@@ -1052,6 +1058,7 @@
 				29AE223D284D71DC00EDF34B /* LocationManageable.swift in Sources */,
 				29AE223D284D71DC00EDF34B /* LocationManageable.swift in Sources */,
 				FD8AD7072851E28000454AC3 /* GatherListCell.swift in Sources */,
+				FDBC120C2868BF6200FCADF4 /* InitialIntroductionView.swift in Sources */,
 				37C3F4F8284C70E40006CB02 /* KeychainQueryRequestable.swift in Sources */,
 				37C14516284DC90900D11CC3 /* HTTPMethod.swift in Sources */,
 				37C3F4FA284C71030006CB02 /* KeychainQueryRequester.swift in Sources */,
@@ -1062,6 +1069,7 @@
 				374F41CF2864E6C60074F04B /* AccountValidationResponseDTO.swift in Sources */,
 				37605DF62839FB4100394929 /* RxASAuthorizationControllerDelegateProxy.swift in Sources */,
 				374380A3284FDCE500CB02A5 /* SexDTO.swift in Sources */,
+				FDBC12102868CD4C00FCADF4 /* DogTableViewCell.swift in Sources */,
 				37AA7E212851FCA200B4B5C2 /* Authentification.swift in Sources */,
 				37AA7E162850B17600B4B5C2 /* EligibleBreedDTO.swift in Sources */,
 				37C3F4FC284C7D8B0006CB02 /* KeychainError.swift in Sources */,
