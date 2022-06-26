@@ -11,20 +11,14 @@ final class IntroduceView: UIView {
 
     private lazy var introLabel: UILabel = {
         let label = UILabel()
-        label.text = "자기소개와 관심 카테고리를 추가해보세요!"
+        label.text = "우리 초코랑 같이 산책하실 분 구해요! 평행산책 같이 연습해요~"
+        label.numberOfLines = 0
         label.textColor = .white
-        label.font = .customFont(size: 14, style: .SemiBold)
+        label.font = .customFont(size: 16, style: .Medium)
         
         return label
     }()
     
-    private lazy var indicator: UIButton = {
-        let button = UIButton()
-        button.setImage(.Togaether.rightArrow, for: .normal)
-        button.tintColor = .white
-        
-        return button
-    }()
     
     private lazy var divisionView: UIView = {
         let view = UIView()
@@ -33,9 +27,17 @@ final class IntroduceView: UIView {
         return view
     }()
     
+    private lazy var category: UILabel = {
+        let label = UILabel()
+        label.text = "관심 카테고리"
+        label.font = .customFont(size: 14, style: .Medium)
+        label.textColor = .white
+        
+        return label
+    }()
     
     override init(frame: CGRect) {
-        super.init(frame: frame)
+        super.init(frame: .zero)
         addSubviews()
         configureLayout()
         configureUI()
@@ -48,17 +50,24 @@ final class IntroduceView: UIView {
     
     private func addSubviews() {
         addSubview(introLabel)
-        addSubview(indicator)
-
+        addSubview(divisionView)
+        addSubview(category)
     }
     
     private func configureLayout() {
         NSLayoutConstraint.useAndActivateConstraints([
+            introLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
             introLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 15),
-            introLabel.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor),
+            introLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -15),
             
-            indicator.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            indicator.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor),
+            divisionView.topAnchor.constraint(equalTo: introLabel.bottomAnchor, constant: 10),
+            divisionView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 15),
+            divisionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -15),
+            divisionView.heightAnchor.constraint(equalToConstant: 1),
+
+            
+            category.topAnchor.constraint(equalTo: divisionView.bottomAnchor, constant: 10),
+            category.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 15)
             ])
     }
     
