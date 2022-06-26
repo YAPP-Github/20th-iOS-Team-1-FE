@@ -12,9 +12,10 @@ import RxCocoa
 
 final class ProfileViewController: BaseViewController {
     var disposeBag = DisposeBag()
-    
+        
     private lazy var scrollView = UIScrollView()
-    private lazy var contentView = ProfileContentView()
+    private lazy var contentView = UIView()
+    private lazy var profileContentView = ProfileContentView()
     
     init(reactor: ProfileReactor) {
         super.init(nibName: nil, bundle: nil)
@@ -36,6 +37,7 @@ final class ProfileViewController: BaseViewController {
     private func addSubviews() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
+        contentView.addSubview(profileContentView)
     }
     
     private func configureLayout() {
@@ -47,8 +49,14 @@ final class ProfileViewController: BaseViewController {
             
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            contentView.heightAnchor.constraint(equalToConstant: 500) // 임의설정
+            contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
+            
+            profileContentView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            profileContentView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            profileContentView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            profileContentView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
+        
     }
     
     private func configureUI() {
