@@ -12,9 +12,9 @@ import RxSwift
 
 final class SignUpAreaReactor: Reactor {
     enum Action {
-        case selectBigCityButtonDidTap
+        case bigCityTextFieldDidTap
         case bigCityDidPick(Int)
-        case selectSmallCityButtonDidTap
+        case smallCityTextFieldDidTap
         case smallCityDidPick(Int)
         case nextButtonDidTap
     }
@@ -24,7 +24,6 @@ final class SignUpAreaReactor: Reactor {
         case updateBigCity(String?)
         case showSmallCities([String]?)
         case updateSmallCity(String?)
-        case activateNextButton(Bool)
         case readyToStartTogaether
     }
 
@@ -46,16 +45,13 @@ final class SignUpAreaReactor: Reactor {
 
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
-        case .selectBigCityButtonDidTap:
+        case .bigCityTextFieldDidTap:
             return Observable.just(.showBigCities(currentState.bigCityList))
         case .bigCityDidPick(let city):
             return Observable.just(.updateBigCity(currentState.bigCityList[safe: city]))
-        case .selectSmallCityButtonDidTap:
+        case .smallCityTextFieldDidTap:
             let smallCities = getSmallCities(bigCity: currentState.selectedBigCity)
-            return Observable.concat([
-                Observable.just(.showSmallCities(smallCities)),
-                Observable.just(.activateNextButton((currentState.selectedBigCity != nil && currentState.selectedSmallCity != nil)))
-            ])
+            return Observable.just(.showSmallCities(smallCities))
         case .smallCityDidPick(let city):
             return Observable.just(.updateSmallCity(currentState.smallCityList?[safe: city]))
         case .nextButtonDidTap:
@@ -71,13 +67,15 @@ final class SignUpAreaReactor: Reactor {
             newState.bigCityList = cities
         case .updateBigCity(let city):
             newState.selectedBigCity = city
-            newState.selectedSmallCity = nil
+            if newState.selectedBigCity != state.selectedBigCity {
+                newState.selectedSmallCity = nil
+                newState.isNextButtonEnabled = false
+            }
         case .showSmallCities(let cities):
             newState.smallCityList = cities
         case .updateSmallCity(let city):
             newState.selectedSmallCity = city
-        case .activateNextButton(let isEnabled):
-            newState.isNextButtonEnabled = isEnabled
+            newState.isNextButtonEnabled = true
         case .readyToStartTogaether:
             newState.isReadyToStartTogaether = true
         }

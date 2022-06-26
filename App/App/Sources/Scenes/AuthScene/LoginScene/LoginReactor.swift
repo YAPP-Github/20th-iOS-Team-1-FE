@@ -37,8 +37,8 @@ final class LoginReactor: Reactor {
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .signInWithApple(authorization: let authorization):
-            return Observable.just(.isLoggedIn(true))
-          //  return signInWithApple(authorization: authorization)
+           // return Observable.just(.isLoggedIn(true))
+           return signInWithApple(authorization: authorization)
         }
     }
     
@@ -72,8 +72,8 @@ final class LoginReactor: Reactor {
                                 return 
                             }
                             
-                            try? self.keychainProvider.create(accessToken, service: "appleLogin", account: "accessToken")
-                            try? self.keychainProvider.create(refreshToken, service: "appleLogin", account: "refreshToken")
+                            try? self.keychainProvider.create(accessToken, service: KeychainService.apple, account: KeychainAccount.accessToken)
+                            try? self.keychainProvider.create(refreshToken, service: KeychainService.apple, account: KeychainAccount.refreshToken)
                         }
                         observer.onNext(Mutation.isLoggedIn(true))
                     case .failure(_):

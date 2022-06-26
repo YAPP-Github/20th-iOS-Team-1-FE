@@ -24,15 +24,17 @@ final class AppleLoginRepository: AppleLoginRepositoryInterface {
             }
             
             let dto = AppleCredentialRequestDTO(appleCredential: appleCredential)
-            
-            guard let url = URL(string: "https://yapp-togather.com/auth/apple/callback"),
+            print(dto.idToken)
+            guard let url = URL(string: "https://yapp-togather.com/auth/apple"),
                   let data = try? JSONEncoder().encode(dto) else {
                 return Disposables.create()
             }
             
             var urlRequest = URLRequest(url: url)
             urlRequest.httpBody = data
-            
+            urlRequest.httpMethod = HTTPMethod.post
+            urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
             let response: Single<SignInResponseDTO> = self.networkManager.requestDataTask(with: urlRequest)
             
             response.subscribe { result in
