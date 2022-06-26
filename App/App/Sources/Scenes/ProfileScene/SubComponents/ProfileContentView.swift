@@ -8,6 +8,7 @@
 import UIKit
 
 final class ProfileContentView: UIView {
+    let hasIntroduction = true
     
     private lazy var profileModifyButton: UIButton = {
         let button = UIButton()
@@ -74,11 +75,31 @@ final class ProfileContentView: UIView {
         return view
     }()
     
-    private lazy var introduceView: UIView = {
-        let view = IntroduceView()
+    private lazy var initailIntroduceView: UIView = {
+        var view = InitialIntroductionView()
         view.layer.cornerRadius = 10
+        view.isHidden = hasIntroduction
         
         return view
+    }()
+    
+    private lazy var introduceView: UIView = {
+        var view = IntroduceView()
+        view.layer.cornerRadius = 10
+        view.isHidden = !hasIntroduction
+        
+        return view
+    }()
+
+    private lazy var dogListView: UITableView = {
+        let tableView = UITableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.allowsSelection = false
+        tableView.registerCell(type: DogTableViewCell.self)
+        
+        return tableView
     }()
     
     override init(frame: CGRect) {
@@ -101,7 +122,9 @@ final class ProfileContentView: UIView {
         addSubview(divisionView)
         addSubview(ageLabel)
         addSubview(genderImageView)
+        addSubview(initailIntroduceView)
         addSubview(introduceView)
+        addSubview(dogListView)
     }
     
     private func configureLayout() {
@@ -136,10 +159,20 @@ final class ProfileContentView: UIView {
             genderImageView.widthAnchor.constraint(equalToConstant: 24),
             genderImageView.heightAnchor.constraint(equalToConstant: 24),
             
+            initailIntroduceView.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 20),
+            initailIntroduceView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            initailIntroduceView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            initailIntroduceView.heightAnchor.constraint(equalToConstant: 48),
+            
             introduceView.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 20),
             introduceView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
             introduceView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            introduceView.heightAnchor.constraint(equalToConstant: 48)
+            introduceView.heightAnchor.constraint(equalToConstant: 151),
+            
+            dogListView.topAnchor.constraint(equalTo: introduceView.bottomAnchor, constant: 20),
+            dogListView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            dogListView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            dogListView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
         ])
     }
     
@@ -147,4 +180,22 @@ final class ProfileContentView: UIView {
         backgroundColor = .Togaether.mainGreen
     }
     
+}
+
+extension ProfileContentView: UITableViewDataSource, UITableViewDelegate{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueCell(withType: DogTableViewCell.self, for: indexPath) as? DogTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 132
+    }
 }
