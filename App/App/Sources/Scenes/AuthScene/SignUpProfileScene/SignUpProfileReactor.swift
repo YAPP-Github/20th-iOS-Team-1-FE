@@ -28,7 +28,7 @@ final class SignUpProfileReactor: Reactor {
     
     struct State {
         var nickname = ""
-        var user: UserAuthentification
+        var user: UserAccount
         var isNicknameValidationCheckDone = false
         var isNicknameDuplicateCheckDone = false
         var isReadyToProceedWithSignUp = false
@@ -41,7 +41,7 @@ final class SignUpProfileReactor: Reactor {
     private let keychainUseCase: KeychainUseCaseInterface
     private let disposeBag = DisposeBag()
     
-    init(user: UserAuthentification, regularExpressionValidator: RegularExpressionValidatable, accountValidationRepository: AccountValidationRepositoryInterface, keychainUseCase: KeychainUseCaseInterface) {
+    init(user: UserAccount, regularExpressionValidator: RegularExpressionValidatable, accountValidationRepository: AccountValidationRepositoryInterface, keychainUseCase: KeychainUseCaseInterface) {
         self.initialState = State(user: user)
         self.regularExpressionValidator = regularExpressionValidator
         self.accountValidationRepository = accountValidationRepository

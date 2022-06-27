@@ -7,10 +7,12 @@
 
 import Foundation
 
-struct UserAuthentification: Equatable {
+struct UserAccount: Equatable {
     var email: String? = nil
     var profileImageData: Data? = nil
     var nickName: String? = nil
     var age: Int? = nil
-    var sex: Sex?
+    var sex: String?
+    var bigCity: String?
+    var smallCity: String?
 }

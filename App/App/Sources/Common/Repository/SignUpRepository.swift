@@ -1,15 +1,15 @@
 //
-//  AppleLoginRepository.swift
+//  SignUpRepository.swift
 //  App
 //
-//  Created by Hani on 2022/06/16.
+//  Created by Hani on 2022/06/27.
 //
 
 import Foundation
 
-import RxSwift
+import RxSwift 
 
-final class AppleLoginRepository: AppleLoginRepositoryInterface {
+final class SignUpRepository: SignUpRepositoryInterface {
     private let networkManager: NetworkManageable
     private let disposeBag = DisposeBag()
     
@@ -17,31 +17,31 @@ final class AppleLoginRepository: AppleLoginRepositoryInterface {
         self.networkManager = networkManager
     }
     
-    internal func requestAppleLogin(appleCredential: AppleCredential) -> Single<SignInResult> {
-        return Single.create { [weak self] observer in
+    internal func signUp(user: UserAccount, accessToken: Data) -> Single<Void> {
+        return Single<Void>.create { [weak self] observer in
             guard let self = self else {
                 return Disposables.create()
             }
             
-            let dto = AppleCredentialRequestDTO(appleCredential: appleCredential)
-            
-            guard let url = URL(string: "https://yapp-togather.com/auth/apple"),
+            guard let dto = SignUpAccountDTO(user: user),
+                  let url = URL(string: "https://yapp-togather.com/api/accounts/sign-up"),
                   let data = try? JSONEncoder().encode(dto) else {
                 return Disposables.create()
             }
             
+            let accessToken = String(decoding: accessToken, as: UTF8.self)
             var urlRequest = URLRequest(url: url)
             urlRequest.httpBody = data
             urlRequest.httpMethod = HTTPMethod.post
             urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
             urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
-            let response: Single<SignInResponseDTO> = self.networkManager.requestDataTask(with: urlRequest)
+            urlRequest.setValue(accessToken, forHTTPHeaderField: "accessToken")
+            let response: Single<Int> = self.networkManager.requestDataTask(with: urlRequest)
             
             response.subscribe { result in
                 switch result {
-                case .success(let dto):
-                    let domain = dto.toDomain()
-                    observer(.success(domain))
+                case .success(_):
+                    observer(.success(()))
                 case .failure(let error):
                     observer(.failure(error))
                 }

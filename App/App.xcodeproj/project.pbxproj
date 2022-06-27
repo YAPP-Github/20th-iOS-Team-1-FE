@@ -25,6 +25,10 @@
 		37348B0A2866BA1F00C38F70 /* SignUpInfomationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37348B092866BA1F00C38F70 /* SignUpInfomationCoordinator.swift */; };
 		37348B0C2866CA5E00C38F70 /* BorderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37348B0B2866CA5E00C38F70 /* BorderButton.swift */; };
 		29AE22522869E47100EDF34B /* MapViewAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE22512869E47100EDF34B /* MapViewAnnotation.swift */; };
+		3734CEAA2869E70C00EEF38D /* SignUpRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3734CEA92869E70C00EEF38D /* SignUpRepositoryInterface.swift */; };
+		3734CEAC2869E72100EEF38D /* SignUpRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3734CEAB2869E72100EEF38D /* SignUpRepository.swift */; };
+		3734CEAE2869E7E700EEF38D /* SignUpAccountDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3734CEAD2869E7E700EEF38D /* SignUpAccountDTO.swift */; };
+		3734CEB12869F6DD00EEF38D /* RxKeyboard in Frameworks */ = {isa = PBXBuildFile; productRef = 3734CEB02869F6DD00EEF38D /* RxKeyboard */; };
 		37438095284FD9BA00CB02A5 /* ExceptionDetailResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37438094284FD9BA00CB02A5 /* ExceptionDetailResponseDTO.swift */; };
 		37438097284FD9F800CB02A5 /* ExceptionResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37438096284FD9F800CB02A5 /* ExceptionResponseDTO.swift */; };
 		3743809D284FDB5300CB02A5 /* ExceptionResponseInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3743809C284FDB5300CB02A5 /* ExceptionResponseInfoDTO.swift */; };
@@ -80,7 +84,7 @@
 		377370842841BE1000D5CCB6 /* UIButton+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377370832841BE1000D5CCB6 /* UIButton+Rx.swift */; };
 		377370882841DE3500D5CCB6 /* SignUpProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377370862841DE3500D5CCB6 /* SignUpProfileViewController.swift */; };
 		377370892841DE3500D5CCB6 /* SignUpProfileReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377370872841DE3500D5CCB6 /* SignUpProfileReactor.swift */; };
-		3773708C2841DE6D00D5CCB6 /* UserAuthentification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3773708B2841DE6D00D5CCB6 /* UserAuthentification.swift */; };
+		3773708C2841DE6D00D5CCB6 /* UserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3773708B2841DE6D00D5CCB6 /* UserAccount.swift */; };
 		378F347A281DBDF10063CE4F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F3478281DBDF10063CE4F /* LoginViewController.swift */; };
 		378F347B281DBDF10063CE4F /* LoginReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F3479281DBDF10063CE4F /* LoginReactor.swift */; };
 		378F347E281DBE070063CE4F /* GatherListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F347C281DBE070063CE4F /* GatherListViewController.swift */; };
@@ -177,6 +181,9 @@
 		37348B092866BA1F00C38F70 /* SignUpInfomationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInfomationCoordinator.swift; sourceTree = "<group>"; };
 		37348B0B2866CA5E00C38F70 /* BorderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderButton.swift; sourceTree = "<group>"; };
 		29AE22512869E47100EDF34B /* MapViewAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewAnnotation.swift; sourceTree = "<group>"; };
+		3734CEA92869E70C00EEF38D /* SignUpRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRepositoryInterface.swift; sourceTree = "<group>"; };
+		3734CEAB2869E72100EEF38D /* SignUpRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRepository.swift; sourceTree = "<group>"; };
+		3734CEAD2869E7E700EEF38D /* SignUpAccountDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAccountDTO.swift; sourceTree = "<group>"; };
 		37438094284FD9BA00CB02A5 /* ExceptionDetailResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionDetailResponseDTO.swift; sourceTree = "<group>"; };
 		37438096284FD9F800CB02A5 /* ExceptionResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionResponseDTO.swift; sourceTree = "<group>"; };
 		3743809C284FDB5300CB02A5 /* ExceptionResponseInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionResponseInfoDTO.swift; sourceTree = "<group>"; };
@@ -224,7 +231,7 @@
 		377370832841BE1000D5CCB6 /* UIButton+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Rx.swift"; sourceTree = "<group>"; };
 		377370862841DE3500D5CCB6 /* SignUpProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpProfileViewController.swift; sourceTree = "<group>"; };
 		377370872841DE3500D5CCB6 /* SignUpProfileReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpProfileReactor.swift; sourceTree = "<group>"; };
-		3773708B2841DE6D00D5CCB6 /* UserAuthentification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthentification.swift; sourceTree = "<group>"; };
+		3773708B2841DE6D00D5CCB6 /* UserAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccount.swift; sourceTree = "<group>"; };
 		378F3478281DBDF10063CE4F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		378F3479281DBDF10063CE4F /* LoginReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginReactor.swift; sourceTree = "<group>"; };
 		378F347C281DBE070063CE4F /* GatherListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListViewController.swift; sourceTree = "<group>"; };
@@ -301,6 +308,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3770FFF0283112E8001960A0 /* RxSwift in Frameworks */,
+				3734CEB12869F6DD00EEF38D /* RxKeyboard in Frameworks */,
 				3770FFF3283112F4001960A0 /* ReactorKit in Frameworks */,
 				37605E11283C56B900394929 /* RxGesture in Frameworks */,
 				37451F252834245100696B21 /* WeakMapTable in Frameworks */,
@@ -359,6 +367,7 @@
 			children = (
 				379B1A78285A52DA00E58A34 /* AppleLoginRepository.swift */,
 				374F41CC2864E5250074F04B /* AccountValidationRepository.swift */,
+				3734CEAB2869E72100EEF38D /* SignUpRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -383,6 +392,7 @@
 				37AA7E1B2850B1C400B4B5C2 /* StatusDTO.swift */,
 				379B1A76285A4F7700E58A34 /* AppleCredentialRequestDTO.swift */,
 				374F41CE2864E6C60074F04B /* AccountValidationResponseDTO.swift */,
+				3734CEAD2869E7E700EEF38D /* SignUpAccountDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -412,6 +422,7 @@
 				375558BC2866E0AC00D13208 /* SignUpAreaViewController.swift */,
 				375558BD2866E0AC00D13208 /* SignUpAreaReactor.swift */,
 				375558C02867905800D13208 /* SignUpAreaCoordinator.swift */,
+				3734CEA92869E70C00EEF38D /* SignUpRepositoryInterface.swift */,
 			);
 			path = SignUpAreaScene;
 			sourceTree = "<group>";
@@ -525,7 +536,7 @@
 		3773708A2841DE4800D5CCB6 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				3773708B2841DE6D00D5CCB6 /* UserAuthentification.swift */,
+				3773708B2841DE6D00D5CCB6 /* UserAccount.swift */,
 				37AA7E1D2850B37B00B4B5C2 /* Sex.swift */,
 				37AA7E202851FCA200B4B5C2 /* Authentification.swift */,
 			);
@@ -908,6 +919,7 @@
 				3770FFF2283112F4001960A0 /* ReactorKit */,
 				37451F242834245100696B21 /* WeakMapTable */,
 				37605E10283C56B900394929 /* RxGesture */,
+				3734CEB02869F6DD00EEF38D /* RxKeyboard */,
 			);
 			productName = App;
 			productReference = 37912C61281445AC0087B95E /* App.app */;
@@ -970,6 +982,7 @@
 				3770FFF1283112F4001960A0 /* XCRemoteSwiftPackageReference "ReactorKit" */,
 				37451F232834245100696B21 /* XCRemoteSwiftPackageReference "WeakMapTable" */,
 				37605E0F283C56B900394929 /* XCRemoteSwiftPackageReference "RxGesture" */,
+				3734CEAF2869F6DD00EEF38D /* XCRemoteSwiftPackageReference "RxKeyboard" */,
 			);
 			productRefGroup = 37912C62281445AC0087B95E /* Products */;
 			projectDirPath = "";
@@ -1013,6 +1026,7 @@
 				29AE2238284B941800EDF34B /* GatherCategory.swift in Sources */,
 				378F3487281DBE210063CE4F /* ProfileReactor.swift in Sources */,
 				37912C9A281447C40087B95E /* Array+Extension.swift in Sources */,
+				3734CEAE2869E7E700EEF38D /* SignUpAccountDTO.swift in Sources */,
 				3743809D284FDB5300CB02A5 /* ExceptionResponseInfoDTO.swift in Sources */,
 				374380A9284FDDC600CB02A5 /* TokenResponseDTO.swift in Sources */,
 				37605E01283A2AE200394929 /* RxASAuthorizationControllerPresentationContextProvidingProxy.swift in Sources */,
@@ -1075,13 +1089,14 @@
 				FDBC12102868CD4C00FCADF4 /* DogTableViewCell.swift in Sources */,
 				37AA7E212851FCA200B4B5C2 /* Authentification.swift in Sources */,
 				37AA7E162850B17600B4B5C2 /* EligibleBreedDTO.swift in Sources */,
+				3734CEAA2869E70C00EEF38D /* SignUpRepositoryInterface.swift in Sources */,
 				37C3F4FC284C7D8B0006CB02 /* KeychainError.swift in Sources */,
 				37AA7E142850B15800B4B5C2 /* CategoryDTO.swift in Sources */,
 				378F3483281DBE140063CE4F /* ChattingReactor.swift in Sources */,
 				376006C528489A2B00B27015 /* RegularExpressionValidator.swift in Sources */,
 				29AE224C2853711F00EDF34B /* RxMKMapViewDelegateProxy.swift in Sources */,
 				374F41CD2864E5250074F04B /* AccountValidationRepository.swift in Sources */,
-				3773708C2841DE6D00D5CCB6 /* UserAuthentification.swift in Sources */,
+				3773708C2841DE6D00D5CCB6 /* UserAccount.swift in Sources */,
 				FDE6F14C285234A3005E4783 /* NSObject+Extension.swift in Sources */,
 				374F41D52864E9490074F04B /* KeychainService.swift in Sources */,
 				37605DF92839FDB300394929 /* ASAuthorizationController+Rx.swift in Sources */,
@@ -1100,6 +1115,7 @@
 				379B1A7D285A580D00E58A34 /* SignInResult.swift in Sources */,
 				378F347B281DBDF10063CE4F /* LoginReactor.swift in Sources */,
 				37912C65281445AC0087B95E /* AppDelegate.swift in Sources */,
+				3734CEAC2869E72100EEF38D /* SignUpRepository.swift in Sources */,
 				374380AF284FE13300CB02A5 /* SearchingResponseDTO.swift in Sources */,
 				374F41D72864E97A0074F04B /* KeychainAccount.swift in Sources */,
 				29AE222D284B7DAA00EDF34B /* SearchViewController.swift in Sources */,
@@ -1415,6 +1431,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3734CEAF2869F6DD00EEF38D /* XCRemoteSwiftPackageReference "RxKeyboard" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxKeyboard";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		37451F232834245100696B21 /* XCRemoteSwiftPackageReference "WeakMapTable" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactorKit/WeakMapTable";
@@ -1450,6 +1474,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3734CEB02869F6DD00EEF38D /* RxKeyboard */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3734CEAF2869F6DD00EEF38D /* XCRemoteSwiftPackageReference "RxKeyboard" */;
+			productName = RxKeyboard;
+		};
 		37451F242834245100696B21 /* WeakMapTable */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 37451F232834245100696B21 /* XCRemoteSwiftPackageReference "WeakMapTable" */;
