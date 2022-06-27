@@ -28,7 +28,7 @@ final class SignUpAreaReactor: Reactor {
     }
 
     struct State {
-        var user: UserAuthentification
+        var user: UserAccount
         var selectedBigCity: String?
         var selectedSmallCity: String?
         var bigCityList = Area.allCases.map { $0.rawValue }
@@ -38,9 +38,15 @@ final class SignUpAreaReactor: Reactor {
     }
 
     let initialState: State
-
-    init(user: UserAuthentification) {
+    
+    private let signUpRepository: SignUpRepositoryInterface
+    private let keychainUseCase: KeychainUseCaseInterface
+    private let disposeBag = DisposeBag()
+    
+    init(user: UserAccount, keychainUseCase: KeychainUseCaseInterface, signUpRepository: SignUpRepositoryInterface) {
         initialState = State(user: user)
+        self.signUpRepository = signUpRepository
+        self.keychainUseCase = keychainUseCase
     }
 
     func mutate(action: Action) -> Observable<Mutation> {
@@ -66,14 +72,17 @@ final class SignUpAreaReactor: Reactor {
         case .showBigCities(let cities):
             newState.bigCityList = cities
         case .updateBigCity(let city):
+            newState.user.bigCity = city
             newState.selectedBigCity = city
             if newState.selectedBigCity != state.selectedBigCity {
+                newState.user.smallCity = nil
                 newState.selectedSmallCity = nil
                 newState.isNextButtonEnabled = false
             }
         case .showSmallCities(let cities):
             newState.smallCityList = cities
         case .updateSmallCity(let city):
+            newState.user.smallCity = city
             newState.selectedSmallCity = city
             newState.isNextButtonEnabled = true
         case .readyToStartTogaether:
@@ -91,5 +100,36 @@ final class SignUpAreaReactor: Reactor {
         let smallCities = Area.getSmallCity(bigCity: bigCity)
     
         return smallCities
+    }
+    
+    private func signUp(user: UserAccount) -> Observable<Mutation> {
+        return Observable.create { [weak self] observer in
+            guard let self = self else {
+                return Disposables.create()
+            }
+            
+            self.keychainUseCase.getAccessToken()
+                .subscribe(with: self,
+                   onSuccess: { this, token in
+                    this.signUpRepository.signUp(user: user, accessToken: token)
+                        .subscribe(
+                            onSuccess: {
+                                observer.onNext(Mutation.readyToStartTogaether)
+                                return
+                            
+                            }, onFailure: { _ in
+                                #warning("회원가입 실패할 경우 버튼을 눌러도 반응이 없음")
+                                return
+                            }
+                        ).disposed(by: self.disposeBag)
+                   },
+                   onFailure: { _,_ in
+                        #warning("회원가입 실패할 경우 버튼을 눌러도 반응이 없음")
+                        return
+                   }
+                ).disposed(by: self.disposeBag)
+            
+            return Disposables.create()
+        }
     }
 }

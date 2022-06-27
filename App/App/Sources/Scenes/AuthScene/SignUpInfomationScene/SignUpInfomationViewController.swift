@@ -8,9 +8,13 @@
 import UIKit
 
 import ReactorKit
-import RxSwift
+import RxKeyboard
 
 final class SignUpInfomationViewController: BaseViewController {
+    private let scrollView = UIScrollView()
+    
+    private let contentView = UIView()
+    
     private var guidanceLabel: UILabel = {
         let text = "견주님의 나이와\n성별을 알려주세요."
         let boldFont = UIFont.boldSystemFont(ofSize: 32)
@@ -106,7 +110,12 @@ final class SignUpInfomationViewController: BaseViewController {
         configureLayout()
         configureUI()
     }
-
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        view.endEditing(true)
+    }
+    
     private func addSubviews() {
         view.addSubview(guidanceLabel)
         
@@ -181,6 +190,13 @@ final class SignUpInfomationViewController: BaseViewController {
             nextButton.rx.throttleTap
                 .map { Reactor.Action.nextButtonDidTap }
                 .bind(to: reactor.action)
+            
+            RxKeyboard.instance.visibleHeight
+                .skip(1)
+                .drive(with: self,
+                   onNext: { this, keyboardHeight in
+                    this.scrollView.contentInset.bottom = keyboardHeight
+                })
         }
     }
     
@@ -202,7 +218,13 @@ final class SignUpInfomationViewController: BaseViewController {
                 .map { $0.isNextButtonEnabled }
                 .distinctUntilChanged()
                 .asDriver(onErrorJustReturn: false)
-                .drive(nextButton.rx.isEnabled)
+                .drive(with: self,
+                   onNext: { this, isEnabled in
+                    this.nextButton.isEnabled = isEnabled
+                    if isEnabled {
+                        this.nextButton.becomeFirstResponder()
+                    }
+                })
         }
     }
     

@@ -163,7 +163,12 @@ final class SignUpAreaViewController: BaseViewController {
         configureLayout()
         configureUI()
     }
-
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        view.endEditing(true)
+    }
+    
     private func addSubviews() {
         view.addSubview(guidanceLabel)
         
@@ -180,6 +185,7 @@ final class SignUpAreaViewController: BaseViewController {
     }
     
     private func configureLayout() {
+        guidanceLabel.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         NSLayoutConstraint.useAndActivateConstraints([
             guidanceLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 96),
             guidanceLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
@@ -281,7 +287,13 @@ final class SignUpAreaViewController: BaseViewController {
                 .map { $0.isNextButtonEnabled }
                 .distinctUntilChanged()
                 .asDriver(onErrorJustReturn: false)
-                .drive(nextButton.rx.isEnabled)
+                .drive(with: self,
+                   onNext: { this, isEnabled in
+                    this.nextButton.isEnabled = isEnabled
+                    if isEnabled {
+                        this.nextButton.becomeFirstResponder()
+                    }
+                })
         }
     }
     
