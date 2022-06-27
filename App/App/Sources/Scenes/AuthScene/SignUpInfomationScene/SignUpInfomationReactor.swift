@@ -28,7 +28,7 @@ final class SignUpInfomationReactor: Reactor {
     }
     
     struct State {
-        var user: UserAuthentification
+        var user: UserAccount
         var isManSelected = false
         var isWomanSelected = false
         var isPrivateSexSelected = false
@@ -38,7 +38,7 @@ final class SignUpInfomationReactor: Reactor {
     
     let initialState: State
     
-    init(user: UserAuthentification) {
+    init(user: UserAccount) {
         initialState = State(user: user)
     }
     
@@ -65,16 +65,19 @@ final class SignUpInfomationReactor: Reactor {
             newState.user.age = age
             newState.isNextButtonEnabled = newState.user.age != nil && (newState.isManSelected || newState.isWomanSelected || newState.isPrivateSexSelected)
         case .selectMan:
+            newState.user.sex = Sex.man
             newState.isManSelected = true
             newState.isWomanSelected = false
             newState.isPrivateSexSelected = false
             newState.isNextButtonEnabled = newState.user.age != nil && (newState.isManSelected || newState.isWomanSelected || newState.isPrivateSexSelected)
         case .selectWoman:
+            newState.user.sex = Sex.woman
             newState.isManSelected = false
             newState.isWomanSelected = true
             newState.isPrivateSexSelected = false
             newState.isNextButtonEnabled = newState.user.age != nil && (newState.isManSelected || newState.isWomanSelected || newState.isPrivateSexSelected)
         case .selectPrivateSex:
+            newState.user.sex = Sex.private
             newState.isManSelected = false
             newState.isWomanSelected = false
             newState.isPrivateSexSelected = true

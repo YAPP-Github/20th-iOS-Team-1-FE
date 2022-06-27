@@ -10,14 +10,14 @@ import UIKit
 import RxSwift
 
 final class SignUpProfileCoordinator: SceneCoordinator {
-    private var user: UserAuthentification
+    private var user: UserAccount
     
     var parentCoordinator: SceneCoordinator?
     var navigationController: UINavigationController
     var childCoordinators = [Coordinator]()
     var disposeBag = DisposeBag()
     
-    init(navigationController: UINavigationController, user: UserAuthentification) {
+    init(navigationController: UINavigationController, user: UserAccount) {
         self.navigationController = navigationController
         self.user = user
     }
@@ -44,7 +44,7 @@ final class SignUpProfileCoordinator: SceneCoordinator {
         navigationController.pushViewController(signUpProfileViewController, animated: true)
     }
     
-    private func pushSignUpInfomationViewController(with user: UserAuthentification) {
+    private func pushSignUpInfomationViewController(with user: UserAccount) {
         let signUpInfomationCoordinator = SignUpInfomationCoordinator(navigationController: navigationController, user: user)
         signUpInfomationCoordinator.parentCoordinator = self
         childCoordinators.append(signUpInfomationCoordinator)

@@ -28,7 +28,7 @@ final class SignUpAgreementReactor: Reactor {
     }
     
     struct State {
-        let user = UserAuthentification()
+        let user = UserAccount()
         var isAgreementChecked = false
         var isTermsOfServiceChecked = false
         var isPrivacyPolicyChecked = false

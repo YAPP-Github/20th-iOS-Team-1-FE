@@ -35,7 +35,7 @@ final class SignUpAgreementCoordinator: SceneCoordinator {
         navigationController.pushViewController(signUpAgreementViewController, animated: true)
     }
     
-    private func pushSignUpProfileViewController(with user: UserAuthentification) {
+    private func pushSignUpProfileViewController(with user: UserAccount) {
         let signUpProfileCoordinator = SignUpProfileCoordinator(navigationController: navigationController, user: user)
         signUpProfileCoordinator.parentCoordinator = self
         childCoordinators.append(signUpProfileCoordinator)
