@@ -10,8 +10,8 @@ import Foundation
 enum GatherCategory: Codable {
     case walk
     case playground
-    case petCafe
-    case petRestaurant
-    case fair
+    case dogCafe
+    case dogRestaurant
+    case exhibition
     case etc
 }

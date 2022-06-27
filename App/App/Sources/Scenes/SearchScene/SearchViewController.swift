@@ -24,6 +24,70 @@ final class SearchViewController: BaseViewController {
             MKMapView.CameraZoomRange(maxCenterCoordinateDistance: 10000),
             animated: false
         )
+        mapView.delegate = self
+        mapView.showsCompass = false
+        
+        mapView.register(AnnotationView.self, forAnnotationViewWithReuseIdentifier: AnnotationView.identifier)
+        
+        mapView.addAnnotation(
+            Annotation(
+                coordinate: CLLocationCoordinate2D(
+                    latitude: 37.29263305664062,
+                    longitude: 127.11612977377284
+                ),
+                gatherCategory: .walk
+            )
+        )
+        
+        mapView.addAnnotation(
+            Annotation(
+                coordinate: CLLocationCoordinate2D(
+                    latitude: 35.29263305664062,
+                    longitude: 127.11612977377284
+                ),
+                gatherCategory: .playground
+            )
+        )
+        
+        mapView.addAnnotation(
+            Annotation(
+                coordinate: CLLocationCoordinate2D(
+                    latitude: 38.29263305664062,
+                    longitude: 127.11612977377284
+                ),
+                gatherCategory: .dogRestaurant
+            )
+        )
+        
+        mapView.addAnnotation(
+            Annotation(
+                coordinate: CLLocationCoordinate2D(
+                    latitude: 37.29263305664062,
+                    longitude: 128.11612977377284
+                ),
+                gatherCategory: .dogCafe
+            )
+        )
+        
+        mapView.addAnnotation(
+            Annotation(
+                coordinate: CLLocationCoordinate2D(
+                    latitude: 35.29263305664062,
+                    longitude: 126.11612977377284
+                ),
+                gatherCategory: .etc
+            )
+        )
+        
+        mapView.addAnnotation(
+            Annotation(
+                coordinate: CLLocationCoordinate2D(
+                    latitude: 34.29263305664062,
+                    longitude: 126.11612977377284
+                ),
+                gatherCategory: .exhibition
+            )
+        )
         
         return mapView
     }()
@@ -58,7 +122,7 @@ final class SearchViewController: BaseViewController {
         button.layer.cornerRadius = 5
         return button
     }()
-
+    
     var disposeBag = DisposeBag()
     
     init(reactor: SearchReactor, locationManager: CLLocationManager) {
@@ -83,7 +147,7 @@ final class SearchViewController: BaseViewController {
             bind(reactor: reactor)
         }
     }
-
+    
     private func addSubviews() {
         view.addSubview(mapView)
         view.addSubview(currentLocationButton)
@@ -171,3 +235,14 @@ extension SearchViewController: CLLocationManagerDelegate {
     }
 }
 
+extension SearchViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        print(annotation is Annotation)
+        guard let annotation = annotation as? Annotation
+        else { return nil }
+        
+        let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: AnnotationView.identifier, for: annotation) as? AnnotationView
+        
+        return annotationView
+    }
+}
