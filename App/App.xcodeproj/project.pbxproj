@@ -24,6 +24,7 @@
 		29AE224E285372B200EDF34B /* Reactive+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE224D285372B200EDF34B /* Reactive+Extension.swift */; };
 		37348B0A2866BA1F00C38F70 /* SignUpInfomationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37348B092866BA1F00C38F70 /* SignUpInfomationCoordinator.swift */; };
 		37348B0C2866CA5E00C38F70 /* BorderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37348B0B2866CA5E00C38F70 /* BorderButton.swift */; };
+		29AE22522869E47100EDF34B /* MapViewAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE22512869E47100EDF34B /* MapViewAnnotation.swift */; };
 		37438095284FD9BA00CB02A5 /* ExceptionDetailResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37438094284FD9BA00CB02A5 /* ExceptionDetailResponseDTO.swift */; };
 		37438097284FD9F800CB02A5 /* ExceptionResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37438096284FD9F800CB02A5 /* ExceptionResponseDTO.swift */; };
 		3743809D284FDB5300CB02A5 /* ExceptionResponseInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3743809C284FDB5300CB02A5 /* ExceptionResponseInfoDTO.swift */; };
@@ -175,6 +176,7 @@
 		29AE224D285372B200EDF34B /* Reactive+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reactive+Extension.swift"; sourceTree = "<group>"; };
 		37348B092866BA1F00C38F70 /* SignUpInfomationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInfomationCoordinator.swift; sourceTree = "<group>"; };
 		37348B0B2866CA5E00C38F70 /* BorderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderButton.swift; sourceTree = "<group>"; };
+		29AE22512869E47100EDF34B /* MapViewAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewAnnotation.swift; sourceTree = "<group>"; };
 		37438094284FD9BA00CB02A5 /* ExceptionDetailResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionDetailResponseDTO.swift; sourceTree = "<group>"; };
 		37438096284FD9F800CB02A5 /* ExceptionResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionResponseDTO.swift; sourceTree = "<group>"; };
 		3743809C284FDB5300CB02A5 /* ExceptionResponseInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionResponseInfoDTO.swift; sourceTree = "<group>"; };
@@ -326,6 +328,7 @@
 				29AE2242284DF14C00EDF34B /* Entity */,
 				29AE222B284B7DAA00EDF34B /* SearchViewController.swift */,
 				29AE224B2853711F00EDF34B /* RxMKMapViewDelegateProxy.swift */,
+				29AE22512869E47100EDF34B /* MapViewAnnotation.swift */,
 				29AE222C284B7DAA00EDF34B /* SearchReactor.swift */,
 				29AE2235284B867300EDF34B /* SearchCoordinator.swift */,
 			);
@@ -1111,6 +1114,7 @@
 				37438095284FD9BA00CB02A5 /* ExceptionDetailResponseDTO.swift in Sources */,
 				374F41DE2864F0780074F04B /* KeychainUseCaseInterface.swift in Sources */,
 				37AC3105284930E6003C3FA2 /* SignUpInfomationViewController.swift in Sources */,
+				29AE22522869E47100EDF34B /* MapViewAnnotation.swift in Sources */,
 				3743809F284FDBB600CB02A5 /* SignInResponseDTO.swift in Sources */,
 				378F347A281DBDF10063CE4F /* LoginViewController.swift in Sources */,
 				29AE2244284DF18200EDF34B /* Coordinate.swift in Sources */,
