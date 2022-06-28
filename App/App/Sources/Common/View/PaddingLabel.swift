@@ -33,4 +33,19 @@ final class PaddingLabel: UILabel {
         
         return contentSize
     }
+    
+    func tagLabel(_ text: String?) -> UILabel{
+        let label = PaddingLabel(padding: UIEdgeInsets(top: 2.0, left: 8.0, bottom: 2.0, right: 8.0))
+        label.text = text ?? ""
+        label.backgroundColor = .white
+        label.layer.masksToBounds = true
+        label.layer.cornerRadius = 10
+        label.layer.borderWidth = 1
+        label.layer.borderColor = UIColor.Togaether.tagLine.cgColor
+        label.font = .customFont(size: 11, style: .Regular)
+        label.textColor = .Togaether.secondaryLabel
+        label.textAlignment = .center
+        
+        return label
+    }
 }
