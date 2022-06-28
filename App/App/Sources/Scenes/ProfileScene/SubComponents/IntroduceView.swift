@@ -8,7 +8,8 @@
 import UIKit
 
 final class IntroduceView: UIView {
-
+    private let tags: [String] = ["산책", "놀이터", "애견 카페", "애견 동반 식당", "박람회", "기타"] // 임시 데이터
+    
     private lazy var introLabel: UILabel = {
         let label = UILabel()
         label.text = "우리 초코랑 같이 산책하실 분 구해요! 평행산책 같이 연습해요~"
@@ -36,6 +37,21 @@ final class IntroduceView: UIView {
         return label
     }()
     
+    private lazy var categoryTagCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 5
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .Togaether.introduceViewBackground
+        collectionView.registerCell(type: TagCollectionViewCell.self)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.showsHorizontalScrollIndicator = false
+        
+        return collectionView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         addSubviews()
@@ -52,6 +68,7 @@ final class IntroduceView: UIView {
         addSubview(introLabel)
         addSubview(divisionView)
         addSubview(category)
+        addSubview(categoryTagCollectionView)
     }
     
     private func configureLayout() {
@@ -65,13 +82,52 @@ final class IntroduceView: UIView {
             divisionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -15),
             divisionView.heightAnchor.constraint(equalToConstant: 1),
 
+            category.topAnchor.constraint(equalTo: divisionView.bottomAnchor, constant: 18),
+            category.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 15),
+            category.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -29),
             
-            category.topAnchor.constraint(equalTo: divisionView.bottomAnchor, constant: 10),
-            category.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 15)
+            categoryTagCollectionView.topAnchor.constraint(equalTo: category.topAnchor),
+            categoryTagCollectionView.leadingAnchor.constraint(equalTo: category.trailingAnchor, constant: 16),
+            categoryTagCollectionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            categoryTagCollectionView.bottomAnchor.constraint(equalTo: category.bottomAnchor, constant: 2)
             ])
     }
     
     private func configureUI() {
         backgroundColor = .Togaether.introduceViewBackground
     }
+}
+
+
+extension IntroduceView: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return tags.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueCell(withType: TagCollectionViewCell.self, for: indexPath) as? TagCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        cell.changeTagStyle()
+        cell.configureData(tags[indexPath.row])
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 4)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        guard let item = tags[safe: indexPath.row] else {
+            return CGSize(width: 0, height: 0)
+        }
+        let itemSize = item.size(withAttributes: [
+            NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12)
+        ])
+        
+        return CGSize(width: itemSize.width + 17, height: 19)
+    }
+    
 }
