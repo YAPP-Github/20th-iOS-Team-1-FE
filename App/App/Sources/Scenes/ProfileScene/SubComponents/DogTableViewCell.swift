@@ -56,6 +56,16 @@ final class DogTableViewCell: UITableViewCell {
         
         return view
     }()
+        
+    private lazy var tagStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: configureTagStackView(tags: ["중성화완료","활발","사교적","능동적"]))
+        stackView.axis = .horizontal
+        stackView.contentMode = .scaleAspectFit
+        stackView.distribution = .equalSpacing
+        stackView.spacing = 4
+        
+        return stackView
+    }()
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -72,6 +82,7 @@ final class DogTableViewCell: UITableViewCell {
         addSubview(divisionView)
         addSubview(ageLabel)
         addSubview(genderImageView)
+        addSubview(tagStackView)
     }
     
     private func configureLayout() {
@@ -99,7 +110,12 @@ final class DogTableViewCell: UITableViewCell {
             genderImageView.leadingAnchor.constraint(equalTo: ageLabel.trailingAnchor, constant: 10),
             genderImageView.centerYAnchor.constraint(equalTo: breedLabel.centerYAnchor),
             genderImageView.widthAnchor.constraint(equalToConstant: 20),
-            genderImageView.heightAnchor.constraint(equalToConstant: 20)
+            genderImageView.heightAnchor.constraint(equalToConstant: 20),
+            
+            tagStackView.topAnchor.constraint(equalTo: divisionView.bottomAnchor, constant: 12),
+            tagStackView.leadingAnchor.constraint(equalTo: dogNameLabel.leadingAnchor),
+            tagStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            tagStackView.heightAnchor.constraint(equalToConstant: 18)
             ])
     }
     
@@ -108,5 +124,15 @@ final class DogTableViewCell: UITableViewCell {
         contentView.layer.borderWidth = 1
         contentView.layer.borderColor = UIColor.Togaether.divider.cgColor
         contentView.layer.cornerRadius = 10
+    }
+    
+    func configureTagStackView(tags: [String]) -> [UILabel] {
+        var tagLabels = [UILabel]()
+        tags.forEach { tag in
+            let label = PaddingLabel()
+            tagLabels.append(label.tagLabel(tag))
+        }
+
+        return tagLabels
     }
 }
