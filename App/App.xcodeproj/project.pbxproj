@@ -132,6 +132,7 @@
 		37C3F4FA284C71030006CB02 /* KeychainQueryRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C3F4F9284C71030006CB02 /* KeychainQueryRequester.swift */; };
 		37C3F4FC284C7D8B0006CB02 /* KeychainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C3F4FB284C7D8B0006CB02 /* KeychainError.swift */; };
 		37C3F62C284D194C0006CB02 /* StubKeychainQueryRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C3F62B284D194C0006CB02 /* StubKeychainQueryRequester.swift */; };
+		37F67CC5286A1C270073FE8C /* AA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F67CC4286A1C270073FE8C /* AA.swift */; };
 		FD8AD7052851E26200454AC3 /* GatherListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8AD7042851E26200454AC3 /* GatherListTableView.swift */; };
 		FD8AD7072851E28000454AC3 /* GatherListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8AD7062851E28000454AC3 /* GatherListCell.swift */; };
 		FD8AD7092851E2AA00454AC3 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8AD7082851E2AA00454AC3 /* PaddingLabel.swift */; };
@@ -283,6 +284,7 @@
 		37C3F4F9284C71030006CB02 /* KeychainQueryRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainQueryRequester.swift; sourceTree = "<group>"; };
 		37C3F4FB284C7D8B0006CB02 /* KeychainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainError.swift; sourceTree = "<group>"; };
 		37C3F62B284D194C0006CB02 /* StubKeychainQueryRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubKeychainQueryRequester.swift; sourceTree = "<group>"; };
+		37F67CC4286A1C270073FE8C /* AA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AA.swift; sourceTree = "<group>"; };
 		FD8AD7042851E26200454AC3 /* GatherListTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListTableView.swift; sourceTree = "<group>"; };
 		FD8AD7062851E28000454AC3 /* GatherListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListCell.swift; sourceTree = "<group>"; };
 		FD8AD7082851E2AA00454AC3 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
@@ -713,6 +715,7 @@
 				37605DEE2839547200394929 /* AuthCoordinator.swift */,
 				37912CA528144A530087B95E /* TabCoordinator.swift */,
 				37912CA328144A260087B95E /* Protocol */,
+				37F67CC4286A1C270073FE8C /* AA.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -1128,6 +1131,7 @@
 				376006CA28490EFD00B27015 /* EnableButton.swift in Sources */,
 				37348B0A2866BA1F00C38F70 /* SignUpInfomationCoordinator.swift in Sources */,
 				379B1A79285A52DA00E58A34 /* AppleLoginRepository.swift in Sources */,
+				37F67CC5286A1C270073FE8C /* AA.swift in Sources */,
 				378F3486281DBE210063CE4F /* ProfileViewController.swift in Sources */,
 				FDBC12042866858900FCADF4 /* ProfileContentView.swift in Sources */,
 				378F348B281DC0560063CE4F /* GatherListCoordinator.swift in Sources */,

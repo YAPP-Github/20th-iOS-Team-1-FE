@@ -26,16 +26,6 @@ final class LoginCoordinator: SceneCoordinator {
         let loginReactor = LoginReactor(appleLoginRepository: appleLoginRepository, keychainProvider: keychainProvider)
         let loginViewController = LoginViewController(reactor: loginReactor)
 
-        loginViewController.reactor?.state
-            .map(\.isReadyToProceedWithSignUp)
-            .distinctUntilChanged()
-            .filter { $0 == true }
-            .withUnretained(self)
-            .subscribe(onNext: { (owner, user) in
-                owner.pushSignUpAgreementViewController()
-            })
-            .disposed(by: disposeBag)
-        
         navigationController.setViewControllers([loginViewController], animated: false)
     }
     

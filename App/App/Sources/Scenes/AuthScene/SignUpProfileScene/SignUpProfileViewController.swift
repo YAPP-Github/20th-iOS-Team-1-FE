@@ -278,6 +278,18 @@ final class SignUpProfileViewController: BaseViewController {
                         this.nextButton.becomeFirstResponder()
                     }
                 })
+            
+            reactor.state
+                .filter { $0.isReadyToProceedWithSignUp == true }
+                .map { $0.user }
+                .observe(on: MainScheduler.instance)
+                .subscribe(with: self,
+                   onNext: { this, user in
+                    let signUpInfomationReactor = SignUpInfomationReactor(user: user)
+                    let signUpInfomationViewController = SignUpInfomationViewController(reactor: signUpInfomationReactor)
+
+                    this.navigationController?.pushViewController(signUpInfomationViewController, animated: true)
+                })
         }
     }
     
