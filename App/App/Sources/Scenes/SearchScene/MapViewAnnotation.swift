@@ -37,7 +37,23 @@ final class AnnotationView: MKAnnotationView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure() {
+    internal func select() {
+        guard let annotation = self.annotation as? Annotation
+        else { return }
+        
+        annotation.isSelected = true
+        configure()
+    }
+    
+    internal func deselect() {
+        guard let annotation = self.annotation as? Annotation
+        else { return }
+        
+        annotation.isSelected = false
+        configure()
+    }
+    
+    private func configure() {
         guard let annotation = self.annotation as? Annotation
         else { return }
         self.canShowCallout = false
