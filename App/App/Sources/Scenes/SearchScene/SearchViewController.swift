@@ -38,58 +38,28 @@ final class SearchViewController: BaseViewController {
                 gatherCategory: .walk
             )
         )
-        
-        mapView.addAnnotation(
-            Annotation(
-                coordinate: CLLocationCoordinate2D(
-                    latitude: 35.29263305664062,
-                    longitude: 127.11612977377284
-                ),
-                gatherCategory: .playground
-            )
-        )
-        
-        mapView.addAnnotation(
-            Annotation(
-                coordinate: CLLocationCoordinate2D(
-                    latitude: 38.29263305664062,
-                    longitude: 127.11612977377284
-                ),
-                gatherCategory: .dogRestaurant
-            )
-        )
-        
-        mapView.addAnnotation(
-            Annotation(
-                coordinate: CLLocationCoordinate2D(
-                    latitude: 37.29263305664062,
-                    longitude: 128.11612977377284
-                ),
-                gatherCategory: .dogCafe
-            )
-        )
-        
-        mapView.addAnnotation(
-            Annotation(
-                coordinate: CLLocationCoordinate2D(
-                    latitude: 35.29263305664062,
-                    longitude: 126.11612977377284
-                ),
-                gatherCategory: .etc
-            )
-        )
-        
-        mapView.addAnnotation(
-            Annotation(
-                coordinate: CLLocationCoordinate2D(
-                    latitude: 34.29263305664062,
-                    longitude: 126.11612977377284
-                ),
-                gatherCategory: .exhibition
-            )
-        )
-        
+    
         return mapView
+    }()
+    
+    private lazy var gatherInformationBottomSheet: UIView = {
+        let view = UIView()
+        
+        view.layer.cornerRadius = 10
+        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+
+        view.backgroundColor = .systemBackground
+        
+        
+        return view
+    }()
+    
+    private lazy var gatherInformationBottomSheetHeightConstraint: NSLayoutConstraint = {
+        let constraint = gatherInformationBottomSheet.heightAnchor.constraint(equalToConstant: 0)
+        
+        constraint.isActive = true
+        
+        return constraint
     }()
     
     private lazy var searchButton: CircularButton =  {
@@ -117,7 +87,8 @@ final class SearchViewController: BaseViewController {
     
     private lazy var currentLocationButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage.Togaether.target, for: .normal)
+        button.setImage(UIImage.Togaether.scope, for: .normal)
+        button.tintColor = UIColor.Togaether.mainGreen
         button.backgroundColor = .white
         button.layer.cornerRadius = 5
         return button
@@ -151,6 +122,7 @@ final class SearchViewController: BaseViewController {
     private func addSubviews() {
         view.addSubview(mapView)
         view.addSubview(currentLocationButton)
+        view.addSubview(gatherInformationBottomSheet)
         mapView.addSubview(searchButton)
     }
     
@@ -170,7 +142,10 @@ final class SearchViewController: BaseViewController {
             currentLocationButton.widthAnchor.constraint(equalToConstant: 44),
             currentLocationButton.heightAnchor.constraint(equalToConstant: 44),
             currentLocationButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            currentLocationButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30)
+            currentLocationButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
+            //bottomSheet
+            gatherInformationBottomSheet.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor),
+            gatherInformationBottomSheet.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
     
@@ -218,7 +193,7 @@ final class SearchViewController: BaseViewController {
     
     private func moveToCurrentLocation() {
         if let location = locationManager.location {
-            mapView.centerCoordinate = location.coordinate
+            mapView.setCenter(location.coordinate, animated: true)
         }
     }
 }
@@ -251,17 +226,23 @@ extension SearchViewController: MKMapViewDelegate {
         }
         else if let view = view as? AnnotationView,
                 let annotation = view.annotation as? Annotation {
-            annotation.isSelected = true
-            view.configure()
+            view.select()
+            mapView.setCenter(annotation.coordinate, animated: true)
+            UIView.animate(withDuration: 0.2, animations: {
+                self.gatherInformationBottomSheetHeightConstraint.constant = 192
+                self.view.layoutIfNeeded()
+            })
         }
     }
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
-        guard let view = view as? AnnotationView,
-              let annotation = view.annotation as? Annotation
+        guard let view = view as? AnnotationView
         else { return }
         
-        annotation.isSelected = false
-        view.configure()
+        view.deselect()
+        UIView.animate(withDuration: 0.2, animations: {
+            self.gatherInformationBottomSheetHeightConstraint.constant = 0
+            self.view.layoutIfNeeded()
+        })
     }
 }
