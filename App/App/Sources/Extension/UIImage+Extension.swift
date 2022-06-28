@@ -14,6 +14,7 @@ extension UIImage {
         static let xCircleFill         = UIImage(systemName: "x.circle.fill")!
         static let cameraCircleFill    = UIImage(systemName: "camera.circle.fill")!
         static let target              = UIImage(systemName: "target")!
+        static let scope               = UIImage(systemName: "scope")
         static let bell                = UIImage(systemName: "bell")!
         static let magnifyingglass     = UIImage(systemName: "magnifyingglass")!
         static let genderSignMan       = UIImage(named: "genderMan")!
