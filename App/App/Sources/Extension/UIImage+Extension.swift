@@ -21,11 +21,18 @@ extension UIImage {
         static let genderSignGirlPuppy = UIImage(named: "girlPuppy")!
         static let profileSetting      = UIImage(named: "profileSetting")!
         static let rightArrow          = UIImage(systemName: "chevron.right")!
-        static let defaultWalkMapViewAnnotaion = UIImage(named: "defaultWalkMapViewAnnotaion")!
-        static let defaultDogCafeMapviewAnnotation = UIImage(named: "defaultDogCafeMapviewAnnotation")!
+        static let defaultWalkMapViewAnnotation = UIImage(named: "defaultWalkMapViewAnnotation")!
+        static let defaultDogCafeMapViewAnnotation = UIImage(named: "defaultDogCafeMapViewAnnotation")!
         static let defaultDogRestaurantMapviewAnnotation = UIImage(named: "defaultDogRestaurantMapviewAnnotation")!
         static let defaultETCMapViewAnnotation = UIImage(named: "defaultETCMapViewAnnotation")!
         static let defaultExhibitionMapViewAnnotation = UIImage(named: "defaultExhibitionMapViewAnnotation")!
-        static let defaultPlaygroundMapViewAnnotation = UIImage(named: "defaultPlaygroundMapViewAnnotation")
+        static let defaultPlaygroundMapViewAnnotation = UIImage(named: "defaultPlaygroundMapViewAnnotation")!
+        static let focusWalkMapViewAnnotation = UIImage(named: "focusWalkMapViewAnnotation")!
+        static let focusDogCafeMapviewAnnotation = UIImage(named: "focusDogCafeMapviewAnnotation")!
+        static let focusDogRestaurantMapviewAnnotation = UIImage(named: "focusDogRestaurantMapviewAnnotation")!
+        static let focusETCMapViewAnnotation = UIImage(named: "focusETCMapViewAnnotation")!
+        static let focusExhibitionMapViewAnnotation = UIImage(named: "focusExhibitionMapViewAnnotation")!
+        static let focusPlaygroundMapViewAnnotation = UIImage(named: "focusPlaygroundMapViewAnnotation")!
+
     }
 }
