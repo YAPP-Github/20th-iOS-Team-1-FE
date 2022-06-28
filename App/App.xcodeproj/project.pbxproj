@@ -22,9 +22,9 @@
 		29AE224A284E0A2F00EDF34B /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2249284E0A2F00EDF34B /* LocationManager.swift */; };
 		29AE224C2853711F00EDF34B /* RxMKMapViewDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE224B2853711F00EDF34B /* RxMKMapViewDelegateProxy.swift */; };
 		29AE224E285372B200EDF34B /* Reactive+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE224D285372B200EDF34B /* Reactive+Extension.swift */; };
+		29AE22522869E47100EDF34B /* MapViewAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE22512869E47100EDF34B /* MapViewAnnotation.swift */; };
 		37348B0A2866BA1F00C38F70 /* SignUpInfomationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37348B092866BA1F00C38F70 /* SignUpInfomationCoordinator.swift */; };
 		37348B0C2866CA5E00C38F70 /* BorderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37348B0B2866CA5E00C38F70 /* BorderButton.swift */; };
-		29AE22522869E47100EDF34B /* MapViewAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE22512869E47100EDF34B /* MapViewAnnotation.swift */; };
 		3734CEAA2869E70C00EEF38D /* SignUpRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3734CEA92869E70C00EEF38D /* SignUpRepositoryInterface.swift */; };
 		3734CEAC2869E72100EEF38D /* SignUpRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3734CEAB2869E72100EEF38D /* SignUpRepository.swift */; };
 		3734CEAE2869E7E700EEF38D /* SignUpAccountDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3734CEAD2869E7E700EEF38D /* SignUpAccountDTO.swift */; };
@@ -146,6 +146,7 @@
 		FDBC12062866867600FCADF4 /* IntroduceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC12052866867600FCADF4 /* IntroduceView.swift */; };
 		FDBC120C2868BF6200FCADF4 /* InitialIntroductionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC120B2868BF6200FCADF4 /* InitialIntroductionView.swift */; };
 		FDBC12102868CD4C00FCADF4 /* DogTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC120F2868CD4C00FCADF4 /* DogTableViewCell.swift */; };
+		FDBC121F286AC09200FCADF4 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC121E286AC09200FCADF4 /* ProfileHeaderView.swift */; };
 		FDE6F146285215BD005E4783 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE6F145285215BD005E4783 /* UIFont+Extension.swift */; };
 		FDE6F1482852317F005E4783 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE6F1472852317F005E4783 /* UITableView+Extension.swift */; };
 		FDE6F14A28523493005E4783 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE6F14928523493005E4783 /* UICollectionView+Extension.swift */; };
@@ -178,9 +179,9 @@
 		29AE2249284E0A2F00EDF34B /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		29AE224B2853711F00EDF34B /* RxMKMapViewDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxMKMapViewDelegateProxy.swift; sourceTree = "<group>"; };
 		29AE224D285372B200EDF34B /* Reactive+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reactive+Extension.swift"; sourceTree = "<group>"; };
+		29AE22512869E47100EDF34B /* MapViewAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewAnnotation.swift; sourceTree = "<group>"; };
 		37348B092866BA1F00C38F70 /* SignUpInfomationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInfomationCoordinator.swift; sourceTree = "<group>"; };
 		37348B0B2866CA5E00C38F70 /* BorderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderButton.swift; sourceTree = "<group>"; };
-		29AE22512869E47100EDF34B /* MapViewAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewAnnotation.swift; sourceTree = "<group>"; };
 		3734CEA92869E70C00EEF38D /* SignUpRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRepositoryInterface.swift; sourceTree = "<group>"; };
 		3734CEAB2869E72100EEF38D /* SignUpRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRepository.swift; sourceTree = "<group>"; };
 		3734CEAD2869E7E700EEF38D /* SignUpAccountDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAccountDTO.swift; sourceTree = "<group>"; };
@@ -296,6 +297,7 @@
 		FDBC12052866867600FCADF4 /* IntroduceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroduceView.swift; sourceTree = "<group>"; };
 		FDBC120B2868BF6200FCADF4 /* InitialIntroductionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialIntroductionView.swift; sourceTree = "<group>"; };
 		FDBC120F2868CD4C00FCADF4 /* DogTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogTableViewCell.swift; sourceTree = "<group>"; };
+		FDBC121E286AC09200FCADF4 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		FDE6F145285215BD005E4783 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		FDE6F1472852317F005E4783 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		FDE6F14928523493005E4783 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
@@ -889,6 +891,7 @@
 		FDBC12022866857800FCADF4 /* SubComponents */ = {
 			isa = PBXGroup;
 			children = (
+				FDBC121E286AC09200FCADF4 /* ProfileHeaderView.swift */,
 				FDBC12032866858900FCADF4 /* ProfileContentView.swift */,
 				FDBC12052866867600FCADF4 /* IntroduceView.swift */,
 				FDBC120B2868BF6200FCADF4 /* InitialIntroductionView.swift */,
@@ -1094,6 +1097,7 @@
 				37AA7E142850B15800B4B5C2 /* CategoryDTO.swift in Sources */,
 				378F3483281DBE140063CE4F /* ChattingReactor.swift in Sources */,
 				376006C528489A2B00B27015 /* RegularExpressionValidator.swift in Sources */,
+				FDBC121F286AC09200FCADF4 /* ProfileHeaderView.swift in Sources */,
 				29AE224C2853711F00EDF34B /* RxMKMapViewDelegateProxy.swift in Sources */,
 				374F41CD2864E5250074F04B /* AccountValidationRepository.swift in Sources */,
 				3773708C2841DE6D00D5CCB6 /* UserAccount.swift in Sources */,
