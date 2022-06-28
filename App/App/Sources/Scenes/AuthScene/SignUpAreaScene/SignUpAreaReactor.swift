@@ -21,9 +21,9 @@ final class SignUpAreaReactor: Reactor {
 
     enum Mutation {
         case showBigCities([String])
-        case updateBigCity(String?)
-        case showSmallCities([String]?)
-        case updateSmallCity(String?)
+        case updateBigCity(String)
+        case showSmallCities([String])
+        case updateSmallCity(String)
         case readyToStartTogaether
     }
 
@@ -32,7 +32,7 @@ final class SignUpAreaReactor: Reactor {
         var selectedBigCity: String?
         var selectedSmallCity: String?
         var bigCityList = Area.allCases.map { $0.rawValue }
-        var smallCityList: [String]?
+        var smallCityList = [String]()
         var isNextButtonEnabled = false
         var isReadyToStartTogaether = false
     }
@@ -54,12 +54,23 @@ final class SignUpAreaReactor: Reactor {
         case .bigCityTextFieldDidTap:
             return Observable.just(.showBigCities(currentState.bigCityList))
         case .bigCityDidPick(let city):
-            return Observable.just(.updateBigCity(currentState.bigCityList[safe: city]))
+            if let bigCity = currentState.bigCityList[safe: city] {
+                return Observable.just(.updateBigCity(bigCity))
+            } else {
+                return Observable.empty()
+            }
         case .smallCityTextFieldDidTap:
-            let smallCities = getSmallCities(bigCity: currentState.selectedBigCity)
-            return Observable.just(.showSmallCities(smallCities))
+            if let smallCities = getSmallCities(bigCity: currentState.selectedBigCity) {
+                return Observable.just(.showSmallCities(smallCities))
+            } else {
+                return Observable.empty()
+            }
         case .smallCityDidPick(let city):
-            return Observable.just(.updateSmallCity(currentState.smallCityList?[safe: city]))
+            if let smallCity = currentState.smallCityList[safe: city] {
+                return Observable.just(.updateSmallCity(smallCity))
+            } else {
+                return Observable.empty()
+            }
         case .nextButtonDidTap:
             return Observable.just(.readyToStartTogaether)
         }
@@ -77,6 +88,7 @@ final class SignUpAreaReactor: Reactor {
             if newState.selectedBigCity != state.selectedBigCity {
                 newState.user.smallCity = nil
                 newState.selectedSmallCity = nil
+                newState.smallCityList = []
                 newState.isNextButtonEnabled = false
             }
         case .showSmallCities(let cities):
