@@ -36,7 +36,7 @@ final class DogTableViewCell: UITableViewCell {
     
     private lazy var divisionView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = .Togaether.divider
         
         return view
     }()
@@ -59,7 +59,7 @@ final class DogTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10.0, left: 20.0, bottom: 0.0, right: 20.0))
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 20.0, left: 20.0, bottom: 0.0, right: 20.0))
         addSubviews()
         configureLayout()
         configureUI()
@@ -76,14 +76,14 @@ final class DogTableViewCell: UITableViewCell {
     
     private func configureLayout() {
         NSLayoutConstraint.useAndActivateConstraints([
-            profileImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 30),
-            profileImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 38),
+            profileImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 40),
+            profileImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 38),
             profileImageView.widthAnchor.constraint(equalToConstant: 72),
             profileImageView.heightAnchor.constraint(equalToConstant: 72),
             
-            dogNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 30),
+            dogNameLabel.topAnchor.constraint(equalTo: profileImageView.topAnchor),
             dogNameLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 10),
-            dogNameLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -43),
+            dogNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -43),
             
             breedLabel.topAnchor.constraint(equalTo: dogNameLabel.bottomAnchor),
             breedLabel.leadingAnchor.constraint(equalTo: dogNameLabel.leadingAnchor),
