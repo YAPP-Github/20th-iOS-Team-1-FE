@@ -57,7 +57,18 @@ final class LoginViewController: BaseViewController {
     }
     
     private func bindState(with reactor: LoginReactor) {
-        
+        disposeBag.insert {
+            reactor.state
+                .map { $0.isReadyToProceedWithSignUp }
+                .filter { $0 == true }
+                .observe(on: MainScheduler.instance)
+                .subscribe(with: self,
+                   onNext: { this, isEnabled in
+                    let signUpAgreementReactor = SignUpAgreementReactor()
+                    let signUpAgreementViewController = SignUpAgreementViewController(reactor: signUpAgreementReactor)
+                    this.navigationController?.pushViewController(signUpAgreementViewController, animated: true)
+                })
+        }
     }
     
     func bind(reactor: LoginReactor) {

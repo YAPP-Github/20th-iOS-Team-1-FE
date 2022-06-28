@@ -35,27 +35,10 @@ final class SignUpAreaViewController: BaseViewController {
         return label
     }()
     
-    
     private var bigCityPickerView: UIPickerView = {
         let pickerView = UIPickerView()
         
         return pickerView
-    }()
-    
-    private var bigCityCancelToolbarButton: UIBarButtonItem = {
-        let button = UIBarButtonItem()
-        button.title = "취소"
-        button.style = .plain
-        
-        return button
-    }()
-    
-    private var bigCityCompleteToolbarButton: UIBarButtonItem = {
-        let button = UIBarButtonItem()
-        button.title = "완료"
-        button.style = .plain
-        
-        return button
     }()
     
     private lazy var bigCityTextField: UITextField = {
@@ -67,24 +50,12 @@ final class SignUpAreaViewController: BaseViewController {
         textField.rightView = button
         textField.rightViewMode = .always
         
-        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let toolBar = UIToolbar()
-        toolBar.barStyle = UIBarStyle.default
-        toolBar.isTranslucent = true
-        toolBar.tintColor = UIColor.white
-        toolBar.sizeToFit()
-        toolBar.setItems([bigCityCancelToolbarButton,flexibleSpace,bigCityCompleteToolbarButton], animated: false)
-        toolBar.isUserInteractionEnabled = true
-               
-        textField.inputAccessoryView = toolBar
-        
         return textField
     }()
     
+    private lazy var bigCityContourView = ContourView()
     
-    private var bigCityContourView = ContourView()
-    
-    private var smallCityLabel: UILabel = {
+    private lazy var smallCityLabel: UILabel = {
         let label = UILabel()
         label.text = "시/군/구"
         label.font = UIFont.systemFont(ofSize: 14)
@@ -92,22 +63,10 @@ final class SignUpAreaViewController: BaseViewController {
         return label
     }()
     
-    private lazy var smallCityPickerView: UIPickerView = {
+    private var smallCityPickerView: UIPickerView = {
         let pickerView = UIPickerView()
         
         return pickerView
-    }()
-    
-    private lazy var smallCityCancelToolbarButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(title: "취소", style: .plain, target: self, action: nil)
-        
-        return button
-    }()
-    
-    private lazy var smallCityCompleteToolbarButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(title: "완료", style: .plain, target: self, action: nil)
-        
-        return button
     }()
     
     private lazy var smallCityTextField: UITextField = {
@@ -115,29 +74,18 @@ final class SignUpAreaViewController: BaseViewController {
         button.setImage(UIImage(systemName: "chevron.down"), for: .normal)
         
         let textField = UITextField()
-        textField.inputView = bigCityPickerView
+        textField.inputView = smallCityPickerView
         textField.rightView = button
         textField.rightViewMode = .always
-        
-        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let toolBar = UIToolbar()
-        toolBar.barStyle = UIBarStyle.default
-        toolBar.isTranslucent = true
-        toolBar.tintColor = UIColor.white
-        toolBar.sizeToFit()
-        toolBar.setItems([smallCityCancelToolbarButton,flexibleSpace,smallCityCompleteToolbarButton], animated: false)
-        toolBar.isUserInteractionEnabled = true
-               
-        textField.inputAccessoryView = toolBar
         
         return textField
     }()
     
-    private var smallCityContourView = ContourView()
+    private lazy var smallCityContourView = ContourView()
     
     private lazy var nextButtonContourView = ContourView()
 
-    private var nextButton: EnableButton = {
+    private lazy var nextButton: EnableButton = {
         let button = EnableButton()
         button.setTitle("투개더 시작하기", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
@@ -185,7 +133,6 @@ final class SignUpAreaViewController: BaseViewController {
     }
     
     private func configureLayout() {
-        guidanceLabel.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         NSLayoutConstraint.useAndActivateConstraints([
             guidanceLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 96),
             guidanceLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
@@ -236,20 +183,17 @@ final class SignUpAreaViewController: BaseViewController {
             bigCityTextField.rx.controlEvent([.touchUpInside])
                 .map { Reactor.Action.bigCityTextFieldDidTap }
                 .bind(to: reactor.action)
-            
-            bigCityCompleteToolbarButton.rx.tap
-                .withLatestFrom(bigCityPickerView.rx.itemSelected)
+                  
+            bigCityPickerView.rx.itemSelected
                 .map { Reactor.Action.bigCityDidPick($0.row) }
                 .bind(to: reactor.action)
             
-                
             smallCityTextField.rx.controlEvent([.touchUpInside])
                 .map { Reactor.Action.smallCityTextFieldDidTap }
                 .bind(to: reactor.action)
             
-            smallCityCompleteToolbarButton.rx.tap
-                .withLatestFrom(smallCityPickerView.rx.itemSelected)
-                .map { Reactor.Action.smallCityDidPick($0.row) }
+            smallCityPickerView.rx.itemSelected
+                .map { Reactor.Action.smallCityDidPick($0.component) }
                 .bind(to: reactor.action)
             
             nextButton.rx.throttleTap
@@ -270,10 +214,10 @@ final class SignUpAreaViewController: BaseViewController {
                 .distinctUntilChanged()
                 .asDriver(onErrorJustReturn: nil)
                 .drive(bigCityTextField.rx.text)
+
             
             reactor.state
-                .compactMap { $0.smallCityList }
-                .distinctUntilChanged()
+                .map { $0.smallCityList }
                 .asDriver(onErrorJustReturn: [])
                 .drive(smallCityPickerView.rx.itemTitles) { (row, element) in return element }
 
@@ -293,6 +237,14 @@ final class SignUpAreaViewController: BaseViewController {
                     if isEnabled {
                         this.nextButton.becomeFirstResponder()
                     }
+                })
+            
+            reactor.state
+                .filter { $0.isReadyToStartTogaether == true }
+                .observe(on: MainScheduler.instance)
+                .subscribe(with: self,
+                   onNext: { this, _ in
+                    
                 })
         }
     }

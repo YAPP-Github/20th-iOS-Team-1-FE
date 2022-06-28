@@ -221,6 +221,23 @@ final class SignUpAgreementViewController: BaseViewController {
                 .distinctUntilChanged()
                 .asDriver(onErrorJustReturn: false)
                 .drive(nextButton.rx.isEnabled)
+            
+            reactor.state
+                .filter { $0.isReadyToProceedWithSignUp == true }
+                .map { $0.user }
+                .observe(on: MainScheduler.instance)
+                .subscribe(with: self,
+                   onNext: { this, user in
+                    let networkManager = NetworkManager.shared
+                    let accountValidationRepository = AccountValidationRepository(networkManager: networkManager)
+                    let keychain = KeychainQueryRequester()
+                    let keychainProvider = KeychainProvider(keyChain: keychain)
+                    let keychainUseCase = KeychainUsecase(keychainProvider: keychainProvider, networkManager: networkManager)
+                    let regularExpressionValidator = RegularExpressionValidator()
+                    let signUpProfileReactor = SignUpProfileReactor(user: user, regularExpressionValidator: regularExpressionValidator, accountValidationRepository: accountValidationRepository, keychainUseCase: keychainUseCase)
+                    let signUpProfileViewController = SignUpProfileViewController(reactor: signUpProfileReactor)
+                    this.navigationController?.pushViewController(signUpProfileViewController, animated: true)
+                })
         }
     }
     
