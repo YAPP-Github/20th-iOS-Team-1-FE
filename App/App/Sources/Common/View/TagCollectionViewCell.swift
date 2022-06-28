@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class TagCollectionViewCell: UICollectionViewCell {    
+final class TagCollectionViewCell: UICollectionViewCell {
     private lazy var tagLabel: PaddingLabel = {
         let label = PaddingLabel(padding: UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 8.0))
         label.backgroundColor = .white
@@ -15,7 +15,7 @@ final class TagCollectionViewCell: UICollectionViewCell {
         label.layer.cornerRadius = 10
         label.layer.borderWidth = 1
         label.layer.borderColor = UIColor.Togaether.tagLine.cgColor
-        label.font = .systemFont(ofSize: 12)
+        label.font = .customFont(size: 12, style: .Regular)
         label.textColor = .Togaether.secondaryLabel
         label.textAlignment = .center
         
@@ -48,5 +48,12 @@ final class TagCollectionViewCell: UICollectionViewCell {
     
     internal func configureData(_ tag: String) {
         tagLabel.text = tag        
+    }
+    
+    internal func changeTagStyle() {
+        tagLabel.backgroundColor = .Togaether.introduceViewBackground
+        tagLabel.layer.borderWidth = 0.5
+        tagLabel.layer.borderColor = UIColor.white.cgColor
+        tagLabel.textColor = .white
     }
 }

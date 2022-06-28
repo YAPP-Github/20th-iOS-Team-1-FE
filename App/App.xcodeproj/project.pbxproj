@@ -519,6 +519,7 @@
 				37AC310728493367003C3FA2 /* ContourView.swift */,
 				FD8AD7082851E2AA00454AC3 /* PaddingLabel.swift */,
 				37348B0B2866CA5E00C38F70 /* BorderButton.swift */,
+				FD8AD70A2851E51300454AC3 /* TagCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -871,7 +872,6 @@
 				FD9D38ED28543409005A0C86 /* SegmentView.swift */,
 				FD8AD7042851E26200454AC3 /* GatherListTableView.swift */,
 				FD8AD7062851E28000454AC3 /* GatherListCell.swift */,
-				FD8AD70A2851E51300454AC3 /* TagCollectionViewCell.swift */,
 			);
 			path = SubComponents;
 			sourceTree = "<group>";
