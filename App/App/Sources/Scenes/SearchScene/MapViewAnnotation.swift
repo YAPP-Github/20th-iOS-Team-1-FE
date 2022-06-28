@@ -11,10 +11,12 @@ import MapKit
 final class Annotation: NSObject, MKAnnotation {
     internal var coordinate: CLLocationCoordinate2D
     internal var gatherCategory: GatherCategory
+    internal var isSelected: Bool
     
     init(coordinate: CLLocationCoordinate2D, gatherCategory: GatherCategory) {
         self.coordinate = coordinate
         self.gatherCategory = gatherCategory
+        self.isSelected = false
     }
 }
 
@@ -28,7 +30,7 @@ final class AnnotationView: MKAnnotationView {
     
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-        self.configure()
+        configure()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -41,18 +43,18 @@ final class AnnotationView: MKAnnotationView {
         self.canShowCallout = false
         switch annotation.gatherCategory {
         case .walk:
-            self.image = UIImage.Togaether.defaultWalkMapViewAnnotaion
+            self.image = annotation.isSelected ? UIImage.Togaether.focusWalkMapViewAnnotation: UIImage.Togaether.defaultWalkMapViewAnnotation
         case .dogCafe:
-            self.image = UIImage.Togaether.defaultDogCafeMapviewAnnotation
+            self.image = annotation.isSelected ? UIImage.Togaether.focusDogCafeMapviewAnnotation: UIImage.Togaether.defaultDogCafeMapViewAnnotation
         case .dogRestaurant:
-            self.image = UIImage.Togaether.defaultDogRestaurantMapviewAnnotation
+            self.image = annotation.isSelected ? UIImage.Togaether.focusDogRestaurantMapviewAnnotation: UIImage.Togaether.defaultDogRestaurantMapviewAnnotation
         case .exhibition:
-            self.image = UIImage.Togaether.defaultExhibitionMapViewAnnotation
+            self.image = annotation.isSelected ? UIImage.Togaether.focusExhibitionMapViewAnnotation: UIImage.Togaether.defaultExhibitionMapViewAnnotation
         case .playground:
-            self.image = UIImage.Togaether.defaultPlaygroundMapViewAnnotation
+            self.image = annotation.isSelected ? UIImage.Togaether.focusPlaygroundMapViewAnnotation: UIImage.Togaether.defaultPlaygroundMapViewAnnotation
         case .etc:
-            self.image = UIImage.Togaether.defaultETCMapViewAnnotation
+            self.image = annotation.isSelected ? UIImage.Togaether.focusETCMapViewAnnotation: UIImage.Togaether.defaultETCMapViewAnnotation
         }
-        self.frame.size = CGSize(width: 28, height: 28)
+        self.frame.size = annotation.isSelected ? CGSize(width: 48, height: 54) : CGSize(width: 28, height: 28)
     }
 }

@@ -19,13 +19,13 @@ final class SearchViewController: BaseViewController {
         let mapView = MKMapView()
         
         mapView.showsUserLocation = true
+        mapView.showsCompass = false
         mapView.isPitchEnabled = false
         mapView.setCameraZoomRange(
-            MKMapView.CameraZoomRange(maxCenterCoordinateDistance: 10000),
+            MKMapView.CameraZoomRange(minCenterCoordinateDistance: 1000, maxCenterCoordinateDistance: 10000),
             animated: false
         )
         mapView.delegate = self
-        mapView.showsCompass = false
         
         mapView.register(AnnotationView.self, forAnnotationViewWithReuseIdentifier: AnnotationView.identifier)
         
@@ -237,12 +237,31 @@ extension SearchViewController: CLLocationManagerDelegate {
 
 extension SearchViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        print(annotation is Annotation)
         guard let annotation = annotation as? Annotation
         else { return nil }
         
         let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: AnnotationView.identifier, for: annotation) as? AnnotationView
         
         return annotationView
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        if view.annotation is MKUserLocation {
+            mapView.deselectAnnotation(view.annotation, animated: false)
+        }
+        else if let view = view as? AnnotationView,
+                let annotation = view.annotation as? Annotation {
+            annotation.isSelected = true
+            view.configure()
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        guard let view = view as? AnnotationView,
+              let annotation = view.annotation as? Annotation
+        else { return }
+        
+        annotation.isSelected = false
+        view.configure()
     }
 }
