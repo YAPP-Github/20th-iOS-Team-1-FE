@@ -133,6 +133,12 @@
 		37C3F4FC284C7D8B0006CB02 /* KeychainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C3F4FB284C7D8B0006CB02 /* KeychainError.swift */; };
 		37C3F62C284D194C0006CB02 /* StubKeychainQueryRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C3F62B284D194C0006CB02 /* StubKeychainQueryRequester.swift */; };
 		37F67CC5286A1C270073FE8C /* AA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F67CC4286A1C270073FE8C /* AA.swift */; };
+		FD5AEE86286DDC2A00001838 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5AEE85286DDC2A00001838 /* EditProfileViewController.swift */; };
+		FD5AEE88286DDC3600001838 /* AddPetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5AEE87286DDC3600001838 /* AddPetViewController.swift */; };
+		FD5AEE8A286DDD5100001838 /* EditProflieReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5AEE89286DDD5100001838 /* EditProflieReactor.swift */; };
+		FD5AEE8C286DDD7000001838 /* AddPetReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5AEE8B286DDD7000001838 /* AddPetReactor.swift */; };
+		FD5AEE8E286E265700001838 /* AccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5AEE8D286E265700001838 /* AccountInfo.swift */; };
+		FD5AEE90286E266800001838 /* PetInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5AEE8F286E266800001838 /* PetInfo.swift */; };
 		FD8AD7052851E26200454AC3 /* GatherListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8AD7042851E26200454AC3 /* GatherListTableView.swift */; };
 		FD8AD7072851E28000454AC3 /* GatherListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8AD7062851E28000454AC3 /* GatherListCell.swift */; };
 		FD8AD7092851E2AA00454AC3 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8AD7082851E2AA00454AC3 /* PaddingLabel.swift */; };
@@ -147,7 +153,13 @@
 		FDBC12062866867600FCADF4 /* IntroduceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC12052866867600FCADF4 /* IntroduceView.swift */; };
 		FDBC120C2868BF6200FCADF4 /* InitialIntroductionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC120B2868BF6200FCADF4 /* InitialIntroductionView.swift */; };
 		FDBC12102868CD4C00FCADF4 /* DogTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC120F2868CD4C00FCADF4 /* DogTableViewCell.swift */; };
-		FDBC121F286AC09200FCADF4 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC121E286AC09200FCADF4 /* ProfileHeaderView.swift */; };
+		FDBC1226286C309C00FCADF4 /* ProfileRespository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC1225286C309C00FCADF4 /* ProfileRespository.swift */; };
+		FDBC1229286C31D200FCADF4 /* ProfileMainRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC1228286C31D200FCADF4 /* ProfileMainRepositoryInterface.swift */; };
+		FDBC122C286C328C00FCADF4 /* ProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC122B286C328C00FCADF4 /* ProfileInfo.swift */; };
+		FDBC1230286C95D000FCADF4 /* ProfileResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC122F286C95D000FCADF4 /* ProfileResponseDTO.swift */; };
+		FDBC1232286C983E00FCADF4 /* AccountInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC1231286C983E00FCADF4 /* AccountInfoDTO.swift */; };
+		FDBC1234286C986700FCADF4 /* PetInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC1233286C986700FCADF4 /* PetInfoDTO.swift */; };
+		FDBC1237286D6A6600FCADF4 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC1236286D6A6600FCADF4 /* APIConstants.swift */; };
 		FDE6F146285215BD005E4783 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE6F145285215BD005E4783 /* UIFont+Extension.swift */; };
 		FDE6F1482852317F005E4783 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE6F1472852317F005E4783 /* UITableView+Extension.swift */; };
 		FDE6F14A28523493005E4783 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE6F14928523493005E4783 /* UICollectionView+Extension.swift */; };
@@ -285,6 +297,12 @@
 		37C3F4FB284C7D8B0006CB02 /* KeychainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainError.swift; sourceTree = "<group>"; };
 		37C3F62B284D194C0006CB02 /* StubKeychainQueryRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubKeychainQueryRequester.swift; sourceTree = "<group>"; };
 		37F67CC4286A1C270073FE8C /* AA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AA.swift; sourceTree = "<group>"; };
+		FD5AEE85286DDC2A00001838 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		FD5AEE87286DDC3600001838 /* AddPetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPetViewController.swift; sourceTree = "<group>"; };
+		FD5AEE89286DDD5100001838 /* EditProflieReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProflieReactor.swift; sourceTree = "<group>"; };
+		FD5AEE8B286DDD7000001838 /* AddPetReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPetReactor.swift; sourceTree = "<group>"; };
+		FD5AEE8D286E265700001838 /* AccountInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInfo.swift; sourceTree = "<group>"; };
+		FD5AEE8F286E266800001838 /* PetInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetInfo.swift; sourceTree = "<group>"; };
 		FD8AD7042851E26200454AC3 /* GatherListTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListTableView.swift; sourceTree = "<group>"; };
 		FD8AD7062851E28000454AC3 /* GatherListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListCell.swift; sourceTree = "<group>"; };
 		FD8AD7082851E2AA00454AC3 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
@@ -299,7 +317,13 @@
 		FDBC12052866867600FCADF4 /* IntroduceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroduceView.swift; sourceTree = "<group>"; };
 		FDBC120B2868BF6200FCADF4 /* InitialIntroductionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialIntroductionView.swift; sourceTree = "<group>"; };
 		FDBC120F2868CD4C00FCADF4 /* DogTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogTableViewCell.swift; sourceTree = "<group>"; };
-		FDBC121E286AC09200FCADF4 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		FDBC1225286C309C00FCADF4 /* ProfileRespository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRespository.swift; sourceTree = "<group>"; };
+		FDBC1228286C31D200FCADF4 /* ProfileMainRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMainRepositoryInterface.swift; sourceTree = "<group>"; };
+		FDBC122B286C328C00FCADF4 /* ProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfo.swift; sourceTree = "<group>"; };
+		FDBC122F286C95D000FCADF4 /* ProfileResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponseDTO.swift; sourceTree = "<group>"; };
+		FDBC1231286C983E00FCADF4 /* AccountInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInfoDTO.swift; sourceTree = "<group>"; };
+		FDBC1233286C986700FCADF4 /* PetInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetInfoDTO.swift; sourceTree = "<group>"; };
+		FDBC1236286D6A6600FCADF4 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		FDE6F145285215BD005E4783 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		FDE6F1472852317F005E4783 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		FDE6F14928523493005E4783 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
@@ -372,6 +396,7 @@
 				379B1A78285A52DA00E58A34 /* AppleLoginRepository.swift */,
 				374F41CC2864E5250074F04B /* AccountValidationRepository.swift */,
 				3734CEAB2869E72100EEF38D /* SignUpRepository.swift */,
+				FDBC1225286C309C00FCADF4 /* ProfileRespository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -397,6 +422,9 @@
 				379B1A76285A4F7700E58A34 /* AppleCredentialRequestDTO.swift */,
 				374F41CE2864E6C60074F04B /* AccountValidationResponseDTO.swift */,
 				3734CEAD2869E7E700EEF38D /* SignUpAccountDTO.swift */,
+				FDBC122F286C95D000FCADF4 /* ProfileResponseDTO.swift */,
+				FDBC1231286C983E00FCADF4 /* AccountInfoDTO.swift */,
+				FDBC1233286C986700FCADF4 /* PetInfoDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -597,10 +625,9 @@
 		378F3477281DBDC30063CE4F /* ProfileScene */ = {
 			isa = PBXGroup;
 			children = (
-				FDBC12022866857800FCADF4 /* SubComponents */,
-				378F3484281DBE210063CE4F /* ProfileViewController.swift */,
-				378F3485281DBE210063CE4F /* ProfileReactor.swift */,
-				378F348E281DC0760063CE4F /* ProfileCoordinator.swift */,
+				FDBC1227286C317500FCADF4 /* MainScene */,
+				FD5AEE83286DDBD200001838 /* EditProfileScene */,
+				FD5AEE84286DDBE200001838 /* AddPetScene */,
 			);
 			path = ProfileScene;
 			sourceTree = "<group>";
@@ -734,6 +761,7 @@
 			children = (
 				37438093284FD8A300CB02A5 /* DTO */,
 				37C14519284DF23400D11CC3 /* Network */,
+				FDBC1235286D6A5000FCADF4 /* APIConstants */,
 				37C14514284DC86300D11CC3 /* HTTPMethod */,
 				37C14513284DC85100D11CC3 /* NetworkError */,
 			);
@@ -869,6 +897,24 @@
 			path = TestDouble;
 			sourceTree = "<group>";
 		};
+		FD5AEE83286DDBD200001838 /* EditProfileScene */ = {
+			isa = PBXGroup;
+			children = (
+				FD5AEE85286DDC2A00001838 /* EditProfileViewController.swift */,
+				FD5AEE89286DDD5100001838 /* EditProflieReactor.swift */,
+			);
+			path = EditProfileScene;
+			sourceTree = "<group>";
+		};
+		FD5AEE84286DDBE200001838 /* AddPetScene */ = {
+			isa = PBXGroup;
+			children = (
+				FD5AEE87286DDC3600001838 /* AddPetViewController.swift */,
+				FD5AEE8B286DDD7000001838 /* AddPetReactor.swift */,
+			);
+			path = AddPetScene;
+			sourceTree = "<group>";
+		};
 		FD8AD7032851E25300454AC3 /* SubComponents */ = {
 			isa = PBXGroup;
 			children = (
@@ -894,13 +940,43 @@
 		FDBC12022866857800FCADF4 /* SubComponents */ = {
 			isa = PBXGroup;
 			children = (
-				FDBC121E286AC09200FCADF4 /* ProfileHeaderView.swift */,
 				FDBC12032866858900FCADF4 /* ProfileContentView.swift */,
 				FDBC12052866867600FCADF4 /* IntroduceView.swift */,
 				FDBC120B2868BF6200FCADF4 /* InitialIntroductionView.swift */,
 				FDBC120F2868CD4C00FCADF4 /* DogTableViewCell.swift */,
 			);
 			path = SubComponents;
+			sourceTree = "<group>";
+		};
+		FDBC1227286C317500FCADF4 /* MainScene */ = {
+			isa = PBXGroup;
+			children = (
+				FDBC122A286C325500FCADF4 /* Entity */,
+				FDBC12022866857800FCADF4 /* SubComponents */,
+				378F3484281DBE210063CE4F /* ProfileViewController.swift */,
+				378F3485281DBE210063CE4F /* ProfileReactor.swift */,
+				378F348E281DC0760063CE4F /* ProfileCoordinator.swift */,
+				FDBC1228286C31D200FCADF4 /* ProfileMainRepositoryInterface.swift */,
+			);
+			path = MainScene;
+			sourceTree = "<group>";
+		};
+		FDBC122A286C325500FCADF4 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				FDBC122B286C328C00FCADF4 /* ProfileInfo.swift */,
+				FD5AEE8D286E265700001838 /* AccountInfo.swift */,
+				FD5AEE8F286E266800001838 /* PetInfo.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		FDBC1235286D6A5000FCADF4 /* APIConstants */ = {
+			isa = PBXGroup;
+			children = (
+				FDBC1236286D6A6600FCADF4 /* APIConstants.swift */,
+			);
+			name = APIConstants;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1034,6 +1110,7 @@
 				37912C9A281447C40087B95E /* Array+Extension.swift in Sources */,
 				3734CEAE2869E7E700EEF38D /* SignUpAccountDTO.swift in Sources */,
 				3743809D284FDB5300CB02A5 /* ExceptionResponseInfoDTO.swift in Sources */,
+				FD5AEE8E286E265700001838 /* AccountInfo.swift in Sources */,
 				374380A9284FDDC600CB02A5 /* TokenResponseDTO.swift in Sources */,
 				37605E01283A2AE200394929 /* RxASAuthorizationControllerPresentationContextProvidingProxy.swift in Sources */,
 				378F348D281DC0660063CE4F /* ChattingCoordinator.swift in Sources */,
@@ -1048,6 +1125,7 @@
 				37605E05283C12D400394929 /* SignUpAgreementViewController.swift in Sources */,
 				37605DFB2839FF4A00394929 /* ASAuthorizationAppleIDButton+Rx.swift in Sources */,
 				29AE222E284B7DAA00EDF34B /* SearchReactor.swift in Sources */,
+				FD5AEE8C286DDD7000001838 /* AddPetReactor.swift in Sources */,
 				377370892841DE3500D5CCB6 /* SignUpProfileReactor.swift in Sources */,
 				29AE2234284B829200EDF34B /* CircularButton.swift in Sources */,
 				FDE6F14A28523493005E4783 /* UICollectionView+Extension.swift in Sources */,
@@ -1069,8 +1147,10 @@
 				37479BA1283EBB220078386E /* UIButton+Extension.swift in Sources */,
 				374F41DA2864EB060074F04B /* KeychainUseCase.swift in Sources */,
 				37605DFD283A003B00394929 /* ASAuthorizationAppleIDProvider+Rx.swift in Sources */,
+				FDBC1230286C95D000FCADF4 /* ProfileResponseDTO.swift in Sources */,
 				FD8AD7052851E26200454AC3 /* GatherListTableView.swift in Sources */,
 				37912CA0281449230087B95E /* Coordinator.swift in Sources */,
+				FDBC1237286D6A6600FCADF4 /* APIConstants.swift in Sources */,
 				375558BE2866E0AC00D13208 /* SignUpAreaViewController.swift in Sources */,
 				379B1A77285A4F7700E58A34 /* AppleCredentialRequestDTO.swift in Sources */,
 				374F41E1286619C90074F04B /* Area.swift in Sources */,
@@ -1085,6 +1165,7 @@
 				37C3F4F8284C70E40006CB02 /* KeychainQueryRequestable.swift in Sources */,
 				37C14516284DC90900D11CC3 /* HTTPMethod.swift in Sources */,
 				37C3F4FA284C71030006CB02 /* KeychainQueryRequester.swift in Sources */,
+				FD5AEE8A286DDD5100001838 /* EditProflieReactor.swift in Sources */,
 				37AA7E1C2850B1C400B4B5C2 /* StatusDTO.swift in Sources */,
 				378F347F281DBE070063CE4F /* GatherListReactor.swift in Sources */,
 				FDBC12062866867600FCADF4 /* IntroduceView.swift in Sources */,
@@ -1098,19 +1179,21 @@
 				3734CEAA2869E70C00EEF38D /* SignUpRepositoryInterface.swift in Sources */,
 				37C3F4FC284C7D8B0006CB02 /* KeychainError.swift in Sources */,
 				37AA7E142850B15800B4B5C2 /* CategoryDTO.swift in Sources */,
+				FDBC122C286C328C00FCADF4 /* ProfileInfo.swift in Sources */,
 				378F3483281DBE140063CE4F /* ChattingReactor.swift in Sources */,
 				376006C528489A2B00B27015 /* RegularExpressionValidator.swift in Sources */,
-				FDBC121F286AC09200FCADF4 /* ProfileHeaderView.swift in Sources */,
 				29AE224C2853711F00EDF34B /* RxMKMapViewDelegateProxy.swift in Sources */,
 				374F41CD2864E5250074F04B /* AccountValidationRepository.swift in Sources */,
 				3773708C2841DE6D00D5CCB6 /* UserAccount.swift in Sources */,
 				FDE6F14C285234A3005E4783 /* NSObject+Extension.swift in Sources */,
 				374F41D52864E9490074F04B /* KeychainService.swift in Sources */,
+				FDBC1229286C31D200FCADF4 /* ProfileMainRepositoryInterface.swift in Sources */,
 				37605DF92839FDB300394929 /* ASAuthorizationController+Rx.swift in Sources */,
 				374380A7284FDD8A00CB02A5 /* SocialTypeDTO.swift in Sources */,
 				37AA7E1E2850B37B00B4B5C2 /* Sex.swift in Sources */,
 				37438097284FD9F800CB02A5 /* ExceptionResponseDTO.swift in Sources */,
 				37C1451B284E06E400D11CC3 /* NetworkManager.swift in Sources */,
+				FD5AEE86286DDC2A00001838 /* EditProfileViewController.swift in Sources */,
 				374F41DC2864ED6E0074F04B /* KeychainTokens.swift in Sources */,
 				37912CA2281449610087B95E /* SceneCoordinator.swift in Sources */,
 				374F41D32864E86F0074F04B /* AccountValidationRepositoryInterface.swift in Sources */,
@@ -1121,6 +1204,7 @@
 				378F3482281DBE140063CE4F /* ChattingViewController.swift in Sources */,
 				379B1A7D285A580D00E58A34 /* SignInResult.swift in Sources */,
 				378F347B281DBDF10063CE4F /* LoginReactor.swift in Sources */,
+				FDBC1234286C986700FCADF4 /* PetInfoDTO.swift in Sources */,
 				37912C65281445AC0087B95E /* AppDelegate.swift in Sources */,
 				3734CEAC2869E72100EEF38D /* SignUpRepository.swift in Sources */,
 				374380AF284FE13300CB02A5 /* SearchingResponseDTO.swift in Sources */,
@@ -1135,6 +1219,7 @@
 				378F3486281DBE210063CE4F /* ProfileViewController.swift in Sources */,
 				FDBC12042866858900FCADF4 /* ProfileContentView.swift in Sources */,
 				378F348B281DC0560063CE4F /* GatherListCoordinator.swift in Sources */,
+				FD5AEE90286E266800001838 /* PetInfo.swift in Sources */,
 				37438095284FD9BA00CB02A5 /* ExceptionDetailResponseDTO.swift in Sources */,
 				374F41DE2864F0780074F04B /* KeychainUseCaseInterface.swift in Sources */,
 				37AC3105284930E6003C3FA2 /* SignUpInfomationViewController.swift in Sources */,
@@ -1145,13 +1230,16 @@
 				29AE2236284B867300EDF34B /* SearchCoordinator.swift in Sources */,
 				37912C67281445AC0087B95E /* SceneDelegate.swift in Sources */,
 				37C1451D284F9D6500D11CC3 /* NetworkManageable.swift in Sources */,
+				FDBC1232286C983E00FCADF4 /* AccountInfoDTO.swift in Sources */,
 				37AA7E1A2850B1B600B4B5C2 /* EligibleSexDTO.swift in Sources */,
 				37348B0C2866CA5E00C38F70 /* BorderButton.swift in Sources */,
 				37AC3106284930E6003C3FA2 /* SignUpInfomationReactor.swift in Sources */,
 				375558C12867905800D13208 /* SignUpAreaCoordinator.swift in Sources */,
+				FDBC1226286C309C00FCADF4 /* ProfileRespository.swift in Sources */,
 				37C14518284DC94A00D11CC3 /* NetworkError.swift in Sources */,
 				37C3F4EF284BF4450006CB02 /* KeychainProvider.swift in Sources */,
 				377370842841BE1000D5CCB6 /* UIButton+Rx.swift in Sources */,
+				FD5AEE88286DDC3600001838 /* AddPetViewController.swift in Sources */,
 				29AE224E285372B200EDF34B /* Reactive+Extension.swift in Sources */,
 				29AE223F284DC1B500EDF34B /* CLLocationCoordinate2D+Extension.swift in Sources */,
 			);
