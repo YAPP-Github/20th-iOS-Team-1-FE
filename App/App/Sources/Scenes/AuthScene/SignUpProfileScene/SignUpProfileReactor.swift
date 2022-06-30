@@ -51,14 +51,13 @@ final class SignUpProfileReactor: Reactor {
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .profileRegisterButtonDidTap:
-            return checkDuplication(nickname: "temp")
+            return Observable.empty()
         case .textFieldDidEndEditing(let nickname):
             let isValid = regularExpressionValidator.validate(nickname: nickname)
             return Observable.concat([Observable.just(Mutation.validateNicknameLength(isValid)),
                                       Observable.just(Mutation.updateNickname(nickname))])
         case .duplicateCheckButtonDidTap:
-            //return checkDuplication(nickname: self.currentState.nickname)
-            return Observable.just(.checkNicknameDuplication("aaaa"))
+            return checkDuplication(nickname: currentState.nickname)
         case .nextButtonDidTap:
             return Observable.just(Mutation.readyToProceedWithSignUp)
         }
@@ -75,10 +74,10 @@ final class SignUpProfileReactor: Reactor {
         case .checkNicknameDuplication(let checkedNickname):
             newState.user.nickName = checkedNickname
             newState.isNicknameDuplicateCheckDone = (checkedNickname != nil)
-        case .readyToProceedWithSignUp:
-            newState.isReadyToProceedWithSignUp = true
         case .updateNickname(let nickname):
             newState.nickname = nickname
+        case .readyToProceedWithSignUp:
+            newState.isReadyToProceedWithSignUp = true
         }
         
         return newState
@@ -117,5 +116,3 @@ final class SignUpProfileReactor: Reactor {
         }
     }
 }
-
-

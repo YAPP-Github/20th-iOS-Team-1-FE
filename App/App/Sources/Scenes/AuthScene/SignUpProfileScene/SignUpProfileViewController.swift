@@ -27,7 +27,8 @@ final class SignUpProfileViewController: BaseViewController {
         label.font = UIFont.systemFont(ofSize: 32)
         label.textColor = .Togaether.primaryLabel
         label.attributedText = attributedText
-        label.numberOfLines = 0
+        label.numberOfLines = 2
+        label.adjustsFontSizeToFitWidth = true
         
         return label
     }()
@@ -277,18 +278,6 @@ final class SignUpProfileViewController: BaseViewController {
                     if isEnabled {
                         this.nextButton.becomeFirstResponder()
                     }
-                })
-            
-            reactor.state
-                .filter { $0.isReadyToProceedWithSignUp == true }
-                .map { $0.user }
-                .observe(on: MainScheduler.instance)
-                .subscribe(with: self,
-                   onNext: { this, user in
-                    let signUpInfomationReactor = SignUpInfomationReactor(user: user)
-                    let signUpInfomationViewController = SignUpInfomationViewController(reactor: signUpInfomationReactor)
-
-                    this.navigationController?.pushViewController(signUpInfomationViewController, animated: true)
                 })
         }
     }
