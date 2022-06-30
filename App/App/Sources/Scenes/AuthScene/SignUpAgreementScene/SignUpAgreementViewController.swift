@@ -8,6 +8,7 @@
 import UIKit
 
 import ReactorKit
+import RxGesture
 import RxSwift
 
 final class SignUpAgreementViewController: BaseViewController {
@@ -23,7 +24,8 @@ final class SignUpAgreementViewController: BaseViewController {
         label.font = UIFont.systemFont(ofSize: 32)
         label.textColor = .Togaether.primaryLabel
         label.attributedText = attributedText
-        label.numberOfLines = 0
+        label.numberOfLines = 2
+        label.adjustsFontSizeToFitWidth = true
         
         return label
     }()
@@ -186,8 +188,18 @@ final class SignUpAgreementViewController: BaseViewController {
                 .map { Reactor.Action.termsOfServiceCheckBoxDidTap }
                 .bind(to: reactor.action)
             
+            termsOfServiceLabel.rx.tapGesture()
+                .when(.recognized)
+                .map { _ in Reactor.Action.termsOfServiceLabelDidTap }
+                .bind(to: reactor.action)
+            
             privacyPolicyCheckBox.rx.tap
                 .map { Reactor.Action.privacyPolicyCheckBoxDidTap }
+                .bind(to: reactor.action)
+            
+            privacyPolicyLabel.rx.tapGesture()
+                .when(.recognized)
+                .map { _ in Reactor.Action.privacyPolicyLabelDidTap }
                 .bind(to: reactor.action)
             
             nextButton.rx.throttleTap
@@ -221,23 +233,6 @@ final class SignUpAgreementViewController: BaseViewController {
                 .distinctUntilChanged()
                 .asDriver(onErrorJustReturn: false)
                 .drive(nextButton.rx.isEnabled)
-            
-            reactor.state
-                .filter { $0.isReadyToProceedWithSignUp == true }
-                .map { $0.user }
-                .observe(on: MainScheduler.instance)
-                .subscribe(with: self,
-                   onNext: { this, user in
-                    let networkManager = NetworkManager.shared
-                    let accountValidationRepository = AccountValidationRepository(networkManager: networkManager)
-                    let keychain = KeychainQueryRequester()
-                    let keychainProvider = KeychainProvider(keyChain: keychain)
-                    let keychainUseCase = KeychainUsecase(keychainProvider: keychainProvider, networkManager: networkManager)
-                    let regularExpressionValidator = RegularExpressionValidator()
-                    let signUpProfileReactor = SignUpProfileReactor(user: user, regularExpressionValidator: regularExpressionValidator, accountValidationRepository: accountValidationRepository, keychainUseCase: keychainUseCase)
-                    let signUpProfileViewController = SignUpProfileViewController(reactor: signUpProfileReactor)
-                    this.navigationController?.pushViewController(signUpProfileViewController, animated: true)
-                })
         }
     }
     

@@ -25,7 +25,8 @@ final class SignUpInfomationViewController: BaseViewController {
         label.font = UIFont.systemFont(ofSize: 32)
         label.textColor = .Togaether.primaryLabel
         label.attributedText = attributedText
-        label.numberOfLines = 0
+        label.numberOfLines = 2
+        label.adjustsFontSizeToFitWidth = true
         
         return label
     }()
@@ -224,23 +225,6 @@ final class SignUpInfomationViewController: BaseViewController {
                     if isEnabled {
                         this.nextButton.becomeFirstResponder()
                     }
-                })
-            
-            reactor.state
-                .filter { $0.isReadyToProceedWithSignUp == true }
-                .map { $0.user }
-                .observe(on: MainScheduler.instance)
-                .subscribe(with: self,
-                   onNext: { this, user in
-                    let networkManager = NetworkManager.shared
-                    let signUpRepository = SignUpRepository(networkManager: networkManager)
-                    let keychain = KeychainQueryRequester()
-                    let keychainProvider = KeychainProvider(keyChain: keychain)
-                    let keychainUseCase = KeychainUsecase(keychainProvider: keychainProvider, networkManager: networkManager)
-                    let signUpAreaReactor = SignUpAreaReactor(user: user, keychainUseCase: keychainUseCase, signUpRepository: signUpRepository)
-                    let signUpAreaViewController = SignUpAreaViewController(reactor: signUpAreaReactor)
-
-                    this.navigationController?.pushViewController(signUpAreaViewController, animated: true)
                 })
         }
     }

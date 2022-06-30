@@ -28,9 +28,10 @@ final class AccountValidationRepository: AccountValidationRepositoryInterface {
             }
             
             var urlRequest = URLRequest(url: url)
-            urlRequest.httpBody = accessToken
-            urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            
+            let accessToken = String(decoding: accessToken, as: UTF8.self)
+            urlRequest.addValue(accessToken, forHTTPHeaderField: "Authorization")
+            urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
             let response: Single<AccountValidationResponseDTO> = self.networkManager.requestDataTask(with: urlRequest)
             
             response.subscribe { result in

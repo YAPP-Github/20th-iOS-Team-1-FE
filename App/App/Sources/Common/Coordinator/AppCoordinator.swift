@@ -22,6 +22,7 @@ final class AppCoordinator: Coordinator {
             tabCoordinator.start()
         } else {
             let authCoordinator = AuthCoordinator(window: window)
+            childCoordinators.append(authCoordinator)
             authCoordinator.start()
         }
     }
