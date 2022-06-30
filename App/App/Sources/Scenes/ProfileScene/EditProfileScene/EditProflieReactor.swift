@@ -1,8 +1,8 @@
 //
-//  ProfileReactor.swift
+//  EditProflieReactor.swift
 //  App
 //
-//  Created by Hani on 2022/05/01.
+//  Created by 김나희 on 6/30/22.
 //
 
 import UIKit
@@ -10,7 +10,7 @@ import UIKit
 import ReactorKit
 import RxSwift
 
-final class ProfileReactor: Reactor {
+final class EditProflieReactor: Reactor {
     enum Action {
         
     }
