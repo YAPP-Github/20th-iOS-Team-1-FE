@@ -12,6 +12,7 @@ import RxCocoa
 
 final class ProfileViewController: BaseViewController {
     var disposeBag = DisposeBag()
+    let nickName: String? = "yapp" // 임시
         
     private lazy var scrollView = UIScrollView()
     private lazy var contentView = UIView()
@@ -64,10 +65,54 @@ final class ProfileViewController: BaseViewController {
     }
     
     private func bindAction(with reactor: ProfileReactor) {
-        
+        disposeBag.insert {
+            Observable.just(nickName)
+                .map { nickName in
+                    Reactor.Action.profileInfo(nickname: nickName) }
+                .bind(to: reactor.action)
+            
+            profileContentView.profileModifyButton.rx.tap
+                .map { Reactor.Action.profileEditButtonDidTap }
+                .bind(to: reactor.action)
+            
+            profileContentView.addPuppyButton.rx.tap
+                .map { Reactor.Action.petAddButtonDidTap }
+                .bind(to: reactor.action)
+        }
     }
     
     private func bindState(with reactor: ProfileReactor) {
+        disposeBag.insert {
+            reactor.state
+                .map { $0.profileInfo }
+                .distinctUntilChanged()
+                .asDriver(onErrorJustReturn: ProfileInfo())
+                .drive(onNext: {
+                    print($0)
+                })
+            
+            reactor.state
+                .map { $0.isReadyToProceedEditProfile }
+                .filter { $0 == true }
+                .observe(on: MainScheduler.instance)
+                .subscribe(with: self,
+                   onNext: { this, isEnabled in
+                    let editProfileReactor = EditProflieReactor()
+                    let editProfileViewController = EditProfileViewController(reactor: editProfileReactor)
+                    this.navigationController?.pushViewController(editProfileViewController, animated: true)
+                })
+            
+            reactor.state
+                .map { $0.isReadyToProceedAddPet }
+                .filter { $0 == true }
+                .observe(on: MainScheduler.instance)
+                .subscribe(with: self,
+                   onNext: { this, isEnabled in
+                    let addPetReactor = AddPetReactor()
+                    let addPetViewController = AddPetViewController(reactor: addPetReactor)
+                    this.navigationController?.pushViewController(addPetViewController, animated: true)
+                })
+        }
         
     }
     
