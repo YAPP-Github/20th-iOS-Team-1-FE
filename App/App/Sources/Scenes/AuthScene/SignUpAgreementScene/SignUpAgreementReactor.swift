@@ -14,7 +14,9 @@ final class SignUpAgreementReactor: Reactor {
     enum Action {
         case agreementCheckBoxDidTap
         case termsOfServiceCheckBoxDidTap
+        case termsOfServiceLabelDidTap
         case privacyPolicyCheckBoxDidTap
+        case privacyPolicyLabelDidTap
         case nextButtonDidTap
     }
     
@@ -25,6 +27,8 @@ final class SignUpAgreementReactor: Reactor {
         case syncAgreementWithTermsOfServiceAndPrivacyPolicy
         case syncTermsOfServiceAndPrivacyPolicyWithAgreement
         case readyToProceedWithSignUp
+        case readyToShowTermsOfService
+        case readyToShowPrivacyPolicy
     }
     
     struct State {
@@ -33,6 +37,8 @@ final class SignUpAgreementReactor: Reactor {
         var isTermsOfServiceChecked = false
         var isPrivacyPolicyChecked = false
         var isReadyToProceedWithSignUp = false
+        var isReadyToShowTermsOfService = false
+        var isReadyToShowPrivacyPolicy = false
     }
     
     let initialState: State
@@ -45,21 +51,25 @@ final class SignUpAgreementReactor: Reactor {
         switch action {
         case .agreementCheckBoxDidTap:
             return Observable.concat([
-                Observable.just(Mutation.toggleAgreement),
-                Observable.just(Mutation.syncTermsOfServiceAndPrivacyPolicyWithAgreement)
+                Observable.just(.toggleAgreement),
+                Observable.just(.syncTermsOfServiceAndPrivacyPolicyWithAgreement)
             ])
         case .termsOfServiceCheckBoxDidTap:
             return Observable.concat([
-                Observable.just(Mutation.toggleTermsOfService),
-                Observable.just(Mutation.syncAgreementWithTermsOfServiceAndPrivacyPolicy)
+                Observable.just(.toggleTermsOfService),
+                Observable.just(.syncAgreementWithTermsOfServiceAndPrivacyPolicy)
             ])
+        case .termsOfServiceLabelDidTap:
+            return Observable.just(Mutation.readyToShowTermsOfService)
         case .privacyPolicyCheckBoxDidTap:
             return Observable.concat([
-                Observable.just(Mutation.togglePrivacyPolicy),
-                Observable.just(Mutation.syncAgreementWithTermsOfServiceAndPrivacyPolicy)
+                Observable.just(.togglePrivacyPolicy),
+                Observable.just(.syncAgreementWithTermsOfServiceAndPrivacyPolicy)
             ])
+        case .privacyPolicyLabelDidTap:
+            return Observable.just(Mutation.readyToShowPrivacyPolicy)
         case .nextButtonDidTap:
-            return Observable.just(Mutation.readyToProceedWithSignUp)
+            return Observable.just(.readyToProceedWithSignUp)
         }
     }
     
@@ -80,6 +90,10 @@ final class SignUpAgreementReactor: Reactor {
             newState.isPrivacyPolicyChecked = newState.isAgreementChecked
         case .readyToProceedWithSignUp:
             newState.isReadyToProceedWithSignUp = true
+        case .readyToShowTermsOfService:
+            newState.isReadyToShowTermsOfService = true
+        case .readyToShowPrivacyPolicy:
+            newState.isReadyToShowPrivacyPolicy = true
         }
         
         return newState

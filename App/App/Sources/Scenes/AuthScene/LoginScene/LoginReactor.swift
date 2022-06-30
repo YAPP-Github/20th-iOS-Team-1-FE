@@ -25,6 +25,7 @@ final class LoginReactor: Reactor {
     }
     
     let initialState = State()
+    
     private let disposeBag = DisposeBag()
     private let appleLoginRepository: AppleLoginRepositoryInterface
     private let keychainProvider: KeychainProvidable
@@ -37,7 +38,6 @@ final class LoginReactor: Reactor {
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .signInWithApple(authorization: let authorization):
-           // return Observable.just(.isLoggedIn(true))
            return signInWithApple(authorization: authorization)
         }
     }
@@ -46,8 +46,8 @@ final class LoginReactor: Reactor {
         var newState = state
         
         switch mutation {
-        case .isLoggedIn:
-            newState.isReadyToProceedWithSignUp = true
+        case .isLoggedIn(let isLoggedIn):
+            newState.isReadyToProceedWithSignUp = isLoggedIn
         }
         
         return newState

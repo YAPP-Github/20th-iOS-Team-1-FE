@@ -22,7 +22,8 @@ final class SignUpAreaViewController: BaseViewController {
         label.font = UIFont.systemFont(ofSize: 32)
         label.textColor = .Togaether.primaryLabel
         label.attributedText = attributedText
-        label.numberOfLines = 0
+        label.numberOfLines = 2
+        label.adjustsFontSizeToFitWidth = true
         
         return label
     }()
@@ -237,14 +238,6 @@ final class SignUpAreaViewController: BaseViewController {
                     if isEnabled {
                         this.nextButton.becomeFirstResponder()
                     }
-                })
-            
-            reactor.state
-                .filter { $0.isReadyToStartTogaether == true }
-                .observe(on: MainScheduler.instance)
-                .subscribe(with: self,
-                   onNext: { this, _ in
-                    
                 })
         }
     }
