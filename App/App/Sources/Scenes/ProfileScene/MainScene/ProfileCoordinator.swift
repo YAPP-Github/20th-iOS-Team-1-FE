@@ -17,7 +17,9 @@ final class ProfileCoordinator: SceneCoordinator {
     }
     
     func start() {
-        let reactor = ProfileReactor()
+        let networkManager = NetworkManager.shared
+        let profileMainRepository = ProfileRespository(networkManager: networkManager)
+        let reactor = ProfileReactor(profileMainRepository: profileMainRepository)
         let viewController = ProfileViewController(reactor: reactor)
         
         navigationController.setViewControllers([viewController], animated: false)
