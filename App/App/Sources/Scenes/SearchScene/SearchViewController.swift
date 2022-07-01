@@ -177,7 +177,10 @@ final class SearchViewController: BaseViewController {
             mapView.rx.didChangeVisibleRegion
                 .debounce(.milliseconds(250), scheduler: MainScheduler.instance)
                 .map { [unowned self] in
-                    Reactor.Action.mapViewVisibleRegionDidChanged(self.mapView.centerCoordinate)
+                    Reactor.Action.mapViewVisibleRegionDidChanged(
+                        self.mapView.topLeftCoordinate(),
+                        self.mapView.bottomRightCoordinate()
+                    )
                 }
                 .bind(to: reactor.action)
         )
