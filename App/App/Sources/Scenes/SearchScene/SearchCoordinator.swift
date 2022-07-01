@@ -18,7 +18,8 @@ final class SearchCoordinator: SceneCoordinator {
     }
     
     func start() {
-        let reactor = SearchReactor()
+        let gatherRepository = GatherRepository(networkManager: NetworkManager.shared)
+        let reactor = SearchReactor(gatherRepository: gatherRepository)
         let locationManger = CLLocationManager()
         let viewController = SearchViewController(reactor: reactor, locationManager: locationManger)
         
