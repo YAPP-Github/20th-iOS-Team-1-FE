@@ -9,13 +9,19 @@ import UIKit
 import MapKit
 
 final class Annotation: NSObject, MKAnnotation {
-    internal var coordinate: CLLocationCoordinate2D
-    internal var gatherCategory: GatherCategory
+    internal var coordinate: CLLocationCoordinate2D {
+        self.gather.coordinate.toCLLocationCoordinate2D()
+    }
+    
+    internal var gather: GatherConfigurationForAnnotation
     internal var isSelected: Bool
     
-    init(coordinate: CLLocationCoordinate2D, gatherCategory: GatherCategory) {
-        self.coordinate = coordinate
-        self.gatherCategory = gatherCategory
+    init(id: Int, coordinate: CLLocationCoordinate2D, gatherCategory: GatherCategory) {
+        self.gather = GatherConfigurationForAnnotation(
+            id: id,
+            coordinate: coordinate.toCoordinate(),
+            category: gatherCategory
+        )
         self.isSelected = false
     }
 }
@@ -57,7 +63,7 @@ final class AnnotationView: MKAnnotationView {
         guard let annotation = self.annotation as? Annotation
         else { return }
         self.canShowCallout = false
-        switch annotation.gatherCategory {
+        switch annotation.gather.category  {
         case .walk:
             self.image = annotation.isSelected ? UIImage.Togaether.focusWalkMapViewAnnotation: UIImage.Togaether.defaultWalkMapViewAnnotation
         case .dogCafe:
