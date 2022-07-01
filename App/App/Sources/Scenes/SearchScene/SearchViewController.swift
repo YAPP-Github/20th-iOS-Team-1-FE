@@ -31,6 +31,7 @@ final class SearchViewController: BaseViewController {
         
         mapView.addAnnotation(
             Annotation(
+                id: 0,
                 coordinate: CLLocationCoordinate2D(
                     latitude: 37.29263305664062,
                     longitude: 127.11612977377284
@@ -142,7 +143,7 @@ final class SearchViewController: BaseViewController {
             currentLocationButton.widthAnchor.constraint(equalToConstant: 44),
             currentLocationButton.heightAnchor.constraint(equalToConstant: 44),
             currentLocationButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            currentLocationButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
+            currentLocationButton.bottomAnchor.constraint(equalTo: gatherInformationBottomSheet.topAnchor, constant: -30),
             //bottomSheet
             gatherInformationBottomSheet.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor),
             gatherInformationBottomSheet.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
