@@ -26,6 +26,7 @@
 		29AE2254286DDA0500EDF34B /* GatherConfigurationForSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2253286DDA0500EDF34B /* GatherConfigurationForSheet.swift */; };
 		29AE2256286F2DDF00EDF34B /* MKMapView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2255286F2DDF00EDF34B /* MKMapView+Extension.swift */; };
 		29AE2258286F2FB400EDF34B /* GatherRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2257286F2FB400EDF34B /* GatherRepository.swift */; };
+		29AE225A286F523D00EDF34B /* MapViewBottomSheetContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2259286F523D00EDF34B /* MapViewBottomSheetContentView.swift */; };
 		37191838286E166100169FC2 /* SignUpTermsOfServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37191836286E166100169FC2 /* SignUpTermsOfServiceViewController.swift */; };
 		3719183B286E184F00169FC2 /* GuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3719183A286E184F00169FC2 /* GuideView.swift */; };
 		3719183E286E235E00169FC2 /* SignUpPrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3719183D286E235E00169FC2 /* SignUpPrivacyPolicyViewController.swift */; };
@@ -196,6 +197,7 @@
 		29AE2253286DDA0500EDF34B /* GatherConfigurationForSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherConfigurationForSheet.swift; sourceTree = "<group>"; };
 		29AE2255286F2DDF00EDF34B /* MKMapView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+Extension.swift"; sourceTree = "<group>"; };
 		29AE2257286F2FB400EDF34B /* GatherRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherRepository.swift; sourceTree = "<group>"; };
+		29AE2259286F523D00EDF34B /* MapViewBottomSheetContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewBottomSheetContentView.swift; sourceTree = "<group>"; };
 		37191836286E166100169FC2 /* SignUpTermsOfServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTermsOfServiceViewController.swift; sourceTree = "<group>"; };
 		3719183A286E184F00169FC2 /* GuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideView.swift; sourceTree = "<group>"; };
 		3719183D286E235E00169FC2 /* SignUpPrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPrivacyPolicyViewController.swift; sourceTree = "<group>"; };
@@ -363,6 +365,7 @@
 			children = (
 				29AE2242284DF14C00EDF34B /* Entity */,
 				29AE222B284B7DAA00EDF34B /* SearchViewController.swift */,
+				29AE2259286F523D00EDF34B /* MapViewBottomSheetContentView.swift */,
 				29AE224B2853711F00EDF34B /* RxMKMapViewDelegateProxy.swift */,
 				29AE22512869E47100EDF34B /* MapViewAnnotation.swift */,
 				29AE222C284B7DAA00EDF34B /* SearchReactor.swift */,
@@ -1218,6 +1221,7 @@
 				FD9D38EE28543409005A0C86 /* SegmentView.swift in Sources */,
 				378F3482281DBE140063CE4F /* ChattingViewController.swift in Sources */,
 				379B1A7D285A580D00E58A34 /* SignInResult.swift in Sources */,
+				29AE225A286F523D00EDF34B /* MapViewBottomSheetContentView.swift in Sources */,
 				378F347B281DBDF10063CE4F /* LoginReactor.swift in Sources */,
 				FDBC1234286C986700FCADF4 /* PetInfoDTO.swift in Sources */,
 				37912C65281445AC0087B95E /* AppDelegate.swift in Sources */,
