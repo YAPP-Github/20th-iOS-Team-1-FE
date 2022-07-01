@@ -25,6 +25,7 @@
 		29AE22522869E47100EDF34B /* MapViewAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE22512869E47100EDF34B /* MapViewAnnotation.swift */; };
 		29AE2254286DDA0500EDF34B /* GatherConfigurationForSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2253286DDA0500EDF34B /* GatherConfigurationForSheet.swift */; };
 		29AE2256286F2DDF00EDF34B /* MKMapView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2255286F2DDF00EDF34B /* MKMapView+Extension.swift */; };
+		29AE2258286F2FB400EDF34B /* GatherRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2257286F2FB400EDF34B /* GatherRepository.swift */; };
 		37191838286E166100169FC2 /* SignUpTermsOfServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37191836286E166100169FC2 /* SignUpTermsOfServiceViewController.swift */; };
 		3719183B286E184F00169FC2 /* GuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3719183A286E184F00169FC2 /* GuideView.swift */; };
 		3719183E286E235E00169FC2 /* SignUpPrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3719183D286E235E00169FC2 /* SignUpPrivacyPolicyViewController.swift */; };
@@ -194,6 +195,7 @@
 		29AE22512869E47100EDF34B /* MapViewAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewAnnotation.swift; sourceTree = "<group>"; };
 		29AE2253286DDA0500EDF34B /* GatherConfigurationForSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherConfigurationForSheet.swift; sourceTree = "<group>"; };
 		29AE2255286F2DDF00EDF34B /* MKMapView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+Extension.swift"; sourceTree = "<group>"; };
+		29AE2257286F2FB400EDF34B /* GatherRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherRepository.swift; sourceTree = "<group>"; };
 		37191836286E166100169FC2 /* SignUpTermsOfServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTermsOfServiceViewController.swift; sourceTree = "<group>"; };
 		3719183A286E184F00169FC2 /* GuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideView.swift; sourceTree = "<group>"; };
 		3719183D286E235E00169FC2 /* SignUpPrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPrivacyPolicyViewController.swift; sourceTree = "<group>"; };
@@ -396,6 +398,7 @@
 				374F41CC2864E5250074F04B /* AccountValidationRepository.swift */,
 				3734CEAB2869E72100EEF38D /* SignUpRepository.swift */,
 				FDBC1225286C309C00FCADF4 /* ProfileRespository.swift */,
+				29AE2257286F2FB400EDF34B /* GatherRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -1121,6 +1124,7 @@
 				29AE2238284B941800EDF34B /* GatherCategory.swift in Sources */,
 				378F3487281DBE210063CE4F /* ProfileReactor.swift in Sources */,
 				37912C9A281447C40087B95E /* Array+Extension.swift in Sources */,
+				29AE2258286F2FB400EDF34B /* GatherRepository.swift in Sources */,
 				3719183B286E184F00169FC2 /* GuideView.swift in Sources */,
 				3734CEAE2869E7E700EEF38D /* SignUpAccountDTO.swift in Sources */,
 				3743809D284FDB5300CB02A5 /* ExceptionResponseInfoDTO.swift in Sources */,
