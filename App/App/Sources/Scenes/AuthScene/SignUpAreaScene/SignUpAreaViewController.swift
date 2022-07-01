@@ -194,7 +194,7 @@ final class SignUpAreaViewController: BaseViewController {
                 .bind(to: reactor.action)
             
             smallCityPickerView.rx.itemSelected
-                .map { Reactor.Action.smallCityDidPick($0.component) }
+                .map { Reactor.Action.smallCityDidPick($0.row) }
                 .bind(to: reactor.action)
             
             nextButton.rx.throttleTap

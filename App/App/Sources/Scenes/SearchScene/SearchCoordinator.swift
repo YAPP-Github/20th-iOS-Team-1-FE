@@ -9,7 +9,7 @@ import UIKit
 import CoreLocation
 
 final class SearchCoordinator: SceneCoordinator {
-    weak var parentCoordinator: SceneCoordinator?
+    weak var parentCoordinator: Coordinator?
     var navigationController: UINavigationController
     var childCoordinators = [Coordinator]()
     

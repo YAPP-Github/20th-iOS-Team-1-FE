@@ -26,52 +26,57 @@ final class KeychainUsecase: KeychainUseCaseInterface {
                 return Disposables.create()
             }
             
-            if let accessToken = try? self.keychainProvider.read(service: KeychainService.apple, account: KeychainAccount.accessToken) {
-                single(.success(accessToken))
-                return Disposables.create()
-                
-            } else if let refreshToken = try? self.keychainProvider.read(service: KeychainService.apple, account: KeychainAccount.refreshToken) {
-                guard let url = URL(string: "https://yapp-togather.com/api/tokens/re-issuance") else {
-                    single(.failure(NSError()))
-                    return Disposables.create()
-                }
-                
-                var urlRequest = URLRequest(url: url)
-                urlRequest.httpBody = refreshToken
-                
-                let response: Single<TokenResponseDTO> = self.networkManager.requestDataTask(with: urlRequest)
-                
-                response.subscribe { result in
-                    switch result {
-                    case .success(let dto):
-                        let tokens = dto.toDomain()
-                        
-                        guard let accessToken = tokens.accessToken.data(using: .utf8, allowLossyConversion: false),
-                              let refreshToken = tokens.refreshToken.data(using: .utf8, allowLossyConversion: false) else {
-                            single(.failure(NSError()))
-                            return
-                        }
-                        
-                        do {
-                            try self.keychainProvider.create(accessToken, service: KeychainService.apple, account: KeychainAccount.accessToken)
-                            try self.keychainProvider.delete(service: KeychainService.apple, account: KeychainAccount.refreshToken)
-                            try self.keychainProvider.create(refreshToken, service: KeychainService.apple, account: KeychainAccount.refreshToken)
-                        } catch {
-                            single(.failure(NSError()))
-                            return
-                        }
-                    case .failure(_):
-                        single(.failure(NSError()))
-                        return
-                    }
-                }.disposed(by: self.disposeBag)
-                
-            } else {
+            guard let accessToken = try? self.keychainProvider.read(service: KeychainService.apple, account: KeychainAccount.accessToken) else {
                 single(.failure(NSError()))
                 return Disposables.create()
             }
             
-            single(.failure(NSError()))
+            guard let refreshToken = try? self.keychainProvider.read(service: KeychainService.apple, account: KeychainAccount.refreshToken),
+                  let url = URL(string: "https://yapp-togather.com/api/tokens/re-issuance") else {
+                single(.failure(NSError()))
+                return Disposables.create()
+            }
+        
+            var urlRequest = URLRequest(url: url)
+            urlRequest.httpBody = refreshToken
+            
+            let refreshTokenString = String(decoding: refreshToken, as: UTF8.self)
+            urlRequest.httpMethod = HTTPMethod.post
+            urlRequest.addValue(refreshTokenString.makePrefixBearer(), forHTTPHeaderField: "Authorization")
+            urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
+            urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            let response: Single<TokenResponseDTO> = self.networkManager.requestDataTask(with: urlRequest)
+            
+            response.subscribe { result in
+                switch result {
+                case .success(let dto):
+                    let tokens = dto.toDomain()
+                    
+                    guard let accessToken = tokens.accessToken.data(using: .utf8, allowLossyConversion: false),
+                          let refreshToken = tokens.refreshToken.data(using: .utf8, allowLossyConversion: false) else {
+                        single(.failure(NSError()))
+                        return
+                    }
+                    
+                    do {
+                        try self.keychainProvider.delete(service: KeychainService.apple, account: KeychainAccount.accessToken)
+                        try self.keychainProvider.create(accessToken, service: KeychainService.apple, account: KeychainAccount.accessToken)
+                        try self.keychainProvider.delete(service: KeychainService.apple, account: KeychainAccount.refreshToken)
+                        try self.keychainProvider.create(refreshToken, service: KeychainService.apple, account: KeychainAccount.refreshToken)
+                        if let accessToken = try self.keychainProvider.read(service: KeychainService.apple, account: KeychainAccount.refreshToken) {
+                            single(.success(accessToken))
+                            return
+                        }
+                    } catch {
+                        single(.failure(NSError()))
+                        return
+                    }
+                case .failure(_):
+                    single(.failure(NSError()))
+                    return
+                }
+            }.disposed(by: self.disposeBag)
+            
             return Disposables.create()
         }
     }
