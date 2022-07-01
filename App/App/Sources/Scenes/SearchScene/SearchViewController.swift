@@ -29,16 +29,16 @@ final class SearchViewController: BaseViewController {
         
         mapView.register(AnnotationView.self, forAnnotationViewWithReuseIdentifier: AnnotationView.identifier)
         
-//        mapView.addAnnotation(
-//            Annotation(
-//                id: 0,
-//                coordinate: CLLocationCoordinate2D(
-//                    latitude: 37.29263305664062,
-//                    longitude: 127.11612977377284
-//                ),
-//                gatherCategory: .walk
-//            )
-//        )
+        mapView.addAnnotation(
+            Annotation(
+                id: 0,
+                coordinate: CLLocationCoordinate2D(
+                    latitude: 37.29263305664062,
+                    longitude: 127.11612977377284
+                ),
+                gatherCategory: .walk
+            )
+        )
     
         return mapView
     }()
@@ -95,6 +95,15 @@ final class SearchViewController: BaseViewController {
         return button
     }()
     
+    private lazy var bottomSheetContentView: MapViewBottomSheetContentView = {
+        let view = MapViewBottomSheetContentView(frame: .zero)
+        view.layer.cornerRadius = 10
+        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        view.isHidden = true
+       
+        return view
+    }()
+    
     var disposeBag = DisposeBag()
     
     init(reactor: SearchReactor, locationManager: CLLocationManager) {
@@ -125,6 +134,7 @@ final class SearchViewController: BaseViewController {
         view.addSubview(currentLocationButton)
         view.addSubview(gatherInformationBottomSheet)
         mapView.addSubview(searchButton)
+        gatherInformationBottomSheet.addSubview(bottomSheetContentView)
     }
     
     private func configureLayout() {
@@ -146,7 +156,12 @@ final class SearchViewController: BaseViewController {
             currentLocationButton.bottomAnchor.constraint(equalTo: gatherInformationBottomSheet.topAnchor, constant: -30),
             //bottomSheet
             gatherInformationBottomSheet.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor),
-            gatherInformationBottomSheet.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            gatherInformationBottomSheet.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            //bottomSheetContentView
+            bottomSheetContentView.topAnchor.constraint(equalTo: gatherInformationBottomSheet.topAnchor),
+            bottomSheetContentView.leadingAnchor.constraint(equalTo: gatherInformationBottomSheet.leadingAnchor),
+            bottomSheetContentView.trailingAnchor.constraint(equalTo: gatherInformationBottomSheet.trailingAnchor),
+            bottomSheetContentView.bottomAnchor.constraint(equalTo: gatherInformationBottomSheet.bottomAnchor)
         ])
     }
     
@@ -243,7 +258,9 @@ extension SearchViewController: MKMapViewDelegate {
             view.select()
             mapView.setCenter(annotation.coordinate, animated: true)
             UIView.animate(withDuration: 0.2, animations: {
-                self.gatherInformationBottomSheetHeightConstraint.constant = 192
+                self.gatherInformationBottomSheetHeightConstraint.constant = 200
+                self.bottomSheetContentView.isHidden = false
+                //TODO: ANNOTATION 정보로 View 그리기
                 self.view.layoutIfNeeded()
             })
         }
@@ -256,6 +273,7 @@ extension SearchViewController: MKMapViewDelegate {
         view.deselect()
         UIView.animate(withDuration: 0.2, animations: {
             self.gatherInformationBottomSheetHeightConstraint.constant = 0
+            self.bottomSheetContentView.isHidden = true
             self.view.layoutIfNeeded()
         })
     }
