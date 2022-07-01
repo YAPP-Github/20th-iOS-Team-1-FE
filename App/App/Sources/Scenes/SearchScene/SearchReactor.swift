@@ -13,7 +13,7 @@ import RxSwift
 
 final class SearchReactor: Reactor {
     enum Action {
-        case mapViewVisibleRegionDidChanged(CLLocationCoordinate2D)
+        case mapViewVisibleRegionDidChanged(CLLocationCoordinate2D, CLLocationCoordinate2D)
     }
     
     enum Mutation {
@@ -22,6 +22,7 @@ final class SearchReactor: Reactor {
     
     struct State {
         var visibleCorrdinate: Coordinate = .seoulCityHall
+        
         var currentSpan: Double = 0.005
     }
 
@@ -34,8 +35,9 @@ final class SearchReactor: Reactor {
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
 
-        case .mapViewVisibleRegionDidChanged(let newCoordinate):
-            return Observable.just(.setVisibleCoordinate(newCoordinate))
+        case let .mapViewVisibleRegionDidChanged(topLeftCoordinate, rightBottomCoordinate):
+//            return Observable.just(.setVisibleCoordinate(newCoordinate))
+            return .never()
         }
     }
     
