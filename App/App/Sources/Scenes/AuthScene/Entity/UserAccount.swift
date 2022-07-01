@@ -8,7 +8,6 @@
 import Foundation
 
 struct UserAccount: Equatable {
-    var email: String? = nil
     var profileImageData: Data? = nil
     var nickName: String? = nil
     var age: Int? = nil

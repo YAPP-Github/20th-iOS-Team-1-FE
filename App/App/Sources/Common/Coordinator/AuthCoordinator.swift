@@ -9,9 +9,10 @@ import UIKit
 
 import RxSwift
 
-final class AuthCoordinator: NSObject, Coordinator {
+final class AuthCoordinator: SceneCoordinator {
+    weak var delegate: AuthCoordinatorDelegate?
     var childCoordinators = [Coordinator]()
-    let navigationController = UINavigationController()
+    var navigationController = UINavigationController()
     var window: UIWindow?
     var disposeBag = DisposeBag()
     
@@ -139,17 +140,18 @@ final class AuthCoordinator: NSObject, Coordinator {
         let signUpAreaReactor = SignUpAreaReactor(user: user, keychainUseCase: keychainUseCase, signUpRepository: signUpRepository)
         let signUpAreaViewController = SignUpAreaViewController(reactor: signUpAreaReactor)
 
-        signUpAreaReactor.state
-            .skip(1)
-            .filter { $0.isReadyToStartTogaether == true }
-            .asDriver(onErrorJustReturn: SignUpAreaReactor.State(user: UserAccount()))
+        signUpAreaReactor.readyToStart
+            .asDriver(onErrorJustReturn: ())
             .drive(with: self,
-                   onNext: { this, _ in
-                print(1)
+                   onNext: { this, user in
+                this.delegate?.switchToTabBar()
             })
             .disposed(by:disposeBag)
         
         navigationController.pushViewController(signUpAreaViewController, animated: true)
     }
-    
+}
+
+protocol AuthCoordinatorDelegate: AnyObject {
+    func switchToTabBar()
 }
