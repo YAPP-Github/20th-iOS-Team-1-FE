@@ -24,7 +24,6 @@ final class SignUpAreaReactor: Reactor {
         case updateBigCity(String)
         case showSmallCities([String])
         case updateSmallCity(String)
-        case readyToStartTogaether
     }
 
     struct State {
@@ -34,7 +33,6 @@ final class SignUpAreaReactor: Reactor {
         var bigCityList = Area.allCases.map { $0.rawValue }
         var smallCityList = [String]()
         var isNextButtonEnabled = false
-        var isReadyToStartTogaether = false
     }
 
     let initialState: State
@@ -42,6 +40,7 @@ final class SignUpAreaReactor: Reactor {
     private let signUpRepository: SignUpRepositoryInterface
     private let keychainUseCase: KeychainUseCaseInterface
     private let disposeBag = DisposeBag()
+    internal var readyToStart = PublishSubject<Void>()
     
     init(user: UserAccount, keychainUseCase: KeychainUseCaseInterface, signUpRepository: SignUpRepositoryInterface) {
         initialState = State(user: user)
@@ -53,8 +52,8 @@ final class SignUpAreaReactor: Reactor {
         switch action {
         case .bigCityTextFieldDidTap:
             return Observable.just(.showBigCities(currentState.bigCityList))
-        case .bigCityDidPick(let city):
-            if let bigCity = currentState.bigCityList[safe: city] {
+        case .bigCityDidPick(let cityIndex):
+            if let bigCity = currentState.bigCityList[safe: cityIndex] {
                 return Observable.just(.updateBigCity(bigCity))
             } else {
                 return Observable.empty()
@@ -65,14 +64,15 @@ final class SignUpAreaReactor: Reactor {
             } else {
                 return Observable.empty()
             }
-        case .smallCityDidPick(let city):
-            if let smallCity = currentState.smallCityList[safe: city] {
+        case .smallCityDidPick(let cityIndex):
+            if let smallCity = currentState.smallCityList[safe: cityIndex] {
                 return Observable.just(.updateSmallCity(smallCity))
             } else {
                 return Observable.empty()
             }
         case .nextButtonDidTap:
-            return Observable.just(.readyToStartTogaether)
+            signUp(user: currentState.user)
+            return Observable.empty()
         }
     }
 
@@ -85,20 +85,15 @@ final class SignUpAreaReactor: Reactor {
         case .updateBigCity(let city):
             newState.user.bigCity = city
             newState.selectedBigCity = city
-            if newState.selectedBigCity != state.selectedBigCity {
-                newState.user.smallCity = nil
-                newState.selectedSmallCity = nil
-                newState.smallCityList = []
-                newState.isNextButtonEnabled = false
-            }
+            newState.user.smallCity = "종로구"
+            newState.selectedSmallCity = "종로구"
+            newState.isNextButtonEnabled = true
         case .showSmallCities(let cities):
             newState.smallCityList = cities
         case .updateSmallCity(let city):
             newState.user.smallCity = city
             newState.selectedSmallCity = city
             newState.isNextButtonEnabled = true
-        case .readyToStartTogaether:
-            newState.isReadyToStartTogaether = true
         }
 
         return newState
@@ -114,34 +109,26 @@ final class SignUpAreaReactor: Reactor {
         return smallCities
     }
     
-    private func signUp(user: UserAccount) -> Observable<Mutation> {
-        return Observable.create { [weak self] observer in
-            guard let self = self else {
-                return Disposables.create()
-            }
-            
-            self.keychainUseCase.getAccessToken()
-                .subscribe(with: self,
-                   onSuccess: { this, token in
-                    this.signUpRepository.signUp(user: user, accessToken: token)
-                        .subscribe(
-                            onSuccess: {
-                                observer.onNext(Mutation.readyToStartTogaether)
-                                return
-                            
-                            }, onFailure: { _ in
-                                #warning("회원가입 실패할 경우 버튼을 눌러도 반응이 없음")
-                                return
-                            }
-                        ).disposed(by: self.disposeBag)
-                   },
-                   onFailure: { _,_ in
-                        #warning("회원가입 실패할 경우 버튼을 눌러도 반응이 없음")
-                        return
-                   }
-                ).disposed(by: self.disposeBag)
-            
-            return Disposables.create()
-        }
+    private func signUp(user: UserAccount) {
+        keychainUseCase.getAccessToken()
+            .subscribe(with: self,
+               onSuccess: { this, token in
+                this.signUpRepository.signUp(user: user, accessToken: token)
+                    .subscribe(
+                        onSuccess: {
+                            this.readyToStart.onNext(())
+                            return
+                        
+                        }, onFailure: { _ in
+                            this.readyToStart.onNext(())
+                            #warning("회원가입 실패할 경우 버튼을 눌러도 반응이 없음")
+                            return
+                        }
+                    ).disposed(by: self.disposeBag)
+               },
+               onFailure: { _, _ in
+                    #warning("회원가입 실패할 경우 버튼을 눌러도 반응이 없음")
+                }
+            ).disposed(by: self.disposeBag)
     }
 }

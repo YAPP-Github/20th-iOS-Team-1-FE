@@ -30,6 +30,7 @@
 		37191838286E166100169FC2 /* SignUpTermsOfServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37191836286E166100169FC2 /* SignUpTermsOfServiceViewController.swift */; };
 		3719183B286E184F00169FC2 /* GuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3719183A286E184F00169FC2 /* GuideView.swift */; };
 		3719183E286E235E00169FC2 /* SignUpPrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3719183D286E235E00169FC2 /* SignUpPrivacyPolicyViewController.swift */; };
+		3732EF44286F4DDC0037404E /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3732EF43286F4DDC0037404E /* String+Extension.swift */; };
 		37348B0C2866CA5E00C38F70 /* BorderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37348B0B2866CA5E00C38F70 /* BorderButton.swift */; };
 		3734CEAA2869E70C00EEF38D /* SignUpRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3734CEA92869E70C00EEF38D /* SignUpRepositoryInterface.swift */; };
 		3734CEAC2869E72100EEF38D /* SignUpRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3734CEAB2869E72100EEF38D /* SignUpRepository.swift */; };
@@ -201,6 +202,7 @@
 		37191836286E166100169FC2 /* SignUpTermsOfServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTermsOfServiceViewController.swift; sourceTree = "<group>"; };
 		3719183A286E184F00169FC2 /* GuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideView.swift; sourceTree = "<group>"; };
 		3719183D286E235E00169FC2 /* SignUpPrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPrivacyPolicyViewController.swift; sourceTree = "<group>"; };
+		3732EF43286F4DDC0037404E /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		37348B0B2866CA5E00C38F70 /* BorderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderButton.swift; sourceTree = "<group>"; };
 		3734CEA92869E70C00EEF38D /* SignUpRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRepositoryInterface.swift; sourceTree = "<group>"; };
 		3734CEAB2869E72100EEF38D /* SignUpRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRepository.swift; sourceTree = "<group>"; };
@@ -737,6 +739,7 @@
 				FDE6F14B285234A3005E4783 /* NSObject+Extension.swift */,
 				FDE6F145285215BD005E4783 /* UIFont+Extension.swift */,
 				29AE2255286F2DDF00EDF34B /* MKMapView+Extension.swift */,
+				3732EF43286F4DDC0037404E /* String+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1199,6 +1202,7 @@
 				37C3F4FC284C7D8B0006CB02 /* KeychainError.swift in Sources */,
 				37AA7E142850B15800B4B5C2 /* CategoryDTO.swift in Sources */,
 				FDBC122C286C328C00FCADF4 /* ProfileInfo.swift in Sources */,
+				3732EF44286F4DDC0037404E /* String+Extension.swift in Sources */,
 				378F3483281DBE140063CE4F /* ChattingReactor.swift in Sources */,
 				376006C528489A2B00B27015 /* RegularExpressionValidator.swift in Sources */,
 				29AE224C2853711F00EDF34B /* RxMKMapViewDelegateProxy.swift in Sources */,
