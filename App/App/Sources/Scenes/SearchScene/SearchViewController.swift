@@ -29,16 +29,16 @@ final class SearchViewController: BaseViewController {
         
         mapView.register(AnnotationView.self, forAnnotationViewWithReuseIdentifier: AnnotationView.identifier)
         
-        mapView.addAnnotation(
-            Annotation(
-                id: 0,
-                coordinate: CLLocationCoordinate2D(
-                    latitude: 37.29263305664062,
-                    longitude: 127.11612977377284
-                ),
-                gatherCategory: .walk
-            )
-        )
+//        mapView.addAnnotation(
+//            Annotation(
+//                id: 0,
+//                coordinate: CLLocationCoordinate2D(
+//                    latitude: 37.29263305664062,
+//                    longitude: 127.11612977377284
+//                ),
+//                gatherCategory: .walk
+//            )
+//        )
     
         return mapView
     }()
@@ -175,7 +175,7 @@ final class SearchViewController: BaseViewController {
                 },
             
             mapView.rx.didChangeVisibleRegion
-                .debounce(.milliseconds(250), scheduler: MainScheduler.instance)
+                .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
                 .map { [unowned self] in
                     Reactor.Action.mapViewVisibleRegionDidChanged(
                         self.mapView.topLeftCoordinate(),
@@ -187,7 +187,17 @@ final class SearchViewController: BaseViewController {
     }
     
     private func bindState(with reactor: SearchReactor) {
-        
+        disposeBag.insert(
+            reactor.state
+                .map { $0.annotations }
+                .distinctUntilChanged()
+                .asDriver(onErrorJustReturn: [GatherConfigurationForAnnotation]() )
+                .drive(onNext: { annotations in
+                    for annotation in annotations {
+                        self.mapView.addAnnotation(annotation.toAnnotation())
+                    }
+                })
+        )
     }
     
     func bind(reactor: SearchReactor) {
