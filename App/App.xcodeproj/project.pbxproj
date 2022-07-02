@@ -631,6 +631,7 @@
 		378F3476281DBDB10063CE4F /* AuthScene */ = {
 			isa = PBXGroup;
 			children = (
+				37F67CC4286A1C270073FE8C /* AuthCoordinator.swift */,
 				3773708A2841DE4800D5CCB6 /* Entity */,
 				37605DED28394F4400394929 /* LoginScene */,
 				37605E02283C126100394929 /* SignUpAgreementScene */,
@@ -762,7 +763,6 @@
 			isa = PBXGroup;
 			children = (
 				37605DEB28394E0400394929 /* AppCoordinator.swift */,
-				37F67CC4286A1C270073FE8C /* AuthCoordinator.swift */,
 				37912CA528144A530087B95E /* TabCoordinator.swift */,
 				37912CA328144A260087B95E /* Protocol */,
 			);

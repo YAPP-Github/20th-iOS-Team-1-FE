@@ -26,9 +26,6 @@ final class SignUpAgreementReactor: Reactor {
         case togglePrivacyPolicy
         case syncAgreementWithTermsOfServiceAndPrivacyPolicy
         case syncTermsOfServiceAndPrivacyPolicyWithAgreement
-        case readyToProceedWithSignUp
-        case readyToShowTermsOfService
-        case readyToShowPrivacyPolicy
     }
     
     struct State {
@@ -36,12 +33,13 @@ final class SignUpAgreementReactor: Reactor {
         var isAgreementChecked = false
         var isTermsOfServiceChecked = false
         var isPrivacyPolicyChecked = false
-        var isReadyToProceedWithSignUp = false
-        var isReadyToShowTermsOfService = false
-        var isReadyToShowPrivacyPolicy = false
     }
     
     let initialState: State
+    
+    internal var readyToProceedWithSignUp = PublishSubject<UserAccount>()
+    internal var readyToShowTermsOfService = PublishSubject<Void>()
+    internal var readyToShowPrivacyPolicy = PublishSubject<Void>()
     
     init() {
         self.initialState = State()
@@ -59,17 +57,21 @@ final class SignUpAgreementReactor: Reactor {
                 Observable.just(.toggleTermsOfService),
                 Observable.just(.syncAgreementWithTermsOfServiceAndPrivacyPolicy)
             ])
-        case .termsOfServiceLabelDidTap:
-            return Observable.just(Mutation.readyToShowTermsOfService)
+            return Observable.empty()
         case .privacyPolicyCheckBoxDidTap:
             return Observable.concat([
                 Observable.just(.togglePrivacyPolicy),
                 Observable.just(.syncAgreementWithTermsOfServiceAndPrivacyPolicy)
             ])
+        case .termsOfServiceLabelDidTap:
+            readyToShowTermsOfService.onNext(())
+            return Observable.empty()
         case .privacyPolicyLabelDidTap:
-            return Observable.just(Mutation.readyToShowPrivacyPolicy)
+            readyToShowPrivacyPolicy.onNext(())
+            return Observable.empty()
         case .nextButtonDidTap:
-            return Observable.just(.readyToProceedWithSignUp)
+            readyToProceedWithSignUp.onNext((currentState.user))
+            return Observable.empty()
         }
     }
     
@@ -88,12 +90,6 @@ final class SignUpAgreementReactor: Reactor {
         case .syncTermsOfServiceAndPrivacyPolicyWithAgreement:
             newState.isTermsOfServiceChecked = newState.isAgreementChecked
             newState.isPrivacyPolicyChecked = newState.isAgreementChecked
-        case .readyToProceedWithSignUp:
-            newState.isReadyToProceedWithSignUp = true
-        case .readyToShowTermsOfService:
-            newState.isReadyToShowTermsOfService = true
-        case .readyToShowPrivacyPolicy:
-            newState.isReadyToShowPrivacyPolicy = true
         }
         
         return newState

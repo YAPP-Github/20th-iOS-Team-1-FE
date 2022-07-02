@@ -17,11 +17,9 @@ final class LoginReactor: Reactor {
     }
     
     enum Mutation {
-        case isLoggedIn(Bool)
     }
     
     struct State {
-        var isReadyToProceedWithSignUp = false
     }
     
     let initialState = State()
@@ -29,6 +27,7 @@ final class LoginReactor: Reactor {
     private let disposeBag = DisposeBag()
     private let appleLoginRepository: AppleLoginRepositoryInterface
     private let keychainProvider: KeychainProvidable
+    internal var readyToProceedWithSignUp = PublishSubject<Void>()
     
     init(appleLoginRepository: AppleLoginRepositoryInterface, keychainProvider: KeychainProvidable) {
         self.appleLoginRepository = appleLoginRepository
@@ -38,7 +37,8 @@ final class LoginReactor: Reactor {
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .signInWithApple(authorization: let authorization):
-           return signInWithApple(authorization: authorization)
+            signInWithApple(authorization: authorization)
+            return Observable.empty()
         }
     }
     
@@ -46,42 +46,35 @@ final class LoginReactor: Reactor {
         var newState = state
         
         switch mutation {
-        case .isLoggedIn(let isLoggedIn):
-            newState.isReadyToProceedWithSignUp = isLoggedIn
         }
         
         return newState
     }
     
-    private func signInWithApple(authorization: ASAuthorization) -> Observable<Mutation> {
-        return Observable.create { [weak self] observer in
-            guard let self = self,
-                  let appleCrendential = self.getAppleCrendential(for: authorization) else {
-                observer.onNext(Mutation.isLoggedIn(false))
-                return Disposables.create()
-            }
-            
-            self.appleLoginRepository.requestAppleLogin(appleCredential: appleCrendential)
-                .subscribe { result in
-                    switch result {
-                    case .success(let signInResult):
-                        if signInResult.firstAccount {
-                            guard let accessToken = signInResult.accessToken.data(using: .utf8, allowLossyConversion: false),
-                                  let refreshToken = signInResult.refreshToken.data(using: .utf8, allowLossyConversion: false) else {
-                                observer.onNext(Mutation.isLoggedIn(false))
-                                return 
-                            }
-                            
-                            try? self.keychainProvider.create(accessToken, service: KeychainService.apple, account: KeychainAccount.accessToken)
-                            try? self.keychainProvider.create(refreshToken, service: KeychainService.apple, account: KeychainAccount.refreshToken)
-                        }
-                        observer.onNext(Mutation.isLoggedIn(true))
-                    case .failure(_):
-                        observer.onNext(Mutation.isLoggedIn(false))
-                    }
-                }.disposed(by: self.disposeBag)
-            return Disposables.create()
+    private func signInWithApple(authorization: ASAuthorization) {
+        guard let appleCrendential = getAppleCrendential(for: authorization) else {
+            return
         }
+        
+        appleLoginRepository.requestAppleLogin(appleCredential: appleCrendential)
+            .subscribe { [weak self] result in
+                switch result {
+                case .success(let signInResult):
+                    if signInResult.firstAccount {
+                        guard let accessToken = signInResult.accessToken.data(using: .utf8, allowLossyConversion: false),
+                              let refreshToken = signInResult.refreshToken.data(using: .utf8, allowLossyConversion: false) else {
+                            return
+                        }
+                    
+                        try? self?.keychainProvider.create(accessToken, service: KeychainService.apple, account: KeychainAccount.accessToken)
+                        try? self?.keychainProvider.create(refreshToken, service: KeychainService.apple, account: KeychainAccount.refreshToken)
+                    }
+                    
+                    self?.readyToProceedWithSignUp.onNext(())
+            case .failure(_):
+                #warning("애플로그인 실패하면 예외처리")
+            }
+        }.disposed(by: self.disposeBag)
     }
     
     private func getAppleCrendential(for authorization: ASAuthorization) -> AppleCredential? {

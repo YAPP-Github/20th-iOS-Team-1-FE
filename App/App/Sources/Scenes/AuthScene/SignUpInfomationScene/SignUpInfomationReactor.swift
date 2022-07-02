@@ -24,7 +24,6 @@ final class SignUpInfomationReactor: Reactor {
         case selectMan
         case selectWoman
         case selectPrivateSex
-        case readyToProceedWithSignUp
     }
     
     struct State {
@@ -33,10 +32,11 @@ final class SignUpInfomationReactor: Reactor {
         var isWomanSelected = false
         var isPrivateSexSelected = false
         var isNextButtonEnabled = false
-        var isReadyToProceedWithSignUp = false
     }
     
     let initialState: State
+    
+    internal var readyToProceedWithSignUp = PublishSubject<UserAccount>()
     
     init(user: UserAccount) {
         initialState = State(user: user)
@@ -53,7 +53,8 @@ final class SignUpInfomationReactor: Reactor {
         case .privateSexButtonDidTap:
             return Observable.just(.selectPrivateSex)
         case .nextButtonDidTap:
-            return Observable.just(.readyToProceedWithSignUp)
+            readyToProceedWithSignUp.onNext(currentState.user)
+            return Observable.empty()
         }
     }
     
@@ -82,8 +83,6 @@ final class SignUpInfomationReactor: Reactor {
             newState.isWomanSelected = false
             newState.isPrivateSexSelected = true
             newState.isNextButtonEnabled = newState.user.age != nil && (newState.isManSelected || newState.isWomanSelected || newState.isPrivateSexSelected)
-        case .readyToProceedWithSignUp:
-            newState.isReadyToProceedWithSignUp = true
         }
         
         return newState
