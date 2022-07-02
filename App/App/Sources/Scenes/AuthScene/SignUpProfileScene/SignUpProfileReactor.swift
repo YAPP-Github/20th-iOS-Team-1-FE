@@ -23,7 +23,6 @@ final class SignUpProfileReactor: Reactor {
         case validateNicknameLength(Bool)
         case updateNickname(String)
         case checkNicknameDuplication(String?)
-        case readyToProceedWithSignUp
     }
     
     struct State {
@@ -31,7 +30,6 @@ final class SignUpProfileReactor: Reactor {
         var user: UserAccount
         var isNicknameValidationCheckDone = false
         var isNicknameDuplicateCheckDone = false
-        var isReadyToProceedWithSignUp = false
     }
     
     let initialState: State
@@ -40,6 +38,7 @@ final class SignUpProfileReactor: Reactor {
     private let accountValidationRepository: AccountValidationRepositoryInterface
     private let keychainUseCase: KeychainUseCaseInterface
     private let disposeBag = DisposeBag()
+    internal var readyToProceedWithSignUp = PublishSubject<UserAccount>()
     
     init(user: UserAccount, regularExpressionValidator: RegularExpressionValidatable, accountValidationRepository: AccountValidationRepositoryInterface, keychainUseCase: KeychainUseCaseInterface) {
         self.initialState = State(user: user)
@@ -59,7 +58,8 @@ final class SignUpProfileReactor: Reactor {
         case .duplicateCheckButtonDidTap:
             return checkDuplication(nickname: currentState.nickname)
         case .nextButtonDidTap:
-            return Observable.just(Mutation.readyToProceedWithSignUp)
+            readyToProceedWithSignUp.onNext(currentState.user)
+            return Observable.empty()
         }
     }
     
@@ -76,8 +76,6 @@ final class SignUpProfileReactor: Reactor {
             newState.isNicknameDuplicateCheckDone = (checkedNickname != nil)
         case .updateNickname(let nickname):
             newState.nickname = nickname
-        case .readyToProceedWithSignUp:
-            newState.isReadyToProceedWithSignUp = true
         }
         
         return newState

@@ -27,10 +27,8 @@ final class AuthCoordinator: SceneCoordinator {
         let loginReactor = LoginReactor(appleLoginRepository: appleLoginRepository, keychainProvider: keychainProvider)
         let loginViewController = LoginViewController(reactor: loginReactor)
  
-        loginReactor.state
-            .skip(1)
-            .filter { $0.isReadyToProceedWithSignUp == true }
-            .asDriver(onErrorDriveWith: .empty())
+        loginReactor.readyToProceedWithSignUp
+            .asDriver(onErrorJustReturn: ())
             .drive(with: self,
                    onNext: { this, _ in
                 this.pushSignUpAgreementViewController()
@@ -46,32 +44,28 @@ final class AuthCoordinator: SceneCoordinator {
         let signUpAgreementReactor = SignUpAgreementReactor()
         let signUpAgreementViewController = SignUpAgreementViewController(reactor: signUpAgreementReactor)
         
-        signUpAgreementReactor.state
-            .skip(1)
-            .filter { $0.isReadyToProceedWithSignUp == true }
-            .map { $0.user }
-            .withUnretained(self)
-            .subscribe { this, user in
+        signUpAgreementReactor.readyToProceedWithSignUp
+            .asDriver(onErrorJustReturn: UserAccount())
+            .drive(with: self,
+                   onNext: { this, user in
                 this.pushSignUpProfileViewController(with: user)
-            }
+            })
             .disposed(by:disposeBag)
         
-        signUpAgreementReactor.state
-            .skip(1)
-            .filter { $0.isReadyToShowTermsOfService == true }
-            .withUnretained(self)
-            .subscribe { this, _ in
+        signUpAgreementReactor.readyToShowTermsOfService
+            .asDriver(onErrorJustReturn: ())
+            .drive(with: self,
+                   onNext: { this, _ in
                 this.pushSignUpTermsOfServiceViewController()
-            }
+            })
             .disposed(by:disposeBag)
         
-        signUpAgreementReactor.state
-            .skip(1)
-            .filter { $0.isReadyToShowPrivacyPolicy == true }
-            .withUnretained(self)
-            .subscribe { this, _ in
+        signUpAgreementReactor.readyToShowPrivacyPolicy
+            .asDriver(onErrorJustReturn: ())
+            .drive(with: self,
+                   onNext: { this, _ in
                 this.pushSignUpPrivacyPolicyViewController()
-            }
+            })
             .disposed(by:disposeBag)
         
         navigationController.pushViewController(signUpAgreementViewController, animated: true)
@@ -99,11 +93,8 @@ final class AuthCoordinator: SceneCoordinator {
         let signUpProfileReactor = SignUpProfileReactor(user: user, regularExpressionValidator: regularExpressionValidator, accountValidationRepository: accountValidationRepository, keychainUseCase: keychainUseCase)
         let signUpProfileViewController = SignUpProfileViewController(reactor: signUpProfileReactor)
         
-        signUpProfileReactor.state
-            .skip(1)
-            .filter { $0.isReadyToProceedWithSignUp == true }
-            .map { $0.user }
-            .asDriver(onErrorJustReturn: UserAccount())
+        signUpProfileReactor.readyToProceedWithSignUp
+            .asDriver(onErrorJustReturn: (UserAccount()))
             .drive(with: self,
                    onNext: { this, user in
                 this.pushSignUpInfomationViewController(with: user)
@@ -117,10 +108,7 @@ final class AuthCoordinator: SceneCoordinator {
         let signUpInfomationReactor = SignUpInfomationReactor(user: user)
         let signUpInfomationViewController = SignUpInfomationViewController(reactor: signUpInfomationReactor)
         
-        signUpInfomationReactor.state
-            .skip(1)
-            .filter { $0.isReadyToProceedWithSignUp == true }
-            .map { $0.user }
+        signUpInfomationReactor.readyToProceedWithSignUp
             .asDriver(onErrorJustReturn: UserAccount())
             .drive(with: self,
                    onNext: { this, user in
