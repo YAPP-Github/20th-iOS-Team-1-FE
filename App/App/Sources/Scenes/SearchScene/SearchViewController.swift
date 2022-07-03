@@ -10,7 +10,6 @@ import MapKit
 
 import ReactorKit
 import RxCocoa
-import AVFAudio
 
 final class SearchViewController: BaseViewController {
     private let locationManager: CLLocationManager!
@@ -29,17 +28,6 @@ final class SearchViewController: BaseViewController {
         
         mapView.register(AnnotationView.self, forAnnotationViewWithReuseIdentifier: AnnotationView.identifier)
         
-        mapView.addAnnotation(
-            Annotation(
-                id: 0,
-                coordinate: CLLocationCoordinate2D(
-                    latitude: 37.29263305664062,
-                    longitude: 127.11612977377284
-                ),
-                gatherCategory: .walk
-            )
-        )
-    
         return mapView
     }()
     
@@ -48,7 +36,7 @@ final class SearchViewController: BaseViewController {
         
         view.layer.cornerRadius = 10
         view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-
+        
         view.backgroundColor = .systemBackground
         
         
@@ -63,6 +51,15 @@ final class SearchViewController: BaseViewController {
         return constraint
     }()
     
+    private lazy var addButon: CircularButton =  {
+        let button = CircularButton()
+        button.setImage(UIImage.Togaether.plus, for: .normal)
+        button.tintColor = .white
+        button.backgroundColor = UIColor.Togaether.mainGreen
+        
+        return button
+    }()
+    
     private lazy var searchButton: CircularButton =  {
         let button = CircularButton()
         
@@ -73,9 +70,22 @@ final class SearchViewController: BaseViewController {
         return button
     }()
     
-    private lazy var notificationItem: UIBarButtonItem = {
+    private lazy var notificationBarButtonItem: UIBarButtonItem = {
         let barButtonItem = UIBarButtonItem(
             image: UIImage.Togaether.bell,
+            style: .plain,
+            target: SearchViewController.self,
+            action: nil
+        )
+        
+        barButtonItem.tintColor = .label
+        
+        return barButtonItem
+    }()
+    
+    private lazy var AddCloseBarButtonItem: UIBarButtonItem = {
+        let barButtonItem = UIBarButtonItem(
+            image: UIImage.Togaether.xmark,
             style: .plain,
             target: SearchViewController.self,
             action: nil
@@ -100,7 +110,7 @@ final class SearchViewController: BaseViewController {
         view.layer.cornerRadius = 10
         view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         view.isHidden = true
-       
+        
         return view
     }()
     
@@ -134,6 +144,7 @@ final class SearchViewController: BaseViewController {
         view.addSubview(currentLocationButton)
         view.addSubview(gatherInformationBottomSheet)
         mapView.addSubview(searchButton)
+        mapView.addSubview(addButon)
         gatherInformationBottomSheet.addSubview(bottomSheetContentView)
     }
     
@@ -149,6 +160,11 @@ final class SearchViewController: BaseViewController {
             searchButton.widthAnchor.constraint(equalToConstant: 56),
             searchButton.topAnchor.constraint(equalTo: mapView.topAnchor, constant: 22),
             searchButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -22),
+            //addButton
+            addButon.heightAnchor.constraint(equalToConstant: 56),
+            addButon.widthAnchor.constraint(equalToConstant: 56),
+            addButon.topAnchor.constraint(equalTo: searchButton.bottomAnchor, constant: 22),
+            addButon.trailingAnchor.constraint(equalTo: searchButton.trailingAnchor),
             //currentLocationButton
             currentLocationButton.widthAnchor.constraint(equalToConstant: 44),
             currentLocationButton.heightAnchor.constraint(equalToConstant: 44),
@@ -168,7 +184,7 @@ final class SearchViewController: BaseViewController {
     private func configureUI() {
         view.backgroundColor = .systemBackground
         
-        navigationItem.rightBarButtonItem = notificationItem
+        navigationItem.rightBarButtonItem = notificationBarButtonItem
     }
     
     func configureLocationManager() {
@@ -189,6 +205,16 @@ final class SearchViewController: BaseViewController {
                     self.moveToCurrentLocation()
                 },
             
+            addButon.rx.throttleTap
+                .bind { [unowned self] in
+                    self.addButtonTouched()
+                },
+            
+            AddCloseBarButtonItem.rx.tap
+                .bind { [unowned self] in
+                    
+                },
+            
             mapView.rx.didChangeVisibleRegion
                 .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
                 .map { [unowned self] in
@@ -197,7 +223,19 @@ final class SearchViewController: BaseViewController {
                         self.mapView.bottomRightCoordinate()
                     )
                 }
-                .bind(to: reactor.action)
+                .bind(to: reactor.action),
+            
+            mapView.rx.didChangeVisibleRegion
+                .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+                .bind { [unowned self] in
+                    convertToAddressWith(
+                        coordinate: CLLocation(
+                            latitude: self.mapView.centerCoordinate.latitude,
+                            longitude: self.mapView.centerCoordinate.longitude
+                        )
+                    )
+                }
+            
         )
     }
     
@@ -209,7 +247,10 @@ final class SearchViewController: BaseViewController {
                 .asDriver(onErrorJustReturn: [GatherConfigurationForAnnotation]() )
                 .drive(onNext: { annotations in
                     for annotation in annotations {
-                        self.mapView.addAnnotation(annotation.toAnnotation())
+                        let mapViewAnnotation = annotation.toAnnotation()
+                        if self.mapView.view(for: mapViewAnnotation) == nil {
+                            self.mapView.addAnnotation(mapViewAnnotation)
+                        }
                     }
                 })
         )
@@ -224,6 +265,43 @@ final class SearchViewController: BaseViewController {
         if let location = locationManager.location {
             mapView.setCenter(location.coordinate, animated: true)
         }
+    }
+    
+    private func addButtonTouched() {
+        navigationItem.title = "반려견 모임 생성"
+        navigationItem.rightBarButtonItem = AddCloseBarButtonItem
+    }
+    
+    func convertToAddressWith(coordinate: CLLocation) {
+        let geocoder = CLGeocoder()
+        let locale = Locale(identifier: "Ko-kr")
+        geocoder.reverseGeocodeLocation(coordinate, preferredLocale: locale, completionHandler: {(placemarks, error) in
+            if let address: [CLPlacemark] = placemarks {
+                var gatherAddress: [String] = []
+                
+                if let province = address.last?.administrativeArea {
+                    gatherAddress.append(province)
+                }
+                
+                if let locality = address.last?.locality {
+                    gatherAddress.append(locality)
+                }
+                
+                if let subLocality = address.last?.subLocality {
+                    gatherAddress.append(subLocality)
+                }
+                
+                if let street = address.last?.thoroughfare, street != gatherAddress.last {
+                    gatherAddress.append(street)
+                }
+                
+                if let subStreet = address.last?.subThoroughfare {
+                    gatherAddress.append(subStreet)
+                }
+                
+                // Change Label Text
+            }
+        })
     }
 }
 

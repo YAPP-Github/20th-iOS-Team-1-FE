@@ -22,7 +22,8 @@ extension UIImage {
         static let genderSignGirlPuppy = UIImage(named: "girlPuppy")!
         static let profileSetting      = UIImage(named: "profileSetting")!
         static let rightArrow          = UIImage(systemName: "chevron.right")!
-        static let plus                = UIImage(systemName: "plus")
+        static let plus                = UIImage(systemName: "plus")!
+        static let xmark              = UIImage(systemName: "xmark")
         static let defaultWalkMapViewAnnotation = UIImage(named: "defaultWalkMapViewAnnotation")!
         static let defaultDogCafeMapViewAnnotation = UIImage(named: "defaultDogCafeMapViewAnnotation")!
         static let defaultDogRestaurantMapviewAnnotation = UIImage(named: "defaultDogRestaurantMapviewAnnotation")!

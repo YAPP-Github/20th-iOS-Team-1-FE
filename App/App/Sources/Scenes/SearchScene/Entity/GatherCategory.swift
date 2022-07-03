@@ -7,11 +7,11 @@
 
 import Foundation
 
-enum GatherCategory: Codable {
-    case walk
-    case playground
-    case dogCafe
-    case dogRestaurant
-    case exhibition
-    case etc
+enum GatherCategory: String, Codable {
+    case walk = "WALK"
+    case playground = "PLAY_GROUND"
+    case dogCafe = "DOG_CAFE"
+    case dogRestaurant = "DOG_FRIENDLY_RESTAURANT"
+    case exhibition = "EXPOSITION"
+    case etc = "ETC"
 }

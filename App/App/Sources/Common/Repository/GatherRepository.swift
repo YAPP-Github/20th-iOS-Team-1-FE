@@ -67,7 +67,9 @@ final class GatherRepository: GatherRepositoryInterface {
             let keychain = KeychainQueryRequester()
             let keychainProvider = KeychainProvider(keyChain: keychain)
             guard let Token = try? keychainProvider.read(
-                service: KeychainService.apple, account: KeychainAccount.accessToken) else {
+                service: KeychainService.apple,
+                account: KeychainAccount.accessToken
+            ) else {
                 print("토큰이 존재하지 않습니다.")
                 return Disposables.create()
             }
@@ -78,6 +80,7 @@ final class GatherRepository: GatherRepositoryInterface {
             urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
             urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
             urlRequest.addValue(accessToken, forHTTPHeaderField: "Authorization")
+            
             let response: Single<[GatherConfigurationForAnnotation]> = self.networkManager.requestDataTask(with: urlRequest)
             
             response.subscribe { result in
