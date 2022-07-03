@@ -12,7 +12,7 @@ import RxSwift
 
 final class SignUpProfileReactor: Reactor {
     enum Action {
-        case profileRegisterButtonDidTap
+        case gallaryImageDidPick(Data?)
         case textFieldDidEndEditing(String)
         case duplicateCheckButtonDidTap
         case nextButtonDidTap
@@ -22,6 +22,7 @@ final class SignUpProfileReactor: Reactor {
         case changeProfileImage(Data?)
         case validateNicknameLength(Bool)
         case updateNickname(String)
+        case updateImage(Data?)
         case checkNicknameDuplication(String?)
     }
     
@@ -30,6 +31,7 @@ final class SignUpProfileReactor: Reactor {
         var user: UserAccount
         var isNicknameValidationCheckDone = false
         var isNicknameDuplicateCheckDone = false
+        var isNextButtonEnabled = false
     }
     
     let initialState: State
@@ -49,8 +51,8 @@ final class SignUpProfileReactor: Reactor {
     
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
-        case .profileRegisterButtonDidTap:
-            return Observable.empty()
+        case .gallaryImageDidPick(let data):
+            return Observable.just(.updateImage(data))
         case .textFieldDidEndEditing(let nickname):
             let isValid = regularExpressionValidator.validate(nickname: nickname)
             return Observable.concat([Observable.just(Mutation.validateNicknameLength(isValid)),
@@ -74,8 +76,11 @@ final class SignUpProfileReactor: Reactor {
         case .checkNicknameDuplication(let checkedNickname):
             newState.user.nickName = checkedNickname
             newState.isNicknameDuplicateCheckDone = (checkedNickname != nil)
+            newState.isNextButtonEnabled = (checkedNickname != nil)
         case .updateNickname(let nickname):
             newState.nickname = nickname
+        case .updateImage(let data):
+            newState.user.profileImageData = data
         }
         
         return newState

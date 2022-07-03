@@ -23,17 +23,23 @@ extension UIColor {
 
 extension UIColor {
     enum Togaether {
-        static let primaryLabel            = UIColor(named: "primaryLabel")!
-        static let secondaryLabel          = UIColor(named: "secondaryLabel")!
-        static let mainGreen               = UIColor(named: "mainGreen")!
-        static let mainYellow              = UIColor(named: "mainYellow")!
-        static let divider                 = UIColor(named: "divider")!
-        static let introduceViewDivider    = UIColor(named: "introduceViewDivider")!
-        static let background              = UIColor(named: "background")!
-        static let introduceViewBackground = UIColor(named: "introduceViewBackground")!
-        static let checkBoxDidDeselect     = UIColor(named: "checkBoxDidDeselect")!
-        static let buttonDisabled          = UIColor(named: "buttonDisabled")!
-        static let line                    = UIColor(named: "line")!
-        static let tagLine                 = UIColor(named: "tagLine")!
+        static let primaryLabel    = UIColor(named: "primaryLabel")!
+        static let secondaryLabel  = UIColor(named: "secondaryLabel")!
+        
+        static let primaryButton   = UIColor(named: "primaryButton")!
+        static let secondaryButton = UIColor(named: "secondaryButton")!
+        
+        static let tabBarIcon      = UIColor(named: "tabBarIcon")!
+        static let icon            = UIColor(named: "icon")
+        static let mainGreen       = UIColor(named: "mainGreen")!
+        static let mainYellow      = UIColor(named: "mainYellow")!
+        static let mainCoral       = UIColor(named: "mainCoral")!
+        
+        static let divider         = UIColor(named: "divider")!
+        
+        static let background      = UIColor(named: "background")!
+        
+        static let line            = UIColor(named: "line")!
+        static let tagLine         = UIColor(named: "tagLine")!
     }
 }
