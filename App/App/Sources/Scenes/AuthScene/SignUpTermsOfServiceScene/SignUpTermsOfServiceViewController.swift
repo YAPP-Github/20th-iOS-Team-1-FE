@@ -21,7 +21,7 @@ final class SignUpTermsOfServiceViewController: UIViewController {
         return label
     }()
     
-    private var guideStackView: UIStackView = {
+    private lazy var guideStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.spacing = 12
         stackView.axis = .vertical
@@ -130,5 +130,7 @@ final class SignUpTermsOfServiceViewController: UIViewController {
         ])
     }
     
-    private func configureUI() { }
+    private func configureUI() {
+        view.backgroundColor = .Togaether.background
+    }
 }

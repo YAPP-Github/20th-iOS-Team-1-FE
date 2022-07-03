@@ -11,9 +11,13 @@ import ReactorKit
 import RxKeyboard
 
 final class SignUpInfomationViewController: BaseViewController {
-    private let scrollView = UIScrollView()
-    
     private let contentView = UIView()
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.keyboardDismissMode = .onDrag
+        
+        return scrollView
+    }()
     
     private var guidanceLabel: UILabel = {
         let text = "견주님의 나이와\n성별을 알려주세요."
@@ -118,14 +122,17 @@ final class SignUpInfomationViewController: BaseViewController {
     }
     
     private func addSubviews() {
-        view.addSubview(guidanceLabel)
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
         
-        view.addSubview(ageLabel)
-        view.addSubview(ageTextField)
-        view.addSubview(ageContourView)
+        contentView.addSubview(guidanceLabel)
         
-        view.addSubview(sexLabel)
-        view.addSubview(sexStackView)
+        contentView.addSubview(ageLabel)
+        contentView.addSubview(ageTextField)
+        contentView.addSubview(ageContourView)
+        
+        contentView.addSubview(sexLabel)
+        contentView.addSubview(sexStackView)
         sexStackView.addArrangedSubview(manButton)
         sexStackView.addArrangedSubview(womanButton)
         
@@ -135,27 +142,6 @@ final class SignUpInfomationViewController: BaseViewController {
     
     private func configureLayout() {
         NSLayoutConstraint.useAndActivateConstraints([
-            guidanceLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 96),
-            guidanceLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            guidanceLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            
-            ageLabel.topAnchor.constraint(equalTo: guidanceLabel.bottomAnchor, constant: 72),
-            ageLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            ageTextField.topAnchor.constraint(equalTo: ageLabel.bottomAnchor, constant: 20),
-            ageTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            
-            ageContourView.topAnchor.constraint(equalTo: ageTextField.bottomAnchor, constant: 15),
-            ageContourView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            ageContourView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            
-            sexLabel.topAnchor.constraint(equalTo: ageContourView.bottomAnchor, constant: 44),
-            sexLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            
-            sexStackView.topAnchor.constraint(equalTo: sexLabel.bottomAnchor, constant: 20),
-            sexStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            sexStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            sexStackView.heightAnchor.constraint(equalToConstant: 44),
-            
             nextButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             nextButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -4),
@@ -164,12 +150,46 @@ final class SignUpInfomationViewController: BaseViewController {
             nextButtonContourView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             nextButtonContourView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             nextButtonContourView.bottomAnchor.constraint(equalTo: nextButton.topAnchor, constant: -14),
-            nextButtonContourView.heightAnchor.constraint(equalToConstant: 1)
+            nextButtonContourView.heightAnchor.constraint(equalToConstant: 1),
+            
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: nextButtonContourView.topAnchor, constant: -14),
+            
+            contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor),
+            
+            guidanceLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 96),
+            guidanceLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            guidanceLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            
+            ageLabel.topAnchor.constraint(equalTo: guidanceLabel.bottomAnchor, constant: 72),
+            ageLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            ageTextField.topAnchor.constraint(equalTo: ageLabel.bottomAnchor, constant: 20),
+            ageTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            
+            ageContourView.topAnchor.constraint(equalTo: ageTextField.bottomAnchor, constant: 15),
+            ageContourView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            ageContourView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            
+            sexLabel.topAnchor.constraint(equalTo: ageContourView.bottomAnchor, constant: 44),
+            sexLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            
+            sexStackView.topAnchor.constraint(equalTo: sexLabel.bottomAnchor, constant: 20),
+            sexStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            sexStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            sexStackView.heightAnchor.constraint(equalToConstant: 44)
         ])
     }
     
     private func configureUI() {
         view.backgroundColor = .Togaether.background
+        navigationController?.navigationBar.barTintColor = .Togaether.background
     }
     
     private func bindAction(with reactor: SignUpInfomationReactor) {

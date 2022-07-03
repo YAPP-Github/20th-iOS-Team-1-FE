@@ -74,13 +74,13 @@ final class AuthCoordinator: SceneCoordinator {
     func pushSignUpTermsOfServiceViewController() {
         let signUpTermsOfServiceViewController = SignUpTermsOfServiceViewController()
         
-        navigationController.pushViewController(signUpTermsOfServiceViewController, animated: true)
+        navigationController.present(signUpTermsOfServiceViewController, animated: true)
     }
     
     func pushSignUpPrivacyPolicyViewController() {
         let signUpPrivacyPolicyViewController = SignUpPrivacyPolicyViewController()
         
-        navigationController.pushViewController(signUpPrivacyPolicyViewController, animated: true)
+        navigationController.present(signUpPrivacyPolicyViewController, animated: true)
     }
     
     func pushSignUpProfileViewController(with user: UserAccount) {

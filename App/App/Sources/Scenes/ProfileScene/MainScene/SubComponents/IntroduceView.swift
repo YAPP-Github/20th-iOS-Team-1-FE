@@ -23,7 +23,7 @@ final class IntroduceView: UIView {
     
     private lazy var divisionView: UIView = {
         let view = UIView()
-        view.backgroundColor = .Togaether.introduceViewDivider
+        view.backgroundColor = .Togaether.divider
         
         return view
     }()
@@ -43,7 +43,7 @@ final class IntroduceView: UIView {
         layout.minimumLineSpacing = 5
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .Togaether.introduceViewBackground
+        collectionView.backgroundColor = .Togaether.background
         collectionView.registerCell(type: TagCollectionViewCell.self)
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -94,7 +94,7 @@ final class IntroduceView: UIView {
     }
     
     private func configureUI() {
-        backgroundColor = .Togaether.introduceViewBackground
+        backgroundColor = .Togaether.background
     }
 }
 

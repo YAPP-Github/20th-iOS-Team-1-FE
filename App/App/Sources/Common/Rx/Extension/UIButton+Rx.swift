@@ -7,8 +7,8 @@
 
 import UIKit
 
-import RxSwift
 import RxCocoa
+import RxSwift
 
 extension Reactive where Base: UIButton {
     public var throttleTap: ControlEvent<Void> {

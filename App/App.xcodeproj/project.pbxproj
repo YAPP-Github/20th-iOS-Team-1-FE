@@ -134,6 +134,8 @@
 		37C3F4FA284C71030006CB02 /* KeychainQueryRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C3F4F9284C71030006CB02 /* KeychainQueryRequester.swift */; };
 		37C3F4FC284C7D8B0006CB02 /* KeychainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C3F4FB284C7D8B0006CB02 /* KeychainError.swift */; };
 		37C3F62C284D194C0006CB02 /* StubKeychainQueryRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C3F62B284D194C0006CB02 /* StubKeychainQueryRequester.swift */; };
+		37ECC53C2871B4B000CFE8E9 /* UIImagePickerViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ECC53B2871B4B000CFE8E9 /* UIImagePickerViewController+Rx.swift */; };
+		37ECC53E2871BA9300CFE8E9 /* RxImagePickerDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ECC53D2871BA9300CFE8E9 /* RxImagePickerDelegateProxy.swift */; };
 		37F67CC5286A1C270073FE8C /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F67CC4286A1C270073FE8C /* AuthCoordinator.swift */; };
 		FD5AEE86286DDC2A00001838 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5AEE85286DDC2A00001838 /* EditProfileViewController.swift */; };
 		FD5AEE88286DDC3600001838 /* AddPetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5AEE87286DDC3600001838 /* AddPetViewController.swift */; };
@@ -300,6 +302,9 @@
 		37C3F4F9284C71030006CB02 /* KeychainQueryRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainQueryRequester.swift; sourceTree = "<group>"; };
 		37C3F4FB284C7D8B0006CB02 /* KeychainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainError.swift; sourceTree = "<group>"; };
 		37C3F62B284D194C0006CB02 /* StubKeychainQueryRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubKeychainQueryRequester.swift; sourceTree = "<group>"; };
+		37ECC53A287166C200CFE8E9 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		37ECC53B2871B4B000CFE8E9 /* UIImagePickerViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImagePickerViewController+Rx.swift"; sourceTree = "<group>"; };
+		37ECC53D2871BA9300CFE8E9 /* RxImagePickerDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxImagePickerDelegateProxy.swift; sourceTree = "<group>"; };
 		37F67CC4286A1C270073FE8C /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		FD5AEE85286DDC2A00001838 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		FD5AEE87286DDC3600001838 /* AddPetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPetViewController.swift; sourceTree = "<group>"; };
@@ -533,6 +538,7 @@
 			children = (
 				37605DF52839FB4100394929 /* RxASAuthorizationControllerDelegateProxy.swift */,
 				37605E00283A2AE200394929 /* RxASAuthorizationControllerPresentationContextProvidingProxy.swift */,
+				37ECC53D2871BA9300CFE8E9 /* RxImagePickerDelegateProxy.swift */,
 			);
 			path = Proxy;
 			sourceTree = "<group>";
@@ -544,6 +550,7 @@
 				37605DFC283A003B00394929 /* ASAuthorizationAppleIDProvider+Rx.swift */,
 				37605DF82839FDB300394929 /* ASAuthorizationController+Rx.swift */,
 				377370832841BE1000D5CCB6 /* UIButton+Rx.swift */,
+				37ECC53B2871B4B000CFE8E9 /* UIImagePickerViewController+Rx.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1079,6 +1086,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = 37912C58281445AC0087B95E;
 			packageReferences = (
@@ -1129,6 +1137,7 @@
 			files = (
 				29AE2238284B941800EDF34B /* GatherCategory.swift in Sources */,
 				378F3487281DBE210063CE4F /* ProfileReactor.swift in Sources */,
+				37ECC53C2871B4B000CFE8E9 /* UIImagePickerViewController+Rx.swift in Sources */,
 				37912C9A281447C40087B95E /* Array+Extension.swift in Sources */,
 				29AE2258286F2FB400EDF34B /* GatherRepository.swift in Sources */,
 				3719183B286E184F00169FC2 /* GuideView.swift in Sources */,
@@ -1225,6 +1234,7 @@
 				FD9D38EE28543409005A0C86 /* SegmentView.swift in Sources */,
 				378F3482281DBE140063CE4F /* ChattingViewController.swift in Sources */,
 				379B1A7D285A580D00E58A34 /* SignInResult.swift in Sources */,
+				37ECC53E2871BA9300CFE8E9 /* RxImagePickerDelegateProxy.swift in Sources */,
 				29AE225A286F523D00EDF34B /* MapViewBottomSheetContentView.swift in Sources */,
 				378F347B281DBDF10063CE4F /* LoginReactor.swift in Sources */,
 				FDBC1234286C986700FCADF4 /* PetInfoDTO.swift in Sources */,
@@ -1295,6 +1305,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				37912C70281445AD0087B95E /* Base */,
+				37ECC53A287166C200CFE8E9 /* ko */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1306,6 +1317,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -1367,6 +1379,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";

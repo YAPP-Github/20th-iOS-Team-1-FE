@@ -129,5 +129,7 @@ final class SignUpPrivacyPolicyViewController: UIViewController {
         ])
     }
     
-    private func configureUI() { }
+    private func configureUI() {
+        view.backgroundColor = .Togaether.background
+    }
 }
