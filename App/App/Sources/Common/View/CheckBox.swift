@@ -24,7 +24,7 @@ final class CheckBox: UIButton {
     
     private func configureUI() {
         let image = UIImage.Togaether.checkMarkCircle
-            .withTintColor(.Togaether.checkBoxDidDeselect)
+            .withTintColor(.Togaether.secondaryButton)
             .withRenderingMode(.alwaysOriginal)
             .withConfiguration(UIImage.SymbolConfiguration(pointSize: 36))
         

@@ -8,8 +8,8 @@
 import AuthenticationServices
 import Foundation
 
-import RxSwift
 import RxCocoa
+import RxSwift
 
 extension Reactive where Base: ASAuthorizationAppleIDProvider {
     public func requestAuthorization(with scopes: [ASAuthorization.Scope], window: UIWindow) -> Observable<ASAuthorization> {

@@ -11,7 +11,7 @@ final class EnableButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setBackgroundColor(.Togaether.mainGreen, for: .normal)
-        setBackgroundColor(.Togaether.buttonDisabled, for: .disabled)
+        setBackgroundColor(.Togaether.secondaryButton, for: .disabled)
         
         isEnabled = false
         layer.cornerRadius = 10

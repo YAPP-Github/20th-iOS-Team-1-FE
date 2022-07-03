@@ -14,6 +14,14 @@ import RxSwift
 final class SignUpAgreementViewController: BaseViewController {
     typealias Reactor = SignUpAgreementReactor
     
+    private let contentView = UIView()
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.keyboardDismissMode = .onDrag
+        
+        return scrollView
+    }()
+    
     private var guidanceLabel: UILabel = {
         let text = "서비스 이용을 위해\n약관 동의가 필요해요."
         let boldFont = UIFont.boldSystemFont(ofSize: 32)
@@ -112,18 +120,21 @@ final class SignUpAgreementViewController: BaseViewController {
     }
 
     private func addSubviews() {
-        view.addSubview(guidanceLabel)
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
         
-        view.addSubview(agreementCheckBox)
-        view.addSubview(agreementLabel)
+        contentView.addSubview(guidanceLabel)
         
-        view.addSubview(checkBoxContourView)
+        contentView.addSubview(agreementCheckBox)
+        contentView.addSubview(agreementLabel)
         
-        view.addSubview(termsOfServiceCheckBox)
-        view.addSubview(termsOfServiceLabel)
+        contentView.addSubview(checkBoxContourView)
         
-        view.addSubview(privacyPolicyCheckBox)
-        view.addSubview(privacyPolicyLabel)
+        contentView.addSubview(termsOfServiceCheckBox)
+        contentView.addSubview(termsOfServiceLabel)
+        
+        contentView.addSubview(privacyPolicyCheckBox)
+        contentView.addSubview(privacyPolicyLabel)
         
         view.addSubview(nextButtonContourView)
         
@@ -132,36 +143,6 @@ final class SignUpAgreementViewController: BaseViewController {
     
     private func configureLayout() {
         NSLayoutConstraint.useAndActivateConstraints([
-            guidanceLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 96),
-            guidanceLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            guidanceLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            
-            agreementCheckBox.topAnchor.constraint(equalTo: guidanceLabel.bottomAnchor, constant: 78),
-            agreementCheckBox.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 22),
-            agreementCheckBox.heightAnchor.constraint(equalToConstant: 36),
-            agreementCheckBox.widthAnchor.constraint(equalToConstant: 36),
-            agreementLabel.leadingAnchor.constraint(equalTo: agreementCheckBox.trailingAnchor, constant: 10),
-            agreementLabel.centerYAnchor.constraint(equalTo: agreementCheckBox.centerYAnchor),
- 
-            checkBoxContourView.topAnchor.constraint(equalTo: agreementCheckBox.bottomAnchor, constant: 14),
-            checkBoxContourView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            checkBoxContourView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            checkBoxContourView.heightAnchor.constraint(equalToConstant: 1),
-            
-            termsOfServiceCheckBox.topAnchor.constraint(equalTo: checkBoxContourView.bottomAnchor, constant: 14),
-            termsOfServiceCheckBox.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 22),
-            termsOfServiceCheckBox.heightAnchor.constraint(equalToConstant: 36),
-            termsOfServiceCheckBox.widthAnchor.constraint(equalToConstant: 36),
-            termsOfServiceLabel.leadingAnchor.constraint(equalTo: termsOfServiceCheckBox.trailingAnchor, constant: 10),
-            termsOfServiceLabel.centerYAnchor.constraint(equalTo: termsOfServiceCheckBox.centerYAnchor),
-            termsOfServiceLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -46),
-            privacyPolicyCheckBox.topAnchor.constraint(equalTo: termsOfServiceCheckBox.bottomAnchor, constant: 16),
-            privacyPolicyCheckBox.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 22),
-            privacyPolicyCheckBox.heightAnchor.constraint(equalToConstant: 36),
-            privacyPolicyCheckBox.widthAnchor.constraint(equalToConstant: 36),
-            privacyPolicyLabel.leadingAnchor.constraint(equalTo: privacyPolicyCheckBox.trailingAnchor, constant: 10),
-            privacyPolicyLabel.centerYAnchor.constraint(equalTo: privacyPolicyCheckBox.centerYAnchor),
-            
             nextButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             nextButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -4),
@@ -170,12 +151,56 @@ final class SignUpAgreementViewController: BaseViewController {
             nextButtonContourView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             nextButtonContourView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             nextButtonContourView.bottomAnchor.constraint(equalTo: nextButton.topAnchor, constant: -14),
-            nextButtonContourView.heightAnchor.constraint(equalToConstant: 1)
+            nextButtonContourView.heightAnchor.constraint(equalToConstant: 1),
+            
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: nextButtonContourView.topAnchor, constant: -14),
+            
+            contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor),
+            
+            guidanceLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 96),
+            guidanceLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            guidanceLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            
+            agreementCheckBox.topAnchor.constraint(equalTo: guidanceLabel.bottomAnchor, constant: 78),
+            agreementCheckBox.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 22),
+            agreementCheckBox.heightAnchor.constraint(equalToConstant: 36),
+            agreementCheckBox.widthAnchor.constraint(equalToConstant: 36),
+            agreementLabel.leadingAnchor.constraint(equalTo: agreementCheckBox.trailingAnchor, constant: 10),
+            agreementLabel.centerYAnchor.constraint(equalTo: agreementCheckBox.centerYAnchor),
+ 
+            checkBoxContourView.topAnchor.constraint(equalTo: agreementCheckBox.bottomAnchor, constant: 14),
+            checkBoxContourView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            checkBoxContourView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            checkBoxContourView.heightAnchor.constraint(equalToConstant: 1),
+            
+            termsOfServiceCheckBox.topAnchor.constraint(equalTo: checkBoxContourView.bottomAnchor, constant: 14),
+            termsOfServiceCheckBox.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 22),
+            termsOfServiceCheckBox.heightAnchor.constraint(equalToConstant: 36),
+            termsOfServiceCheckBox.widthAnchor.constraint(equalToConstant: 36),
+            termsOfServiceLabel.leadingAnchor.constraint(equalTo: termsOfServiceCheckBox.trailingAnchor, constant: 10),
+            termsOfServiceLabel.centerYAnchor.constraint(equalTo: termsOfServiceCheckBox.centerYAnchor),
+            termsOfServiceLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -46),
+            
+            privacyPolicyCheckBox.topAnchor.constraint(equalTo: termsOfServiceCheckBox.bottomAnchor, constant: 16),
+            privacyPolicyCheckBox.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 22),
+            privacyPolicyCheckBox.heightAnchor.constraint(equalToConstant: 36),
+            privacyPolicyCheckBox.widthAnchor.constraint(equalToConstant: 36),
+            privacyPolicyLabel.leadingAnchor.constraint(equalTo: privacyPolicyCheckBox.trailingAnchor, constant: 10),
+            privacyPolicyLabel.centerYAnchor.constraint(equalTo: privacyPolicyCheckBox.centerYAnchor)
         ])
     }
     
     private func configureUI() {
         view.backgroundColor = .Togaether.background
+        navigationController?.navigationBar.barTintColor = .Togaether.background
     }
     
     private func bindAction(with reactor: Reactor) {

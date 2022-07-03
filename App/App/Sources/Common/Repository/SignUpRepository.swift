@@ -34,7 +34,7 @@ final class SignUpRepository: SignUpRepositoryInterface {
             urlRequest.httpBody = data
             urlRequest.httpMethod = HTTPMethod.post
             urlRequest.addValue(accessToken, forHTTPHeaderField: "Authorization")
-            urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            urlRequest.addValue("multipart/form-data", forHTTPHeaderField: "Content-Type")
             urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
             
             let response: Single<Int> = self.networkManager.requestDataTask(with: urlRequest)

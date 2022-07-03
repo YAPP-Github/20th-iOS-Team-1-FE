@@ -13,9 +13,13 @@ import RxCocoa
 import RxKeyboard
 
 final class SignUpProfileViewController: BaseViewController {
-    private let scrollView = UIScrollView()
-    
     private let contentView = UIView()
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.keyboardDismissMode = .onDrag
+        
+        return scrollView
+    }()
     
     private let guidanceLabel: UILabel = {
         let text = "견주님의 프로필과\n닉네임을 등록해주세요."
@@ -33,19 +37,17 @@ final class SignUpProfileViewController: BaseViewController {
         return label
     }()
     
-    private var profileImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.backgroundColor = .gray
-        imageView.layer.cornerRadius = imageView.frame.height / 2
-        imageView.layer.masksToBounds = true
-        
-        return imageView
-    }()
-    
-    private var profileRegisterButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        button.setBackgroundImage(UIImage.Togaether.cameraCircleFill, for: .normal)
-        
+    private var profileImageButton: UIButton = {
+        let button = UIButton()
+        button.setBackgroundImage(.Togaether.cameraCircleFill, for: .normal)
+        button.backgroundColor = .Togaether.divider
+        button.layer.cornerRadius = button.frame.height / 2
+        button.layer.masksToBounds = true
+        button.imageView?.layer.cornerRadius = button.frame.width / 2
+        button.imageView?.layer.masksToBounds = true
+        button.clipsToBounds = true
+        button.imageView?.clipsToBounds = true
+        button.imageView?.contentMode = .scaleAspectFit
         return button
     }()
     
@@ -101,16 +103,6 @@ final class SignUpProfileViewController: BaseViewController {
         return button
     }()
     
-    private lazy var imagePicker: UIImagePickerController = {
-        let picker = UIImagePickerController()
-        picker.modalPresentationStyle = .fullScreen
-        picker.sourceType = .photoLibrary
-        picker.allowsEditing = false
-        picker.delegate = self
-    
-        return picker
-    }()
-    
     private var nicknameTextFieldConstraint: NSLayoutConstraint?
     
     var disposeBag = DisposeBag()
@@ -130,17 +122,10 @@ final class SignUpProfileViewController: BaseViewController {
         addSubviews()
         configureLayout()
         configureUI()
-        imagePicker.delegate = self
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        nicknameTextField.becomeFirstResponder()
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
-        view.endEditing(true)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        nicknameTextField.resignFirstResponder()
     }
     
     private func addSubviews() {
@@ -149,8 +134,7 @@ final class SignUpProfileViewController: BaseViewController {
         
         contentView.addSubview(guidanceLabel)
         
-        contentView.addSubview(profileImageView)
-        contentView.addSubview(profileRegisterButton)
+        contentView.addSubview(profileImageButton)
         
         contentView.addSubview(nickNameLabel)
         
@@ -160,16 +144,26 @@ final class SignUpProfileViewController: BaseViewController {
         
         contentView.addSubview(nicknameContourView)
         
-        contentView.addSubview(nextButtonContourView)
-        contentView.addSubview(nextButton)
+        view.addSubview(nextButtonContourView)
+        view.addSubview(nextButton)
     }
     
     private func configureLayout() {
         NSLayoutConstraint.useAndActivateConstraints([
+            nextButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            nextButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -4),
+            nextButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            nextButtonContourView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            nextButtonContourView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            nextButtonContourView.bottomAnchor.constraint(equalTo: nextButton.topAnchor, constant: -14),
+            nextButtonContourView.heightAnchor.constraint(equalToConstant: 1),
+            
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: nextButtonContourView.topAnchor, constant: -14),
             
             contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
             contentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
@@ -182,21 +176,20 @@ final class SignUpProfileViewController: BaseViewController {
             guidanceLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             guidanceLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
-            profileImageView.topAnchor.constraint(equalTo: guidanceLabel.bottomAnchor, constant: 72),
-            profileImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.5),
-            profileImageView.heightAnchor.constraint(equalTo: profileImageView.widthAnchor),
-            profileImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            profileImageButton.topAnchor.constraint(equalTo: guidanceLabel.bottomAnchor, constant: 72),
+            profileImageButton.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.5),
+            profileImageButton.heightAnchor.constraint(equalTo: profileImageButton.widthAnchor),
+            profileImageButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             
-            profileRegisterButton.centerXAnchor.constraint(equalTo: profileImageView.centerXAnchor),
-            profileRegisterButton.centerYAnchor.constraint(equalTo: profileImageView.centerYAnchor),
-            
-            nickNameLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 57),
+            nickNameLabel.topAnchor.constraint(equalTo: profileImageButton.bottomAnchor, constant: 57),
             nickNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             
             nicknameTextField.topAnchor.constraint(equalTo: nickNameLabel.bottomAnchor, constant: 5),
             nicknameTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             
             duplicateCheckButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            duplicateCheckButton.widthAnchor.constraint(equalToConstant: 90),
+            duplicateCheckButton.heightAnchor.constraint(equalToConstant: 36),
             duplicateCheckButton.centerYAnchor.constraint(equalTo: nicknameTextField.centerYAnchor),
             
             deleteButton.trailingAnchor.constraint(equalTo: duplicateCheckButton.leadingAnchor, constant: -8),
@@ -206,26 +199,29 @@ final class SignUpProfileViewController: BaseViewController {
             nicknameContourView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             nicknameContourView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             nicknameContourView.heightAnchor.constraint(equalToConstant: 1),
-            
-            nextButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            nextButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            nextButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4),
-            nextButton.heightAnchor.constraint(equalToConstant: 50),
-            
-            nextButtonContourView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            nextButtonContourView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            nextButtonContourView.bottomAnchor.constraint(equalTo: nextButton.topAnchor, constant: -14),
-            nextButtonContourView.heightAnchor.constraint(equalToConstant: 1),
-            nextButtonContourView.topAnchor.constraint(greaterThanOrEqualTo: nicknameContourView.bottomAnchor, constant: 50)
         ])
     }
     
     private func configureUI() {
         view.backgroundColor = .Togaether.background
+        navigationController?.navigationBar.barTintColor = .Togaether.background
     }
     
     private func bindAction(with reactor: SignUpProfileReactor) {
         disposeBag.insert {
+            profileImageButton.rx.tap.flatMapLatest { [weak self] (_) in
+                return UIImagePickerController.rx.createWithParent(parent: self) { picker in
+                    picker.sourceType = .photoLibrary
+                    picker.allowsEditing = true
+                }
+                .flatMap { $0.rx.didFinishPickingMediaWithInfo }
+                .take(1)
+                }
+                .map { $0[.originalImage] as? UIImage }
+                .map { $0?.pngData() }
+                .map { Reactor.Action.gallaryImageDidPick($0) }
+                .bind(to: reactor.action)
+
             nicknameTextField.rx.text
                 .orEmpty
                 .distinctUntilChanged()
@@ -240,16 +236,6 @@ final class SignUpProfileViewController: BaseViewController {
                 .map { Reactor.Action.nextButtonDidTap }
                 .bind(to: reactor.action)
             
-            profileRegisterButton.rx.tap
-                .asDriver()
-                .drive(onNext: { [weak self] in
-                    guard let self = self else {
-                        return
-                    }
-                    
-                    self.present(self.imagePicker, animated: true)
-                })
-            
             RxKeyboard.instance.visibleHeight
                 .skip(1)
                 .drive(with: self,
@@ -262,10 +248,26 @@ final class SignUpProfileViewController: BaseViewController {
     private func bindState(with reactor: SignUpProfileReactor) {
         disposeBag.insert {
             reactor.state
+                .map { $0.user.profileImageData }
+                .distinctUntilChanged()
+                .asDriver(onErrorJustReturn: nil)
+                .drive(with: self,
+                   onNext: { this, imageData in
+                    guard let imageData = imageData else {
+                        return
+                    }
+                    
+                    this.profileImageButton.setImage(UIImage(data: imageData), for: .normal)
+                })
+            
+            reactor.state
                 .map { $0.isNicknameValidationCheckDone }
                 .distinctUntilChanged()
                 .asDriver(onErrorJustReturn: false)
-                .drive(duplicateCheckButton.rx.isEnabled)
+                .drive(with: self,
+                   onNext: { this, isEnabled in
+                    this.duplicateCheckButton.isEnabled = isEnabled
+                })
             
             reactor.state
                 .map { $0.isNicknameDuplicateCheckDone }
@@ -275,9 +277,15 @@ final class SignUpProfileViewController: BaseViewController {
                    onNext: { this, isEnabled in
                     this.nextButton.isEnabled = isEnabled
                     this.nicknameTextField.resignFirstResponder()
-                    if isEnabled {
-                        this.nextButton.becomeFirstResponder()
-                    }
+                })
+            
+            reactor.state
+                .map { $0.isNextButtonEnabled }
+                .distinctUntilChanged()
+                .asDriver(onErrorJustReturn: false)
+                .drive(with: self,
+                   onNext: { this, isEnabled in
+                    this.nextButton.isEnabled = isEnabled
                 })
         }
     }
@@ -302,21 +310,5 @@ final class SignUpProfileViewController: BaseViewController {
         alertController.addAction(cancelAction)
         alertController.addAction(confirmAction)
         present(alertController, animated: true, completion: nil)
-    }
-}
-
-extension SignUpProfileViewController: UINavigationControllerDelegate { } // for ImagePicker, not implement
-
-extension SignUpProfileViewController: UIImagePickerControllerDelegate {
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            self.profileImageView.image = image
-        }
-        
-        dismiss(animated: true, completion: nil)
     }
 }

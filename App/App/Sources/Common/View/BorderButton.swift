@@ -14,7 +14,7 @@ final class BorderButton: UIButton {
             case true:
                 layer.borderColor = UIColor.Togaether.mainGreen.cgColor
             case false:
-                layer.borderColor = UIColor.Togaether.buttonDisabled.cgColor
+                layer.borderColor = UIColor.Togaether.secondaryButton.cgColor
             }
         }
     }
@@ -24,7 +24,7 @@ final class BorderButton: UIButton {
         layer.cornerRadius = 10
         layer.borderWidth = 1
         setTitleColor(UIColor.Togaether.mainGreen, for: .selected)
-        setTitleColor(UIColor.Togaether.buttonDisabled, for: .normal)
+        setTitleColor(UIColor.Togaether.secondaryButton, for: .normal)
     }
     
     @available(*, unavailable)
