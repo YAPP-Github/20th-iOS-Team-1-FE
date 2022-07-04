@@ -252,6 +252,14 @@ final class SearchViewController: BaseViewController {
                             self.mapView.addAnnotation(mapViewAnnotation)
                         }
                     }
+                }),
+            
+            reactor.state
+                .map { $0.selectedGather }
+                .distinctUntilChanged()
+                .asDriver(onErrorJustReturn: nil)
+                .drive(onNext: { selectedGather in
+                    self.bottomSheetContentView.configure(gatherConfiguration: selectedGather)
                 })
         )
     }
@@ -332,13 +340,21 @@ extension SearchViewController: MKMapViewDelegate {
             mapView.deselectAnnotation(view.annotation, animated: false)
         }
         else if let view = view as? AnnotationView,
-                let annotation = view.annotation as? Annotation {
+                let annotation = view.annotation as? Annotation,
+                let location = locationManager.location
+        {
             view.select()
+            reactor?.action
+                .onNext(
+                    .annotationViewDidSelect(
+                        annotation.gather.id,
+                        location
+                    )
+                )
             mapView.setCenter(annotation.coordinate, animated: true)
             UIView.animate(withDuration: 0.2, animations: {
-                self.gatherInformationBottomSheetHeightConstraint.constant = 200
+                self.gatherInformationBottomSheetHeightConstraint.constant = 160
                 self.bottomSheetContentView.isHidden = false
-                //TODO: ANNOTATION 정보로 View 그리기
                 self.view.layoutIfNeeded()
             })
         }
