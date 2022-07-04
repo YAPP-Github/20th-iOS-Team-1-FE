@@ -252,15 +252,15 @@ final class SearchViewController: BaseViewController {
                             self.mapView.addAnnotation(mapViewAnnotation)
                         }
                     }
-                }),
-            
-            reactor.state
-                .map { $0.selectedGather }
-                .distinctUntilChanged()
-                .asDriver(onErrorJustReturn: nil)
-                .drive(onNext: { selectedGather in
-                    self.bottomSheetContentView.configure(gatherConfiguration: selectedGather)
                 })
+            
+//            reactor.state
+//                .map { $0.selectedGather }
+//                .distinctUntilChanged()
+//                .asDriver(onErrorJustReturn: nil)
+//                .drive(onNext: { selectedGather in
+//                    self.bottomSheetContentView.configure(gatherConfiguration: selectedGather)
+//                })
         )
     }
     

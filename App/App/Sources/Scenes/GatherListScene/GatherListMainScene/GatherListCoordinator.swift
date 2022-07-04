@@ -17,7 +17,9 @@ final class GatherListCoordinator: SceneCoordinator {
     }
     
     func start() {
-        let reactor = GatherListReactor()
+        let networkManager = NetworkManager.shared
+        let gatherListRepository = GatherListRepository(networkManager: networkManager)
+        let reactor = GatherListReactor(gatherListRepository: gatherListRepository)
         let viewController = GatherListViewController(reactor: reactor)
         
         navigationController.setViewControllers([viewController], animated: false)

@@ -72,11 +72,23 @@ final class GatherListViewController: BaseViewController {
     }
     
     private func bindAction(with reactor: GatherListReactor) {
-        
+        disposeBag.insert {
+            segmentView.segmentControl.rx.selectedSegmentIndex
+                .map { index in
+                    Reactor.Action.segmentIndex(index: index) }
+                .bind(to: reactor.action)
+        }
     }
     
     private func bindState(with reactor: GatherListReactor) {
-        
+        disposeBag.insert {
+            reactor.state
+                .map { $0.gatherListInfo }
+                .distinctUntilChanged()
+                .asDriver(onErrorJustReturn: GatherListInfo(hasNotClub: false))
+                .drive(onNext: { data in
+                })
+        }
     }
     
     func bind(reactor: GatherListReactor) {

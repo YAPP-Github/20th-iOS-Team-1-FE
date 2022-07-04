@@ -23,7 +23,6 @@
 		29AE224C2853711F00EDF34B /* RxMKMapViewDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE224B2853711F00EDF34B /* RxMKMapViewDelegateProxy.swift */; };
 		29AE224E285372B200EDF34B /* Reactive+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE224D285372B200EDF34B /* Reactive+Extension.swift */; };
 		29AE22522869E47100EDF34B /* MapViewAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE22512869E47100EDF34B /* MapViewAnnotation.swift */; };
-		29AE2254286DDA0500EDF34B /* GatherConfigurationForSheetResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2253286DDA0500EDF34B /* GatherConfigurationForSheetResponseDTO.swift */; };
 		29AE2256286F2DDF00EDF34B /* MKMapView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2255286F2DDF00EDF34B /* MKMapView+Extension.swift */; };
 		29AE2258286F2FB400EDF34B /* GatherRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2257286F2FB400EDF34B /* GatherRepository.swift */; };
 		29AE225A286F523D00EDF34B /* MapViewBottomSheetContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2259286F523D00EDF34B /* MapViewBottomSheetContentView.swift */; };
@@ -168,10 +167,15 @@
 		FDBC1232286C983E00FCADF4 /* AccountInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC1231286C983E00FCADF4 /* AccountInfoDTO.swift */; };
 		FDBC1234286C986700FCADF4 /* PetInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC1233286C986700FCADF4 /* PetInfoDTO.swift */; };
 		FDBC1237286D6A6600FCADF4 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC1236286D6A6600FCADF4 /* APIConstants.swift */; };
+		FDE18E182873586C00A7369D /* GatherListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE18E172873586C00A7369D /* GatherListRepository.swift */; };
+		FDE18E1C2873596300A7369D /* GatherListInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE18E1B2873596300A7369D /* GatherListInfo.swift */; };
+		FDE18E1F2873598E00A7369D /* GatherListRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE18E1E2873598E00A7369D /* GatherListRepositoryInterface.swift */; };
 		FDE6F146285215BD005E4783 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE6F145285215BD005E4783 /* UIFont+Extension.swift */; };
 		FDE6F1482852317F005E4783 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE6F1472852317F005E4783 /* UITableView+Extension.swift */; };
 		FDE6F14A28523493005E4783 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE6F14928523493005E4783 /* UICollectionView+Extension.swift */; };
 		FDE6F14C285234A3005E4783 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE6F14B285234A3005E4783 /* NSObject+Extension.swift */; };
+		FDFD017028735DA300C625B1 /* GatherListResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFD016F28735DA300C625B1 /* GatherListResponseDTO.swift */; };
+		FDFD017228735DBB00C625B1 /* GatherConfigurationForSheetResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFD017128735DBB00C625B1 /* GatherConfigurationForSheetResponseDTO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -201,7 +205,6 @@
 		29AE224B2853711F00EDF34B /* RxMKMapViewDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxMKMapViewDelegateProxy.swift; sourceTree = "<group>"; };
 		29AE224D285372B200EDF34B /* Reactive+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reactive+Extension.swift"; sourceTree = "<group>"; };
 		29AE22512869E47100EDF34B /* MapViewAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewAnnotation.swift; sourceTree = "<group>"; };
-		29AE2253286DDA0500EDF34B /* GatherConfigurationForSheetResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherConfigurationForSheetResponseDTO.swift; sourceTree = "<group>"; };
 		29AE2255286F2DDF00EDF34B /* MKMapView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+Extension.swift"; sourceTree = "<group>"; };
 		29AE2257286F2FB400EDF34B /* GatherRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherRepository.swift; sourceTree = "<group>"; };
 		29AE2259286F523D00EDF34B /* MapViewBottomSheetContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewBottomSheetContentView.swift; sourceTree = "<group>"; };
@@ -341,10 +344,15 @@
 		FDBC1231286C983E00FCADF4 /* AccountInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInfoDTO.swift; sourceTree = "<group>"; };
 		FDBC1233286C986700FCADF4 /* PetInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetInfoDTO.swift; sourceTree = "<group>"; };
 		FDBC1236286D6A6600FCADF4 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
+		FDE18E172873586C00A7369D /* GatherListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListRepository.swift; sourceTree = "<group>"; };
+		FDE18E1B2873596300A7369D /* GatherListInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListInfo.swift; sourceTree = "<group>"; };
+		FDE18E1E2873598E00A7369D /* GatherListRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListRepositoryInterface.swift; sourceTree = "<group>"; };
 		FDE6F145285215BD005E4783 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		FDE6F1472852317F005E4783 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		FDE6F14928523493005E4783 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
 		FDE6F14B285234A3005E4783 /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
+		FDFD016F28735DA300C625B1 /* GatherListResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListResponseDTO.swift; sourceTree = "<group>"; };
+		FDFD017128735DBB00C625B1 /* GatherConfigurationForSheetResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherConfigurationForSheetResponseDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -402,7 +410,6 @@
 			isa = PBXGroup;
 			children = (
 				29AE2239284B97DA00EDF34B /* GatherConfigurationForAnnotation.swift */,
-				29AE2253286DDA0500EDF34B /* GatherConfigurationForSheetResponseDTO.swift */,
 				29AE2237284B941800EDF34B /* GatherCategory.swift */,
 				29AE2243284DF18200EDF34B /* Coordinate.swift */,
 			);
@@ -417,6 +424,7 @@
 				3734CEAB2869E72100EEF38D /* SignUpRepository.swift */,
 				FDBC1225286C309C00FCADF4 /* ProfileRespository.swift */,
 				29AE2257286F2FB400EDF34B /* GatherRepository.swift */,
+				FDE18E172873586C00A7369D /* GatherListRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -461,6 +469,8 @@
 				FDBC122F286C95D000FCADF4 /* ProfileResponseDTO.swift */,
 				FDBC1231286C983E00FCADF4 /* AccountInfoDTO.swift */,
 				FDBC1233286C986700FCADF4 /* PetInfoDTO.swift */,
+				FDFD016F28735DA300C625B1 /* GatherListResponseDTO.swift */,
+				FDFD017128735DBB00C625B1 /* GatherConfigurationForSheetResponseDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -636,11 +646,9 @@
 		378F3475281DBD4C0063CE4F /* GatherListScene */ = {
 			isa = PBXGroup;
 			children = (
+				FDE18E1D2873596A00A7369D /* Entitiy */,
+				FDFD016A28735A9800C625B1 /* GatherListMainScene */,
 				37DA251D287317CA002E4D67 /* DetailGatherScene */,
-				FD8AD7032851E25300454AC3 /* SubComponents */,
-				378F348A281DC0560063CE4F /* GatherListCoordinator.swift */,
-				378F347C281DBE070063CE4F /* GatherListViewController.swift */,
-				378F347D281DBE070063CE4F /* GatherListReactor.swift */,
 			);
 			path = GatherListScene;
 			sourceTree = "<group>";
@@ -1028,6 +1036,26 @@
 			name = APIConstants;
 			sourceTree = "<group>";
 		};
+		FDE18E1D2873596A00A7369D /* Entitiy */ = {
+			isa = PBXGroup;
+			children = (
+				FDE18E1B2873596300A7369D /* GatherListInfo.swift */,
+			);
+			path = Entitiy;
+			sourceTree = "<group>";
+		};
+		FDFD016A28735A9800C625B1 /* GatherListMainScene */ = {
+			isa = PBXGroup;
+			children = (
+				FD8AD7032851E25300454AC3 /* SubComponents */,
+				378F348A281DC0560063CE4F /* GatherListCoordinator.swift */,
+				378F347C281DBE070063CE4F /* GatherListViewController.swift */,
+				378F347D281DBE070063CE4F /* GatherListReactor.swift */,
+				FDE18E1E2873598E00A7369D /* GatherListRepositoryInterface.swift */,
+			);
+			path = GatherListMainScene;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1206,10 +1234,10 @@
 				375558BE2866E0AC00D13208 /* SignUpAreaViewController.swift in Sources */,
 				379B1A77285A4F7700E58A34 /* AppleCredentialRequestDTO.swift in Sources */,
 				374F41E1286619C90074F04B /* Area.swift in Sources */,
-				29AE2254286DDA0500EDF34B /* GatherConfigurationForSheetResponseDTO.swift in Sources */,
 				37C3F4ED284BF4380006CB02 /* KeychainProvidable.swift in Sources */,
 				378F348F281DC0770063CE4F /* ProfileCoordinator.swift in Sources */,
 				376006C82848A16400B27015 /* RegularExpressionValidatable.swift in Sources */,
+				FDFD017228735DBB00C625B1 /* GatherConfigurationForSheetResponseDTO.swift in Sources */,
 				29AE223D284D71DC00EDF34B /* LocationManageable.swift in Sources */,
 				29AE223D284D71DC00EDF34B /* LocationManageable.swift in Sources */,
 				FD8AD7072851E28000454AC3 /* GatherListCell.swift in Sources */,
@@ -1261,11 +1289,13 @@
 				FDBC1234286C986700FCADF4 /* PetInfoDTO.swift in Sources */,
 				37912C65281445AC0087B95E /* AppDelegate.swift in Sources */,
 				3734CEAC2869E72100EEF38D /* SignUpRepository.swift in Sources */,
+				FDE18E1F2873598E00A7369D /* GatherListRepositoryInterface.swift in Sources */,
 				374380AF284FE13300CB02A5 /* SearchingResponseDTO.swift in Sources */,
 				374F41D72864E97A0074F04B /* KeychainAccount.swift in Sources */,
 				29AE222D284B7DAA00EDF34B /* SearchViewController.swift in Sources */,
 				377370882841DE3500D5CCB6 /* SignUpProfileViewController.swift in Sources */,
 				29AE223A284B97DA00EDF34B /* GatherConfigurationForAnnotation.swift in Sources */,
+				FDE18E182873586C00A7369D /* GatherListRepository.swift in Sources */,
 				376006CA28490EFD00B27015 /* EnableButton.swift in Sources */,
 				37DA252328732816002E4D67 /* Divider.swift in Sources */,
 				379B1A79285A52DA00E58A34 /* AppleLoginRepository.swift in Sources */,
@@ -1288,6 +1318,7 @@
 				37912C67281445AC0087B95E /* SceneDelegate.swift in Sources */,
 				37C1451D284F9D6500D11CC3 /* NetworkManageable.swift in Sources */,
 				FDBC1232286C983E00FCADF4 /* AccountInfoDTO.swift in Sources */,
+				FDE18E1C2873596300A7369D /* GatherListInfo.swift in Sources */,
 				37AA7E1A2850B1B600B4B5C2 /* EligibleSexDTO.swift in Sources */,
 				37348B0C2866CA5E00C38F70 /* BorderButton.swift in Sources */,
 				37AC3106284930E6003C3FA2 /* SignUpInfomationReactor.swift in Sources */,
@@ -1300,6 +1331,7 @@
 				29AE224E285372B200EDF34B /* Reactive+Extension.swift in Sources */,
 				29AE223F284DC1B500EDF34B /* CLLocationCoordinate2D+Extension.swift in Sources */,
 				37191838286E166100169FC2 /* SignUpTermsOfServiceViewController.swift in Sources */,
+				FDFD017028735DA300C625B1 /* GatherListResponseDTO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
