@@ -76,7 +76,7 @@ final class SearchReactor: Reactor {
     ) -> Observable<Mutation> {
         return Observable.create { [unowned self] observer in
             self.gatherRepository
-                .requsetGatherConfigurationForAnnotation(
+                .requestGatherConfigurationForAnnotation(
                     topLeftCoordinate: topLeftCoordinate,
                     bottomRightCoordinate: rightBottomCoordinate
                 )
