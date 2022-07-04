@@ -51,7 +51,7 @@ final class TagCollectionViewCell: UICollectionViewCell {
     }
     
     internal func changeTagStyle() {
-        tagLabel.backgroundColor = .Togaether.background
+        tagLabel.backgroundColor = .Togaether.subGreen
         tagLabel.layer.borderWidth = 0.5
         tagLabel.layer.borderColor = UIColor.white.cgColor
         tagLabel.textColor = .white

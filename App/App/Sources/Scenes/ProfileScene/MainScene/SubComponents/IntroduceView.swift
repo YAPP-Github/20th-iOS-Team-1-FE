@@ -26,7 +26,7 @@ final class IntroduceView: UIView {
     
     private lazy var divisionView: UIView = {
         let view = UIView()
-        view.backgroundColor = .Togaether.divider
+        view.backgroundColor = .Togaether.mainGreen
         
         return view
     }()
@@ -45,7 +45,7 @@ final class IntroduceView: UIView {
         layout.scrollDirection = .horizontal
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .Togaether.background
+        collectionView.backgroundColor = .Togaether.subGreen
         collectionView.registerCell(type: TagCollectionViewCell.self)
         collectionView.delegate = self
         collectionView.showsHorizontalScrollIndicator = false
@@ -78,7 +78,7 @@ final class IntroduceView: UIView {
         NSLayoutConstraint.useAndActivateConstraints([
             introduceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
             introduceLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
-            introduceLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -25),
+            introduceLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -28),
             
             divisionView.topAnchor.constraint(equalTo: introduceLabel.bottomAnchor, constant: 10),
             divisionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
@@ -97,7 +97,7 @@ final class IntroduceView: UIView {
     }
     
     private func configureUI() {
-        backgroundColor = .Togaether.background
+        backgroundColor = .Togaether.subGreen
     }
     
     internal func configureData(_ accountData: AccountInfo?) {

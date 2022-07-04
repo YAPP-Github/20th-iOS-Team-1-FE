@@ -68,7 +68,7 @@ final class ProfileViewController: BaseViewController {
     
     private func configureUI() {
         view.backgroundColor = .Togaether.background
-        navigationController?.navigationBar.titleTextAttributes = [ .foregroundColor: UIColor.Togaether.mainGreen ]
+        navigationController?.navigationBar.titleTextAttributes = [ .foregroundColor: UIColor.Togaether.primaryLabel ]
         navigationItem.title = "프로필"
     }
     
