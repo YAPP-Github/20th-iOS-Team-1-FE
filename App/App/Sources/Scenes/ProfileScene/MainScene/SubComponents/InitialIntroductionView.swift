@@ -56,6 +56,6 @@ final class InitialIntroductionView: UIView {
     }
     
     private func configureUI() {
-        backgroundColor = .Togaether.background
+        backgroundColor = .Togaether.subGreen
     }
 }
