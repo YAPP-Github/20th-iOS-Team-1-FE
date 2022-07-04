@@ -23,3 +23,25 @@ struct GatherConfigurationForSheet: Codable {
     let distance: Int
     let clubStatus: String
 }
+
+struct GatherConfigurationForSheetResponse {
+    let category: Category
+    let title: String
+    let startDate: Date
+    let endDate: Date
+    let eligiblePetSizeTypes: [PetSizeType]
+    let eligibleSex: Sex
+    let latitude: Double
+    let longitude: Double
+    let meetingPlace: String
+    let distance: Int
+    let clubStatus: ClubStatus
+}
+
+enum PetSizeType {
+    case large, medium, small, all
+}
+
+enum ClubStatus {
+    case available, peronnelFull, end
+}

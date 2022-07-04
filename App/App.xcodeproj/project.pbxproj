@@ -23,7 +23,7 @@
 		29AE224C2853711F00EDF34B /* RxMKMapViewDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE224B2853711F00EDF34B /* RxMKMapViewDelegateProxy.swift */; };
 		29AE224E285372B200EDF34B /* Reactive+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE224D285372B200EDF34B /* Reactive+Extension.swift */; };
 		29AE22522869E47100EDF34B /* MapViewAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE22512869E47100EDF34B /* MapViewAnnotation.swift */; };
-		29AE2254286DDA0500EDF34B /* GatherConfigurationForSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2253286DDA0500EDF34B /* GatherConfigurationForSheet.swift */; };
+		29AE2254286DDA0500EDF34B /* GatherConfigurationForSheetResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2253286DDA0500EDF34B /* GatherConfigurationForSheetResponseDTO.swift */; };
 		29AE2256286F2DDF00EDF34B /* MKMapView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2255286F2DDF00EDF34B /* MKMapView+Extension.swift */; };
 		29AE2258286F2FB400EDF34B /* GatherRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2257286F2FB400EDF34B /* GatherRepository.swift */; };
 		29AE225A286F523D00EDF34B /* MapViewBottomSheetContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2259286F523D00EDF34B /* MapViewBottomSheetContentView.swift */; };
@@ -201,7 +201,7 @@
 		29AE224B2853711F00EDF34B /* RxMKMapViewDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxMKMapViewDelegateProxy.swift; sourceTree = "<group>"; };
 		29AE224D285372B200EDF34B /* Reactive+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reactive+Extension.swift"; sourceTree = "<group>"; };
 		29AE22512869E47100EDF34B /* MapViewAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewAnnotation.swift; sourceTree = "<group>"; };
-		29AE2253286DDA0500EDF34B /* GatherConfigurationForSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherConfigurationForSheet.swift; sourceTree = "<group>"; };
+		29AE2253286DDA0500EDF34B /* GatherConfigurationForSheetResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherConfigurationForSheetResponseDTO.swift; sourceTree = "<group>"; };
 		29AE2255286F2DDF00EDF34B /* MKMapView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+Extension.swift"; sourceTree = "<group>"; };
 		29AE2257286F2FB400EDF34B /* GatherRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherRepository.swift; sourceTree = "<group>"; };
 		29AE2259286F523D00EDF34B /* MapViewBottomSheetContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewBottomSheetContentView.swift; sourceTree = "<group>"; };
@@ -402,7 +402,7 @@
 			isa = PBXGroup;
 			children = (
 				29AE2239284B97DA00EDF34B /* GatherConfigurationForAnnotation.swift */,
-				29AE2253286DDA0500EDF34B /* GatherConfigurationForSheet.swift */,
+				29AE2253286DDA0500EDF34B /* GatherConfigurationForSheetResponseDTO.swift */,
 				29AE2237284B941800EDF34B /* GatherCategory.swift */,
 				29AE2243284DF18200EDF34B /* Coordinate.swift */,
 			);
@@ -1206,7 +1206,7 @@
 				375558BE2866E0AC00D13208 /* SignUpAreaViewController.swift in Sources */,
 				379B1A77285A4F7700E58A34 /* AppleCredentialRequestDTO.swift in Sources */,
 				374F41E1286619C90074F04B /* Area.swift in Sources */,
-				29AE2254286DDA0500EDF34B /* GatherConfigurationForSheet.swift in Sources */,
+				29AE2254286DDA0500EDF34B /* GatherConfigurationForSheetResponseDTO.swift in Sources */,
 				37C3F4ED284BF4380006CB02 /* KeychainProvidable.swift in Sources */,
 				378F348F281DC0770063CE4F /* ProfileCoordinator.swift in Sources */,
 				376006C82848A16400B27015 /* RegularExpressionValidatable.swift in Sources */,

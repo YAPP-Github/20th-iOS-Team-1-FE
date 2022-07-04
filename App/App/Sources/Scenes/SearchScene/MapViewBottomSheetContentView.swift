@@ -44,6 +44,15 @@ class MapViewBottomSheetContentView: UIView {
         return label
     }()
     
+    private lazy var distanceLabel: UILabel = {
+        let label = UILabel()
+        label.text = "거리"
+        label.textColor = .Togaether.secondaryLabel
+        label.font = UIFont.systemFont(ofSize: 12)
+
+        return label
+    }()
+    
     private lazy var addressLabel: UILabel = {
         let label = UILabel()
         label.text = "모임 장소 주소"
@@ -168,6 +177,7 @@ class MapViewBottomSheetContentView: UIView {
         addSubview(hostProfileImageView)
         addSubview(hostNickNameLabel)
         addSubview(tagStackView)
+        addSubview(distanceLabel)
         tagStackView.addSubview(dogTypeTagLabel)
         tagStackView.addSubview(dogSizeTagLabel)
         tagStackView.addSubview(sexTagLabel)
@@ -188,12 +198,17 @@ class MapViewBottomSheetContentView: UIView {
             titleLabel.leadingAnchor.constraint(equalTo: categoryLabel.leadingAnchor),
             titleLabel.trailingAnchor.constraint(equalTo: countLabel.leadingAnchor, constant: -14.0),
             
-            addressLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 6.0),
-            addressLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            distanceLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 6),
+            distanceLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            distanceLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 60),
+            
+            
+            addressLabel.topAnchor.constraint(equalTo: distanceLabel.topAnchor),
+            addressLabel.leadingAnchor.constraint(equalTo: distanceLabel.trailingAnchor, constant: 10),
             addressLabel.trailingAnchor.constraint(equalTo: countLabel.leadingAnchor, constant: -14.0),
             
-            dateLabel.topAnchor.constraint(equalTo: addressLabel.bottomAnchor, constant: 12.0),
-            dateLabel.leadingAnchor.constraint(equalTo: addressLabel.leadingAnchor),
+            dateLabel.topAnchor.constraint(equalTo: distanceLabel.bottomAnchor, constant: 12.0),
+            dateLabel.leadingAnchor.constraint(equalTo: distanceLabel.leadingAnchor),
 
             divisionView.leadingAnchor.constraint(equalTo: dateLabel.trailingAnchor, constant: 8.0),
             divisionView.centerYAnchor.constraint(equalTo: dateLabel.centerYAnchor),
@@ -203,16 +218,8 @@ class MapViewBottomSheetContentView: UIView {
             timeLabel.topAnchor.constraint(equalTo: dateLabel.topAnchor),
             timeLabel.leadingAnchor.constraint(equalTo: divisionView.trailingAnchor, constant: 8.0),
             timeLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -8.0),
-            
-            hostProfileImageView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 16.0),
-            hostProfileImageView.leadingAnchor.constraint(equalTo: addressLabel.leadingAnchor),
-            hostProfileImageView.widthAnchor.constraint(equalToConstant: 28.0),
-            hostProfileImageView.heightAnchor.constraint(equalToConstant: 28.0),
-            
-            hostNickNameLabel.leadingAnchor.constraint(equalTo: hostProfileImageView.trailingAnchor, constant: 8.0),
-            hostNickNameLabel.centerYAnchor.constraint(equalTo: hostProfileImageView.centerYAnchor),
-            
-            tagStackView.topAnchor.constraint(equalTo: hostProfileImageView.bottomAnchor, constant: 16.0),
+    
+            tagStackView.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 16.0),
             tagStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
             tagStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
             tagStackView.heightAnchor.constraint(equalToConstant: 18),
@@ -232,5 +239,84 @@ class MapViewBottomSheetContentView: UIView {
     
     private func configureUI() {
         backgroundColor = .Togaether.background
+    }
+    
+    internal func configure(gatherConfiguration: GatherConfigurationForSheetResponseDTO?) {
+        titleLabel.text = gatherConfiguration?.title
+        categoryLabel.text = gatherConfiguration?.category.korean
+        distanceLabel.text = "거리 \(gatherConfiguration?.distance ?? 0)m"
+        addressLabel.text = gatherConfiguration?.meetingPlace
+        countLabel.text = "\(gatherConfiguration?.participants ?? 0)/\(gatherConfiguration?.maximumPeople ?? 0)"
+        if let startDate = gatherConfiguration?.startDate.toDate(),
+           let endDate = gatherConfiguration?.endDate.toDate(){
+            dateLabel.text = startDate.monthDayWeekDay()
+            timeLabel.text = startDate.hourMinute() + "-" + endDate.hourMinute()
+        }
+//        dogTypeTagLabel.text = gatherConfiguration?.eligibleBreeds.count == 1 ? gatherConfiguration?.eligibleBreeds.first : "\(gatherConfiguration?.eligibleBreeds.first ?? "말티즈") 외 \((gatherConfiguration?.eligibleBreeds.count ?? 2) - 1)종"
+//        dogSizeTagLabel.text = (gatherConfiguration?.eligiblePetSizeTypes.map{ String($0[String.Index(utf16Offset: 0, in: $0)]) }.joined(separator: ",") ?? "소") + "형견"
+    }
+}
+
+extension String {
+    func toDate() -> Date? { //"yyyy-MM-dd HH:mm:ss"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+        dateFormatter.timeZone = TimeZone(identifier: "UTC")
+        if let date = dateFormatter.date(from: self) {
+            return date
+        } else {
+            return nil
+        }
+    }
+}
+
+extension Date {
+    func get(_ components: Calendar.Component..., calendar: Calendar = Calendar.current) -> DateComponents {
+        return calendar.dateComponents(Set(components), from: self)
+    }
+
+    func get(_ component: Calendar.Component, calendar: Calendar = Calendar.current) -> Int {
+        return calendar.component(component, from: self)
+    }
+    
+    func toString() -> String {
+           let dateFormatter = DateFormatter()
+           dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+           dateFormatter.timeZone = TimeZone(identifier: "UTC")
+           return dateFormatter.string(from: self)
+       }
+    
+    func monthDayWeekDay() -> String {
+        "\(self.get(.month))월 \(self.get(.day))일(\(Weekday.init(rawValue: self.get(.weekday))?.korean ?? "월"))"
+    }
+    
+    func hourMinute() -> String {
+        let hour = self.get(.hour) < 10 ? "0\(self.get(.hour))" : "\(self.get(.hour))"
+        let minute = self.get(.minute) < 10 ? "0\(self.get(.minute))" : "\(self.get(.minute))"
+        
+        return "\(hour):\(minute)"
+    }
+}
+
+enum Weekday: Int {
+    case sat, sun, mon, tue, wed, thu, fri
+    
+    internal var korean: String {
+        switch self {
+        case .sat:
+            return "토"
+        case .sun:
+            return "일"
+        case .mon:
+            return "월"
+        case .tue:
+            return "화"
+        case .wed:
+            return "수"
+        case .thu:
+            return "목"
+        case .fri:
+            return "금"
+        }
     }
 }
