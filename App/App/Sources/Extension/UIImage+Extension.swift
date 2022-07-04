@@ -23,6 +23,8 @@ extension UIImage {
         static let profileSetting      = UIImage(named: "profileSetting")!
         static let rightArrow          = UIImage(systemName: "chevron.right")!
         static let plus                = UIImage(systemName: "plus")!
+        static let userDefaultProfile  = UIImage(named: "userDefaultProfile")!
+        static let petDefaultProfile   = UIImage(named: "petDefaultProfile")!
         static let xmark              = UIImage(systemName: "xmark")
         static let defaultWalkMapViewAnnotation = UIImage(named: "defaultWalkMapViewAnnotation")!
         static let defaultDogCafeMapViewAnnotation = UIImage(named: "defaultDogCafeMapViewAnnotation")!

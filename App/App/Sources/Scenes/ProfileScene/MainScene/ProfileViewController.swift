@@ -12,7 +12,7 @@ import RxCocoa
 
 final class ProfileViewController: BaseViewController {
     var disposeBag = DisposeBag()
-    let nickName: String? = "yapp" // 임시
+    let nickName: String? = "qqqq" // 임시
         
     private lazy var scrollView = UIScrollView()
     private lazy var contentView = UIView()
@@ -43,25 +43,33 @@ final class ProfileViewController: BaseViewController {
     
     private func configureLayout() {
         NSLayoutConstraint.useAndActivateConstraints([
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
             
             profileContentView.topAnchor.constraint(equalTo: contentView.topAnchor),
             profileContentView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             profileContentView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            profileContentView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            profileContentView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            contentView.bottomAnchor.constraint(greaterThanOrEqualTo: profileContentView.bottomAnchor)
         ])
         
+        let contentViewHeight = contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor)
+        contentViewHeight.priority = .defaultLow
+        contentViewHeight.isActive = true
     }
     
     private func configureUI() {
         view.backgroundColor = .Togaether.background
+        navigationController?.navigationBar.titleTextAttributes = [ .foregroundColor: UIColor.Togaether.mainGreen ]
+        navigationItem.title = "프로필"
     }
     
     private func bindAction(with reactor: ProfileReactor) {
@@ -87,8 +95,9 @@ final class ProfileViewController: BaseViewController {
                 .map { $0.profileInfo }
                 .distinctUntilChanged()
                 .asDriver(onErrorJustReturn: ProfileInfo())
-                .drive(onNext: {
-                    print($0)
+                .drive(onNext: { data in
+                    print(data)
+                    self.profileContentView.configureData(data.myPage, data.accountInfo, petInfo: data.petInfos)
                 })
             
             reactor.state

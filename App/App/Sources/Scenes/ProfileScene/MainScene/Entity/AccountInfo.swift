@@ -11,6 +11,7 @@ struct AccountInfo: Equatable {
     var nickName: String? = nil
     var address: String? = nil
     var age: String? = nil
+    var sex: String? = nil
     var Introduction: String? = nil
     var categories: [String]?
     var profileImageURL: String?
