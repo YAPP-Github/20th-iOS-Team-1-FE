@@ -1,15 +1,15 @@
 //
-//  MyPageRespository.swift
+//  GatherListRepository.swift
 //  App
 //
-//  Created by 김나희 on 6/29/22.
+//  Created by 김나희 on 7/5/22.
 //
 
 import Foundation
 
 import RxSwift
 
-final class ProfileRespository: ProfileMainRepositoryInterface {
+final class GatherListRepository: GatherListRepositoryInterface {
     private let networkManager: NetworkManageable
     private let disposeBag = DisposeBag()
     
@@ -17,16 +17,32 @@ final class ProfileRespository: ProfileMainRepositoryInterface {
         self.networkManager = networkManager
     }
     
-    internal func requestProfileInfo(nickname: String) -> Single<ProfileInfo> {
+    internal func requestGatherList(club: Int) -> Single<GatherListInfo> {
+        let cursorQuery = URLQueryItem(name: "cursor-id", value: "2")
+        var conditionQuery: URLQueryItem
+        switch club {
+        case 0:
+            conditionQuery = URLQueryItem(name: "condition", value: "I_AM_PARTICIPATING")
+        case 1:
+            conditionQuery = URLQueryItem(name: "condition", value: "I_AM_LEADER")
+        case 2:
+            conditionQuery = URLQueryItem(name: "condition", value: "I_AM_PARTICIPATED_AND_EXCEED")
+        default:
+            conditionQuery = URLQueryItem(name: "condition", value: "I_AM_PARTICIPATING")
+        }
+        
         return Single.create { [weak self] observer in
             guard let self = self else {
                 return Disposables.create()
             }
             
-            guard let url = URL(string: APIConstants.BaseURL + APIConstants.GetMyPage + "\(nickname)") else {
+            let url = APIConstants.BaseURL + APIConstants.GetGatherList
+            guard var urlComponents = URLComponents(string: url) else {
                 return Disposables.create()
             }
-                        
+            
+            urlComponents.queryItems = [cursorQuery, conditionQuery]
+            
             let keychain = KeychainQueryRequester()
             let keychainProvider = KeychainProvider(keyChain: keychain)
             guard let Token = try? keychainProvider.read(service: KeychainService.apple, account: KeychainAccount.accessToken) else {
@@ -34,20 +50,21 @@ final class ProfileRespository: ProfileMainRepositoryInterface {
                 return Disposables.create()
             }
             let accessToken = "Bearer " + (String(data: Token, encoding: .utf8) ?? "")
-
-            var urlRequest = URLRequest(url: url)
+            
+            var urlRequest = URLRequest(url: urlComponents.url ?? URL(fileURLWithPath: APIConstants.BaseURL))
             urlRequest.httpMethod = HTTPMethod.get
             urlRequest.addValue(accessToken, forHTTPHeaderField: "Authorization")
             urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
             urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
-
-            let response: Single<ProfileResponseDTO> = self.networkManager.requestDataTask(with: urlRequest)
+            
+            let response: Single<GatherListResponseDTO> = self.networkManager.requestDataTask(with: urlRequest)
             
             response.subscribe { result in
                 switch result {
                 case .success(let dto):
-                    let domain = dto.toDomain()
-                    observer(.success(domain))
+                    print(dto)
+                    let data = dto.toDomain()
+                    observer(.success(data))
                 case .failure(let error):
                     observer(.failure(error))
                 }

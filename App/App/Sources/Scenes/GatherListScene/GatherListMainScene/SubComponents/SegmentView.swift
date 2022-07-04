@@ -16,7 +16,7 @@ final class SegmentView: UIView {
         return container
     }()
 
-    private lazy var segmentControl: UISegmentedControl = {
+    internal lazy var segmentControl: UISegmentedControl = {
         let segment = UISegmentedControl()
         segment.setBackgroundImage(UIImage(), for: .normal, barMetrics: .default)
         segment.setDividerImage(UIImage(), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)

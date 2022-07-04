@@ -9,8 +9,12 @@ import Foundation
 
 struct APIConstants {
     // MARK: BASE URL
-    static let BASE_URL = "https://yapp-togather.com"
+    static let BaseURL = "https://yapp-togather.com"
+
+    // MARK: Gather List
+    static let GetGatherList = "/api/clubs"
     
-    // MARK: MY PAGE
-    static let GET_MY_PAGE = "/api/accounts/my-page/"
+    // MARK: My Page
+    static let GetMyPage = "/api/accounts/my-page/"
+
 }
