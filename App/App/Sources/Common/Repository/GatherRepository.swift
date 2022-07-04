@@ -19,7 +19,7 @@ protocol GatherRepositoryInterface {
     func requsetGatherConfigurationForBottomSheet(
         gatherID: Int,
         userLocation: CLLocation
-    ) -> Single<GatherConfigurationForSheetResponseDTO>
+    ) -> Single<GatherConfigurationForSheet>
 }
 
 struct GatherConfigurationForAnnotationRequestDTO: Codable {
@@ -119,8 +119,8 @@ final class GatherRepository: GatherRepositoryInterface {
     internal func requsetGatherConfigurationForBottomSheet(
         gatherID: Int,
         userLocation: CLLocation
-    ) -> Single<GatherConfigurationForSheetResponseDTO> {
-        return Single<GatherConfigurationForSheetResponseDTO>.create { [weak self] observer in
+    ) -> Single<GatherConfigurationForSheet> {
+        return Single<GatherConfigurationForSheet>.create { [weak self] observer in
             guard let self = self else {
                 return Disposables.create()
             }
@@ -155,8 +155,8 @@ final class GatherRepository: GatherRepositoryInterface {
             
             response.subscribe { result in
                 switch result {
-                case .success(let gatherConfigurationForSheet):
-                    observer(.success(gatherConfigurationForSheet))
+                case .success(let GatherConfigurationForSheetResponseDTO):
+                    observer(.success(GatherConfigurationForSheetResponseDTO.toDomain()))
                 case .failure(let error):
                     observer(.failure(error))
                 }
