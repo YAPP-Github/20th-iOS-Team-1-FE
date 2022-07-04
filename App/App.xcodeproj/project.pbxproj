@@ -134,6 +134,9 @@
 		37C3F4FA284C71030006CB02 /* KeychainQueryRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C3F4F9284C71030006CB02 /* KeychainQueryRequester.swift */; };
 		37C3F4FC284C7D8B0006CB02 /* KeychainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C3F4FB284C7D8B0006CB02 /* KeychainError.swift */; };
 		37C3F62C284D194C0006CB02 /* StubKeychainQueryRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C3F62B284D194C0006CB02 /* StubKeychainQueryRequester.swift */; };
+		37DA2520287317EE002E4D67 /* DetailGatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA251E287317EE002E4D67 /* DetailGatherViewController.swift */; };
+		37DA2521287317EE002E4D67 /* DetailGatherReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA251F287317EE002E4D67 /* DetailGatherReactor.swift */; };
+		37DA252328732816002E4D67 /* Divider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA252228732816002E4D67 /* Divider.swift */; };
 		37ECC53C2871B4B000CFE8E9 /* UIImagePickerViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ECC53B2871B4B000CFE8E9 /* UIImagePickerViewController+Rx.swift */; };
 		37ECC53E2871BA9300CFE8E9 /* RxImagePickerDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ECC53D2871BA9300CFE8E9 /* RxImagePickerDelegateProxy.swift */; };
 		37F67CC5286A1C270073FE8C /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F67CC4286A1C270073FE8C /* AuthCoordinator.swift */; };
@@ -303,6 +306,9 @@
 		37C3F4F9284C71030006CB02 /* KeychainQueryRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainQueryRequester.swift; sourceTree = "<group>"; };
 		37C3F4FB284C7D8B0006CB02 /* KeychainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainError.swift; sourceTree = "<group>"; };
 		37C3F62B284D194C0006CB02 /* StubKeychainQueryRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubKeychainQueryRequester.swift; sourceTree = "<group>"; };
+		37DA251E287317EE002E4D67 /* DetailGatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGatherViewController.swift; sourceTree = "<group>"; };
+		37DA251F287317EE002E4D67 /* DetailGatherReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGatherReactor.swift; sourceTree = "<group>"; };
+		37DA252228732816002E4D67 /* Divider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Divider.swift; sourceTree = "<group>"; };
 		37ECC53A287166C200CFE8E9 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		37ECC53B2871B4B000CFE8E9 /* UIImagePickerViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImagePickerViewController+Rx.swift"; sourceTree = "<group>"; };
 		37ECC53D2871BA9300CFE8E9 /* RxImagePickerDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxImagePickerDelegateProxy.swift; sourceTree = "<group>"; };
@@ -577,6 +583,7 @@
 				37348B0B2866CA5E00C38F70 /* BorderButton.swift */,
 				FD8AD70A2851E51300454AC3 /* TagCollectionViewCell.swift */,
 				3719183A286E184F00169FC2 /* GuideView.swift */,
+				37DA252228732816002E4D67 /* Divider.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -629,6 +636,7 @@
 		378F3475281DBD4C0063CE4F /* GatherListScene */ = {
 			isa = PBXGroup;
 			children = (
+				37DA251D287317CA002E4D67 /* DetailGatherScene */,
 				FD8AD7032851E25300454AC3 /* SubComponents */,
 				378F348A281DC0560063CE4F /* GatherListCoordinator.swift */,
 				378F347C281DBE070063CE4F /* GatherListViewController.swift */,
@@ -927,6 +935,15 @@
 				37C3F62B284D194C0006CB02 /* StubKeychainQueryRequester.swift */,
 			);
 			path = TestDouble;
+			sourceTree = "<group>";
+		};
+		37DA251D287317CA002E4D67 /* DetailGatherScene */ = {
+			isa = PBXGroup;
+			children = (
+				37DA251E287317EE002E4D67 /* DetailGatherViewController.swift */,
+				37DA251F287317EE002E4D67 /* DetailGatherReactor.swift */,
+			);
+			path = DetailGatherScene;
 			sourceTree = "<group>";
 		};
 		FD5AEE83286DDBD200001838 /* EditProfileScene */ = {
@@ -1250,10 +1267,12 @@
 				377370882841DE3500D5CCB6 /* SignUpProfileViewController.swift in Sources */,
 				29AE223A284B97DA00EDF34B /* GatherConfigurationForAnnotation.swift in Sources */,
 				376006CA28490EFD00B27015 /* EnableButton.swift in Sources */,
+				37DA252328732816002E4D67 /* Divider.swift in Sources */,
 				379B1A79285A52DA00E58A34 /* AppleLoginRepository.swift in Sources */,
 				37F67CC5286A1C270073FE8C /* AuthCoordinator.swift in Sources */,
 				378F3486281DBE210063CE4F /* ProfileViewController.swift in Sources */,
 				29AE2256286F2DDF00EDF34B /* MKMapView+Extension.swift in Sources */,
+				37DA2521287317EE002E4D67 /* DetailGatherReactor.swift in Sources */,
 				FDBC12042866858900FCADF4 /* ProfileContentView.swift in Sources */,
 				378F348B281DC0560063CE4F /* GatherListCoordinator.swift in Sources */,
 				FD5AEE90286E266800001838 /* PetInfo.swift in Sources */,
@@ -1273,6 +1292,7 @@
 				37348B0C2866CA5E00C38F70 /* BorderButton.swift in Sources */,
 				37AC3106284930E6003C3FA2 /* SignUpInfomationReactor.swift in Sources */,
 				FDBC1226286C309C00FCADF4 /* ProfileRespository.swift in Sources */,
+				37DA2520287317EE002E4D67 /* DetailGatherViewController.swift in Sources */,
 				37C14518284DC94A00D11CC3 /* NetworkError.swift in Sources */,
 				37C3F4EF284BF4450006CB02 /* KeychainProvider.swift in Sources */,
 				377370842841BE1000D5CCB6 /* UIButton+Rx.swift in Sources */,
