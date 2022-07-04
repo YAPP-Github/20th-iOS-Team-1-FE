@@ -11,6 +11,7 @@ struct PetInfo: Equatable {
     var nickName: String? = nil
     var breed: String? = nil
     var age: String? = nil
+    var sex: String? = nil
     var tags: [String]?
     var imageURL: String?
 }

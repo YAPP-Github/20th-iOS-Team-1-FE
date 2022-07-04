@@ -143,6 +143,7 @@
 		FD5AEE8C286DDD7000001838 /* AddPetReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5AEE8B286DDD7000001838 /* AddPetReactor.swift */; };
 		FD5AEE8E286E265700001838 /* AccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5AEE8D286E265700001838 /* AccountInfo.swift */; };
 		FD5AEE90286E266800001838 /* PetInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5AEE8F286E266800001838 /* PetInfo.swift */; };
+		FD8191582871E2CC00B49961 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8191572871E2CC00B49961 /* UIImageView+Extension.swift */; };
 		FD8AD7052851E26200454AC3 /* GatherListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8AD7042851E26200454AC3 /* GatherListTableView.swift */; };
 		FD8AD7072851E28000454AC3 /* GatherListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8AD7062851E28000454AC3 /* GatherListCell.swift */; };
 		FD8AD7092851E2AA00454AC3 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8AD7082851E2AA00454AC3 /* PaddingLabel.swift */; };
@@ -312,6 +313,7 @@
 		FD5AEE8B286DDD7000001838 /* AddPetReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPetReactor.swift; sourceTree = "<group>"; };
 		FD5AEE8D286E265700001838 /* AccountInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInfo.swift; sourceTree = "<group>"; };
 		FD5AEE8F286E266800001838 /* PetInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetInfo.swift; sourceTree = "<group>"; };
+		FD8191572871E2CC00B49961 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		FD8AD7042851E26200454AC3 /* GatherListTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListTableView.swift; sourceTree = "<group>"; };
 		FD8AD7062851E28000454AC3 /* GatherListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListCell.swift; sourceTree = "<group>"; };
 		FD8AD7082851E2AA00454AC3 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
@@ -748,6 +750,7 @@
 				FDE6F145285215BD005E4783 /* UIFont+Extension.swift */,
 				29AE2255286F2DDF00EDF34B /* MKMapView+Extension.swift */,
 				3732EF43286F4DDC0037404E /* String+Extension.swift */,
+				FD8191572871E2CC00B49961 /* UIImageView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1166,6 +1169,7 @@
 				FDE6F146285215BD005E4783 /* UIFont+Extension.swift in Sources */,
 				375558BF2866E0AC00D13208 /* SignUpAreaReactor.swift in Sources */,
 				374380AB284FDFDD00CB02A5 /* SearchingRequestDTO.swift in Sources */,
+				FD8191582871E2CC00B49961 /* UIImageView+Extension.swift in Sources */,
 				37605E06283C12D400394929 /* SignUpAgreementReactor.swift in Sources */,
 				FD8AD7092851E2AA00454AC3 /* PaddingLabel.swift in Sources */,
 				FD8AD70B2851E51300454AC3 /* TagCollectionViewCell.swift in Sources */,

@@ -7,10 +7,13 @@
 
 import UIKit
 
+import RxCocoa
+import RxSwift
+
 final class IntroduceView: UIView {
-    private let tags: [String] = ["산책", "놀이터", "애견 카페", "애견 동반 식당", "박람회", "기타"] // 임시 데이터
+    private var tags = [String]()
     
-    private lazy var introLabel: UILabel = {
+    private lazy var introduceLabel: UILabel = {
         let label = UILabel()
         label.text = "우리 초코랑 같이 산책하실 분 구해요! 평행산책 같이 연습해요~"
         label.numberOfLines = 0
@@ -40,18 +43,18 @@ final class IntroduceView: UIView {
     private lazy var categoryTagCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 5
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .Togaether.background
         collectionView.registerCell(type: TagCollectionViewCell.self)
         collectionView.delegate = self
-        collectionView.dataSource = self
         collectionView.showsHorizontalScrollIndicator = false
         
         return collectionView
     }()
     
+    var disposeBag = DisposeBag()
+
     override init(frame: CGRect) {
         super.init(frame: .zero)
         addSubviews()
@@ -65,7 +68,7 @@ final class IntroduceView: UIView {
     }
     
     private func addSubviews() {
-        addSubview(introLabel)
+        addSubview(introduceLabel)
         addSubview(divisionView)
         addSubview(category)
         addSubview(categoryTagCollectionView)
@@ -73,22 +76,22 @@ final class IntroduceView: UIView {
     
     private func configureLayout() {
         NSLayoutConstraint.useAndActivateConstraints([
-            introLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
-            introLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 15),
-            introLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -15),
+            introduceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            introduceLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            introduceLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -25),
             
-            divisionView.topAnchor.constraint(equalTo: introLabel.bottomAnchor, constant: 10),
-            divisionView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 15),
-            divisionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -15),
+            divisionView.topAnchor.constraint(equalTo: introduceLabel.bottomAnchor, constant: 10),
+            divisionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            divisionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
             divisionView.heightAnchor.constraint(equalToConstant: 1),
 
             category.topAnchor.constraint(equalTo: divisionView.bottomAnchor, constant: 18),
-            category.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 15),
-            category.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -29),
+            category.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            category.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -29),
             
             categoryTagCollectionView.topAnchor.constraint(equalTo: category.topAnchor),
             categoryTagCollectionView.leadingAnchor.constraint(equalTo: category.trailingAnchor, constant: 16),
-            categoryTagCollectionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            categoryTagCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             categoryTagCollectionView.bottomAnchor.constraint(equalTo: category.bottomAnchor, constant: 2)
             ])
     }
@@ -96,24 +99,39 @@ final class IntroduceView: UIView {
     private func configureUI() {
         backgroundColor = .Togaether.background
     }
+    
+    internal func configureData(_ accountData: AccountInfo?) {
+        guard let accountData = accountData else {
+            return
+        }
+        
+        tags = accountData.categories ?? []
+
+        disposeBag.insert {
+            Observable.of(accountData.Introduction)
+                .asDriver(onErrorJustReturn: "")
+                .drive(onNext: { data in
+                    self.introduceLabel.text = data
+                })
+            
+            Observable.of(tags)
+                .asDriver(onErrorJustReturn: [])
+                .drive(categoryTagCollectionView.rx.items) { collectionView, row, data in
+                    let indexPath = IndexPath(row: row, section: 0)
+                    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.identifier, for: indexPath) as? TagCollectionViewCell else {
+                        return UICollectionViewCell()
+                    }
+                    cell.changeTagStyle()
+                    cell.configureData(data)
+                    
+                    return cell
+                }
+        }
+    }
 }
 
 
-extension IntroduceView: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return tags.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueCell(withType: TagCollectionViewCell.self, for: indexPath) as? TagCollectionViewCell else {
-            return UICollectionViewCell()
-        }
-        cell.changeTagStyle()
-        cell.configureData(tags[indexPath.row])
-        
-        return cell
-    }
-    
+extension IntroduceView: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 4)
@@ -126,8 +144,8 @@ extension IntroduceView: UICollectionViewDataSource, UICollectionViewDelegate, U
         let itemSize = item.size(withAttributes: [
             NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12)
         ])
-        
+
         return CGSize(width: itemSize.width + 17, height: 19)
     }
-    
+
 }
