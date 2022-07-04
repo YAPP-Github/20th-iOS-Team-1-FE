@@ -242,16 +242,16 @@ class MapViewBottomSheetContentView: UIView {
     }
     
     internal func configure(gatherConfiguration: GatherConfigurationForSheetResponseDTO?) {
-        titleLabel.text = gatherConfiguration?.title
-        categoryLabel.text = gatherConfiguration?.category.korean
-        distanceLabel.text = "거리 \(gatherConfiguration?.distance ?? 0)m"
-        addressLabel.text = gatherConfiguration?.meetingPlace
-        countLabel.text = "\(gatherConfiguration?.participants ?? 0)/\(gatherConfiguration?.maximumPeople ?? 0)"
-        if let startDate = gatherConfiguration?.startDate.toDate(),
-           let endDate = gatherConfiguration?.endDate.toDate(){
-            dateLabel.text = startDate.monthDayWeekDay()
-            timeLabel.text = startDate.hourMinute() + "-" + endDate.hourMinute()
-        }
+//        titleLabel.text = gatherConfiguration?.title
+//        categoryLabel.text = gatherConfiguration?.category.korean
+//        distanceLabel.text = "거리 \(gatherConfiguration?.distance ?? 0)m"
+//        addressLabel.text = gatherConfiguration?.meetingPlace
+//        countLabel.text = "\(gatherConfiguration?.participants ?? 0)/\(gatherConfiguration?.maximumPeople ?? 0)"
+//        if let startDate = gatherConfiguration?.startDate.toDate(),
+//           let endDate = gatherConfiguration?.endDate.toDate(){
+//            dateLabel.text = startDate.monthDayWeekDay()
+//            timeLabel.text = startDate.hourMinute() + "-" + endDate.hourMinute()
+//        }
 //        dogTypeTagLabel.text = gatherConfiguration?.eligibleBreeds.count == 1 ? gatherConfiguration?.eligibleBreeds.first : "\(gatherConfiguration?.eligibleBreeds.first ?? "말티즈") 외 \((gatherConfiguration?.eligibleBreeds.count ?? 2) - 1)종"
 //        dogSizeTagLabel.text = (gatherConfiguration?.eligiblePetSizeTypes.map{ String($0[String.Index(utf16Offset: 0, in: $0)]) }.joined(separator: ",") ?? "소") + "형견"
     }

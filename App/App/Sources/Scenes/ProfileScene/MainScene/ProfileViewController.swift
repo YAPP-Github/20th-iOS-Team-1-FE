@@ -96,7 +96,6 @@ final class ProfileViewController: BaseViewController {
                 .distinctUntilChanged()
                 .asDriver(onErrorJustReturn: ProfileInfo())
                 .drive(onNext: { data in
-                    print(data)
                     self.profileContentView.configureData(data.myPage, data.accountInfo, petInfo: data.petInfos)
                 })
             
