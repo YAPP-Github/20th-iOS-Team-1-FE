@@ -21,7 +21,7 @@ final class SearchReactor: Reactor {
         case setVisibleCoordinate(CLLocationCoordinate2D)
         case setMapViewAnnotation([GatherConfigurationForAnnotation])
         case loadingAnnotation(Bool)
-        case setSelectedGather(GatherConfigurationForSheetResponseDTO)
+        case setSelectedGather(GatherConfigurationForSheet)
         case loadingBottomSheet(Bool)
     }
     
@@ -29,7 +29,7 @@ final class SearchReactor: Reactor {
         var visibleCorrdinate: Coordinate = .seoulCityHall
         var currentSpan: Double = 0.005
         var annotations: [GatherConfigurationForAnnotation] = []
-        var selectedGather: GatherConfigurationForSheetResponseDTO?
+        var selectedGather: GatherConfigurationForSheet?
         var isAnnotationLoading: Bool = true
         var isBottomSheetLoading: Bool = true
     }

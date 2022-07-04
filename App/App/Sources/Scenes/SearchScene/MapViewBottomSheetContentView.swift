@@ -241,19 +241,19 @@ class MapViewBottomSheetContentView: UIView {
         backgroundColor = .Togaether.background
     }
     
-    internal func configure(gatherConfiguration: GatherConfigurationForSheetResponseDTO?) {
-//        titleLabel.text = gatherConfiguration?.title
-//        categoryLabel.text = gatherConfiguration?.category.korean
-//        distanceLabel.text = "거리 \(gatherConfiguration?.distance ?? 0)m"
-//        addressLabel.text = gatherConfiguration?.meetingPlace
-//        countLabel.text = "\(gatherConfiguration?.participants ?? 0)/\(gatherConfiguration?.maximumPeople ?? 0)"
-//        if let startDate = gatherConfiguration?.startDate.toDate(),
-//           let endDate = gatherConfiguration?.endDate.toDate(){
-//            dateLabel.text = startDate.monthDayWeekDay()
-//            timeLabel.text = startDate.hourMinute() + "-" + endDate.hourMinute()
-//        }
-//        dogTypeTagLabel.text = gatherConfiguration?.eligibleBreeds.count == 1 ? gatherConfiguration?.eligibleBreeds.first : "\(gatherConfiguration?.eligibleBreeds.first ?? "말티즈") 외 \((gatherConfiguration?.eligibleBreeds.count ?? 2) - 1)종"
-//        dogSizeTagLabel.text = (gatherConfiguration?.eligiblePetSizeTypes.map{ String($0[String.Index(utf16Offset: 0, in: $0)]) }.joined(separator: ",") ?? "소") + "형견"
+    internal func configure(gatherConfiguration: GatherConfigurationForSheet?) {
+        if let gatherConfiguration = gatherConfiguration {
+            titleLabel.text = gatherConfiguration.title
+            categoryLabel.text = gatherConfiguration.category.korean
+            distanceLabel.text = "거리 \(gatherConfiguration.distance)m"
+            addressLabel.text = gatherConfiguration.meetingPlace
+            countLabel.text = "\(gatherConfiguration.participants)/\(gatherConfiguration.maximumPeople)"
+            dateLabel.text = gatherConfiguration.startDate.monthDayWeekDay()
+            timeLabel.text = gatherConfiguration.startDate.hourMinute() + "-" + gatherConfiguration.endDate.hourMinute()
+            dogTypeTagLabel.text = gatherConfiguration.eligibleBreeds.count == 1 ? gatherConfiguration.eligibleBreeds.first : (gatherConfiguration.eligibleBreeds.first ?? "말티즈") + " 외 \(gatherConfiguration.eligibleBreeds.count - 1)종"
+            dogSizeTagLabel.text = gatherConfiguration.eligiblePetSizeTypes.map { Array(arrayLiteral: $0.toKorean())[0] }.joined(separator: ",") + "형견"
+            sexTagLabel.text = gatherConfiguration.eligibleSex.toKorean()
+        }
     }
 }
 
