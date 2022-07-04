@@ -18,8 +18,8 @@ protocol GatherRepositoryInterface {
     
     func requsetGatherConfigurationForBottomSheet(
         gatherID: Int,
-        userLocation: CLLocationCoordinate2D
-    ) -> Single<GatherConfigurationForSheet>
+        userLocation: CLLocation
+    ) -> Single<GatherConfigurationForSheetResponseDTO>
 }
 
 struct GatherConfigurationForAnnotationRequestDTO: Codable {
@@ -83,7 +83,6 @@ final class GatherRepository: GatherRepositoryInterface {
             else {
                 return Disposables.create()
             }
-            
             let keychain = KeychainQueryRequester()
             let keychainProvider = KeychainProvider(keyChain: keychain)
             guard let Token = try? keychainProvider.read(
@@ -119,19 +118,19 @@ final class GatherRepository: GatherRepositoryInterface {
     
     internal func requsetGatherConfigurationForBottomSheet(
         gatherID: Int,
-        userLocation: CLLocationCoordinate2D
-    ) -> Single<GatherConfigurationForSheet> {
-        return Single<GatherConfigurationForSheet>.create { [weak self] observer in
+        userLocation: CLLocation
+    ) -> Single<GatherConfigurationForSheetResponseDTO> {
+        return Single<GatherConfigurationForSheetResponseDTO>.create { [weak self] observer in
             guard let self = self else {
                 return Disposables.create()
             }
             
             let dto = GatherConfigurationForSheetRequestDTO(
                 id: gatherID,
-                coordinate: userLocation
+                coordinate: userLocation.coordinate
             )
             
-            guard let url = URL(string: "https://yapp-togather.com/api/clubs/search/range/\(dto.toQueryString)")
+            guard let url = URL(string: "https://yapp-togather.com/api/clubs/search/simple/\(dto.toQueryString)")
             else {
                 return Disposables.create()
             }
@@ -146,14 +145,13 @@ final class GatherRepository: GatherRepositoryInterface {
                 return Disposables.create()
             }
             let accessToken = "Bearer " + (String(data: Token, encoding: .utf8) ?? "")
-            
             var urlRequest = URLRequest(url: url)
             urlRequest.httpMethod = HTTPMethod.get
             urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
             urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
             urlRequest.addValue(accessToken, forHTTPHeaderField: "Authorization")
             
-            let response: Single<GatherConfigurationForSheet> = self.networkManager.requestDataTask(with: urlRequest)
+            let response: Single<GatherConfigurationForSheetResponseDTO> = self.networkManager.requestDataTask(with: urlRequest)
             
             response.subscribe { result in
                 switch result {
