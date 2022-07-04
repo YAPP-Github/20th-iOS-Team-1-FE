@@ -7,8 +7,11 @@
 
 import UIKit
 
+import RxCocoa
+import RxSwift
+
 final class ProfileContentView: UIView {
-    let hasIntroduction = true // 임시
+    let disposeBag = DisposeBag()
 
     private lazy var profileHeaderView: UITableViewHeaderFooterView = {
         let headerView = UITableViewHeaderFooterView()
@@ -38,7 +41,7 @@ final class ProfileContentView: UIView {
     
     private lazy var profileImageView: UIImageView = {
         let view = UIImageView()
-        view.backgroundColor = .lightGray
+        view.image = .Togaether.userDefaultProfile
         view.layer.cornerRadius = 60
         
         return view
@@ -88,17 +91,21 @@ final class ProfileContentView: UIView {
     private lazy var initailIntroduceView: UIView = {
         var view = InitialIntroductionView()
         view.layer.cornerRadius = 10
-        view.isHidden = hasIntroduction
         
         return view
     }()
     
-    private lazy var introduceView: UIView = {
+    private lazy var introduceView: IntroduceView = {
         var view = IntroduceView()
         view.layer.cornerRadius = 10
-        view.isHidden = !hasIntroduction
         
         return view
+    }()
+    
+    private lazy var profileFooterView: UIView = {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 100))
+
+        return footerView
     }()
     
     internal lazy var addPuppyButton: UIButton = {
@@ -117,13 +124,13 @@ final class ProfileContentView: UIView {
     }()
 
     private lazy var dogListView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.delegate = self
-        tableView.dataSource = self
+        let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.rowHeight = 132
         tableView.separatorStyle = .none
-        tableView.allowsSelection = false
         tableView.backgroundColor = .Togaether.background
+        tableView.allowsSelection = false
         tableView.tableHeaderView = profileHeaderView
+        tableView.tableFooterView = profileFooterView
         tableView.registerCell(type: DogTableViewCell.self)
         
         return tableView
@@ -152,6 +159,7 @@ final class ProfileContentView: UIView {
         profileHeaderView.addSubview(initailIntroduceView)
         profileHeaderView.addSubview(introduceView)
         addSubview(dogListView)
+        profileFooterView.addSubview(addPuppyButton)
     }
     
     private func configureLayout() {
@@ -168,7 +176,6 @@ final class ProfileContentView: UIView {
             
             userNameLabel.topAnchor.constraint(equalTo: profileModifyButton.bottomAnchor, constant: 26),
             userNameLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 20),
-            userNameLabel.trailingAnchor.constraint(equalTo: profileHeaderView.trailingAnchor, constant: -43),
             
             addressLabel.topAnchor.constraint(equalTo: userNameLabel.bottomAnchor, constant: 7.5),
             addressLabel.leadingAnchor.constraint(equalTo: userNameLabel.leadingAnchor),
@@ -187,61 +194,71 @@ final class ProfileContentView: UIView {
             genderImageView.heightAnchor.constraint(equalToConstant: 24),
             
             initailIntroduceView.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 20),
-            initailIntroduceView.leadingAnchor.constraint(equalTo: profileHeaderView.leadingAnchor, constant: 20),
-            initailIntroduceView.trailingAnchor.constraint(equalTo: profileHeaderView.trailingAnchor, constant: -20),
+            initailIntroduceView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            initailIntroduceView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
             initailIntroduceView.heightAnchor.constraint(equalToConstant: 48),
             
             introduceView.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 20),
-            introduceView.leadingAnchor.constraint(equalTo: profileHeaderView.leadingAnchor, constant: 20),
-            introduceView.trailingAnchor.constraint(equalTo: profileHeaderView.trailingAnchor, constant: -20),
+            introduceView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            introduceView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
             introduceView.heightAnchor.constraint(equalToConstant: 151),
             
             dogListView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             dogListView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             dogListView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            dogListView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+            dogListView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            
+            addPuppyButton.centerXAnchor.constraint(equalTo: profileFooterView.centerXAnchor),
+            addPuppyButton.centerYAnchor.constraint(equalTo: profileFooterView.centerYAnchor),
+            addPuppyButton.widthAnchor.constraint(equalToConstant: 102),
+            addPuppyButton.heightAnchor.constraint(equalToConstant: 33)
         ])
     }
     
     private func configureUI() {
         backgroundColor = .Togaether.background
     }
-}
-
-extension ProfileContentView: UITableViewDataSource, UITableViewDelegate{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
-    }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueCell(withType: DogTableViewCell.self, for: indexPath) as? DogTableViewCell else {
-            return UITableViewCell()
+    internal func configureData(_ myPage: Bool, _ accountInfo: AccountInfo?, petInfo: [PetInfo]?) {
+        guard let accountData = accountInfo,
+              let petData = petInfo else {
+            return
         }
         
-        return cell
+        if !myPage {
+            initailIntroduceView.isHidden = true
+            introduceView.isHidden = false
+            introduceView.configureData(accountData)
+            addPuppyButton.isHidden = true
+        } else {
+            if accountData.Introduction != nil {
+                initailIntroduceView.isHidden = true
+                introduceView.isHidden = false
+                introduceView.configureData(accountData)
+            } else {
+                initailIntroduceView.isHidden = false
+                introduceView.isHidden = true
+                profileHeaderView.frame = CGRect(origin: .zero, size: CGSize(width: UIScreen.main.bounds.width, height: 273))
+            }
+        }
+
+        profileImageView.imageWithURL(accountData.profileImageURL ?? "")
+        userNameLabel.text = accountData.nickName
+        addressLabel.text = accountData.address
+        ageLabel.text = accountData.age
+        
+        Observable.of(petData)
+            .asDriver(onErrorJustReturn: [])
+            .drive(dogListView.rx.items) { tableView, row, data in
+                let indexPath = IndexPath(row: row, section: 0)
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: DogTableViewCell.identifier, for: indexPath) as? DogTableViewCell else {
+                    return UITableViewCell()
+                }
+                cell.configureData(data)
+                
+                return cell
+            }
+            .disposed(by: disposeBag)
     }
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 132
-    }
-
-    func tableView(_ tableView: UITableView,
-                   viewForFooterInSection section: Int) -> UIView? {
-        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: dogListView.frame.width, height: 100))
-        footerView.addSubview(addPuppyButton)
-        NSLayoutConstraint.useAndActivateConstraints([
-            addPuppyButton.centerXAnchor.constraint(equalTo: footerView.centerXAnchor),
-            addPuppyButton.centerYAnchor.constraint(equalTo: footerView.centerYAnchor),
-            addPuppyButton.widthAnchor.constraint(equalToConstant: 102),
-            addPuppyButton.heightAnchor.constraint(equalToConstant: 33)
-            ])
-        footerView.backgroundColor = .Togaether.background
-
-        return footerView
-    }
-    
-    func tableView(_ tableView: UITableView,
-                   heightForFooterInSection section: Int) -> CGFloat {
-        return 100
-    }
 }

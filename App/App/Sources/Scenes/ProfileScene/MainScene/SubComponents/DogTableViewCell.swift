@@ -10,7 +10,7 @@ import UIKit
 final class DogTableViewCell: UITableViewCell {
     private lazy var profileImageView: UIImageView = {
         let view = UIImageView()
-        view.backgroundColor = .lightGray
+        view.image = .Togaether.petDefaultProfile
         view.layer.cornerRadius = 36
         
         return view
@@ -58,9 +58,8 @@ final class DogTableViewCell: UITableViewCell {
     }()
         
     private lazy var tagStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: configureTagStackView(tags: ["중성화완료","활발","사교적","능동적"]))
+        let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.contentMode = .scaleAspectFit
         stackView.distribution = .equalSpacing
         stackView.spacing = 4
         
@@ -87,14 +86,14 @@ final class DogTableViewCell: UITableViewCell {
     
     private func configureLayout() {
         NSLayoutConstraint.useAndActivateConstraints([
-            profileImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 40),
-            profileImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 38),
+            profileImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 40),
+            profileImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 38),
             profileImageView.widthAnchor.constraint(equalToConstant: 72),
             profileImageView.heightAnchor.constraint(equalToConstant: 72),
             
             dogNameLabel.topAnchor.constraint(equalTo: profileImageView.topAnchor),
             dogNameLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 10),
-            dogNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -43),
+            dogNameLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -43),
             
             breedLabel.topAnchor.constraint(equalTo: dogNameLabel.bottomAnchor),
             breedLabel.leadingAnchor.constraint(equalTo: dogNameLabel.leadingAnchor),
@@ -114,7 +113,6 @@ final class DogTableViewCell: UITableViewCell {
             
             tagStackView.topAnchor.constraint(equalTo: divisionView.bottomAnchor, constant: 12),
             tagStackView.leadingAnchor.constraint(equalTo: dogNameLabel.leadingAnchor),
-            tagStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             tagStackView.heightAnchor.constraint(equalToConstant: 18)
             ])
     }
@@ -126,13 +124,20 @@ final class DogTableViewCell: UITableViewCell {
         contentView.layer.cornerRadius = 10
     }
     
-    func configureTagStackView(tags: [String]) -> [UILabel] {
-        var tagLabels = [UILabel]()
-        tags.forEach { tag in
-            let label = PaddingLabel()
-            tagLabels.append(label.tagLabel(tag))
+    internal func configureData(_ petData: PetInfo?) {
+        guard let data = petData else {
+            return
         }
-
-        return tagLabels
+        
+        profileImageView.imageWithURL(data.imageURL ?? "")
+        dogNameLabel.text = data.nickName
+        breedLabel.text = data.breed
+        ageLabel.text = data.age
+        data.tags?.forEach({ tag in
+            let label = PaddingLabel().tagLabel(tag)
+            label.sizeToFit()
+            tagStackView.addArrangedSubview(label)
+        })
     }
+
 }
