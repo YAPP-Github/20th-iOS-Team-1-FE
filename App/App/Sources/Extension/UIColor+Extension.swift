@@ -34,6 +34,7 @@ extension UIColor {
         static let mainGreen       = UIColor(named: "mainGreen")!
         static let mainYellow      = UIColor(named: "mainYellow")!
         static let mainCoral       = UIColor(named: "mainCoral")!
+        static let subGreen        = UIColor(named: "subGreen")!
         
         static let divider         = UIColor(named: "divider")!
         
