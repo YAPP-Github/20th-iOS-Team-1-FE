@@ -11,7 +11,7 @@ final class AppCoordinator: Coordinator {
     private let window: UIWindow?
     weak var parentCoordinator: Coordinator?
     var childCoordinators = [Coordinator]()
-    var isAlreadyLoggedIn = true
+    var isAlreadyLoggedIn = false
     
     init(window: UIWindow?) {
         self.window = window

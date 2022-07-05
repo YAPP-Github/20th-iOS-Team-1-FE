@@ -10,7 +10,7 @@ import Foundation
 import ReactorKit
 import RxSwift
 
-class DetailGatherReactor: Reactor {
+final class DetailGatherReactor: Reactor {
     enum Action {
         
     }
@@ -20,10 +20,14 @@ class DetailGatherReactor: Reactor {
     }
     
     struct State {
-        
+        let clubID: String
     }
     
-    let initialState = State()
+    let initialState: State
+    
+    init(clubID: String) {
+        initialState = State(clubID: clubID)
+    }
     
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
