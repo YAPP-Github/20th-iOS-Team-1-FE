@@ -13,7 +13,7 @@ import RxCocoa
 import RxKeyboard
 
 final class SignUpProfileViewController: BaseViewController {
-    private let contentView = UIView()
+  //  private let contentView = UIView()
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.keyboardDismissMode = .onDrag
@@ -130,24 +130,29 @@ final class SignUpProfileViewController: BaseViewController {
     
     private func addSubviews() {
         view.addSubview(scrollView)
-        scrollView.addSubview(contentView)
+      //  scrollView.addSubview(contentView)
         
-        contentView.addSubview(guidanceLabel)
+        scrollView.addSubview(guidanceLabel)
         
-        contentView.addSubview(profileImageButton)
+        scrollView.addSubview(profileImageButton)
         
-        contentView.addSubview(nickNameLabel)
+        scrollView.addSubview(nickNameLabel)
         
-        contentView.addSubview(nicknameTextField)
-        contentView.addSubview(duplicateCheckButton)
-        contentView.addSubview(deleteButton)
+        scrollView.addSubview(nicknameTextField)
+        scrollView.addSubview(duplicateCheckButton)
+        scrollView.addSubview(deleteButton)
         
-        contentView.addSubview(nicknameContourView)
+        scrollView.addSubview(nicknameContourView)
         
         view.addSubview(nextButtonContourView)
         view.addSubview(nextButton)
     }
-    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let height = scrollView.subviews.reduce(0) { $0 + $1.frame.height }
+        
+        scrollView.contentSize.height = height
+    }
     private func configureLayout() {
         NSLayoutConstraint.useAndActivateConstraints([
             nextButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
@@ -164,30 +169,23 @@ final class SignUpProfileViewController: BaseViewController {
             scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: nextButtonContourView.topAnchor, constant: -14),
-            
-            contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
-            contentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
-            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            contentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor),
-            
-            guidanceLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 96),
-            guidanceLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            guidanceLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+
+            guidanceLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 96),
+            guidanceLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
+            guidanceLabel.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -20),
             
             profileImageButton.topAnchor.constraint(equalTo: guidanceLabel.bottomAnchor, constant: 72),
-            profileImageButton.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.5),
+            profileImageButton.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.5),
             profileImageButton.heightAnchor.constraint(equalTo: profileImageButton.widthAnchor),
-            profileImageButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            profileImageButton.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             
             nickNameLabel.topAnchor.constraint(equalTo: profileImageButton.bottomAnchor, constant: 57),
-            nickNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            nickNameLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
             
             nicknameTextField.topAnchor.constraint(equalTo: nickNameLabel.bottomAnchor, constant: 5),
-            nicknameTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            nicknameTextField.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
             
-            duplicateCheckButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            duplicateCheckButton.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -20),
             duplicateCheckButton.widthAnchor.constraint(equalToConstant: 90),
             duplicateCheckButton.heightAnchor.constraint(equalToConstant: 36),
             duplicateCheckButton.centerYAnchor.constraint(equalTo: nicknameTextField.centerYAnchor),
@@ -196,8 +194,8 @@ final class SignUpProfileViewController: BaseViewController {
             deleteButton.centerYAnchor.constraint(equalTo: duplicateCheckButton.centerYAnchor),
   
             nicknameContourView.topAnchor.constraint(equalTo: deleteButton.bottomAnchor, constant: 10),
-            nicknameContourView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            nicknameContourView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            nicknameContourView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
+            nicknameContourView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -20),
             nicknameContourView.heightAnchor.constraint(equalToConstant: 1),
         ])
     }
