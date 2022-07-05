@@ -21,54 +21,159 @@ final class DetailGatherViewController: BaseViewController {
         return scrollView
     }()
     
-    // 마끄 -----------------
-    private lazy var categoryLabel: UILabel = {
+    private let detailGatherStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 8
+        stackView.alignment = .fill
+        stackView.distribution = .fillProportionally
+        stackView.backgroundColor = .Togaether.divider
+        
+        return stackView
+    }()
+    
+    private let gatherDescriptionStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 8
+        stackView.alignment = .leading
+        stackView.backgroundColor = .Togaether.background
+        stackView.distribution = .fillProportionally
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.layoutMargins = UIEdgeInsets(top: 40, left: 20, bottom: 30, right: 20)
+        
+        return stackView
+    }()
+    
+    private lazy var gatherCategoryLabel: UILabel = {
         let label = UILabel()
+        label.layer.cornerRadius = 10
+        label.layer.masksToBounds = true
+        label.font = .customFont(size: 10)
+        label.backgroundColor = .Togaether.mainGreen
         
         return label
     }()
     
     private lazy var gatherTitleLabel: UILabel = {
         let label = UILabel()
+        label.font = .customFont(size: 20)
+        label.textColor = .Togaether.primaryLabel
+        label.numberOfLines = 0
         
         return label
     }()
     
-    private lazy var dateLabel: UILabel = {
+    private var gatherTimeStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 8
+        stackView.alignment = .fill
+        stackView.distribution = .fillProportionally
+        
+        return stackView
+    }()
+        
+    private var gatherDayLabel: UILabel = {
+        let label = UILabel()
+        label.font = .customFont(size: 16)
+        label.textColor = .Togaether.mainGreen
+        
+        return label
+    }()
+    
+    private let gatherTimeDivider = Divider()
+    
+    private var gatherDurationLabel: UILabel = {
         let label = UILabel()
         
         return label
     }()
     
-    private lazy var timeLabel: UILabel = {
-        let label = UILabel()
+    private lazy var gatherGuideStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 12
+        stackView.alignment = .leading
+        stackView.distribution = .fillProportionally
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         
-        return label
+        return stackView
     }()
     
-    // 마끄 -----------------
-    private lazy var leaderNicknameLabel: UILabel = {
-        let label = UILabel()
+    private let leaderStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 8
+        stackView.alignment = .fill
+        stackView.distribution = .fillProportionally
         
-        return label
+        return stackView
     }()
-    
+
     private lazy var leaderProfileImageView: UIImageView = {
         let imageView = UIImageView()
         
         return imageView
     }()
     
-    private lazy var gatherDescriptionLabel: UILabel = {
+    private var leaderNicknameLabel: UILabel = {
         let label = UILabel()
+        label.font = .customFont(size: 16)
+        label.textColor = .Togaether.primaryLabel
         
         return label
+    }()
+    
+    private lazy var gatherDescriptionLabel: UILabel = {
+        let label = UILabel()
+        label.font = .customFont(size: 16)
+        label.textColor = .Togaether.primaryLabel
+        
+        return label
+    }()
+    
+    private let gatherRequirementDivider = Divider()
+    
+    private lazy var gatherRequirementStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 8
+        stackView.alignment = .leading
+        stackView.distribution = .fillProportionally
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.layoutMargins = UIEdgeInsets(top: 12, left: 20, bottom: 30, right: 20)
+        
+        return stackView
+    }()
+    
+    private lazy var eligiblePetSizeStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 16
+        stackView.alignment = .fill
+        stackView.distribution = .fillProportionally
+        
+        return stackView
     }()
     
     private lazy var eligiblePetSizeLabel: UILabel = {
         let label = UILabel()
         label.text = "가능 크기"
         return label
+    }()
+    
+    private lazy var eligiblePetSizeView = UIView()
+    
+    private lazy var eligiblePetBreedStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 16
+        stackView.alignment = .fill
+        stackView.distribution = .fillProportionally
+        
+        return stackView
     }()
     
     private lazy var eligiblePetBreedLabel: UILabel = {
@@ -78,6 +183,18 @@ final class DetailGatherViewController: BaseViewController {
         return label
     }()
     
+    private lazy var eligiblePetBreedView = UIView()
+    
+    private lazy var eligibleSexStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 16
+        stackView.alignment = .fill
+        stackView.distribution = .fillProportionally
+        
+        return stackView
+    }()
+    
     private lazy var eligibleSexLabel: UILabel = {
         let label = UILabel()
         label.text = "견주 성별"
@@ -85,27 +202,49 @@ final class DetailGatherViewController: BaseViewController {
         return label
     }()
     
-    // 마끄 -----------------
+    private lazy var eligibleSexView = UIView()
+    
     private lazy var gatherPlaceLabel: UILabel = {
         let label = UILabel()
         label.text = "모임 위치"
-        
+        label.font = .customFont(size: 16, style: .Bold)
         return label
+    }()
+    
+    private lazy var mapView = UIView()
+    
+    private lazy var gatherAddressStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 8
+        stackView.alignment = .leading
+        stackView.distribution = .fillProportionally
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 30, right: 20)
+        
+        return stackView
     }()
     
     private lazy var gatherAddressLabel: UILabel = {
         let label = UILabel()
         label.text = "상세 주소"
+        label.textColor = .Togaether.primaryLabel
+        label.font = .customFont(size: 16)
+        
         return label
     }()
     
     private lazy var gatherAddressDescriptionLabel: UILabel = {
         let label = UILabel()
+        label.textColor = .Togaether.secondaryLabel
+        label.font = .customFont(size: 14)
+        label.numberOfLines = 0
         
         return label
     }()
     
-    // 마끄 -----------------
+    private let gatherPlaceDivider = Divider()
+    
     private lazy var participantLabel: UILabel = {
         let label = UILabel()
         label.text = "참여 인원"
@@ -119,28 +258,38 @@ final class DetailGatherViewController: BaseViewController {
         return label
     }()
     
+    private let gatherParticipantDivider = Divider()
     
-    
-    // 마끄 -----------------
     private lazy var gatherCommentLabel: UILabel = {
         let label = UILabel()
         
         return label
     }()
     
-    private lazy var emptyCommentLabel: UILabel = {
+    private let emptyCommentLabel: UILabel = {
         let label = UILabel()
+        label.text = "아직 댓글이 없어요\n모임에 대한 댓글을 달아보세요."
+        label.font = .customFont(size: 18)
+        label.textColor = .Togaether.primaryLabel
+        label.numberOfLines = 2
+        label.adjustsFontSizeToFitWidth = true
         
         return label
     }()
     
-    private lazy var commentButton: UIButton = {
-        let button = UIButton()
+    private let addCommentButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.layer.cornerRadius = 10
+        button.layer.borderWidth = 1
+        button.setTitle("댓글 달기", for: .normal)
+        button.setTitleColor(UIColor.Togaether.mainGreen, for: .normal)
+        button.setImage(UIImage(systemName: "plus.bubble"), for: .normal)
+        button.semanticContentAttribute = .forceRightToLeft
+        button.titleLabel?.font = .customFont(size: 14)
         
         return button
     }()
 
-    // 마끄 -----------------
     private lazy var gatherButtonDivider = Divider()
 
     private lazy var gatherButton: EnableButton = {
@@ -174,6 +323,36 @@ final class DetailGatherViewController: BaseViewController {
     private func addSubviews() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
+        contentView.addSubview(detailGatherStackView)
+        
+        detailGatherStackView.addArrangedSubview(gatherDescriptionStackView)
+        gatherDescriptionStackView.addArrangedSubview(gatherCategoryLabel)
+        gatherDescriptionStackView.addArrangedSubview(gatherTitleLabel)
+        gatherDescriptionStackView.addArrangedSubview(gatherTimeStackView)
+        gatherTimeStackView.addArrangedSubview(gatherDayLabel)
+        gatherTimeStackView.addArrangedSubview(gatherTimeDivider)
+        gatherTimeStackView.addArrangedSubview(gatherDurationLabel)
+        
+        detailGatherStackView.addArrangedSubview(gatherGuideStackView)
+        gatherGuideStackView.addArrangedSubview(leaderStackView)
+        leaderStackView.addArrangedSubview(leaderProfileImageView)
+        leaderStackView.addArrangedSubview(leaderNicknameLabel)
+        gatherGuideStackView.addArrangedSubview(gatherRequirementDivider)
+        gatherGuideStackView.addArrangedSubview(gatherRequirementStackView)
+        gatherRequirementStackView.addArrangedSubview(eligiblePetSizeStackView)
+        eligiblePetSizeStackView.addArrangedSubview(eligiblePetSizeLabel)
+        eligiblePetSizeStackView.addArrangedSubview(eligiblePetSizeView)
+        gatherRequirementStackView.addArrangedSubview(eligiblePetBreedStackView)
+        eligiblePetBreedStackView.addArrangedSubview(eligiblePetBreedLabel)
+        eligiblePetBreedStackView.addArrangedSubview(eligiblePetBreedView)
+        gatherRequirementStackView.addArrangedSubview(eligibleSexStackView)
+        eligibleSexStackView.addArrangedSubview(eligibleSexLabel)
+        eligibleSexStackView.addArrangedSubview(eligibleSexView)
+                
+        //
+        
+        detailGatherStackView.addArrangedSubview(gatherButtonDivider)
+        detailGatherStackView.addArrangedSubview(gatherButton)
     }
     
     private func configureLayout() {
@@ -188,7 +367,12 @@ final class DetailGatherViewController: BaseViewController {
             contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            contentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor)
+            contentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor),
+            
+            detailGatherStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            detailGatherStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            detailGatherStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            detailGatherStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
         ])
     }
     

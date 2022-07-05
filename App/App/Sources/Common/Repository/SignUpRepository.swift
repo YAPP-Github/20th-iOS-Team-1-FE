@@ -29,12 +29,13 @@ final class SignUpRepository: SignUpRepositoryInterface {
                 return Disposables.create()
             }
             
+            let boundary = UUID().uuidString
             let accessToken = String(decoding: accessToken, as: UTF8.self).makePrefixBearer()
+            
             var urlRequest = URLRequest(url: url)
-            urlRequest.httpBody = data
             urlRequest.httpMethod = HTTPMethod.post
             urlRequest.addValue(accessToken, forHTTPHeaderField: "Authorization")
-            urlRequest.addValue("multipart/form-data", forHTTPHeaderField: "Content-Type")
+            urlRequest.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
             urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
             
             let response: Single<Int> = self.networkManager.requestDataTask(with: urlRequest)

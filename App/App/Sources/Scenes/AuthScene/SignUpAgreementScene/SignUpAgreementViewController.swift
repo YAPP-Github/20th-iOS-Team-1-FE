@@ -118,7 +118,7 @@ final class SignUpAgreementViewController: BaseViewController {
         configureLayout()
         configureUI()
     }
-
+    
     private func addSubviews() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
@@ -142,6 +142,9 @@ final class SignUpAgreementViewController: BaseViewController {
     }
     
     private func configureLayout() {
+        let contentViewHeight = contentView.heightAnchor.constraint(greaterThanOrEqualTo: scrollView.heightAnchor)
+        contentViewHeight.priority = .defaultLow
+        contentViewHeight.isActive = true
         NSLayoutConstraint.useAndActivateConstraints([
             nextButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             nextButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
@@ -163,7 +166,7 @@ final class SignUpAgreementViewController: BaseViewController {
             contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            contentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor),
+       //     contentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor),
             
             guidanceLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 96),
             guidanceLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
