@@ -39,6 +39,6 @@ extension UIImage {
         static let focusETCMapViewAnnotation = UIImage(named: "focusETCMapViewAnnotation")!
         static let focusExhibitionMapViewAnnotation = UIImage(named: "focusExhibitionMapViewAnnotation")!
         static let focusPlaygroundMapViewAnnotation = UIImage(named: "focusPlaygroundMapViewAnnotation")!
-
+        static let selectedLocationMapViewAnnotation = UIImage(named: "selectedLocationMapViewAnnotation")!
     }
 }
