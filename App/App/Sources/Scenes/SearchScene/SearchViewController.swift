@@ -31,7 +31,7 @@ final class SearchViewController: BaseViewController {
         return mapView
     }()
     
-    private lazy var gatherInformationBottomSheet: UIView = {
+    private lazy var bottomSheet: UIView = {
         let view = UIView()
         
         view.layer.cornerRadius = 10
@@ -44,8 +44,8 @@ final class SearchViewController: BaseViewController {
     }()
     
     private lazy var gatherInformationBottomSheetHeightConstraint: NSLayoutConstraint = {
-        let constraint = gatherInformationBottomSheet.heightAnchor.constraint(equalToConstant: 0)
-        
+        let constraint = bottomSheet.heightAnchor.constraint(equalToConstant: 0)
+
         constraint.isActive = true
         
         return constraint
@@ -69,21 +69,8 @@ final class SearchViewController: BaseViewController {
         
         return button
     }()
-    
-    private lazy var notificationBarButtonItem: UIBarButtonItem = {
-        let barButtonItem = UIBarButtonItem(
-            image: UIImage.Togaether.bell,
-            style: .plain,
-            target: SearchViewController.self,
-            action: nil
-        )
         
-        barButtonItem.tintColor = .label
-        
-        return barButtonItem
-    }()
-    
-    private lazy var AddCloseBarButtonItem: UIBarButtonItem = {
+    private lazy var addCloseBarButtonItem: UIBarButtonItem = {
         let barButtonItem = UIBarButtonItem(
             image: UIImage.Togaether.xmark,
             style: .plain,
@@ -114,6 +101,49 @@ final class SearchViewController: BaseViewController {
         return view
     }()
     
+    private lazy var setLocationBottomSheet: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 10
+        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        view.isHidden = true
+        
+        return view
+    }()
+    
+    private lazy var setLocationDescriptionLabel: UILabel = {
+        let label = UILabel()
+        label.text = "화면을 이동하여\n위치를 설정해주세요."
+        label.font = label.font.withSize(28)
+        label.numberOfLines = 0
+        label.bold(targetString: "화면을 이동")
+        
+        return label
+    }()
+    
+    private lazy var addressLabel: UILabel = {
+        let label = UILabel()
+        label.font = label.font.withSize(16)
+        label.text = "주소"
+        label.textAlignment = .center
+        return label
+    }()
+    
+    private lazy var createGatherButton: UIButton = {
+        let button = UIButton()
+        button.layer.cornerRadius = 10
+        button.setTitle("여기서 모임을 만들래요", for: .normal)
+        button.titleLabel?.font = button.titleLabel?.font.withSize(20)
+        button.backgroundColor = UIColor.Togaether.mainGreen
+        button.tintColor = UIColor.white
+        return button
+    }()
+    
+    private lazy var selectLocationPinImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage.Togaether.selectedLocationMapViewAnnotation)
+        imageView.isHidden = true
+        return imageView
+    }()
+    
     var disposeBag = DisposeBag()
     
     init(reactor: SearchReactor, locationManager: CLLocationManager) {
@@ -142,10 +172,15 @@ final class SearchViewController: BaseViewController {
     private func addSubviews() {
         view.addSubview(mapView)
         view.addSubview(currentLocationButton)
-        view.addSubview(gatherInformationBottomSheet)
+        view.addSubview(bottomSheet)
         mapView.addSubview(searchButton)
         mapView.addSubview(addButon)
-        gatherInformationBottomSheet.addSubview(bottomSheetContentView)
+        bottomSheet.addSubview(bottomSheetContentView)
+        bottomSheet.addSubview(setLocationBottomSheet)
+        setLocationBottomSheet.addSubview(setLocationDescriptionLabel)
+        setLocationBottomSheet.addSubview(addressLabel)
+        setLocationBottomSheet.addSubview(createGatherButton)
+        mapView.addSubview(selectLocationPinImageView)
     }
     
     private func configureLayout() {
@@ -169,22 +204,46 @@ final class SearchViewController: BaseViewController {
             currentLocationButton.widthAnchor.constraint(equalToConstant: 44),
             currentLocationButton.heightAnchor.constraint(equalToConstant: 44),
             currentLocationButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            currentLocationButton.bottomAnchor.constraint(equalTo: gatherInformationBottomSheet.topAnchor, constant: -30),
+            currentLocationButton.bottomAnchor.constraint(equalTo: bottomSheet.topAnchor, constant: -30),
             //bottomSheet
-            gatherInformationBottomSheet.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor),
-            gatherInformationBottomSheet.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            bottomSheet.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor),
+            bottomSheet.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             //bottomSheetContentView
-            bottomSheetContentView.topAnchor.constraint(equalTo: gatherInformationBottomSheet.topAnchor),
-            bottomSheetContentView.leadingAnchor.constraint(equalTo: gatherInformationBottomSheet.leadingAnchor),
-            bottomSheetContentView.trailingAnchor.constraint(equalTo: gatherInformationBottomSheet.trailingAnchor),
-            bottomSheetContentView.bottomAnchor.constraint(equalTo: gatherInformationBottomSheet.bottomAnchor)
+            bottomSheetContentView.topAnchor.constraint(equalTo: bottomSheet.topAnchor),
+            bottomSheetContentView.leadingAnchor.constraint(equalTo: bottomSheet.leadingAnchor),
+            bottomSheetContentView.trailingAnchor.constraint(equalTo: bottomSheet.trailingAnchor),
+            bottomSheetContentView.bottomAnchor.constraint(equalTo: bottomSheet.bottomAnchor),
+            //setLocationBottomSheet
+            setLocationBottomSheet.topAnchor.constraint(equalTo: bottomSheet.topAnchor),
+            setLocationBottomSheet.leadingAnchor.constraint(equalTo: bottomSheet.leadingAnchor),
+            setLocationBottomSheet.trailingAnchor.constraint(equalTo: bottomSheet.trailingAnchor),
+            setLocationBottomSheet.bottomAnchor.constraint(equalTo: bottomSheet.bottomAnchor),
+            //setLocationDescriptionLabel
+            setLocationDescriptionLabel.topAnchor.constraint(equalTo: setLocationBottomSheet.topAnchor, constant: 30),
+            setLocationDescriptionLabel.leadingAnchor.constraint(equalTo: setLocationBottomSheet.leadingAnchor, constant: 20),
+            setLocationDescriptionLabel.widthAnchor.constraint(equalToConstant: 250),
+            setLocationDescriptionLabel.heightAnchor.constraint(equalToConstant: 80),
+            //addressLabel
+            addressLabel.topAnchor.constraint(equalTo: setLocationDescriptionLabel.bottomAnchor, constant: 30),
+            addressLabel.leadingAnchor.constraint(equalTo: setLocationBottomSheet.leadingAnchor, constant: 20),
+            addressLabel.trailingAnchor.constraint(equalTo: setLocationBottomSheet.trailingAnchor, constant: -20),
+            //createButton
+            createGatherButton.heightAnchor.constraint(equalToConstant: 50),
+            createGatherButton.leadingAnchor.constraint(equalTo: setLocationBottomSheet.leadingAnchor, constant: 20),
+            createGatherButton.trailingAnchor.constraint(equalTo: setLocationBottomSheet.trailingAnchor, constant: -20),
+            createGatherButton.bottomAnchor.constraint(equalTo: setLocationBottomSheet.bottomAnchor, constant: -5),
+            //selectLocationPinImageView
+            selectLocationPinImageView.widthAnchor.constraint(equalToConstant: 48),
+            selectLocationPinImageView.heightAnchor.constraint(equalToConstant: 54),
+            selectLocationPinImageView.centerXAnchor.constraint(equalTo: mapView.centerXAnchor),
+            selectLocationPinImageView.bottomAnchor.constraint(equalTo: mapView.centerYAnchor, constant: -30)
         ])
     }
     
     private func configureUI() {
         view.backgroundColor = .systemBackground
         
-        navigationItem.rightBarButtonItem = notificationBarButtonItem
+        navigationController?.navigationBar.isHidden = true
     }
     
     func configureLocationManager() {
@@ -210,9 +269,9 @@ final class SearchViewController: BaseViewController {
                     self.addButtonTouched()
                 },
             
-            AddCloseBarButtonItem.rx.tap
+            addCloseBarButtonItem.rx.tap
                 .bind { [unowned self] in
-                    
+                    self.createGatherCloseButtonTouched()
                 },
             
             mapView.rx.didChangeVisibleRegion
@@ -226,16 +285,16 @@ final class SearchViewController: BaseViewController {
                 .bind(to: reactor.action),
             
             mapView.rx.didChangeVisibleRegion
-                .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+                .throttle(.seconds(2), scheduler: MainScheduler.instance)
                 .bind { [unowned self] in
+                    let coordinate = mapView.selectedCoordinate(point: self.selectLocationPinImageView.center)
                     convertToAddressWith(
                         coordinate: CLLocation(
-                            latitude: self.mapView.centerCoordinate.latitude,
-                            longitude: self.mapView.centerCoordinate.longitude
+                            latitude: coordinate.latitude,
+                            longitude: coordinate.longitude
                         )
                     )
                 }
-            
         )
     }
     
@@ -276,14 +335,32 @@ final class SearchViewController: BaseViewController {
     }
     
     private func addButtonTouched() {
+        navigationController?.navigationBar.isHidden = false
+        navigationItem.rightBarButtonItem = addCloseBarButtonItem
         navigationItem.title = "반려견 모임 생성"
-        navigationItem.rightBarButtonItem = AddCloseBarButtonItem
+        searchButton.isHidden = true
+        addButon.isHidden = true
+        gatherInformationBottomSheetHeightConstraint.constant = 250
+        bottomSheetContentView.isHidden = true
+        setLocationBottomSheet.isHidden = false
+        selectLocationPinImageView.isHidden = false
+    }
+    
+    private func createGatherCloseButtonTouched() {
+        self.navigationController?.navigationBar.isHidden = true
+        searchButton.isHidden = false
+        addButon.isHidden = false
+        gatherInformationBottomSheetHeightConstraint.constant = 0
+        bottomSheetContentView.isHidden = true
+        setLocationBottomSheet.isHidden = true
+        selectLocationPinImageView.isHidden = true
     }
     
     func convertToAddressWith(coordinate: CLLocation) {
         let geocoder = CLGeocoder()
         let locale = Locale(identifier: "Ko-kr")
         geocoder.reverseGeocodeLocation(coordinate, preferredLocale: locale, completionHandler: {(placemarks, error) in
+            print(placemarks)
             if let address: [CLPlacemark] = placemarks {
                 var gatherAddress: [String] = []
                 
@@ -307,7 +384,9 @@ final class SearchViewController: BaseViewController {
                     gatherAddress.append(subStreet)
                 }
                 
-                // Change Label Text
+                DispatchQueue.main.async {
+                    self.addressLabel.text = gatherAddress.joined(separator: " ")
+                }
             }
         })
     }

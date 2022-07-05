@@ -16,4 +16,8 @@ extension MKMapView {
     func bottomRightCoordinate() -> CLLocationCoordinate2D {
         return convert(CGPoint(x: frame.width, y: frame.height), toCoordinateFrom: self)
     }
+    
+    func selectedCoordinate(point: CGPoint) -> CLLocationCoordinate2D {
+        return convert(point, toCoordinateFrom: self)
+    }
 }

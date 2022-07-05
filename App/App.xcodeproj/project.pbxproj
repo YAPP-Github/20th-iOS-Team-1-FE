@@ -11,6 +11,7 @@
 		294A0C162873A46500D1CEB3 /* OwnerSex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A0C152873A46500D1CEB3 /* OwnerSex.swift */; };
 		294A0C182873A47A00D1CEB3 /* PetSizeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A0C172873A47A00D1CEB3 /* PetSizeType.swift */; };
 		294A0C1A2873A49500D1CEB3 /* ClubStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A0C192873A49500D1CEB3 /* ClubStatus.swift */; };
+		294A0C1C2874783000D1CEB3 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A0C1B2874783000D1CEB3 /* UILabel+Extension.swift */; };
 		29AE222D284B7DAA00EDF34B /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE222B284B7DAA00EDF34B /* SearchViewController.swift */; };
 		29AE222E284B7DAA00EDF34B /* SearchReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE222C284B7DAA00EDF34B /* SearchReactor.swift */; };
 		29AE2232284B7F1100EDF34B /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2231284B7F1100EDF34B /* UIView+Extension.swift */; };
@@ -197,6 +198,7 @@
 		294A0C152873A46500D1CEB3 /* OwnerSex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerSex.swift; sourceTree = "<group>"; };
 		294A0C172873A47A00D1CEB3 /* PetSizeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetSizeType.swift; sourceTree = "<group>"; };
 		294A0C192873A49500D1CEB3 /* ClubStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubStatus.swift; sourceTree = "<group>"; };
+		294A0C1B2874783000D1CEB3 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		29AE222B284B7DAA00EDF34B /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		29AE222C284B7DAA00EDF34B /* SearchReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchReactor.swift; sourceTree = "<group>"; };
 		29AE2231284B7F1100EDF34B /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
@@ -778,6 +780,7 @@
 				FDE6F145285215BD005E4783 /* UIFont+Extension.swift */,
 				29AE2255286F2DDF00EDF34B /* MKMapView+Extension.swift */,
 				3732EF43286F4DDC0037404E /* String+Extension.swift */,
+				294A0C1B2874783000D1CEB3 /* UILabel+Extension.swift */,
 				FD8191572871E2CC00B49961 /* UIImageView+Extension.swift */,
 			);
 			path = Extension;
@@ -1261,6 +1264,7 @@
 				37AA7E1C2850B1C400B4B5C2 /* StatusDTO.swift in Sources */,
 				378F347F281DBE070063CE4F /* GatherListReactor.swift in Sources */,
 				FDBC12062866867600FCADF4 /* IntroduceView.swift in Sources */,
+				294A0C1C2874783000D1CEB3 /* UILabel+Extension.swift in Sources */,
 				374F41D12864E70F0074F04B /* AccountValidation.swift in Sources */,
 				374F41CF2864E6C60074F04B /* AccountValidationResponseDTO.swift in Sources */,
 				37605DF62839FB4100394929 /* RxASAuthorizationControllerDelegateProxy.swift in Sources */,
