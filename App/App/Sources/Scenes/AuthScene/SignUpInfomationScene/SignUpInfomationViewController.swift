@@ -189,7 +189,7 @@ final class SignUpInfomationViewController: BaseViewController {
     
     private func configureUI() {
         view.backgroundColor = .Togaether.background
-        navigationController?.navigationBar.barTintColor = .Togaether.background
+        scrollView.backgroundColor = .Togaether.background
     }
     
     private func bindAction(with reactor: SignUpInfomationReactor) {
