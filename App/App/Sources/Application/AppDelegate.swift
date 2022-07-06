@@ -16,7 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         RxImagePickerDelegateProxy.register { (p) -> RxImagePickerDelegateProxy in
             return RxImagePickerDelegateProxy(imagePicker: p)
         }
-        
         return true
     }
 
