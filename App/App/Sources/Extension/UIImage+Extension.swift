@@ -18,6 +18,9 @@ extension UIImage {
         static let scope               = UIImage(systemName: "scope")
         static let bell                = UIImage(systemName: "bell")!
         static let magnifyingglass     = UIImage(systemName: "magnifyingglass")!
+        
+        static let participantIcon     = UIImage(named: "participantIcon")
+        
         static let genderSignMan       = UIImage(named: "genderMan")!
         static let genderSignWoman     = UIImage(named: "genderWoman")!
         static let genderSignGirlPuppy = UIImage(named: "girlPuppy")!
@@ -26,6 +29,7 @@ extension UIImage {
         static let plus                = UIImage(systemName: "plus")!
         static let userDefaultProfile  = UIImage(named: "userDefaultProfile")!
         static let petDefaultProfile   = UIImage(named: "petDefaultProfile")!
+        
         static let xmark              = UIImage(systemName: "xmark")
         static let defaultWalkMapViewAnnotation = UIImage(named: "defaultWalkMapViewAnnotation")!
         static let defaultDogCafeMapViewAnnotation = UIImage(named: "defaultDogCafeMapViewAnnotation")!
