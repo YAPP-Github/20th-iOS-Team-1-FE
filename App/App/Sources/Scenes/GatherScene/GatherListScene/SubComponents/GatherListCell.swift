@@ -85,16 +85,8 @@ final class GatherListCell: UITableViewCell {
         return label
     }()
     
-    private lazy var tagCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 4
-        
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.registerCell(type: TagCollectionViewCell.self)
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.showsHorizontalScrollIndicator = false
+    private lazy var tagCollectionView: TagCollectionView = {
+        let collectionView = TagCollectionView(reactor: TagCollectionViewReactor(state: []), frame: .zero)
         
         return collectionView
     }()
@@ -119,7 +111,7 @@ final class GatherListCell: UITableViewCell {
     
     private func configureLayout() {
         NSLayoutConstraint.useAndActivateConstraints([
-            categoryLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 14.0),
+            categoryLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20.0),
             categoryLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20.0),
             categoryLabel.heightAnchor.constraint(equalToConstant: 18.0),
             
@@ -151,44 +143,26 @@ final class GatherListCell: UITableViewCell {
             tagCollectionView.topAnchor.constraint(equalTo: divisionView.bottomAnchor, constant: 16.0),
             tagCollectionView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
             tagCollectionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            tagCollectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -22)
+            tagCollectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20)
             ])
     }
     
     private func configureUI() {
         backgroundColor = .Togaether.background
+        separatorInset = UIEdgeInsets.zero
         selectionStyle = .none
+    }
+    
+    internal func configureData(_ data: Content) {
+        categoryLabel.text = data.category
+        titleLabel.text = data.title
+        addressLabel.text = data.meetingPlace
+        dateLabel.text = data.startDate
+        timeLabel.text = data.startDate
+        
+        var tags = (data.eligibleBreeds ?? []) + (data.eligiblePetSizeTypes ?? [])
+        tags.append(data.eligibleSex ?? "")
+        tagCollectionView.reactor = TagCollectionViewReactor(state: tags)
     }
 }
 
-extension GatherListCell: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return tags.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueCell(withType: TagCollectionViewCell.self, for: indexPath) as? TagCollectionViewCell else {
-            return UICollectionViewCell()
-        }
-        cell.configureData(tags[indexPath.row])
-        
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        
-        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 4)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        guard let item = tags[safe: indexPath.row] else {
-            return CGSize(width: 0, height: 0)
-        }
-        let itemSize = item.size(withAttributes: [
-            NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12)
-        ])
-        
-        return CGSize(width: itemSize.width + 18, height: 18)
-    }
-    
-}

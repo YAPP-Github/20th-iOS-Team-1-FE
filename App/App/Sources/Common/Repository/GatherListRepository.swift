@@ -62,7 +62,6 @@ final class GatherListRepository: GatherListRepositoryInterface {
             response.subscribe { result in
                 switch result {
                 case .success(let dto):
-                    print(dto)
                     let data = dto.toDomain()
                     observer(.success(data))
                 case .failure(let error):
