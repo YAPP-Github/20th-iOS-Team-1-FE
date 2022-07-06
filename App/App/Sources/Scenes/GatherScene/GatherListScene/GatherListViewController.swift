@@ -78,6 +78,11 @@ final class GatherListViewController: BaseViewController {
                 .map { index in
                     Reactor.Action.segmentIndex(index: index) }
                 .bind(to: reactor.action)
+            
+            contentTableView.rx.modelSelected(Content.self)
+                .map { model in
+                    Reactor.Action.gatherListCellDidTap(clubID: model.clubID) }
+                .bind(to: reactor.action)
         }
     }
     
@@ -96,6 +101,17 @@ final class GatherListViewController: BaseViewController {
                     
                     return cell
                 }
+            
+            reactor.state
+                .map { $0.isReadyToProceedDetailGatherView }
+                .filter { $0.0 == true }
+                .observe(on: MainScheduler.instance)
+                .subscribe(with: self,
+                   onNext: { this, data in
+                    let detailGatherReactor = DetailGatherReactor(clubID: String(data.1))
+                    let detailGatherViewController = DetailGatherViewController(reactor: detailGatherReactor)
+                    this.navigationController?.pushViewController(detailGatherViewController, animated: true)
+                })
         }
     }
     
