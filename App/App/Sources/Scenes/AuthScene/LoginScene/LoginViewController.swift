@@ -87,7 +87,6 @@ final class LoginViewController: BaseViewController {
     
     private func configureUI() {
         view.backgroundColor = .Togaether.background
-        navigationController?.navigationBar.barTintColor = .Togaether.background
     }
     
     private func bindAction(with reactor: LoginReactor) {

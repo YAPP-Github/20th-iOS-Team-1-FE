@@ -23,12 +23,15 @@ final class SignUpProfileReactor: Reactor {
         case validateNicknameLength(Bool)
         case updateNickname(String)
         case updateImage(Data?)
+        case updateAlertLabel(String)
         case checkNicknameDuplication(String?)
     }
     
     struct State {
-        var nickname = ""
         var user: UserAccount
+        var nickname = ""
+        var alertLabel = ""
+        var isNicknameLengthReached = false
         var isNicknameValidationCheckDone = false
         var isNicknameDuplicateCheckDone = false
         var isNextButtonEnabled = false
@@ -55,8 +58,10 @@ final class SignUpProfileReactor: Reactor {
             return Observable.just(.updateImage(data))
         case .textFieldDidEndEditing(let nickname):
             let isValid = regularExpressionValidator.validate(nickname: nickname)
-            return Observable.concat([Observable.just(Mutation.validateNicknameLength(isValid)),
-                                      Observable.just(Mutation.updateNickname(nickname))])
+            let alertTitle = !isValid && currentState.isNicknameLengthReached ? "한글 또는 영문을 10자 이내로 입력해주세요." : ""
+            return Observable.concat([Observable.just(.validateNicknameLength(isValid)),
+                                      Observable.just(.updateNickname(nickname)),
+                                      Observable.just(.updateAlertLabel(alertTitle))])
         case .duplicateCheckButtonDidTap:
             return checkDuplication(nickname: currentState.nickname)
         case .nextButtonDidTap:
@@ -77,10 +82,16 @@ final class SignUpProfileReactor: Reactor {
             newState.user.nickName = checkedNickname
             newState.isNicknameDuplicateCheckDone = (checkedNickname != nil)
             newState.isNextButtonEnabled = (checkedNickname != nil)
+            newState.alertLabel = (checkedNickname == nil) ? "중복된 닉네임이 존재합니다." : ""
         case .updateNickname(let nickname):
+            if nickname.count >= 4 {
+                newState.isNicknameLengthReached = true
+            }
             newState.nickname = nickname
         case .updateImage(let data):
             newState.user.profileImageData = data
+        case .updateAlertLabel(let title):
+            newState.alertLabel = title
         }
         
         return newState
