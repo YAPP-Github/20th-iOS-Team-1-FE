@@ -17,7 +17,7 @@ final class GatherListCell: UITableViewCell {
         label.backgroundColor = .Togaether.mainGreen
         label.text = "카테고리"
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = .customFont(size: 12, style: .Medium)
         label.textColor = UIColor.white
         
         return label
@@ -31,8 +31,14 @@ final class GatherListCell: UITableViewCell {
         label.layer.cornerRadius = 10
         label.clipsToBounds = true
         label.textColor = .Togaether.primaryLabel
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = .customFont(size: 14, style: .Medium)
         
+        let attributedString = NSMutableAttributedString(string: label.text ?? "")
+        let imageAttachment = NSTextAttachment()
+        imageAttachment.image = .Togaether.participantIcon
+        attributedString.append(NSAttributedString(attachment: imageAttachment))
+        label.attributedText = attributedString
+
         return label
     }()
     
@@ -40,7 +46,7 @@ final class GatherListCell: UITableViewCell {
         let label = UILabel()
         label.text = "모임 제목"
         label.textColor = .Togaether.primaryLabel
-        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.font = .customFont(size: 18, style: .Bold)
 
         return label
     }()
@@ -49,7 +55,7 @@ final class GatherListCell: UITableViewCell {
         let label = UILabel()
         label.text = "모임 장소 주소"
         label.textColor = .Togaether.secondaryLabel
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = .customFont(size: 12, style: .Medium)
 
         return label
     }()
@@ -58,7 +64,7 @@ final class GatherListCell: UITableViewCell {
         let label = UILabel()
         label.text = "12월 31일(월)"
         label.textColor = .Togaether.mainGreen
-        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.font = .customFont(size: 14, style: .Bold)
 
         return label
     }()
@@ -74,25 +80,7 @@ final class GatherListCell: UITableViewCell {
         let label = UILabel()
         label.text = "오후 10시 30분 - 12시"
         label.textColor = .Togaether.primaryLabel
-        label.font = UIFont.systemFont(ofSize: 14)
-        
-        return label
-    }()
-    
-    private lazy var hostProfileImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.backgroundColor = .lightGray
-        imageView.layer.cornerRadius = 14
-        imageView.clipsToBounds = true
-        
-        return imageView
-    }()
-    
-    private lazy var hostNickNameLabel: UILabel = {
-        let label = UILabel()
-        label.text = "호스트 닉네임"
-        label.textColor = .Togaether.primaryLabel
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = .customFont(size: 14, style: .Medium)
 
         return label
     }()
@@ -126,8 +114,6 @@ final class GatherListCell: UITableViewCell {
         addSubview(dateLabel)
         addSubview(divisionView)
         addSubview(timeLabel)
-        addSubview(hostProfileImageView)
-        addSubview(hostNickNameLabel)
         addSubview(tagCollectionView)
     }
     
@@ -139,8 +125,8 @@ final class GatherListCell: UITableViewCell {
             
             countLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 37.0),
             countLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20.0),
-            countLabel.widthAnchor.constraint(equalToConstant: 55.0),
-            countLabel.heightAnchor.constraint(equalToConstant: 55.0),
+            countLabel.widthAnchor.constraint(equalToConstant: 61.0),
+            countLabel.heightAnchor.constraint(equalToConstant: 53.0),
             
             titleLabel.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 12.0),
             titleLabel.leadingAnchor.constraint(equalTo: categoryLabel.leadingAnchor),
@@ -162,15 +148,7 @@ final class GatherListCell: UITableViewCell {
             timeLabel.leadingAnchor.constraint(equalTo: divisionView.trailingAnchor, constant: 8.0),
             timeLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -8.0),
             
-            hostProfileImageView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 16.0),
-            hostProfileImageView.leadingAnchor.constraint(equalTo: addressLabel.leadingAnchor),
-            hostProfileImageView.widthAnchor.constraint(equalToConstant: 28.0),
-            hostProfileImageView.heightAnchor.constraint(equalToConstant: 28.0),
-            
-            hostNickNameLabel.leadingAnchor.constraint(equalTo: hostProfileImageView.trailingAnchor, constant: 8.0),
-            hostNickNameLabel.centerYAnchor.constraint(equalTo: hostProfileImageView.centerYAnchor),
-            
-            tagCollectionView.topAnchor.constraint(equalTo: hostProfileImageView.bottomAnchor, constant: 16.0),
+            tagCollectionView.topAnchor.constraint(equalTo: divisionView.bottomAnchor, constant: 16.0),
             tagCollectionView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
             tagCollectionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
             tagCollectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -22)

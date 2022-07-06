@@ -640,7 +640,7 @@
 			children = (
 				29AE222A284B7CEC00EDF34B /* SearchScene */,
 				378F3476281DBDB10063CE4F /* AuthScene */,
-				378F3475281DBD4C0063CE4F /* GatherListScene */,
+				378F3475281DBD4C0063CE4F /* GatherScene */,
 				378F3474281DBD230063CE4F /* ChattingScene */,
 				378F3477281DBDC30063CE4F /* ProfileScene */,
 			);
@@ -657,14 +657,14 @@
 			path = ChattingScene;
 			sourceTree = "<group>";
 		};
-		378F3475281DBD4C0063CE4F /* GatherListScene */ = {
+		378F3475281DBD4C0063CE4F /* GatherScene */ = {
 			isa = PBXGroup;
 			children = (
 				FDE18E1D2873596A00A7369D /* Entitiy */,
-				FDFD016A28735A9800C625B1 /* GatherListMainScene */,
+				FDFD016A28735A9800C625B1 /* GatherListScene */,
 				37DA251D287317CA002E4D67 /* DetailGatherScene */,
 			);
-			path = GatherListScene;
+			path = GatherScene;
 			sourceTree = "<group>";
 		};
 		378F3476281DBDB10063CE4F /* AuthScene */ = {
@@ -1059,7 +1059,7 @@
 			path = Entitiy;
 			sourceTree = "<group>";
 		};
-		FDFD016A28735A9800C625B1 /* GatherListMainScene */ = {
+		FDFD016A28735A9800C625B1 /* GatherListScene */ = {
 			isa = PBXGroup;
 			children = (
 				FD8AD7032851E25300454AC3 /* SubComponents */,
@@ -1068,7 +1068,7 @@
 				378F347D281DBE070063CE4F /* GatherListReactor.swift */,
 				FDE18E1E2873598E00A7369D /* GatherListRepositoryInterface.swift */,
 			);
-			path = GatherListMainScene;
+			path = GatherListScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

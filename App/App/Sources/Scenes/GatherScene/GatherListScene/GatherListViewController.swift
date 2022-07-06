@@ -113,7 +113,7 @@ extension GatherListViewController: UITableViewDataSource, UITableViewDelegate{
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 218
+        return 180
     }
 
 }
