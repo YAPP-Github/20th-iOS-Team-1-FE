@@ -172,6 +172,8 @@
 		FDBC1232286C983E00FCADF4 /* AccountInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC1231286C983E00FCADF4 /* AccountInfoDTO.swift */; };
 		FDBC1234286C986700FCADF4 /* PetInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC1233286C986700FCADF4 /* PetInfoDTO.swift */; };
 		FDBC1237286D6A6600FCADF4 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC1236286D6A6600FCADF4 /* APIConstants.swift */; };
+		FDD2266F2875F4840042F488 /* TagCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD2266E2875F4840042F488 /* TagCollectionView.swift */; };
+		FDD226712875F4900042F488 /* TagCollectionViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD226702875F4900042F488 /* TagCollectionViewReactor.swift */; };
 		FDE18E182873586C00A7369D /* GatherListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE18E172873586C00A7369D /* GatherListRepository.swift */; };
 		FDE18E1C2873596300A7369D /* GatherListInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE18E1B2873596300A7369D /* GatherListInfo.swift */; };
 		FDE18E1F2873598E00A7369D /* GatherListRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE18E1E2873598E00A7369D /* GatherListRepositoryInterface.swift */; };
@@ -354,6 +356,8 @@
 		FDBC1231286C983E00FCADF4 /* AccountInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInfoDTO.swift; sourceTree = "<group>"; };
 		FDBC1233286C986700FCADF4 /* PetInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetInfoDTO.swift; sourceTree = "<group>"; };
 		FDBC1236286D6A6600FCADF4 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
+		FDD2266E2875F4840042F488 /* TagCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionView.swift; sourceTree = "<group>"; };
+		FDD226702875F4900042F488 /* TagCollectionViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewReactor.swift; sourceTree = "<group>"; };
 		FDE18E172873586C00A7369D /* GatherListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListRepository.swift; sourceTree = "<group>"; };
 		FDE18E1B2873596300A7369D /* GatherListInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListInfo.swift; sourceTree = "<group>"; };
 		FDE18E1E2873598E00A7369D /* GatherListRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListRepositoryInterface.swift; sourceTree = "<group>"; };
@@ -599,13 +603,13 @@
 		37605E0E283C50C800394929 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				FDD2266D2875F4530042F488 /* Tap */,
 				3773707D2841B95000D5CCB6 /* CheckBox.swift */,
 				29AE2233284B829200EDF34B /* CircularButton.swift */,
 				376006C928490EFD00B27015 /* EnableButton.swift */,
 				37AC310728493367003C3FA2 /* ContourView.swift */,
 				FD8AD7082851E2AA00454AC3 /* PaddingLabel.swift */,
 				37348B0B2866CA5E00C38F70 /* BorderButton.swift */,
-				FD8AD70A2851E51300454AC3 /* TagCollectionViewCell.swift */,
 				3719183A286E184F00169FC2 /* GuideView.swift */,
 				37DA252228732816002E4D67 /* Divider.swift */,
 			);
@@ -1051,6 +1055,16 @@
 			name = APIConstants;
 			sourceTree = "<group>";
 		};
+		FDD2266D2875F4530042F488 /* Tap */ = {
+			isa = PBXGroup;
+			children = (
+				FDD2266E2875F4840042F488 /* TagCollectionView.swift */,
+				FD8AD70A2851E51300454AC3 /* TagCollectionViewCell.swift */,
+				FDD226702875F4900042F488 /* TagCollectionViewReactor.swift */,
+			);
+			path = Tap;
+			sourceTree = "<group>";
+		};
 		FDE18E1D2873596A00A7369D /* Entitiy */ = {
 			isa = PBXGroup;
 			children = (
@@ -1230,6 +1244,7 @@
 				375558BF2866E0AC00D13208 /* SignUpAreaReactor.swift in Sources */,
 				374380AB284FDFDD00CB02A5 /* SearchingRequestDTO.swift in Sources */,
 				FD8191582871E2CC00B49961 /* UIImageView+Extension.swift in Sources */,
+				FDD2266F2875F4840042F488 /* TagCollectionView.swift in Sources */,
 				37605E06283C12D400394929 /* SignUpAgreementReactor.swift in Sources */,
 				FD8AD7092851E2AA00454AC3 /* PaddingLabel.swift in Sources */,
 				FD8AD70B2851E51300454AC3 /* TagCollectionViewCell.swift in Sources */,
@@ -1241,6 +1256,7 @@
 				379B1A7B285A52EA00E58A34 /* AppleLoginRepositoryInterface.swift in Sources */,
 				37479BA1283EBB220078386E /* UIButton+Extension.swift in Sources */,
 				374F41DA2864EB060074F04B /* KeychainUseCase.swift in Sources */,
+				FDD226712875F4900042F488 /* TagCollectionViewReactor.swift in Sources */,
 				37605DFD283A003B00394929 /* ASAuthorizationAppleIDProvider+Rx.swift in Sources */,
 				FDBC1230286C95D000FCADF4 /* ProfileResponseDTO.swift in Sources */,
 				FD8AD7052851E26200454AC3 /* GatherListTableView.swift in Sources */,

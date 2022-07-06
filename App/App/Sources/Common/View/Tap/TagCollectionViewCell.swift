@@ -1,5 +1,5 @@
 //
-//  tagCollectionViewCell.swift
+//  TagCollectionViewCell.swift
 //  App
 //
 //  Created by 김나희 on 6/9/22.

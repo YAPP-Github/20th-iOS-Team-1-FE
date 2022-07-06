@@ -17,10 +17,11 @@ final class GatherListViewController: BaseViewController {
         return view
     }()
     
-    private lazy var contentTableView: GatherListTableView = {
-        let tableView = GatherListTableView()
-        tableView.dataSource = self
-        tableView.delegate = self
+    private lazy var contentTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.register(GatherListCell.self, forCellReuseIdentifier: GatherListCell.identifier)
+        tableView.backgroundColor = .Togaether.background
+        tableView.rowHeight = 180
         tableView.separatorStyle = .singleLine
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         tableView.separatorInsetReference = .fromAutomaticInsets
@@ -83,11 +84,18 @@ final class GatherListViewController: BaseViewController {
     private func bindState(with reactor: GatherListReactor) {
         disposeBag.insert {
             reactor.state
-                .map { $0.gatherListInfo }
+                .map { $0.gatherListInfo.clubInfos?.content ?? [] }
                 .distinctUntilChanged()
-                .asDriver(onErrorJustReturn: GatherListInfo(hasNotClub: false))
-                .drive(onNext: { data in
-                })
+                .asDriver(onErrorJustReturn: [])
+                .drive(self.contentTableView.rx.items) { tableView, row, data in
+                    let indexPath = IndexPath(row: row, section: 0)
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: GatherListCell.identifier, for: indexPath) as? GatherListCell else {
+                        return UITableViewCell()
+                    }
+                    cell.configureData(data)
+                    
+                    return cell
+                }
         }
     }
     
@@ -95,25 +103,4 @@ final class GatherListViewController: BaseViewController {
         bindAction(with: reactor)
         bindState(with: reactor)
     }
-}
-
-extension GatherListViewController: UITableViewDataSource, UITableViewDelegate{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueCell(withType: GatherListCell.self, for: indexPath) as? GatherListCell else {
-            return UITableViewCell()
-        }
-        cell.separatorInset = UIEdgeInsets.zero
-        cell.layoutSubviews()
-
-        return cell
-    }
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 180
-    }
-
 }
