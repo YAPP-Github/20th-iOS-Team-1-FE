@@ -38,6 +38,5 @@ struct GatherConfigurationForSheetResponseDTO: Codable {
             distance: distance,
             clubStatus: clubStatus
         )
-        
     }
 }

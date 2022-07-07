@@ -31,14 +31,31 @@ final class SignUpRepository: SignUpRepositoryInterface {
             
             let boundary = UUID().uuidString
             let accessToken = String(decoding: accessToken, as: UTF8.self).makePrefixBearer()
-            
+            let requestData = self.createRequestBody(imageData: user.profileImageData!, boundary: boundary, attachmentKey: "ImageFile", fileName: "aa.png")
+                  
             var urlRequest = URLRequest(url: url)
             urlRequest.httpMethod = HTTPMethod.post
+            urlRequest.httpBody = requestData
             urlRequest.addValue(accessToken, forHTTPHeaderField: "Authorization")
-            urlRequest.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-            urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
+         //   urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
+         urlRequest.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+//
+//
+//            var data1 = Data()
+//
+//              // Add the image data to the raw http request data
+//              data1.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
+//
+//            if let image = user.profileImageData {
+//                data1.append("Content-Disposition: form-data; name=\"imageFile\"; filename=\"aa.png\"\r\n".data(using: .utf8)!)
+//                data1.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
+//                data1.append(image)
+//            }
+//              data1.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
+//
             
-            let response: Single<Int> = self.networkManager.requestDataTask(with: urlRequest)
+            
+            let response: Single<Int> = self.networkManager.requestUploadTask(with: urlRequest, data: data)
             
             response.subscribe { result in
                 switch result {
@@ -53,4 +70,16 @@ final class SignUpRepository: SignUpRepositoryInterface {
             return Disposables.create()
         }
     }
+    func createRequestBody(imageData: Data, boundary: String, attachmentKey: String, fileName: String) -> Data{
+         let lineBreak = "\r\n"
+         var requestBody = Data()
+
+         requestBody.append("\(lineBreak)--\(boundary + lineBreak)" .data(using: .utf8)!)
+         requestBody.append("Content-Disposition: form-data; name=\"\(attachmentKey)\"; filename=\"\(fileName)\"\(lineBreak)" .data(using: .utf8)!)
+         requestBody.append("Content-Type: image/png\(lineBreak + lineBreak)" .data(using: .utf8)!) // you can change the type accordingly if you want to
+         requestBody.append(imageData)
+         requestBody.append("\(lineBreak)--\(boundary)--\(lineBreak)" .data(using: .utf8)!)
+
+         return requestBody
+     }
 }

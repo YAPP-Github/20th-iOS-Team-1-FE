@@ -20,3 +20,4 @@ enum EligibleBreedDTO: Codable {
         case all = "ALL"
     }
 }
+
