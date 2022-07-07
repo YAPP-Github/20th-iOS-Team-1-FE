@@ -108,7 +108,7 @@ final class GatherListViewController: BaseViewController {
                 .observe(on: MainScheduler.instance)
                 .subscribe(with: self,
                    onNext: { this, data in
-                    let detailGatherReactor = DetailGatherReactor(clubID: String(data.1))
+                    let detailGatherReactor = DetailGatherReactor(clubID: data.1)
                     let detailGatherViewController = DetailGatherViewController(reactor: detailGatherReactor)
                     this.navigationController?.pushViewController(detailGatherViewController, animated: true)
                 })
