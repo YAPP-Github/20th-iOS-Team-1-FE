@@ -10,7 +10,7 @@ import Foundation
 struct SignUpAccountDTO: Codable {
     private enum CodingKeys: String, CodingKey {
         case nickname
-        case imageFile
+       // case imageFile
         case age
         case sex
         case city
@@ -18,7 +18,7 @@ struct SignUpAccountDTO: Codable {
     }
     
     internal let nickname: String
-    internal let imageFile: Data?
+   // internal let imageFile: Data?
     internal let age: Int
     internal let sex: String
     internal let city: String
@@ -34,7 +34,7 @@ struct SignUpAccountDTO: Codable {
         }
 
         self.nickname = nickname
-        self.imageFile = user.profileImageData
+       // self.imageFile = user.profileImageData
         self.age = age
         self.sex = sex
         self.city = city

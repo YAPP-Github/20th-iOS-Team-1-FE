@@ -20,12 +20,12 @@ final class DetailGatherReactor: Reactor {
     }
     
     struct State {
-        let clubID: String
+        let clubID: Int
     }
     
     let initialState: State
     
-    init(clubID: String) {
+    init(clubID: Int) {
         initialState = State(clubID: clubID)
     }
     

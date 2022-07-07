@@ -239,7 +239,6 @@ final class SignUpAreaViewController: BaseViewController {
                 .distinctUntilChanged()
                 .asDriver(onErrorJustReturn: nil)
                 .drive(bigCityTextField.rx.text)
-
             
             reactor.state
                 .map { $0.smallCityList }
