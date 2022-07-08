@@ -16,10 +16,10 @@ final class LoginViewController: BaseViewController {
         let text = "반려견 모임을 더 쉽고 즐겁개"
         let boldFont = UIFont.boldSystemFont(ofSize: 20)
         let attributedText = NSMutableAttributedString(string: text)
-        attributedText.addAttribute(.font, value: boldFont, range: (text as NSString).range(of: "더 쉽고 즐겁개"))
+        attributedText.addAttribute(.font, value: UIFont.customFont(size: 20, style: .Bold), range: (text as NSString).range(of: "더 쉽고 즐겁개"))
         
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.font = .customFont(size: 20)
         label.textColor = .Togaether.primaryLabel
         label.attributedText = attributedText
         label.adjustsFontSizeToFitWidth = true
@@ -69,11 +69,8 @@ final class LoginViewController: BaseViewController {
     
     private func configureLayout() {
         NSLayoutConstraint.useAndActivateConstraints([
-            logoImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            logoImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            logoImageView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 22 / 39),
-            logoImageView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            logoImageView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            NSLayoutConstraint(item: logoImageView, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 0.9, constant: 0.0),
             
             guidanceLabel.bottomAnchor.constraint(equalTo: logoImageView.topAnchor),
             guidanceLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),

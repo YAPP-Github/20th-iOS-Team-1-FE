@@ -16,16 +16,36 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchScreenDog" translatesAutoresizingMaskIntoConstraints="NO" id="ZVY-Vp-oEV">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchScreenLogo" translatesAutoresizingMaskIntoConstraints="NO" id="beu-Nm-AOx">
+                                <rect key="frame" x="0.0" y="315" width="414" height="176"/>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ZVY-Vp-oEV" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="2x0-zS-fsQ"/>
+                            <constraint firstItem="beu-Nm-AOx" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" multiplier="0.9" id="9Uq-bH-a3h"/>
+                            <constraint firstItem="ZVY-Vp-oEV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Gka-ZB-KI4"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="beu-Nm-AOx" secondAttribute="trailing" id="K8b-aA-93e"/>
+                            <constraint firstItem="ZVY-Vp-oEV" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="KV9-kW-Hcf"/>
+                            <constraint firstItem="beu-Nm-AOx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="PiH-q0-8s0"/>
+                            <constraint firstAttribute="bottom" secondItem="ZVY-Vp-oEV" secondAttribute="bottom" id="YJx-8s-muR"/>
+                            <constraint firstItem="beu-Nm-AOx" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="nro-72-UgT"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.173913043478265" y="375"/>
         </scene>
     </scenes>
     <resources>
+        <image name="launchScreenDog" width="376" height="812.5"/>
+        <image name="launchScreenLogo" width="312" height="176"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
