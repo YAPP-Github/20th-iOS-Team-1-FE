@@ -140,6 +140,3 @@ final class AuthCoordinator: SceneCoordinator {
     }
 }
 
-protocol AuthCoordinatorDelegate: AnyObject {
-    func switchToTabBar()
-}

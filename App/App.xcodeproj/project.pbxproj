@@ -41,6 +41,7 @@
 		3734CEAC2869E72100EEF38D /* SignUpRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3734CEAB2869E72100EEF38D /* SignUpRepository.swift */; };
 		3734CEAE2869E7E700EEF38D /* SignUpAccountDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3734CEAD2869E7E700EEF38D /* SignUpAccountDTO.swift */; };
 		3734CEB12869F6DD00EEF38D /* RxKeyboard in Frameworks */ = {isa = PBXBuildFile; productRef = 3734CEB02869F6DD00EEF38D /* RxKeyboard */; };
+		373B4BEE28788A82005B8599 /* AuthCoordinatorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B4BED28788A82005B8599 /* AuthCoordinatorDelegate.swift */; };
 		37438095284FD9BA00CB02A5 /* ExceptionDetailResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37438094284FD9BA00CB02A5 /* ExceptionDetailResponseDTO.swift */; };
 		37438097284FD9F800CB02A5 /* ExceptionResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37438096284FD9F800CB02A5 /* ExceptionResponseDTO.swift */; };
 		3743809D284FDB5300CB02A5 /* ExceptionResponseInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3743809C284FDB5300CB02A5 /* ExceptionResponseInfoDTO.swift */; };
@@ -244,6 +245,7 @@
 		3734CEA92869E70C00EEF38D /* SignUpRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRepositoryInterface.swift; sourceTree = "<group>"; };
 		3734CEAB2869E72100EEF38D /* SignUpRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRepository.swift; sourceTree = "<group>"; };
 		3734CEAD2869E7E700EEF38D /* SignUpAccountDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAccountDTO.swift; sourceTree = "<group>"; };
+		373B4BED28788A82005B8599 /* AuthCoordinatorDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinatorDelegate.swift; sourceTree = "<group>"; };
 		37438094284FD9BA00CB02A5 /* ExceptionDetailResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionDetailResponseDTO.swift; sourceTree = "<group>"; };
 		37438096284FD9F800CB02A5 /* ExceptionResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionResponseDTO.swift; sourceTree = "<group>"; };
 		3743809C284FDB5300CB02A5 /* ExceptionResponseInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionResponseInfoDTO.swift; sourceTree = "<group>"; };
@@ -757,6 +759,7 @@
 		378F3476281DBDB10063CE4F /* AuthScene */ = {
 			isa = PBXGroup;
 			children = (
+				373B4BED28788A82005B8599 /* AuthCoordinatorDelegate.swift */,
 				37F67CC4286A1C270073FE8C /* AuthCoordinator.swift */,
 				3773708A2841DE4800D5CCB6 /* Entity */,
 				37605DED28394F4400394929 /* LoginScene */,
@@ -1325,6 +1328,7 @@
 				377370892841DE3500D5CCB6 /* SignUpProfileReactor.swift in Sources */,
 				29AE2234284B829200EDF34B /* CircularButton.swift in Sources */,
 				FDE6F14A28523493005E4783 /* UICollectionView+Extension.swift in Sources */,
+				373B4BEE28788A82005B8599 /* AuthCoordinatorDelegate.swift in Sources */,
 				37479B9F283EAE140078386E /* UIImage+Extension.swift in Sources */,
 				FDE6F1482852317F005E4783 /* UITableView+Extension.swift in Sources */,
 				37912CA628144A530087B95E /* TabCoordinator.swift in Sources */,
