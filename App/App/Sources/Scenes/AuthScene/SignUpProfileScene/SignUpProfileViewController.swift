@@ -13,13 +13,7 @@ import RxCocoa
 import RxKeyboard
 
 final class SignUpProfileViewController: BaseViewController {
-    private let contentView = UIView()
-    private let scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.keyboardDismissMode = .onDrag
-        
-        return scrollView
-    }()
+    typealias Reactor = SignUpProfileReactor
     
     private let guidanceLabel: UILabel = {
         let text = "견주님의 프로필과\n닉네임을 등록해주세요."
@@ -37,7 +31,7 @@ final class SignUpProfileViewController: BaseViewController {
         return label
     }()
     
-    private lazy var profileImageButton: CircularButton = {
+    private let profileImageButton: CircularButton = {
         let button = CircularButton()
         button.setBackgroundImage(.Togaether.userDefaultProfile, for: .normal)
         button.backgroundColor = .Togaether.background
@@ -45,7 +39,7 @@ final class SignUpProfileViewController: BaseViewController {
         return button
     }()
     
-    private var nickNameLabel: UILabel = {
+    private let nickNameLabel: UILabel = {
         let label = UILabel()
         label.text = "닉네임 입력"
         label.font = UIFont.systemFont(ofSize: 14)
@@ -53,14 +47,15 @@ final class SignUpProfileViewController: BaseViewController {
         return label
     }()
     
-    private var nicknameTextField: UITextField = {
+    private let nicknameTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "한글/영어 10글자 이내"
+        textField.keyboardType = .default
         
         return textField
     }()
     
-    private var duplicateCheckButton: EnableButton = {
+    private let duplicateCheckButton: EnableButton = {
         let button = EnableButton(frame: CGRect(x: 0, y: 0, width: 90, height: 36))
         button.setTitle("중복확인", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
@@ -68,14 +63,9 @@ final class SignUpProfileViewController: BaseViewController {
         return button
     }()
     
-    private lazy var nicknameContourView: UIView = {
-        let contour = UIView()
-        contour.backgroundColor = .Togaether.divider
-        
-        return contour
-    }()
+    private let nicknameDivider = Divider()
     
-    private lazy var nicknameAlertLabel: UILabel = {
+    private let nicknameAlertLabel: UILabel = {
         let label = UILabel()
         label.textColor = .Togaether.mainCoral
         label.font = .customFont(size: 12, style: .Medium)
@@ -83,14 +73,9 @@ final class SignUpProfileViewController: BaseViewController {
         return label
     }()
     
-    private lazy var nextButtonContourView: UIView = {
-        let contour = UIView()
-        contour.backgroundColor = .Togaether.divider
-        
-        return contour
-    }()
+    private let nextButtonDivider = Divider()
 
-    private var nextButton: EnableButton = {
+    private let nextButton: EnableButton = {
         let button = EnableButton()
         button.setTitle("다음", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
@@ -124,91 +109,68 @@ final class SignUpProfileViewController: BaseViewController {
     }
     
     private func addSubviews() {
-        view.addSubview(scrollView)
-        scrollView.addSubview(contentView)
+        view.addSubview(guidanceLabel)
+        view.addSubview(profileImageButton)
         
-        contentView.addSubview(guidanceLabel)
+        view.addSubview(nickNameLabel)
+        view.addSubview(nicknameTextField)
+        view.addSubview(duplicateCheckButton)
+        view.addSubview(nicknameDivider)
+        view.addSubview(nicknameAlertLabel)
         
-        contentView.addSubview(profileImageButton)
-        
-        contentView.addSubview(nickNameLabel)
-        
-        contentView.addSubview(nicknameTextField)
-        contentView.addSubview(duplicateCheckButton)
-        
-        contentView.addSubview(nicknameContourView)
-        contentView.addSubview(nicknameAlertLabel)
-        
-        view.addSubview(nextButtonContourView)
+        view.addSubview(nextButtonDivider)
         view.addSubview(nextButton)
-    }
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        let height = contentView.subviews.reduce(0) { $0 + $1.frame.height }
-        
-        scrollView.contentSize.height = height
     }
     
     private func configureLayout() {
+        let viewHeight = view.frame.height
+        let viewWidth = view.frame.width
         NSLayoutConstraint.useAndActivateConstraints([
             nextButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             nextButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -4),
             nextButton.heightAnchor.constraint(equalToConstant: 50),
             
-            nextButtonContourView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            nextButtonContourView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            nextButtonContourView.bottomAnchor.constraint(equalTo: nextButton.topAnchor, constant: -14),
-            nextButtonContourView.heightAnchor.constraint(equalToConstant: 1),
-
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: nextButtonContourView.topAnchor, constant: -14),
-
-            contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
-            contentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
-            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            contentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor),
+            nextButtonDivider.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            nextButtonDivider.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            nextButtonDivider.bottomAnchor.constraint(equalTo: nextButton.topAnchor, constant: -4),
+            nextButtonDivider.heightAnchor.constraint(equalToConstant: 1),
             
-            guidanceLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 96),
-            guidanceLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            guidanceLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            guidanceLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: viewHeight * 0.1),
+            guidanceLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            guidanceLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             
-            profileImageButton.topAnchor.constraint(equalTo: guidanceLabel.bottomAnchor, constant: 72),
-            profileImageButton.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.5),
+            profileImageButton.topAnchor.constraint(equalTo: guidanceLabel.bottomAnchor, constant: viewHeight * 0.1),
+            profileImageButton.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.4),
             profileImageButton.heightAnchor.constraint(equalTo: profileImageButton.widthAnchor),
-            profileImageButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            profileImageButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             
-            nickNameLabel.topAnchor.constraint(equalTo: profileImageButton.bottomAnchor, constant: 57),
-            nickNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            nickNameLabel.topAnchor.constraint(equalTo: profileImageButton.bottomAnchor, constant: viewHeight * 0.1),
+            nickNameLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             
             nicknameTextField.topAnchor.constraint(equalTo: nickNameLabel.bottomAnchor, constant: 5),
-            nicknameTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            nicknameTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             
-            duplicateCheckButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            duplicateCheckButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             duplicateCheckButton.widthAnchor.constraint(equalToConstant: 90),
             duplicateCheckButton.heightAnchor.constraint(equalToConstant: 36),
             duplicateCheckButton.centerYAnchor.constraint(equalTo: nicknameTextField.centerYAnchor),
   
-            nicknameContourView.topAnchor.constraint(equalTo: duplicateCheckButton.bottomAnchor, constant: 10),
-            nicknameContourView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            nicknameContourView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            nicknameContourView.heightAnchor.constraint(equalToConstant: 1),
+            nicknameDivider.topAnchor.constraint(equalTo: duplicateCheckButton.bottomAnchor, constant: 4),
+            nicknameDivider.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            nicknameDivider.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            nicknameDivider.heightAnchor.constraint(equalToConstant: 1),
             
-            nicknameAlertLabel.topAnchor.constraint(equalTo: nicknameContourView.bottomAnchor, constant: 10),
-            nicknameAlertLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20)
+            nicknameAlertLabel.topAnchor.constraint(equalTo: nicknameDivider.bottomAnchor, constant: 10),
+            nicknameAlertLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20)
         ])
     }
     
     private func configureUI() {
         view.backgroundColor = .Togaether.background
-        scrollView.backgroundColor = .Togaether.background
     }
     
-    private func bindAction(with reactor: SignUpProfileReactor) {
+    private func bindAction(with reactor: Reactor) {
         disposeBag.insert {
             profileImageButton.rx.tap.flatMapLatest { [weak self] (_) in
                 return UIImagePickerController.rx.createWithParent(parent: self) { picker in
@@ -237,16 +199,19 @@ final class SignUpProfileViewController: BaseViewController {
                 .map { Reactor.Action.nextButtonDidTap }
                 .bind(to: reactor.action)
             
-            RxKeyboard.instance.visibleHeight
-                .skip(1)
-                .drive(with: self,
-                   onNext: { this, keyboardHeight in
-                    this.scrollView.contentInset.bottom = keyboardHeight
-                })
+//            RxKeyboard.instance.visibleHeight
+//                .skip(1)
+//                .drive(with: self,
+//                   onNext: { this, keyboardHeight in
+//                    this.nicknameTextFieldConstraint?.constant = keyboardHeight + this.view.safeAreaInsets.bottom
+//                    UIView.animate(withDuration: 0.3) {
+//                        this.view.layoutIfNeeded()
+//                    }
+//                })
         }
     }
     
-    private func bindState(with reactor: SignUpProfileReactor) {
+    private func bindState(with reactor: Reactor) {
         disposeBag.insert {
             reactor.state
                 .map { $0.user.profileImageData }
@@ -300,7 +265,7 @@ final class SignUpProfileViewController: BaseViewController {
         }
     }
     
-    func bind(reactor: SignUpProfileReactor) {
+    func bind(reactor: Reactor) {
         bindAction(with: reactor)
         bindState(with: reactor)
     }
