@@ -118,9 +118,7 @@ final class SignUpAreaReactor: Reactor {
                         onSuccess: {
                             this.readyToStart.onNext(())
                             return
-                        
                         }, onFailure: { _ in
-//                            this.readyToStart.onNext(())
                             #warning("회원가입 실패할 경우 버튼을 눌러도 반응이 없음")
                             return
                         }

@@ -13,15 +13,7 @@ import RxSwift
 final class SignUpAreaViewController: BaseViewController {
     typealias Reactor = SignUpAreaReactor
     
-    private let contentView = UIView()
-    private let scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.keyboardDismissMode = .onDrag
-        
-        return scrollView
-    }()
-    
-    private lazy var guidanceLabel: UILabel = {
+    private let guidanceLabel: UILabel = {
         let text = "활동 지역을\n알려주세요."
         let boldFont = UIFont.boldSystemFont(ofSize: 32)
         let attributedText = NSMutableAttributedString(string: text)
@@ -36,7 +28,7 @@ final class SignUpAreaViewController: BaseViewController {
         return label
     }()
     
-    private lazy var bigCityLabel: UILabel = {
+    private let bigCityLabel: UILabel = {
         let label = UILabel()
         label.text = "시/도"
         label.font = UIFont.systemFont(ofSize: 14)
@@ -44,7 +36,7 @@ final class SignUpAreaViewController: BaseViewController {
         return label
     }()
     
-    private var bigCityPickerView: UIPickerView = {
+    private let bigCityPickerView: UIPickerView = {
         let pickerView = UIPickerView()
         
         return pickerView
@@ -62,9 +54,9 @@ final class SignUpAreaViewController: BaseViewController {
         return textField
     }()
     
-    private lazy var bigCityContourView = ContourView()
+    private let bigCityContourView = ContourView()
     
-    private lazy var smallCityLabel: UILabel = {
+    private let smallCityLabel: UILabel = {
         let label = UILabel()
         label.text = "시/군/구"
         label.font = UIFont.systemFont(ofSize: 14)
@@ -72,7 +64,7 @@ final class SignUpAreaViewController: BaseViewController {
         return label
     }()
     
-    private var smallCityPickerView: UIPickerView = {
+    private let smallCityPickerView: UIPickerView = {
         let pickerView = UIPickerView()
         
         return pickerView
@@ -90,11 +82,11 @@ final class SignUpAreaViewController: BaseViewController {
         return textField
     }()
     
-    private lazy var smallCityContourView = ContourView()
+    private let smallCityContourView = ContourView()
     
-    private lazy var nextButtonContourView = ContourView()
+    private let nextButtonContourView = ContourView()
 
-    private lazy var nextButton: EnableButton = {
+    private let nextButton: EnableButton = {
         let button = EnableButton()
         button.setTitle("투개더 시작하기", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
@@ -123,28 +115,23 @@ final class SignUpAreaViewController: BaseViewController {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        contentView.endEditing(true)
+        view.endEditing(true)
     }
     
     private func addSubviews() {
-        view.addSubview(scrollView)
-        scrollView.addSubview(contentView)
-        
-        contentView.addSubview(guidanceLabel)
-        
-        contentView.addSubview(bigCityLabel)
-        contentView.addSubview(bigCityTextField)
-        contentView.addSubview(bigCityContourView)
-        
-        contentView.addSubview(smallCityLabel)
-        contentView.addSubview(smallCityTextField)
-        contentView.addSubview(smallCityContourView)
- 
+        view.addSubview(guidanceLabel)
+        view.addSubview(bigCityLabel)
+        view.addSubview(bigCityTextField)
+        view.addSubview(bigCityContourView)
+        view.addSubview(smallCityLabel)
+        view.addSubview(smallCityTextField)
+        view.addSubview(smallCityContourView)
         view.addSubview(nextButtonContourView)
         view.addSubview(nextButton)
     }
     
     private func configureLayout() {
+        let viewHeight = view.frame.height
         NSLayoutConstraint.useAndActivateConstraints([
             nextButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             nextButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
@@ -153,54 +140,41 @@ final class SignUpAreaViewController: BaseViewController {
             
             nextButtonContourView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             nextButtonContourView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            nextButtonContourView.bottomAnchor.constraint(equalTo: nextButton.topAnchor, constant: -14),
+            nextButtonContourView.bottomAnchor.constraint(equalTo: nextButton.topAnchor, constant: -4),
             nextButtonContourView.heightAnchor.constraint(equalToConstant: 1),
             
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: nextButtonContourView.topAnchor, constant: -14),
+            guidanceLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: viewHeight * 0.1),
+            guidanceLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            guidanceLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             
-            contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
-            contentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
-            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            contentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor),
-            
-            guidanceLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 96),
-            guidanceLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            guidanceLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            
-            bigCityLabel.topAnchor.constraint(equalTo: guidanceLabel.bottomAnchor, constant: 72),
-            bigCityLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            bigCityLabel.topAnchor.constraint(equalTo: guidanceLabel.bottomAnchor, constant: viewHeight * 0.1),
+            bigCityLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             
             bigCityTextField.topAnchor.constraint(equalTo: bigCityLabel.bottomAnchor, constant: 14),
-            bigCityTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            bigCityTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            bigCityTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            bigCityTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             
             bigCityContourView.topAnchor.constraint(equalTo: bigCityTextField.bottomAnchor, constant: 16),
-            bigCityContourView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            bigCityContourView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            bigCityContourView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            bigCityContourView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             bigCityContourView.heightAnchor.constraint(equalToConstant: 1),
             
             smallCityLabel.topAnchor.constraint(equalTo: bigCityContourView.bottomAnchor, constant: 45),
-            smallCityLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            smallCityLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             
             smallCityTextField.topAnchor.constraint(equalTo: smallCityLabel.bottomAnchor, constant: 14),
-            smallCityTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            smallCityTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            smallCityTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            smallCityTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             
             smallCityContourView.topAnchor.constraint(equalTo: smallCityTextField.bottomAnchor, constant: 16),
-            smallCityContourView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            smallCityContourView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            smallCityContourView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            smallCityContourView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             smallCityContourView.heightAnchor.constraint(equalToConstant: 1)
         ])
     }
     
     private func configureUI() {
         view.backgroundColor = .Togaether.background
-        scrollView.backgroundColor = .Togaether.background
     }
     
     private func bindAction(with reactor: Reactor) {

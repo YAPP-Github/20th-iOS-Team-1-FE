@@ -22,75 +22,96 @@ final class SignUpAgreementViewController: BaseViewController {
         return scrollView
     }()
     
-    private var guidanceLabel: UILabel = {
+    private let guidanceLabel: UILabel = {
         let text = "서비스 이용을 위해\n약관 동의가 필요해요."
-        let boldFont = UIFont.boldSystemFont(ofSize: 32)
         let attributedText = NSMutableAttributedString(string: text)
-        attributedText.addAttribute(.font, value: boldFont, range: (text as NSString).range(of: "약관 동의"))
+        attributedText.addAttribute(.font, value: UIFont.customFont(size: 32, style: .Bold), range: (text as NSString).range(of: "약관 동의"))
         
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 32)
-        label.textColor = .Togaether.primaryLabel
-        label.attributedText = attributedText
-        label.numberOfLines = 2
         label.adjustsFontSizeToFitWidth = true
-        
-        return label
-    }()
-    
-    private var agreementCheckBox = CheckBox()
-    private var agreementLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 18)
+        label.attributedText = attributedText
+        label.font = .customFont(size: 32)
+        label.numberOfLines = 2
         label.textColor = .Togaether.primaryLabel
-        label.text = "모든 약관에 동의합니다."
         
         return label
     }()
     
-    private lazy var checkBoxContourView: UIView = {
-        let contour = UIView()
-        contour.backgroundColor = .Togaether.divider
+    private let agreementStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.alignment = .center
+        stackView.axis = .horizontal
+        stackView.distribution = .fillProportionally
+        stackView.spacing = 10
         
-        return contour
+        return stackView
+    }()
+    private let agreementCheckBox = CheckBox()
+    private let agreementLabel: UILabel = {
+        let label = UILabel()
+        label.adjustsFontSizeToFitWidth = true
+        label.font = .customFont(size: 16)
+        label.text = "모든 약관에 동의합니다."
+        label.lineBreakMode = .byWordWrapping
+        label.textColor = .Togaether.primaryLabel
+        
+        return label
     }()
     
-    private var termsOfServiceCheckBox = CheckBox()
-    private var termsOfServiceLabel: UILabel = {
+    private let checkBoxDivider = Divider()
+    
+    private let termsOfServiceStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.alignment = .center
+        stackView.axis = .horizontal
+        stackView.distribution = .fillProportionally
+        stackView.spacing = 10
+        
+        return stackView
+    }()
+    private let termsOfServiceCheckBox = CheckBox()
+    private let termsOfServiceLabel: UILabel = {
         let text = "서비스 이용약관에 동의합니다. [필수]"
         let attributedText = NSMutableAttributedString(string: text)
         attributedText.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: (text as NSString).range(of: "서비스 이용약관"))
         
         let label = UILabel()
         label.adjustsFontSizeToFitWidth = true
-        label.textColor = .Togaether.primaryLabel
         label.attributedText = attributedText
+        label.font = .customFont(size: 16)
+        label.lineBreakMode = .byWordWrapping
+        label.textColor = .Togaether.primaryLabel
         
         return label
     }()
     
-    private var privacyPolicyCheckBox = CheckBox()
-    private var privacyPolicyLabel: UILabel = {
+    private let privacyPolicyStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.alignment = .center
+        stackView.axis = .horizontal
+        stackView.distribution = .fillProportionally
+        stackView.spacing = 10
+        
+        return stackView
+    }()
+    private let privacyPolicyCheckBox = CheckBox()
+    private let privacyPolicyLabel: UILabel = {
         let text = "개인정보처리방침에 동의합니다. [필수]"
         let attributedText = NSMutableAttributedString(string: text)
         attributedText.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: (text as NSString).range(of: "개인정보처리방침"))
         
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 18)
-        label.textColor = .Togaether.primaryLabel
+        label.adjustsFontSizeToFitWidth = true
         label.attributedText = attributedText
+        label.font = .customFont(size: 16)
+        label.lineBreakMode = .byWordWrapping
+        label.textColor = .Togaether.primaryLabel
         
         return label
     }()
 
-    private lazy var nextButtonContourView: UIView = {
-        let contour = UIView()
-        contour.backgroundColor = .Togaether.divider
-        
-        return contour
-    }()
-
-    private var nextButton: EnableButton = {
+    private let nextButtonDivider = Divider()
+    private let nextButton: EnableButton = {
         let button = EnableButton()
         button.setTitle("다음", for: .normal)
         button.isEnabled = false
@@ -102,7 +123,6 @@ final class SignUpAgreementViewController: BaseViewController {
 
     init(reactor: Reactor) {
         super.init(nibName: nil, bundle: nil)
-        
         self.reactor = reactor
     }
     
@@ -113,10 +133,18 @@ final class SignUpAgreementViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         addSubviews()
         configureLayout()
         configureUI()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let contentRect: CGRect = contentView.subviews.reduce(into: .zero) { rect, view in
+            rect = rect.union(view.frame)
+        }
+        scrollView.contentSize = contentRect.size
     }
     
     private func addSubviews() {
@@ -124,86 +152,83 @@ final class SignUpAgreementViewController: BaseViewController {
         scrollView.addSubview(contentView)
         
         contentView.addSubview(guidanceLabel)
+        contentView.addSubview(agreementStackView)
+        agreementStackView.addArrangedSubview(agreementCheckBox)
+        agreementStackView.addArrangedSubview(agreementLabel)
         
-        contentView.addSubview(agreementCheckBox)
-        contentView.addSubview(agreementLabel)
+        contentView.addSubview(checkBoxDivider)
         
-        contentView.addSubview(checkBoxContourView)
+        contentView.addSubview(termsOfServiceStackView)
+        termsOfServiceStackView.addArrangedSubview(termsOfServiceCheckBox)
+        termsOfServiceStackView.addArrangedSubview(termsOfServiceLabel)
+        contentView.addSubview(privacyPolicyStackView)
+        privacyPolicyStackView.addArrangedSubview(privacyPolicyCheckBox)
+        privacyPolicyStackView.addArrangedSubview(privacyPolicyLabel)
         
-        contentView.addSubview(termsOfServiceCheckBox)
-        contentView.addSubview(termsOfServiceLabel)
-        
-        contentView.addSubview(privacyPolicyCheckBox)
-        contentView.addSubview(privacyPolicyLabel)
-        
-        view.addSubview(nextButtonContourView)
-        
+        view.addSubview(nextButtonDivider)
         view.addSubview(nextButton)
     }
     
     private func configureLayout() {
-        let contentViewHeight = contentView.heightAnchor.constraint(greaterThanOrEqualTo: scrollView.heightAnchor)
-        contentViewHeight.priority = .defaultLow
-        contentViewHeight.isActive = true
+        let viewHeight = view.frame.height
         NSLayoutConstraint.useAndActivateConstraints([
             nextButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             nextButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -4),
             nextButton.heightAnchor.constraint(equalToConstant: 50),
             
-            nextButtonContourView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            nextButtonContourView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            nextButtonContourView.bottomAnchor.constraint(equalTo: nextButton.topAnchor, constant: -14),
-            nextButtonContourView.heightAnchor.constraint(equalToConstant: 1),
+            nextButtonDivider.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            nextButtonDivider.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            nextButtonDivider.bottomAnchor.constraint(equalTo: nextButton.topAnchor, constant: -4),
+            nextButtonDivider.heightAnchor.constraint(equalToConstant: 1),
             
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: nextButtonContourView.topAnchor, constant: -14),
+            scrollView.bottomAnchor.constraint(equalTo: nextButtonDivider.topAnchor, constant: -4),
             
             contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
             contentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-       //     contentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor),
+            contentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor),
             
-            guidanceLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 96),
+            guidanceLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: viewHeight * 0.1),
             guidanceLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             guidanceLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            
-            agreementCheckBox.topAnchor.constraint(equalTo: guidanceLabel.bottomAnchor, constant: 78),
-            agreementCheckBox.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 22),
+
+            agreementStackView.topAnchor.constraint(equalTo: guidanceLabel.bottomAnchor, constant: viewHeight * 0.1),
+            agreementStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            agreementStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             agreementCheckBox.heightAnchor.constraint(equalToConstant: 36),
             agreementCheckBox.widthAnchor.constraint(equalToConstant: 36),
-            agreementLabel.leadingAnchor.constraint(equalTo: agreementCheckBox.trailingAnchor, constant: 10),
-            agreementLabel.centerYAnchor.constraint(equalTo: agreementCheckBox.centerYAnchor),
  
-            checkBoxContourView.topAnchor.constraint(equalTo: agreementCheckBox.bottomAnchor, constant: 14),
-            checkBoxContourView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            checkBoxContourView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            checkBoxContourView.heightAnchor.constraint(equalToConstant: 1),
+            checkBoxDivider.topAnchor.constraint(equalTo: agreementCheckBox.bottomAnchor, constant: 14),
+            checkBoxDivider.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            checkBoxDivider.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            checkBoxDivider.heightAnchor.constraint(equalToConstant: 1),
             
-            termsOfServiceCheckBox.topAnchor.constraint(equalTo: checkBoxContourView.bottomAnchor, constant: 14),
-            termsOfServiceCheckBox.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 22),
+            termsOfServiceStackView.topAnchor.constraint(equalTo: checkBoxDivider.bottomAnchor, constant: 14),
+            termsOfServiceStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            termsOfServiceStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             termsOfServiceCheckBox.heightAnchor.constraint(equalToConstant: 36),
             termsOfServiceCheckBox.widthAnchor.constraint(equalToConstant: 36),
-            termsOfServiceLabel.leadingAnchor.constraint(equalTo: termsOfServiceCheckBox.trailingAnchor, constant: 10),
-            termsOfServiceLabel.centerYAnchor.constraint(equalTo: termsOfServiceCheckBox.centerYAnchor),
-            termsOfServiceLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -46),
             
-            privacyPolicyCheckBox.topAnchor.constraint(equalTo: termsOfServiceCheckBox.bottomAnchor, constant: 16),
-            privacyPolicyCheckBox.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 22),
+            privacyPolicyStackView.topAnchor.constraint(equalTo: termsOfServiceStackView.bottomAnchor, constant: 16),
+            privacyPolicyStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            privacyPolicyStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             privacyPolicyCheckBox.heightAnchor.constraint(equalToConstant: 36),
             privacyPolicyCheckBox.widthAnchor.constraint(equalToConstant: 36),
-            privacyPolicyLabel.leadingAnchor.constraint(equalTo: privacyPolicyCheckBox.trailingAnchor, constant: 10),
-            privacyPolicyLabel.centerYAnchor.constraint(equalTo: privacyPolicyCheckBox.centerYAnchor)
         ])
     }
     
     private func configureUI() {
         view.backgroundColor = .Togaether.background
-        scrollView.backgroundColor = .Togaether.background
+        contentView.backgroundColor = .Togaether.background
+        
+        navigationController?.navigationBar.isTranslucent = true
+
     }
     
     private func bindAction(with reactor: Reactor) {
