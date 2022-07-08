@@ -188,6 +188,7 @@
 		FDBC1237286D6A6600FCADF4 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC1236286D6A6600FCADF4 /* APIConstants.swift */; };
 		FDD2266F2875F4840042F488 /* TagCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD2266E2875F4840042F488 /* TagCollectionView.swift */; };
 		FDD226712875F4900042F488 /* TagCollectionViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD226702875F4900042F488 /* TagCollectionViewReactor.swift */; };
+		FDD2267C287873730042F488 /* NSMutableData+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD2267B287873730042F488 /* NSMutableData+Extension.swift */; };
 		FDE18E182873586C00A7369D /* GatherListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE18E172873586C00A7369D /* GatherListRepository.swift */; };
 		FDE18E1C2873596300A7369D /* GatherListInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE18E1B2873596300A7369D /* GatherListInfo.swift */; };
 		FDE18E1F2873598E00A7369D /* GatherListRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE18E1E2873598E00A7369D /* GatherListRepositoryInterface.swift */; };
@@ -386,6 +387,7 @@
 		FDBC1236286D6A6600FCADF4 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		FDD2266E2875F4840042F488 /* TagCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionView.swift; sourceTree = "<group>"; };
 		FDD226702875F4900042F488 /* TagCollectionViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewReactor.swift; sourceTree = "<group>"; };
+		FDD2267B287873730042F488 /* NSMutableData+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableData+Extension.swift"; sourceTree = "<group>"; };
 		FDE18E172873586C00A7369D /* GatherListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListRepository.swift; sourceTree = "<group>"; };
 		FDE18E1B2873596300A7369D /* GatherListInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListInfo.swift; sourceTree = "<group>"; };
 		FDE18E1E2873598E00A7369D /* GatherListRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListRepositoryInterface.swift; sourceTree = "<group>"; };
@@ -868,6 +870,7 @@
 				294A0C1B2874783000D1CEB3 /* UILabel+Extension.swift */,
 				FD8191572871E2CC00B49961 /* UIImageView+Extension.swift */,
 				37D1E5002877116A00A955C4 /* FileManager+Extension.swift */,
+				FDD2267B287873730042F488 /* NSMutableData+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1450,6 +1453,7 @@
 				37C1451D284F9D6500D11CC3 /* NetworkManageable.swift in Sources */,
 				FDBC1232286C983E00FCADF4 /* AccountInfoDTO.swift in Sources */,
 				37D1E509287716FA00A955C4 /* FileManagerUseCase.swift in Sources */,
+				FDD2267C287873730042F488 /* NSMutableData+Extension.swift in Sources */,
 				FDE18E1C2873596300A7369D /* GatherListInfo.swift in Sources */,
 				37AA7E1A2850B1B600B4B5C2 /* EligibleSexDTO.swift in Sources */,
 				37348B0C2866CA5E00C38F70 /* BorderButton.swift in Sources */,
