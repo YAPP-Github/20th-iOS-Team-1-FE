@@ -16,9 +16,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             return
         }
         
+        let networkManager = NetworkManager.shared
+        let profileRepository = ProfileRespository(networkManager: networkManager)
+        let keychain = KeychainQueryRequester()
+        let keychainProvider = KeychainProvider(keyChain: keychain)
+        let keychainUseCase = KeychainUsecase(keychainProvider: keychainProvider, networkManager: networkManager)
+        
         window = UIWindow(windowScene: windowScene)
         
-        appCoordinator = AppCoordinator(window: window)
+        appCoordinator = AppCoordinator(window: window, keychainUseCase: keychainUseCase, profileRepository: profileRepository)
         appCoordinator?.start()
     }
 }

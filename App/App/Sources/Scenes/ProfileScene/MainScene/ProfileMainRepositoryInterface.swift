@@ -10,5 +10,11 @@ import Foundation
 import RxSwift
 
 protocol ProfileMainRepositoryInterface {
-    func requestProfileInfo(nickname: String) -> Single<ProfileInfo>
+    func requestProfileInfo(accessToken: Data, nickname: String?) -> Single<ProfileInfo>
+}
+ 
+extension ProfileMainRepositoryInterface {
+    func requestProfileInfo(accessToken: Data) -> Single<ProfileInfo> {
+        requestProfileInfo(accessToken: accessToken, nickname: nil)
+    }
 }

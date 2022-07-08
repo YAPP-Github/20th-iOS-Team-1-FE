@@ -32,11 +32,13 @@ final class ProfileReactor: Reactor {
     }
     
     let initialState = State()
-    private let disposeBag = DisposeBag()
     private let profileMainRepository: ProfileMainRepositoryInterface
+    private let keychainUseCase: KeychainUseCaseInterface
+    private let disposeBag = DisposeBag()
     
-    init(profileMainRepository: ProfileMainRepositoryInterface) {
+    init(keychainUseCase: KeychainUseCaseInterface, profileMainRepository: ProfileMainRepositoryInterface) {
         self.profileMainRepository = profileMainRepository
+        self.keychainUseCase = keychainUseCase
     }
     
     func mutate(action: Action) -> Observable<Mutation> {
@@ -70,28 +72,34 @@ final class ProfileReactor: Reactor {
     
     private func getProfileInfo(nickname: String?) -> Observable<Mutation> {
         return Observable.create { [weak self] observer in
-            guard let self = self,
-                  let nickname = nickname else {
-                observer.onNext(Mutation.loadingProfile(false))
+            guard let self = self else {
                 return Disposables.create()
             }
-
-            self.profileMainRepository.requestProfileInfo(nickname: nickname)
-                .subscribe { result in
-                    switch result {
-                    case .success(let profileInfo):
-                        let myAccount = profileInfo.myPage
-                        guard let accountInfo = profileInfo.accountInfo,
-                              let petInfo = profileInfo.petInfos else {
-                            observer.onNext(Mutation.loadingProfile(false))
-                            return
-                        }
-                        observer.onNext(Mutation.readyToProfileInfo(ProfileInfo(myPage: myAccount, accountInfo: accountInfo, petInfos: petInfo)))
-                    case .failure(let error):
-                        print("RESULT FAILURE: ", error.localizedDescription)
+            
+            self.keychainUseCase.getAccessToken()
+                .subscribe(with: self,
+                   onSuccess: { this, token in
+                    this.profileMainRepository.requestProfileInfo(accessToken: token, nickname: nickname)
+                        .subscribe { result in
+                            switch result {
+                            case .success(let profileInfo):
+                                let myAccount = profileInfo.myPage
+                                guard let accountInfo = profileInfo.accountInfo,
+                                      let petInfo = profileInfo.petInfos else {
+                                    observer.onNext(Mutation.loadingProfile(false))
+                                    return
+                                }
+                                observer.onNext(Mutation.readyToProfileInfo(ProfileInfo(myPage: myAccount, accountInfo: accountInfo, petInfos: petInfo)))
+                            case .failure(let error):
+                                print("RESULT FAILURE: ", error.localizedDescription)
+                                observer.onNext(Mutation.loadingProfile(false))
+                            }
+                        }.disposed(by: self.disposeBag)
+                    },
+                   onFailure: { _,_ in
                         observer.onNext(Mutation.loadingProfile(false))
-                    }
-                }.disposed(by: self.disposeBag)
+                        return
+                   })
             return Disposables.create()
         }
     }
