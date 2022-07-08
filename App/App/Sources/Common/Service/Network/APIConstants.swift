@@ -15,6 +15,6 @@ struct APIConstants {
     static let GetGatherList = "/api/clubs"
     
     // MARK: My Page
-    static let GetMyPage = "/api/accounts/my-page/"
+    static let GetMyPage = "/api/accounts/my-page"
 
 }

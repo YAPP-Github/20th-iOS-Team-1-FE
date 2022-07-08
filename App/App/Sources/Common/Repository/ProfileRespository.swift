@@ -17,30 +17,30 @@ final class ProfileRespository: ProfileMainRepositoryInterface {
         self.networkManager = networkManager
     }
     
-    internal func requestProfileInfo(nickname: String) -> Single<ProfileInfo> {
+    internal func requestProfileInfo(accessToken: Data, nickname: String? = nil) -> Single<ProfileInfo> {
         return Single.create { [weak self] observer in
             guard let self = self else {
                 return Disposables.create()
             }
             
-            guard let url = URL(string: APIConstants.BaseURL + APIConstants.GetMyPage + "\(nickname)") else {
+            guard var urlComponents = URLComponents(string: APIConstants.BaseURL + APIConstants.GetMyPage) else {
                 return Disposables.create()
             }
                         
-            let keychain = KeychainQueryRequester()
-            let keychainProvider = KeychainProvider(keyChain: keychain)
-            guard let Token = try? keychainProvider.read(service: KeychainService.apple, account: KeychainAccount.accessToken) else {
-                print("토큰이 존재하지 않습니다.")
+            urlComponents.queryItems = [URLQueryItem(name: "nickname", value: nickname)]
+            
+            guard let url = urlComponents.url else {
                 return Disposables.create()
             }
-            let accessToken = "Bearer " + (String(data: Token, encoding: .utf8) ?? "")
+            
+            let accessToken = String(decoding: accessToken, as: UTF8.self).makePrefixBearer()
 
             var urlRequest = URLRequest(url: url)
             urlRequest.httpMethod = HTTPMethod.get
             urlRequest.addValue(accessToken, forHTTPHeaderField: "Authorization")
             urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
             urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
-
+            
             let response: Single<ProfileResponseDTO> = self.networkManager.requestDataTask(with: urlRequest)
             
             response.subscribe { result in
@@ -57,5 +57,4 @@ final class ProfileRespository: ProfileMainRepositoryInterface {
             return Disposables.create()
         }
     }
-
 }
