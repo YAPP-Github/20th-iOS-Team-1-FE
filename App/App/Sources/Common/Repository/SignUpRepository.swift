@@ -23,39 +23,41 @@ final class SignUpRepository: SignUpRepositoryInterface {
                 return Disposables.create()
             }
             
-            guard let dto = SignUpAccountDTO(user: user),
-                  let url = URL(string: "https://yapp-togather.com/api/accounts/sign-up"),
-                  let data = try? JSONEncoder().encode(dto) else {
+            guard let url = URL(string: "https://yapp-togather.com/api/accounts/sign-up") else {
                 return Disposables.create()
             }
             
-            let boundary = UUID().uuidString
+            let boundary = self.generateBoundaryString()
             let accessToken = String(decoding: accessToken, as: UTF8.self).makePrefixBearer()
-            let requestData = self.createRequestBody(imageData: user.profileImageData!, boundary: boundary, attachmentKey: "ImageFile", fileName: "aa.png")
-                  
+            
             var urlRequest = URLRequest(url: url)
             urlRequest.httpMethod = HTTPMethod.post
-            urlRequest.httpBody = requestData
             urlRequest.addValue(accessToken, forHTTPHeaderField: "Authorization")
-         //   urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
-         urlRequest.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-//
-//
-//            var data1 = Data()
-//
-//              // Add the image data to the raw http request data
-//              data1.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
-//
-//            if let image = user.profileImageData {
-//                data1.append("Content-Disposition: form-data; name=\"imageFile\"; filename=\"aa.png\"\r\n".data(using: .utf8)!)
-//                data1.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
-//                data1.append(image)
-//            }
-//              data1.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
-//
+            urlRequest.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
             
+            let formFields: [String: String] = ["nickname": user.nickName ?? "",
+                                                "age": String(user.age ?? 0),
+                                                "sex": user.sex ?? "MAN",
+                                                "city": user.bigCity ?? "서울시",
+                                                "detail": user.smallCity ?? "강남구"]
             
-            let response: Single<Int> = self.networkManager.requestUploadTask(with: urlRequest, data: data)
+            let httpBody = NSMutableData()
+
+            for (key, value) in formFields {
+                httpBody.appendString(self.convertFormField(named: key, value: value, using: boundary))
+            }
+
+            httpBody.append(self.convertFileData(fieldName: "imageFile",
+                                            fileName: "[PROXY]",
+                                            mimeType: "image/jpg",
+                                            fileData:  user.profileImageData ?? Data(),
+                                            using: boundary))
+
+            httpBody.appendString("--\(boundary)--")
+
+            urlRequest.httpBody = httpBody as Data
+
+            let response: Single<Int> = self.networkManager.requestDataTask(with: urlRequest)
             
             response.subscribe { result in
                 switch result {
@@ -70,16 +72,31 @@ final class SignUpRepository: SignUpRepositoryInterface {
             return Disposables.create()
         }
     }
-    func createRequestBody(imageData: Data, boundary: String, attachmentKey: String, fileName: String) -> Data{
-         let lineBreak = "\r\n"
-         var requestBody = Data()
+    
+    private func generateBoundaryString() -> String {
+        return "Boundary-\(UUID().uuidString)"
+    }
+    
+    func convertFormField(named name: String, value: String, using boundary: String) -> String {
+        var fieldString = "--\(boundary)\r\n"
+        fieldString += "Content-Disposition: form-data; name=\"\(name)\"\r\n"
+        fieldString += "\r\n"
+        fieldString += "\(value)\r\n"
+        
+        return fieldString
+      }
+    
+    func convertFileData(fieldName: String, fileName: String, mimeType: String, fileData: Data, using boundary: String) -> Data {
+        let data = NSMutableData()
+        data.appendString("--\(boundary)\r\n")
+        data.appendString("Content-Disposition: form-data; name=\"\(fieldName)\"; filename=\"\(fileName)\"\r\n")
+        data.appendString("Content-Type: \(mimeType)\r\n\r\n")
+        data.append(fileData)
+        data.appendString("\r\n")
+          
+        return data as Data
+      }
 
-         requestBody.append("\(lineBreak)--\(boundary + lineBreak)" .data(using: .utf8)!)
-         requestBody.append("Content-Disposition: form-data; name=\"\(attachmentKey)\"; filename=\"\(fileName)\"\(lineBreak)" .data(using: .utf8)!)
-         requestBody.append("Content-Type: image/png\(lineBreak + lineBreak)" .data(using: .utf8)!) // you can change the type accordingly if you want to
-         requestBody.append(imageData)
-         requestBody.append("\(lineBreak)--\(boundary)--\(lineBreak)" .data(using: .utf8)!)
-
-         return requestBody
-     }
+    
+    
 }

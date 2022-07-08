@@ -13,6 +13,8 @@ extension UIImageView {
             URLSession.shared.dataTask(with: url) { [weak self] data, _, _ in
                 if let data = data {
                     DispatchQueue.main.async {
+                        self?.clipsToBounds = true
+                        self?.layer.cornerRadius = 60
                         self?.image = UIImage(data: data)
                     }
                 }
