@@ -84,7 +84,7 @@ final class SignUpRepository: SignUpRepositoryInterface {
         fieldString += "\(value)\r\n"
         
         return fieldString
-      }
+    }
     
     func convertFileData(fieldName: String, fileName: String, mimeType: String, fileData: Data, using boundary: String) -> Data {
         let data = NSMutableData()
@@ -95,8 +95,5 @@ final class SignUpRepository: SignUpRepositoryInterface {
         data.appendString("\r\n")
           
         return data as Data
-      }
-
-    
-    
+    }
 }
