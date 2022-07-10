@@ -8,6 +8,7 @@
 import Foundation
 
 struct GatherConfigurationForSheetResponseDTO: Codable {
+    let clubId: Int
     let category: String
     let title: String
     let startDate: String
@@ -25,6 +26,7 @@ struct GatherConfigurationForSheetResponseDTO: Codable {
     
     func toDomain() -> GatherConfigurationForSheet {
         return GatherConfigurationForSheet(
+            clubID: clubId,
             category: category,
             title: title,
             meetingPlace: meetingPlace,

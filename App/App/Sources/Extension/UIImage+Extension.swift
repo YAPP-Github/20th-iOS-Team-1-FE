@@ -29,8 +29,14 @@ extension UIImage {
         static let plus                = UIImage(systemName: "plus")!
         static let userDefaultProfile  = UIImage(named: "userDefaultProfile")!
         static let petDefaultProfile   = UIImage(named: "petDefaultProfile")!
+        static let xmark               = UIImage(systemName: "xmark")
+        static let dofCafeButton       = UIImage(named: "dofCafeButton")!
+        static let dogRestaurantButton = UIImage(named: "dogRestaurantButton")!
+        static let playgroundButton    = UIImage(named: "playgroundButton")!
+        static let walkButton          = UIImage(named: "walkButton")!
+        static let fairButton          = UIImage(named: "fairButton")!
+        static let etcButton           = UIImage(named: "etcButton")!
         
-        static let xmark              = UIImage(systemName: "xmark")
         static let defaultWalkMapViewAnnotation = UIImage(named: "defaultWalkMapViewAnnotation")!
         static let defaultDogCafeMapViewAnnotation = UIImage(named: "defaultDogCafeMapViewAnnotation")!
         static let defaultDogRestaurantMapviewAnnotation = UIImage(named: "defaultDogRestaurantMapviewAnnotation")!

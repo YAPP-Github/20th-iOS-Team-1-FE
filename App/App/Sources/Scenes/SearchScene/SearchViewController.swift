@@ -45,7 +45,7 @@ final class SearchViewController: BaseViewController {
     
     private lazy var gatherInformationBottomSheetHeightConstraint: NSLayoutConstraint = {
         let constraint = bottomSheet.heightAnchor.constraint(equalToConstant: 0)
-
+        
         constraint.isActive = true
         
         return constraint
@@ -69,7 +69,7 @@ final class SearchViewController: BaseViewController {
         
         return button
     }()
-        
+    
     private lazy var addCloseBarButtonItem: UIBarButtonItem = {
         let barButtonItem = UIBarButtonItem(
             image: UIImage.Togaether.xmark,
@@ -144,6 +144,14 @@ final class SearchViewController: BaseViewController {
         return imageView
     }()
     
+    private var isAddressConvertRequestPossible: Bool = true
+    private var mapType: MapType = .search
+    
+    private enum MapType {
+        case search
+        case add
+    }
+    
     var disposeBag = DisposeBag()
     
     init(reactor: SearchReactor, locationManager: CLLocationManager) {
@@ -164,9 +172,6 @@ final class SearchViewController: BaseViewController {
         configureUI()
         configureLocationManager()
         
-        if let reactor = reactor {
-            bind(reactor: reactor)
-        }
     }
     
     private func addSubviews() {
@@ -241,7 +246,7 @@ final class SearchViewController: BaseViewController {
     }
     
     private func configureUI() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .Togaether.background
         
         navigationController?.navigationBar.isHidden = true
     }
@@ -259,6 +264,10 @@ final class SearchViewController: BaseViewController {
     
     private func bindAction(with reactor: SearchReactor) {
         disposeBag.insert(
+            searchButton.rx.throttleTap
+                .map { Reactor.Action.searchButtonTapped }
+                .bind(to: reactor.action),
+            
             currentLocationButton.rx.throttleTap
                 .bind { [unowned self] in
                     self.moveToCurrentLocation()
@@ -285,7 +294,7 @@ final class SearchViewController: BaseViewController {
                 .bind(to: reactor.action),
             
             mapView.rx.didChangeVisibleRegion
-                .throttle(.seconds(2), scheduler: MainScheduler.instance)
+                .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
                 .bind { [unowned self] in
                     let coordinate = mapView.selectedCoordinate(point: self.selectLocationPinImageView.center)
                     convertToAddressWith(
@@ -335,6 +344,7 @@ final class SearchViewController: BaseViewController {
     }
     
     private func addButtonTouched() {
+        mapType = .add
         navigationController?.navigationBar.isHidden = false
         navigationItem.rightBarButtonItem = addCloseBarButtonItem
         navigationItem.title = "반려견 모임 생성"
@@ -347,48 +357,54 @@ final class SearchViewController: BaseViewController {
     }
     
     private func createGatherCloseButtonTouched() {
+        mapType = .search
         self.navigationController?.navigationBar.isHidden = true
+        navigationItem.title = nil
         searchButton.isHidden = false
         addButon.isHidden = false
         gatherInformationBottomSheetHeightConstraint.constant = 0
         bottomSheetContentView.isHidden = true
         setLocationBottomSheet.isHidden = true
         selectLocationPinImageView.isHidden = true
+        view.setNeedsLayout()
     }
     
     func convertToAddressWith(coordinate: CLLocation) {
         let geocoder = CLGeocoder()
         let locale = Locale(identifier: "Ko-kr")
-        geocoder.reverseGeocodeLocation(coordinate, preferredLocale: locale, completionHandler: {(placemarks, error) in
-            print(placemarks)
-            if let address: [CLPlacemark] = placemarks {
-                var gatherAddress: [String] = []
-                
-                if let province = address.last?.administrativeArea {
-                    gatherAddress.append(province)
+        if isAddressConvertRequestPossible {
+            isAddressConvertRequestPossible = false
+            geocoder.reverseGeocodeLocation(coordinate, preferredLocale: locale, completionHandler: {(placemarks, error) in
+                if let address: [CLPlacemark] = placemarks {
+                    var gatherAddress: [String] = []
+                    
+                    if let province = address.last?.administrativeArea {
+                        gatherAddress.append(province)
+                    }
+                    
+                    if let locality = address.last?.locality {
+                        gatherAddress.append(locality)
+                    }
+                    
+                    if let subLocality = address.last?.subLocality {
+                        gatherAddress.append(subLocality)
+                    }
+                    
+                    if let street = address.last?.thoroughfare, street != gatherAddress.last {
+                        gatherAddress.append(street)
+                    }
+                    
+                    if let subStreet = address.last?.subThoroughfare {
+                        gatherAddress.append(subStreet)
+                    }
+                    
+                    self.isAddressConvertRequestPossible = true
+                    DispatchQueue.main.async {
+                        self.addressLabel.text = gatherAddress.joined(separator: " ")
+                    }
                 }
-                
-                if let locality = address.last?.locality {
-                    gatherAddress.append(locality)
-                }
-                
-                if let subLocality = address.last?.subLocality {
-                    gatherAddress.append(subLocality)
-                }
-                
-                if let street = address.last?.thoroughfare, street != gatherAddress.last {
-                    gatherAddress.append(street)
-                }
-                
-                if let subStreet = address.last?.subThoroughfare {
-                    gatherAddress.append(subStreet)
-                }
-                
-                DispatchQueue.main.async {
-                    self.addressLabel.text = gatherAddress.joined(separator: " ")
-                }
-            }
-        })
+            })
+        }
     }
 }
 
@@ -415,7 +431,7 @@ extension SearchViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        if view.annotation is MKUserLocation {
+        if view.annotation is MKUserLocation || mapType == .add {
             mapView.deselectAnnotation(view.annotation, animated: false)
         }
         else if let view = view as? AnnotationView,
@@ -443,11 +459,13 @@ extension SearchViewController: MKMapViewDelegate {
         guard let view = view as? AnnotationView
         else { return }
         
-        view.deselect()
-        UIView.animate(withDuration: 0.2, animations: {
-            self.gatherInformationBottomSheetHeightConstraint.constant = 0
-            self.bottomSheetContentView.isHidden = true
-            self.view.layoutIfNeeded()
-        })
+        if mapType == .search {
+            view.deselect()
+            UIView.animate(withDuration: 0.2, animations: {
+                self.gatherInformationBottomSheetHeightConstraint.constant = 0
+                self.bottomSheetContentView.isHidden = true
+                self.view.layoutIfNeeded()
+            })
+        }
     }
 }
