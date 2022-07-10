@@ -12,6 +12,12 @@
 		294A0C182873A47A00D1CEB3 /* PetSizeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A0C172873A47A00D1CEB3 /* PetSizeType.swift */; };
 		294A0C1A2873A49500D1CEB3 /* ClubStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A0C192873A49500D1CEB3 /* ClubStatus.swift */; };
 		294A0C1C2874783000D1CEB3 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A0C1B2874783000D1CEB3 /* UILabel+Extension.swift */; };
+		294A0C1E287963F000D1CEB3 /* SearchGatherReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A0C1D287963F000D1CEB3 /* SearchGatherReactor.swift */; };
+		294A0C20287964DA00D1CEB3 /* SearchGatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A0C1F287964DA00D1CEB3 /* SearchGatherViewController.swift */; };
+		294A0C23287B048600D1CEB3 /* CALayer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A0C22287B048600D1CEB3 /* CALayer+Extension.swift */; };
+		294A0C25287B081300D1CEB3 /* GatherSearchTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A0C24287B081300D1CEB3 /* GatherSearchTextFieldView.swift */; };
+		294A0C29287B085800D1CEB3 /* CategorySelectButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A0C28287B085800D1CEB3 /* CategorySelectButtonView.swift */; };
+		294A0C2B287B089000D1CEB3 /* CategorySelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A0C2A287B089000D1CEB3 /* CategorySelectView.swift */; };
 		29AE222D284B7DAA00EDF34B /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE222B284B7DAA00EDF34B /* SearchViewController.swift */; };
 		29AE222E284B7DAA00EDF34B /* SearchReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE222C284B7DAA00EDF34B /* SearchReactor.swift */; };
 		29AE2232284B7F1100EDF34B /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE2231284B7F1100EDF34B /* UIView+Extension.swift */; };
@@ -217,6 +223,12 @@
 		294A0C172873A47A00D1CEB3 /* PetSizeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetSizeType.swift; sourceTree = "<group>"; };
 		294A0C192873A49500D1CEB3 /* ClubStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubStatus.swift; sourceTree = "<group>"; };
 		294A0C1B2874783000D1CEB3 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
+		294A0C1D287963F000D1CEB3 /* SearchGatherReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGatherReactor.swift; sourceTree = "<group>"; };
+		294A0C1F287964DA00D1CEB3 /* SearchGatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGatherViewController.swift; sourceTree = "<group>"; };
+		294A0C22287B048600D1CEB3 /* CALayer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extension.swift"; sourceTree = "<group>"; };
+		294A0C24287B081300D1CEB3 /* GatherSearchTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherSearchTextFieldView.swift; sourceTree = "<group>"; };
+		294A0C28287B085800D1CEB3 /* CategorySelectButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectButtonView.swift; sourceTree = "<group>"; };
+		294A0C2A287B089000D1CEB3 /* CategorySelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectView.swift; sourceTree = "<group>"; };
 		29AE222B284B7DAA00EDF34B /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		29AE222C284B7DAA00EDF34B /* SearchReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchReactor.swift; sourceTree = "<group>"; };
 		29AE2231284B7F1100EDF34B /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
@@ -429,6 +441,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		294A0C2128796A6E00D1CEB3 /* SearchGatherScene */ = {
+			isa = PBXGroup;
+			children = (
+				294A0C27287B081F00D1CEB3 /* View */,
+				294A0C1F287964DA00D1CEB3 /* SearchGatherViewController.swift */,
+				294A0C1D287963F000D1CEB3 /* SearchGatherReactor.swift */,
+			);
+			path = SearchGatherScene;
+			sourceTree = "<group>";
+		};
+		294A0C27287B081F00D1CEB3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				294A0C24287B081300D1CEB3 /* GatherSearchTextFieldView.swift */,
+				294A0C28287B085800D1CEB3 /* CategorySelectButtonView.swift */,
+				294A0C2A287B089000D1CEB3 /* CategorySelectView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		29AE222A284B7CEC00EDF34B /* SearchScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -439,6 +471,7 @@
 				29AE22512869E47100EDF34B /* MapViewAnnotation.swift */,
 				29AE222C284B7DAA00EDF34B /* SearchReactor.swift */,
 				29AE2235284B867300EDF34B /* SearchCoordinator.swift */,
+				294A0C2128796A6E00D1CEB3 /* SearchGatherScene */,
 			);
 			path = SearchScene;
 			sourceTree = "<group>";
@@ -861,6 +894,7 @@
 				29AE2231284B7F1100EDF34B /* UIView+Extension.swift */,
 				37479B9E283EAE140078386E /* UIImage+Extension.swift */,
 				37479BA0283EBB220078386E /* UIButton+Extension.swift */,
+				294A0C22287B048600D1CEB3 /* CALayer+Extension.swift */,
 				29AE223E284DC1B500EDF34B /* CLLocationCoordinate2D+Extension.swift */,
 				29AE2245284E02EB00EDF34B /* MKCoordinateRegion+Extension.swift */,
 				29AE2247284E031C00EDF34B /* MKCoordinateSpan+Extension.swift */,
@@ -1306,6 +1340,7 @@
 				37912C9A281447C40087B95E /* Array+Extension.swift in Sources */,
 				29AE2258286F2FB400EDF34B /* GatherRepository.swift in Sources */,
 				3719183B286E184F00169FC2 /* GuideView.swift in Sources */,
+				294A0C20287964DA00D1CEB3 /* SearchGatherViewController.swift in Sources */,
 				3734CEAE2869E7E700EEF38D /* SignUpAccountDTO.swift in Sources */,
 				3743809D284FDB5300CB02A5 /* ExceptionResponseInfoDTO.swift in Sources */,
 				FD5AEE8E286E265700001838 /* AccountInfo.swift in Sources */,
@@ -1318,6 +1353,7 @@
 				3749903D287723C700D07211 /* ContentResponseDTO.swift in Sources */,
 				29AE224A284E0A2F00EDF34B /* LocationManager.swift in Sources */,
 				37AC310828493367003C3FA2 /* ContourView.swift in Sources */,
+				294A0C25287B081300D1CEB3 /* GatherSearchTextFieldView.swift in Sources */,
 				37479B9B283E763B0078386E /* UIColor+Extension.swift in Sources */,
 				374380AD284FE05100CB02A5 /* SearchingClubDTO.swift in Sources */,
 				37AA7E182850B19D00B4B5C2 /* PetSizeTypeDTO.swift in Sources */,
@@ -1363,6 +1399,7 @@
 				37C3F4ED284BF4380006CB02 /* KeychainProvidable.swift in Sources */,
 				378F348F281DC0770063CE4F /* ProfileCoordinator.swift in Sources */,
 				376006C82848A16400B27015 /* RegularExpressionValidatable.swift in Sources */,
+				294A0C1E287963F000D1CEB3 /* SearchGatherReactor.swift in Sources */,
 				FDFD017228735DBB00C625B1 /* GatherConfigurationForSheetResponseDTO.swift in Sources */,
 				29AE223D284D71DC00EDF34B /* LocationManageable.swift in Sources */,
 				29AE223D284D71DC00EDF34B /* LocationManageable.swift in Sources */,
@@ -1386,6 +1423,7 @@
 				37AA7E212851FCA200B4B5C2 /* Authentification.swift in Sources */,
 				37AA7E162850B17600B4B5C2 /* EligibleBreedDTO.swift in Sources */,
 				3734CEAA2869E70C00EEF38D /* SignUpRepositoryInterface.swift in Sources */,
+				294A0C23287B048600D1CEB3 /* CALayer+Extension.swift in Sources */,
 				37C3F4FC284C7D8B0006CB02 /* KeychainError.swift in Sources */,
 				37AA7E142850B15800B4B5C2 /* CategoryDTO.swift in Sources */,
 				FDBC122C286C328C00FCADF4 /* ProfileInfo.swift in Sources */,
@@ -1437,6 +1475,7 @@
 				37F67CC5286A1C270073FE8C /* AuthCoordinator.swift in Sources */,
 				378F3486281DBE210063CE4F /* ProfileViewController.swift in Sources */,
 				29AE2256286F2DDF00EDF34B /* MKMapView+Extension.swift in Sources */,
+				294A0C2B287B089000D1CEB3 /* CategorySelectView.swift in Sources */,
 				37DA2521287317EE002E4D67 /* DetailGatherReactor.swift in Sources */,
 				FDBC12042866858900FCADF4 /* ProfileContentView.swift in Sources */,
 				378F348B281DC0560063CE4F /* GatherListCoordinator.swift in Sources */,
@@ -1462,6 +1501,7 @@
 				37AA7E1A2850B1B600B4B5C2 /* EligibleSexDTO.swift in Sources */,
 				37348B0C2866CA5E00C38F70 /* BorderButton.swift in Sources */,
 				37AC3106284930E6003C3FA2 /* SignUpInfomationReactor.swift in Sources */,
+				294A0C29287B085800D1CEB3 /* CategorySelectButtonView.swift in Sources */,
 				FDBC1226286C309C00FCADF4 /* ProfileRespository.swift in Sources */,
 				37DA2520287317EE002E4D67 /* DetailGatherViewController.swift in Sources */,
 				37C14518284DC94A00D11CC3 /* NetworkError.swift in Sources */,

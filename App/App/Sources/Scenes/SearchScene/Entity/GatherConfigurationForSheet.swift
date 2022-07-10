@@ -8,6 +8,7 @@
 import Foundation
 
 struct GatherConfigurationForSheet: Equatable {
+    var clubID: Int
     var category: GatherCategory
     var title, meetingPlace: String
     var startDate, endDate: Date
@@ -20,6 +21,7 @@ struct GatherConfigurationForSheet: Equatable {
     var clubStatus: ClubStatus
     
     init(
+        clubID: Int,
         category: String,
         title: String,
         meetingPlace: String,
@@ -33,6 +35,7 @@ struct GatherConfigurationForSheet: Equatable {
         distance: Int,
         clubStatus: String
     ) {
+        self.clubID = clubID
         self.category = GatherCategory(rawValue: category) ?? .walk
         self.title = title
         self.meetingPlace = meetingPlace
