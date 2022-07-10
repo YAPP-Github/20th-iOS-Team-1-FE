@@ -11,43 +11,22 @@ import RxSwift
 
 final class AppCoordinator: Coordinator {
     private let window: UIWindow?
-    private let keychainUseCase: KeychainUseCaseInterface
-    private let profileRepository: ProfileMainRepositoryInterface
     private let disposeBag = DisposeBag()
     weak var parentCoordinator: Coordinator?
     var childCoordinators = [Coordinator]()
-
-    init(window: UIWindow?, keychainUseCase: KeychainUseCaseInterface, profileRepository: ProfileMainRepositoryInterface) {
+    var isLoggedIn: Bool
+    
+    init(window: UIWindow?, isLoggedIn: Bool) {
         self.window = window
-        self.keychainUseCase = keychainUseCase
-        self.profileRepository = profileRepository
+        self.isLoggedIn = isLoggedIn
     }
     
     func start() {
-        keychainUseCase.getAccessToken()
-            .subscribe(with: self,
-               onSuccess: { this, token in
-                this.profileRepository.requestProfileInfo(accessToken: token)
-                    .observe(on: MainScheduler.instance)
-                    .subscribe { result in
-                        switch result {
-                        case .success(let profileInfo):
-                            guard let _ = profileInfo.accountInfo,
-                                  let _ = profileInfo.petInfos else {
-                                this.moveToAuth()
-                                return
-                            }
-                            
-                            this.moveToTabBar()
-                    
-                        case .failure(let _):
-                            this.moveToAuth()
-                        }
-                    }.disposed(by: this.disposeBag)
-                },
-               onFailure: { _,_ in
-                self.moveToAuth()
-        })
+        if isLoggedIn {
+            moveToTabBar()
+        } else {
+            moveToAuth()
+        }
     }
 
     private func moveToAuth() {
@@ -67,6 +46,7 @@ final class AppCoordinator: Coordinator {
 
 extension AppCoordinator: AuthCoordinatorDelegate {
     func switchToTabBar() {
+        isLoggedIn = true
         childCoordinators.removeAll()
         moveToTabBar()
     }
@@ -74,6 +54,7 @@ extension AppCoordinator: AuthCoordinatorDelegate {
 
 extension AppCoordinator: TabBarCoordinatorDelegate {
     func switchToAuth() {
+        isLoggedIn = false 
         childCoordinators.removeAll()
         moveToAuth()
     }

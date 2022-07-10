@@ -80,11 +80,12 @@ final class LoginReactor: Reactor {
     private func getAppleCrendential(for authorization: ASAuthorization) -> AppleCredential? {
         guard let crendential = authorization.credential as? ASAuthorizationAppleIDCredential,
               let code = crendential.authorizationCode,
-              let token = crendential.identityToken else {
+              let token = crendential.identityToken,
+              let email = crendential.email else {
             return nil
         }
         
-        let appleCredential = AppleCredential(authorizationCode: code, identityToken: token)
+        let appleCredential = AppleCredential(authorizationCode: code, identityToken: token, email: email)
         
         return appleCredential
     }
