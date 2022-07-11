@@ -15,6 +15,7 @@ final class SearchCoordinator: SceneCoordinator {
     var navigationController: UINavigationController
     var childCoordinators = [Coordinator]()
     var disposeBag = DisposeBag()
+    let locationManger = CLLocationManager()
     
     init(navigationController: UINavigationController = .init()) {
         self.navigationController = navigationController
@@ -24,7 +25,6 @@ final class SearchCoordinator: SceneCoordinator {
         //TODO: KeyChainProvider
         let gatherRepository = GatherRepository(networkManager: NetworkManager.shared)
         let searchReactor = SearchReactor(gatherRepository: gatherRepository)
-        let locationManger = CLLocationManager()
         let viewController = SearchViewController(reactor: searchReactor, locationManager: locationManger)
         
         searchReactor.readyToCreateGather
@@ -49,7 +49,7 @@ final class SearchCoordinator: SceneCoordinator {
     func pushSearchGatherViewController() {
         let gatherRepository = GatherRepository(networkManager: NetworkManager.shared)
         let searchGatherReactor = SearchGatherReactor(gatherRepository: gatherRepository)
-        let searchGathreViewController = SearchGatherViewController(reactor: searchGatherReactor)
+        let searchGathreViewController = SearchGatherViewController(reactor: searchGatherReactor, locationManager: locationManger)
         
         //Do Something
         

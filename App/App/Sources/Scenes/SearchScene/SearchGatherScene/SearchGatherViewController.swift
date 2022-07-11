@@ -5,12 +5,14 @@
 //  Created by 유한준 on 2022/07/09.
 //
 
+import CoreLocation
 import UIKit
 
 import ReactorKit
 import RxSwift
 
 final class SearchGatherViewController: BaseViewController {
+    private let locationManager: CLLocationManager!
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -50,7 +52,8 @@ final class SearchGatherViewController: BaseViewController {
     
     var disposeBag = DisposeBag()
     
-    init(reactor: SearchGatherReactor) {
+    init(reactor: SearchGatherReactor, locationManager: CLLocationManager) {
+        self.locationManager = locationManager
         super.init(nibName: nil, bundle: nil)
         self.reactor = reactor
     }
@@ -168,7 +171,7 @@ final class SearchGatherViewController: BaseViewController {
                 .bind(to: reactor.action)
             
             gatherSearchTextFieldView.textField.rx.controlEvent(.editingDidEndOnExit)
-                .map { Reactor.Action.textFieldEditingDidEndOnExit }
+                .map { Reactor.Action.textFieldEditingDidEndOnExit(self.locationManager.location) }
                 .bind(to: reactor.action)
         }
     }

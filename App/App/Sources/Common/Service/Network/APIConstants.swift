@@ -16,5 +16,11 @@ struct APIConstants {
     
     // MARK: My Page
     static let GetMyPage = "/api/accounts/my-page"
-
+    
+    // MARK: Search
+    static let GetSearch = "/api/clubs/search"
+    
+    static let Range = "/range"
+    
+    static let Simple = "/simple"
 }
