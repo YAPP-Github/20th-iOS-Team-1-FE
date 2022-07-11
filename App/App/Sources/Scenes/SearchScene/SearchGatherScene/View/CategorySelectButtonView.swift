@@ -74,6 +74,6 @@ final class CategorySelectButtonView: UIView {
     }
     
     private func configureUI() {
-        self.backgroundColor = UIColor.Togaether.secondaryButton
+        self.backgroundColor = UIColor.Togaether.divider
     }
 }
