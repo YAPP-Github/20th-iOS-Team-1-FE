@@ -12,7 +12,8 @@ import RxSwift
 
 final class SearchGatherReactor: Reactor {
     enum Action {
-        case textFieldDidEndEditing(String)
+        case textFieldEditingChanged(String)
+        case textFieldEditingDidEndOnExit
     }
     
     enum Mutation {
@@ -35,8 +36,12 @@ final class SearchGatherReactor: Reactor {
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
             
-        case let .textFieldDidEndEditing(keyword):
+        case let .textFieldEditingChanged(keyword):
             return Observable.just(.updateKeyword(keyword))
+            
+        case .textFieldEditingDidEndOnExit:
+            // TODO: keyword 던지기
+            return .never()
         }
     }
     
