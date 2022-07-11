@@ -12,8 +12,8 @@ import RxCocoa
 
 final class ProfileViewController: BaseViewController {
     var disposeBag = DisposeBag()
-    let nickName: String? = "qqqq" // 임시
-        
+    var nickName = ""
+    
     private lazy var scrollView = UIScrollView()
     private lazy var contentView = UIView()
     private lazy var profileContentView = ProfileContentView()

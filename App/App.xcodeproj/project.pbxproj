@@ -171,6 +171,7 @@
 		FD5AEE8C286DDD7000001838 /* AddPetReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5AEE8B286DDD7000001838 /* AddPetReactor.swift */; };
 		FD5AEE8E286E265700001838 /* AccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5AEE8D286E265700001838 /* AccountInfo.swift */; };
 		FD5AEE90286E266800001838 /* PetInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5AEE8F286E266800001838 /* PetInfo.swift */; };
+		FD7E2554287C18AC008E9E24 /* PetSizeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7E2553287C18AC008E9E24 /* PetSizeButton.swift */; };
 		FD8191582871E2CC00B49961 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8191572871E2CC00B49961 /* UIImageView+Extension.swift */; };
 		FD8AD7052851E26200454AC3 /* GatherListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8AD7042851E26200454AC3 /* GatherListTableView.swift */; };
 		FD8AD7072851E28000454AC3 /* GatherListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8AD7062851E28000454AC3 /* GatherListCell.swift */; };
@@ -196,6 +197,7 @@
 		FDD2266F2875F4840042F488 /* TagCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD2266E2875F4840042F488 /* TagCollectionView.swift */; };
 		FDD226712875F4900042F488 /* TagCollectionViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD226702875F4900042F488 /* TagCollectionViewReactor.swift */; };
 		FDD2267C287873730042F488 /* NSMutableData+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD2267B287873730042F488 /* NSMutableData+Extension.swift */; };
+		FDD22684287A5C560042F488 /* AddPetContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD22683287A5C560042F488 /* AddPetContentView.swift */; };
 		FDE18E182873586C00A7369D /* GatherListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE18E172873586C00A7369D /* GatherListRepository.swift */; };
 		FDE18E1C2873596300A7369D /* GatherListInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE18E1B2873596300A7369D /* GatherListInfo.swift */; };
 		FDE18E1F2873598E00A7369D /* GatherListRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE18E1E2873598E00A7369D /* GatherListRepositoryInterface.swift */; };
@@ -377,6 +379,7 @@
 		FD5AEE8B286DDD7000001838 /* AddPetReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPetReactor.swift; sourceTree = "<group>"; };
 		FD5AEE8D286E265700001838 /* AccountInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInfo.swift; sourceTree = "<group>"; };
 		FD5AEE8F286E266800001838 /* PetInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetInfo.swift; sourceTree = "<group>"; };
+		FD7E2553287C18AC008E9E24 /* PetSizeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetSizeButton.swift; sourceTree = "<group>"; };
 		FD8191572871E2CC00B49961 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		FD8AD7042851E26200454AC3 /* GatherListTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListTableView.swift; sourceTree = "<group>"; };
 		FD8AD7062851E28000454AC3 /* GatherListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListCell.swift; sourceTree = "<group>"; };
@@ -402,6 +405,7 @@
 		FDD2266E2875F4840042F488 /* TagCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionView.swift; sourceTree = "<group>"; };
 		FDD226702875F4900042F488 /* TagCollectionViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewReactor.swift; sourceTree = "<group>"; };
 		FDD2267B287873730042F488 /* NSMutableData+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableData+Extension.swift"; sourceTree = "<group>"; };
+		FDD22683287A5C560042F488 /* AddPetContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPetContentView.swift; sourceTree = "<group>"; };
 		FDE18E172873586C00A7369D /* GatherListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListRepository.swift; sourceTree = "<group>"; };
 		FDE18E1B2873596300A7369D /* GatherListInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListInfo.swift; sourceTree = "<group>"; };
 		FDE18E1E2873598E00A7369D /* GatherListRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListRepositoryInterface.swift; sourceTree = "<group>"; };
@@ -730,6 +734,7 @@
 				37348B0B2866CA5E00C38F70 /* BorderButton.swift */,
 				3719183A286E184F00169FC2 /* GuideView.swift */,
 				37DA252228732816002E4D67 /* Divider.swift */,
+				FD7E2553287C18AC008E9E24 /* PetSizeButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1109,6 +1114,7 @@
 			children = (
 				FD5AEE87286DDC3600001838 /* AddPetViewController.swift */,
 				FD5AEE8B286DDD7000001838 /* AddPetReactor.swift */,
+				FDD22683287A5C560042F488 /* AddPetContentView.swift */,
 			);
 			path = AddPetScene;
 			sourceTree = "<group>";
@@ -1436,6 +1442,7 @@
 				3773708C2841DE6D00D5CCB6 /* UserAccount.swift in Sources */,
 				FDE6F14C285234A3005E4783 /* NSObject+Extension.swift in Sources */,
 				374F41D52864E9490074F04B /* KeychainService.swift in Sources */,
+				FDD22684287A5C560042F488 /* AddPetContentView.swift in Sources */,
 				FDBC1229286C31D200FCADF4 /* ProfileMainRepositoryInterface.swift in Sources */,
 				37605DF92839FDB300394929 /* ASAuthorizationController+Rx.swift in Sources */,
 				374380A7284FDD8A00CB02A5 /* SocialTypeDTO.swift in Sources */,
@@ -1489,6 +1496,7 @@
 				29AE22522869E47100EDF34B /* MapViewAnnotation.swift in Sources */,
 				3743809F284FDBB600CB02A5 /* SignInResponseDTO.swift in Sources */,
 				378F347A281DBDF10063CE4F /* LoginViewController.swift in Sources */,
+				FD7E2554287C18AC008E9E24 /* PetSizeButton.swift in Sources */,
 				29AE2244284DF18200EDF34B /* Coordinate.swift in Sources */,
 				3719183E286E235E00169FC2 /* SignUpPrivacyPolicyViewController.swift in Sources */,
 				29AE2236284B867300EDF34B /* SearchCoordinator.swift in Sources */,
@@ -1684,6 +1692,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1715,6 +1724,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
