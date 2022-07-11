@@ -64,8 +64,12 @@ final class SearchGatherViewController: BaseViewController {
         super.viewDidLoad()
         addSubviews()
         configureLayout()
-        configureUI()
         configureKeyboardNotification()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureUI()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -160,7 +164,11 @@ final class SearchGatherViewController: BaseViewController {
             gatherSearchTextFieldView.textField.rx.text
                 .orEmpty
                 .distinctUntilChanged()
-                .map {Reactor.Action.textFieldDidEndEditing($0)}
+                .map { Reactor.Action.textFieldEditingChanged($0) }
+                .bind(to: reactor.action)
+            
+            gatherSearchTextFieldView.textField.rx.controlEvent(.editingDidEndOnExit)
+                .map { Reactor.Action.textFieldEditingDidEndOnExit }
                 .bind(to: reactor.action)
         }
     }
