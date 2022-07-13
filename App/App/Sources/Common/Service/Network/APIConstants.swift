@@ -23,4 +23,7 @@ struct APIConstants {
     static let Range = "/range"
     
     static let Simple = "/simple"
+
+    static let comment = "api/comments"
+    
 }

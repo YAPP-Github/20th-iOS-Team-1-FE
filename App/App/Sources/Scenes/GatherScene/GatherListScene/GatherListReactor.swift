@@ -28,9 +28,11 @@ final class GatherListReactor: Reactor {
     
     private let disposeBag = DisposeBag()
     private let gatherListRepository: GatherListRepositoryInterface
+    private let keychainUseCase: KeychainUseCaseInterface
     
-    init(gatherListRepository: GatherListRepositoryInterface) {
+    init(gatherListRepository: GatherListRepositoryInterface, keychainUseCase: KeychainUseCaseInterface) {
         self.gatherListRepository = gatherListRepository
+        self.keychainUseCase = keychainUseCase
     }
     
     let initialState = State()
@@ -38,7 +40,11 @@ final class GatherListReactor: Reactor {
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .segmentIndex(index: let index):
-            return getGatherList(index)
+            guard let gatherCondition = Gather.init(rawValue: index) else {
+                return Observable.empty()
+            }
+            
+            return getGatherList(gatherCondition)
         case .gatherListCellDidTap(clubID: let clubID):
             return Observable.just(Mutation.readyToProceedDetailGatherView(clubID))
         }
@@ -59,25 +65,31 @@ final class GatherListReactor: Reactor {
     }
     
     
-    private func getGatherList(_ index: Int) -> Observable<Mutation> {
+    private func getGatherList(_ gather: Gather) -> Observable<Mutation> {
         return Observable.create { [weak self] observer in
             guard let self = self else {
                 return Disposables.create()
             }
-
-            self.gatherListRepository.requestGatherList(club: index)
-                .subscribe { result in
-                    switch result {
-                    case .success(let gatherListInfo):
-                        let hasNotClub = gatherListInfo.hasNotClub
-                        guard let clubInfo = gatherListInfo.clubInfos?.content else {
-                            return
+            
+            self.keychainUseCase.getAccessToken()
+                .subscribe(with: self,
+                   onSuccess: { this, token in
+                    
+                    
+                    
+                    this.gatherListRepository.requestGatherList(lastID: nil, endDate: nil, gatherCondition: gather, accessToken: token)
+                        .subscribe { result in
+                        switch result {
+                        case .success(let gatherListInfo):
+                            observer.onNext(Mutation.readyToListInfo(GatherListInfo(hasNotClub: gatherListInfo.hasNotClub, clubInfos: gatherListInfo.clubInfos)))
+                        case .failure(let error):
+                            print("RESULT FAILURE: ", error.localizedDescription)
                         }
-                        observer.onNext(Mutation.readyToListInfo(GatherListInfo(hasNotClub: gatherListInfo.hasNotClub, clubInfos: gatherListInfo.clubInfos)))
-                    case .failure(let error):
-                        print("RESULT FAILURE: ", error.localizedDescription)
-                    }
-                }.disposed(by: self.disposeBag)
+                    }.disposed(by: self.disposeBag)
+                },
+                onFailure: { _,_ in
+                     return
+                }).disposed(by: self.disposeBag)
             return Disposables.create()
         }
     }

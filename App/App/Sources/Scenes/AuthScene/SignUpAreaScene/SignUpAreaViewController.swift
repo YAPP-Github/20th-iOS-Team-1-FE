@@ -205,9 +205,8 @@ final class SignUpAreaViewController: BaseViewController {
         disposeBag.insert {
             reactor.state
                 .map { $0.bigCityList }
-                .asDriver(onErrorJustReturn: [])
-                .drive(bigCityPickerView.rx.itemTitles) { (row, element) in return element }
-
+                .bind(to: bigCityPickerView.rx.itemTitles) { (row, element) in return element }
+            
             reactor.state
                 .map { $0.selectedBigCity }
                 .distinctUntilChanged()
@@ -216,8 +215,7 @@ final class SignUpAreaViewController: BaseViewController {
             
             reactor.state
                 .map { $0.smallCityList }
-                .asDriver(onErrorJustReturn: [])
-                .drive(smallCityPickerView.rx.itemTitles) { (row, element) in return element }
+                .bind(to: smallCityPickerView.rx.itemTitles) { (row, element) in return element }
 
             reactor.state
                 .map { $0.selectedSmallCity }

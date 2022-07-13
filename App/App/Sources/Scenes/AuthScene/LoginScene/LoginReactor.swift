@@ -55,22 +55,32 @@ final class LoginReactor: Reactor {
         guard let appleCrendential = getAppleCrendential(for: authorization) else {
             return
         }
-        
+        print(appleCrendential.identifier)
         appleLoginRepository.requestAppleLogin(appleCredential: appleCrendential)
             .subscribe { [weak self] result in
                 switch result {
                 case .success(let signInResult):
-                    if signInResult.firstAccount {
-                        guard let accessToken = signInResult.accessToken.data(using: .utf8, allowLossyConversion: false),
-                              let refreshToken = signInResult.refreshToken.data(using: .utf8, allowLossyConversion: false) else {
-                            return
-                        }
-                    
-                        try? self?.keychainProvider.create(accessToken, service: KeychainService.apple, account: KeychainAccount.accessToken)
-                        try? self?.keychainProvider.create(refreshToken, service: KeychainService.apple, account: KeychainAccount.refreshToken)
+                    guard let accessToken = signInResult.accessToken.data(using: .utf8, allowLossyConversion: false),
+                          let refreshToken = signInResult.refreshToken.data(using: .utf8, allowLossyConversion: false),
+                          let identifier = appleCrendential.identifier.data(using: .utf8, allowLossyConversion: false) else {
+                        return
                     }
                     
+                    try? self?.keychainProvider.delete(service: KeychainService.apple, account: KeychainAccount.identifier)
+                    print(11)
+                    try? self?.keychainProvider.delete(service: KeychainService.apple, account: KeychainAccount.accessToken)
+                    print(21)
+                    try? self?.keychainProvider.delete(service: KeychainService.apple, account: KeychainAccount.refreshToken)
+                    print(31)
+                    try? self?.keychainProvider.create(accessToken, service: KeychainService.apple, account: KeychainAccount.accessToken)
+                    print(41)
+                    try? self?.keychainProvider.create(refreshToken, service: KeychainService.apple, account: KeychainAccount.refreshToken)
+                    print(51)
+                    try? self?.keychainProvider.create(identifier, service: KeychainService.apple, account: KeychainAccount.identifier)
+                    print(61)
                     self?.readyToProceedWithSignUp.onNext(())
+                    print(71)
+                    
             case .failure(_):
                 #warning("애플로그인 실패하면 예외처리")
             }
@@ -85,7 +95,8 @@ final class LoginReactor: Reactor {
             return nil
         }
         
-        let appleCredential = AppleCredential(authorizationCode: code, identityToken: token, email: email)
+        let identifier = crendential.user
+        let appleCredential = AppleCredential(authorizationCode: code, identityToken: token, email: email, identifier: identifier)
         
         return appleCredential
     }

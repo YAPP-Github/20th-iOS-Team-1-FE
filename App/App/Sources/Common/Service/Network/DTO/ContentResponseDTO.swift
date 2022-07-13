@@ -8,6 +8,11 @@
 import Foundation
 
 struct ContentResponseDTO: Codable {
+    private enum CodingKeys: String, CodingKey {
+        case clubID = "clubId"
+        case title, category, meetingPlace, startDate, endDate, eligibleBreeds, eligiblePetSizeTypes, eligibleSex, maximumPeople, participants
+    }
+    
     internal let clubID: Int
     internal let title, category, meetingPlace: String?
     internal let startDate, endDate: String?
@@ -17,13 +22,18 @@ struct ContentResponseDTO: Codable {
     internal let maximumPeople, participants: Int
     
     func toDomain() -> Content {
-        let content = Content(clubID: clubID, title: title, category: category, meetingPlace: meetingPlace, startDate: startDate, endDate: endDate, eligibleBreeds: eligibleBreeds, eligiblePetSizeTypes: eligiblePetSizeTypes, eligibleSex: eligibleSex, maximumPeople: maximumPeople, participants: participants)
+        let content = Content(clubID: clubID,
+                              title: title,
+                              category: category,
+                              meetingPlace: meetingPlace,
+                              startDate: startDate,
+                              endDate: endDate,
+                              eligibleBreeds: eligibleBreeds,
+                              eligiblePetSizeTypes: eligiblePetSizeTypes,
+                              eligibleSex: eligibleSex,
+                              maximumPeople: maximumPeople,
+                              participants: participants)
         
         return content
-    }
-
-    enum CodingKeys: String, CodingKey {
-        case clubID = "clubId"
-        case title, category, meetingPlace, startDate, endDate, eligibleBreeds, eligiblePetSizeTypes, eligibleSex, maximumPeople, participants
     }
 }
