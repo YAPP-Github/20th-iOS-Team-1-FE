@@ -14,8 +14,6 @@ final class TabCoordinator: Coordinator {
     
     init(window: UIWindow?) {
         self.window = window
-        
-        window?.makeKeyAndVisible()
     }
     
     func start() {
@@ -44,9 +42,11 @@ final class TabCoordinator: Coordinator {
         tabBarController.viewControllers = [secondViewController, thirdViewController, fourthViewController]
         
         window?.rootViewController = tabBarController
+        window?.makeKeyAndVisible()
     }
 }
 
 protocol TabBarCoordinatorDelegate: AnyObject {
     func switchToAuth()
 }
+

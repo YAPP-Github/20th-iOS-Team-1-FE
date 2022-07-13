@@ -8,6 +8,11 @@
 import Foundation
 
 struct GatherListResponseDTO: Codable {
+    private enum CodingKeys: String, CodingKey {
+        case hasNotClub
+        case clubInfos
+    }
+    
     internal let hasNotClub: Bool
     internal let clubInfos: ClubInfosResponseDTO
     
@@ -16,15 +21,4 @@ struct GatherListResponseDTO: Codable {
         
         return gatherListInfo
     }
-}
-
-
-struct Pageable: Codable {
-    let sort: Sort
-    let offset, pageNumber, pageSize: Int
-    let paged, unpaged: Bool
-}
-
-struct Sort: Codable {
-    let empty, unsorted, sorted: Bool
 }

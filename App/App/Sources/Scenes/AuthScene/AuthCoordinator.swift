@@ -40,6 +40,39 @@ final class AuthCoordinator: SceneCoordinator {
         window?.makeKeyAndVisible()
     }
     
+    func startAgreement() {
+        let signUpAgreementReactor = SignUpAgreementReactor()
+        let signUpAgreementViewController = SignUpAgreementViewController(reactor: signUpAgreementReactor)
+        
+        signUpAgreementReactor.readyToProceedWithSignUp
+            .asDriver(onErrorJustReturn: UserAccount())
+            .drive(with: self,
+                   onNext: { this, user in
+                this.pushSignUpProfileViewController(with: user)
+            })
+            .disposed(by:disposeBag)
+        
+        signUpAgreementReactor.readyToShowTermsOfService
+            .asDriver(onErrorJustReturn: ())
+            .drive(with: self,
+                   onNext: { this, _ in
+                this.pushSignUpTermsOfServiceViewController()
+            })
+            .disposed(by:disposeBag)
+        
+        signUpAgreementReactor.readyToShowPrivacyPolicy
+            .asDriver(onErrorJustReturn: ())
+            .drive(with: self,
+                   onNext: { this, _ in
+                this.pushSignUpPrivacyPolicyViewController()
+            })
+            .disposed(by:disposeBag)
+        
+        navigationController.setViewControllers([signUpAgreementViewController], animated: false)
+        window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
+    }
+    
     func pushSignUpAgreementViewController() {
         let signUpAgreementReactor = SignUpAgreementReactor()
         let signUpAgreementViewController = SignUpAgreementViewController(reactor: signUpAgreementReactor)
@@ -68,7 +101,7 @@ final class AuthCoordinator: SceneCoordinator {
             })
             .disposed(by:disposeBag)
         
-        navigationController.pushViewController(signUpAgreementViewController, animated: true)
+        navigationController.setViewControllers([signUpAgreementViewController], animated: false)
     }
     
     func pushSignUpTermsOfServiceViewController() {

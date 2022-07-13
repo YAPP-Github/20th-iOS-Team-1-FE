@@ -9,6 +9,12 @@ import Foundation
 
 import RxSwift
 
+enum Gather: Int {
+    case participating
+    case leader
+    case finish
+}
+
 final class GatherListRepository: GatherListRepositoryInterface {
     private let networkManager: NetworkManageable
     private let disposeBag = DisposeBag()
@@ -17,18 +23,17 @@ final class GatherListRepository: GatherListRepositoryInterface {
         self.networkManager = networkManager
     }
     
-    internal func requestGatherList(club: Int) -> Single<GatherListInfo> {
-        let cursorQuery = URLQueryItem(name: "cursor-id", value: "2")
+    internal func requestGatherList(lastID: String?, endDate: String?, gatherCondition: Gather, accessToken: Data) -> Single<GatherListInfo> {
+        let cursorQuery = URLQueryItem(name: "cursor-id", value: lastID)
+        let cursorEndDateQuery = URLQueryItem(name: "cursor-end-date", value: endDate)
         var conditionQuery: URLQueryItem
-        switch club {
-        case 0:
+        switch gatherCondition {
+        case .participating:
             conditionQuery = URLQueryItem(name: "condition", value: "I_AM_PARTICIPATING")
-        case 1:
+        case .leader:
             conditionQuery = URLQueryItem(name: "condition", value: "I_AM_LEADER")
-        case 2:
+        case .finish:
             conditionQuery = URLQueryItem(name: "condition", value: "I_AM_PARTICIPATED_AND_EXCEED")
-        default:
-            conditionQuery = URLQueryItem(name: "condition", value: "I_AM_PARTICIPATING")
         }
         
         return Single.create { [weak self] observer in
@@ -41,17 +46,14 @@ final class GatherListRepository: GatherListRepositoryInterface {
                 return Disposables.create()
             }
             
-            urlComponents.queryItems = [cursorQuery, conditionQuery]
+            urlComponents.queryItems = [cursorQuery, cursorEndDateQuery, conditionQuery]
             
-            let keychain = KeychainQueryRequester()
-            let keychainProvider = KeychainProvider(keyChain: keychain)
-            guard let Token = try? keychainProvider.read(service: KeychainService.apple, account: KeychainAccount.accessToken) else {
-                print("토큰이 존재하지 않습니다.")
+            guard let url = urlComponents.url else {
                 return Disposables.create()
             }
-            let accessToken = "Bearer " + (String(data: Token, encoding: .utf8) ?? "")
             
-            var urlRequest = URLRequest(url: urlComponents.url ?? URL(fileURLWithPath: APIConstants.BaseURL))
+            let accessToken = String(decoding: accessToken, as: UTF8.self).makePrefixBearer()
+            var urlRequest = URLRequest(url: url)
             urlRequest.httpMethod = HTTPMethod.get
             urlRequest.addValue(accessToken, forHTTPHeaderField: "Authorization")
             urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -73,5 +75,4 @@ final class GatherListRepository: GatherListRepositoryInterface {
             return Disposables.create()
         }
     }
-
 }

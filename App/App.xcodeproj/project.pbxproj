@@ -41,6 +41,8 @@
 		3719183B286E184F00169FC2 /* GuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3719183A286E184F00169FC2 /* GuideView.swift */; };
 		3719183E286E235E00169FC2 /* SignUpPrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3719183D286E235E00169FC2 /* SignUpPrivacyPolicyViewController.swift */; };
 		3724CC482875C37100E3C65C /* FileManagerProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724CC472875C37100E3C65C /* FileManagerProxy.swift */; };
+		3731F776287C5AD70058635D /* CommentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3731F775287C5AD70058635D /* CommentRepository.swift */; };
+		3731F778287C606B0058635D /* CommentRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3731F777287C606B0058635D /* CommentRepositoryInterface.swift */; };
 		3732EF44286F4DDC0037404E /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3732EF43286F4DDC0037404E /* String+Extension.swift */; };
 		37348B0C2866CA5E00C38F70 /* BorderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37348B0B2866CA5E00C38F70 /* BorderButton.swift */; };
 		3734CEAA2869E70C00EEF38D /* SignUpRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3734CEA92869E70C00EEF38D /* SignUpRepositoryInterface.swift */; };
@@ -254,6 +256,8 @@
 		3719183A286E184F00169FC2 /* GuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideView.swift; sourceTree = "<group>"; };
 		3719183D286E235E00169FC2 /* SignUpPrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		3724CC472875C37100E3C65C /* FileManagerProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerProxy.swift; sourceTree = "<group>"; };
+		3731F775287C5AD70058635D /* CommentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRepository.swift; sourceTree = "<group>"; };
+		3731F777287C606B0058635D /* CommentRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRepositoryInterface.swift; sourceTree = "<group>"; };
 		3732EF43286F4DDC0037404E /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		37348B0B2866CA5E00C38F70 /* BorderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderButton.swift; sourceTree = "<group>"; };
 		3734CEA92869E70C00EEF38D /* SignUpRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRepositoryInterface.swift; sourceTree = "<group>"; };
@@ -513,6 +517,7 @@
 				29AE2257286F2FB400EDF34B /* GatherRepository.swift */,
 				FDE18E172873586C00A7369D /* GatherListRepository.swift */,
 				37499038287720E100D07211 /* DetailGatherRepository.swift */,
+				3731F775287C5AD70058635D /* CommentRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -545,9 +550,17 @@
 			path = FileManager;
 			sourceTree = "<group>";
 		};
+		373F0CB2287ED636003A5369 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		37438093284FD8A300CB02A5 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				373F0CB2287ED636003A5369 /* New Group */,
 				37499041287726F000D07211 /* Common */,
 				37499043287727B400D07211 /* Token */,
 				37499042287726FA00D07211 /* Account */,
@@ -1096,6 +1109,7 @@
 			children = (
 				37DA251E287317EE002E4D67 /* DetailGatherViewController.swift */,
 				37DA251F287317EE002E4D67 /* DetailGatherReactor.swift */,
+				3731F777287C606B0058635D /* CommentRepositoryInterface.swift */,
 			);
 			path = DetailGatherScene;
 			sourceTree = "<group>";
@@ -1394,6 +1408,7 @@
 				FDD226712875F4900042F488 /* TagCollectionViewReactor.swift in Sources */,
 				37605DFD283A003B00394929 /* ASAuthorizationAppleIDProvider+Rx.swift in Sources */,
 				FDBC1230286C95D000FCADF4 /* ProfileResponseDTO.swift in Sources */,
+				3731F778287C606B0058635D /* CommentRepositoryInterface.swift in Sources */,
 				37499039287720E100D07211 /* DetailGatherRepository.swift in Sources */,
 				FD8AD7052851E26200454AC3 /* GatherListTableView.swift in Sources */,
 				37912CA0281449230087B95E /* Coordinator.swift in Sources */,
@@ -1450,6 +1465,7 @@
 				37438097284FD9F800CB02A5 /* ExceptionResponseDTO.swift in Sources */,
 				294A0C182873A47A00D1CEB3 /* PetSizeType.swift in Sources */,
 				37C1451B284E06E400D11CC3 /* NetworkManager.swift in Sources */,
+				3731F776287C5AD70058635D /* CommentRepository.swift in Sources */,
 				FD5AEE86286DDC2A00001838 /* EditProfileViewController.swift in Sources */,
 				3749903F287724B700D07211 /* ClubDetailInfoDTO.swift in Sources */,
 				374F41DC2864ED6E0074F04B /* KeychainTokens.swift in Sources */,

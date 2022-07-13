@@ -10,4 +10,5 @@ import Foundation
 enum KeychainAccount {
     static let accessToken = "accessToken"
     static let refreshToken = "refreshToken"
+    static let identifier = "identifier"
 }
