@@ -9,26 +9,42 @@ import UIKit
 
 import RxSwift
 
+enum Start {
+    case tapBar
+    case login
+    case agreement
+}
+
 final class AppCoordinator: Coordinator {
     private let window: UIWindow?
     private let disposeBag = DisposeBag()
     weak var parentCoordinator: Coordinator?
     var childCoordinators = [Coordinator]()
-    var isLoggedIn: Bool
+    var startFrom: Start
     
-    init(window: UIWindow?, isLoggedIn: Bool) {
+    init(window: UIWindow?, start: Start) {
         self.window = window
-        self.isLoggedIn = isLoggedIn
+        self.startFrom = start
     }
     
     func start() {
-        if isLoggedIn {
+        switch startFrom {
+        case .tapBar:
             moveToTabBar()
-        } else {
+        case .login:
             moveToAuth()
+        case .agreement:
+            moveToAgreement()
         }
     }
-
+    
+    private func moveToAgreement() {
+        let authCoordinator = AuthCoordinator(window: window)
+        childCoordinators.append(authCoordinator)
+        authCoordinator.delegate = self
+        authCoordinator.startAgreement()
+    }
+    
     private func moveToAuth() {
         let authCoordinator = AuthCoordinator(window: window)
         childCoordinators.append(authCoordinator)
@@ -46,7 +62,7 @@ final class AppCoordinator: Coordinator {
 
 extension AppCoordinator: AuthCoordinatorDelegate {
     func switchToTabBar() {
-        isLoggedIn = true
+        startFrom = .tapBar
         childCoordinators.removeAll()
         moveToTabBar()
     }
@@ -54,7 +70,7 @@ extension AppCoordinator: AuthCoordinatorDelegate {
 
 extension AppCoordinator: TabBarCoordinatorDelegate {
     func switchToAuth() {
-        isLoggedIn = false 
+        startFrom = .login
         childCoordinators.removeAll()
         moveToAuth()
     }

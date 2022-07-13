@@ -21,7 +21,7 @@ final class SignUpPrivacyPolicyViewController: UIViewController {
         return label
     }()
     
-    private var guideStackView: UIStackView = {
+    private lazy var guideStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.spacing = 12
         stackView.axis = .vertical

@@ -11,4 +11,5 @@ struct AppleCredential {
     internal let authorizationCode: Data
     internal let identityToken: Data
     internal let email: String
+    internal let identifier: String
 }
