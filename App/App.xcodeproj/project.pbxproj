@@ -167,6 +167,7 @@
 		37ECC53C2871B4B000CFE8E9 /* UIImagePickerViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ECC53B2871B4B000CFE8E9 /* UIImagePickerViewController+Rx.swift */; };
 		37ECC53E2871BA9300CFE8E9 /* RxImagePickerDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ECC53D2871BA9300CFE8E9 /* RxImagePickerDelegateProxy.swift */; };
 		37F67CC5286A1C270073FE8C /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F67CC4286A1C270073FE8C /* AuthCoordinator.swift */; };
+		FD0870BE287DB15600DF3553 /* EmptyNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0870BD287DB15600DF3553 /* EmptyNoticeView.swift */; };
 		FD5AEE86286DDC2A00001838 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5AEE85286DDC2A00001838 /* EditProfileViewController.swift */; };
 		FD5AEE88286DDC3600001838 /* AddPetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5AEE87286DDC3600001838 /* AddPetViewController.swift */; };
 		FD5AEE8A286DDD5100001838 /* EditProflieReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5AEE89286DDD5100001838 /* EditProflieReactor.swift */; };
@@ -204,8 +205,6 @@
 		FDE18E1C2873596300A7369D /* GatherListInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE18E1B2873596300A7369D /* GatherListInfo.swift */; };
 		FDE18E1F2873598E00A7369D /* GatherListRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE18E1E2873598E00A7369D /* GatherListRepositoryInterface.swift */; };
 		FDE6F146285215BD005E4783 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE6F145285215BD005E4783 /* UIFont+Extension.swift */; };
-		FDE6F1482852317F005E4783 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE6F1472852317F005E4783 /* UITableView+Extension.swift */; };
-		FDE6F14A28523493005E4783 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE6F14928523493005E4783 /* UICollectionView+Extension.swift */; };
 		FDE6F14C285234A3005E4783 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE6F14B285234A3005E4783 /* NSObject+Extension.swift */; };
 		FDFD017028735DA300C625B1 /* GatherListResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFD016F28735DA300C625B1 /* GatherListResponseDTO.swift */; };
 		FDFD017228735DBB00C625B1 /* GatherConfigurationForSheetResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFD017128735DBB00C625B1 /* GatherConfigurationForSheetResponseDTO.swift */; };
@@ -377,6 +376,7 @@
 		37ECC53B2871B4B000CFE8E9 /* UIImagePickerViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImagePickerViewController+Rx.swift"; sourceTree = "<group>"; };
 		37ECC53D2871BA9300CFE8E9 /* RxImagePickerDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxImagePickerDelegateProxy.swift; sourceTree = "<group>"; };
 		37F67CC4286A1C270073FE8C /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
+		FD0870BD287DB15600DF3553 /* EmptyNoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyNoticeView.swift; sourceTree = "<group>"; };
 		FD5AEE85286DDC2A00001838 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		FD5AEE87286DDC3600001838 /* AddPetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPetViewController.swift; sourceTree = "<group>"; };
 		FD5AEE89286DDD5100001838 /* EditProflieReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProflieReactor.swift; sourceTree = "<group>"; };
@@ -414,8 +414,6 @@
 		FDE18E1B2873596300A7369D /* GatherListInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListInfo.swift; sourceTree = "<group>"; };
 		FDE18E1E2873598E00A7369D /* GatherListRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListRepositoryInterface.swift; sourceTree = "<group>"; };
 		FDE6F145285215BD005E4783 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
-		FDE6F1472852317F005E4783 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
-		FDE6F14928523493005E4783 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
 		FDE6F14B285234A3005E4783 /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
 		FDFD016F28735DA300C625B1 /* GatherListResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListResponseDTO.swift; sourceTree = "<group>"; };
 		FDFD017128735DBB00C625B1 /* GatherConfigurationForSheetResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherConfigurationForSheetResponseDTO.swift; sourceTree = "<group>"; };
@@ -748,6 +746,7 @@
 				3719183A286E184F00169FC2 /* GuideView.swift */,
 				37DA252228732816002E4D67 /* Divider.swift */,
 				FD7E2553287C18AC008E9E24 /* PetSizeButton.swift */,
+				FD0870BD287DB15600DF3553 /* EmptyNoticeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -916,8 +915,6 @@
 				29AE223E284DC1B500EDF34B /* CLLocationCoordinate2D+Extension.swift */,
 				29AE2245284E02EB00EDF34B /* MKCoordinateRegion+Extension.swift */,
 				29AE2247284E031C00EDF34B /* MKCoordinateSpan+Extension.swift */,
-				FDE6F1472852317F005E4783 /* UITableView+Extension.swift */,
-				FDE6F14928523493005E4783 /* UICollectionView+Extension.swift */,
 				FDE6F14B285234A3005E4783 /* NSObject+Extension.swift */,
 				FDE6F145285215BD005E4783 /* UIFont+Extension.swift */,
 				29AE2255286F2DDF00EDF34B /* MKMapView+Extension.swift */,
@@ -1133,14 +1130,14 @@
 			path = AddPetScene;
 			sourceTree = "<group>";
 		};
-		FD8AD7032851E25300454AC3 /* SubComponents */ = {
+		FD8AD7032851E25300454AC3 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				FD9D38ED28543409005A0C86 /* SegmentView.swift */,
 				FD8AD7042851E26200454AC3 /* GatherListTableView.swift */,
 				FD8AD7062851E28000454AC3 /* GatherListCell.swift */,
 			);
-			path = SubComponents;
+			path = View;
 			sourceTree = "<group>";
 		};
 		FD8AD71A285212FB00454AC3 /* Font */ = {
@@ -1155,7 +1152,7 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
-		FDBC12022866857800FCADF4 /* SubComponents */ = {
+		FDBC12022866857800FCADF4 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				FDBC12032866858900FCADF4 /* ProfileContentView.swift */,
@@ -1163,14 +1160,14 @@
 				FDBC120B2868BF6200FCADF4 /* InitialIntroductionView.swift */,
 				FDBC120F2868CD4C00FCADF4 /* DogTableViewCell.swift */,
 			);
-			path = SubComponents;
+			path = View;
 			sourceTree = "<group>";
 		};
 		FDBC1227286C317500FCADF4 /* MainScene */ = {
 			isa = PBXGroup;
 			children = (
 				FDBC122A286C325500FCADF4 /* Entity */,
-				FDBC12022866857800FCADF4 /* SubComponents */,
+				FDBC12022866857800FCADF4 /* View */,
 				378F3484281DBE210063CE4F /* ProfileViewController.swift */,
 				378F3485281DBE210063CE4F /* ProfileReactor.swift */,
 				378F348E281DC0760063CE4F /* ProfileCoordinator.swift */,
@@ -1218,7 +1215,7 @@
 		FDFD016A28735A9800C625B1 /* GatherListScene */ = {
 			isa = PBXGroup;
 			children = (
-				FD8AD7032851E25300454AC3 /* SubComponents */,
+				FD8AD7032851E25300454AC3 /* View */,
 				378F348A281DC0560063CE4F /* GatherListCoordinator.swift */,
 				378F347C281DBE070063CE4F /* GatherListViewController.swift */,
 				378F347D281DBE070063CE4F /* GatherListReactor.swift */,
@@ -1383,10 +1380,8 @@
 				FD5AEE8C286DDD7000001838 /* AddPetReactor.swift in Sources */,
 				377370892841DE3500D5CCB6 /* SignUpProfileReactor.swift in Sources */,
 				29AE2234284B829200EDF34B /* CircularButton.swift in Sources */,
-				FDE6F14A28523493005E4783 /* UICollectionView+Extension.swift in Sources */,
 				373B4BEE28788A82005B8599 /* AuthCoordinatorDelegate.swift in Sources */,
 				37479B9F283EAE140078386E /* UIImage+Extension.swift in Sources */,
-				FDE6F1482852317F005E4783 /* UITableView+Extension.swift in Sources */,
 				37912CA628144A530087B95E /* TabCoordinator.swift in Sources */,
 				FDE6F146285215BD005E4783 /* UIFont+Extension.swift in Sources */,
 				375558BF2866E0AC00D13208 /* SignUpAreaReactor.swift in Sources */,
@@ -1436,6 +1431,7 @@
 				378F347F281DBE070063CE4F /* GatherListReactor.swift in Sources */,
 				FDBC12062866867600FCADF4 /* IntroduceView.swift in Sources */,
 				294A0C1C2874783000D1CEB3 /* UILabel+Extension.swift in Sources */,
+				FD0870BE287DB15600DF3553 /* EmptyNoticeView.swift in Sources */,
 				374F41D12864E70F0074F04B /* AccountValidation.swift in Sources */,
 				374F41CF2864E6C60074F04B /* AccountValidationResponseDTO.swift in Sources */,
 				37605DF62839FB4100394929 /* RxASAuthorizationControllerDelegateProxy.swift in Sources */,

@@ -20,6 +20,6 @@ final class GatherListTableView: UITableView {
     
     private func configureUI() {
         backgroundColor = .Togaether.background
-        registerCell(type: GatherListCell.self)
+        register(GatherListCell.self, forCellReuseIdentifier: GatherListCell.identifier)
     }
 }
