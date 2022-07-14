@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "highlighter.png",
+      "filename" : "icon_kebab_menu.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "highlighter@2x.png",
+      "filename" : "icon_kebab_menu@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "highlighter@3x.png",
+      "filename" : "icon_kebab_menu@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

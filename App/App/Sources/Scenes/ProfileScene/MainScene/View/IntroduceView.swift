@@ -46,7 +46,7 @@ final class IntroduceView: UIView {
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .Togaether.subGreen
-        collectionView.registerCell(type: TagCollectionViewCell.self)
+        collectionView.register(TagCollectionViewCell.self, forCellWithReuseIdentifier: TagCollectionViewCell.identifier)
         collectionView.delegate = self
         collectionView.showsHorizontalScrollIndicator = false
         

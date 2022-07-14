@@ -13,7 +13,7 @@ import RxSwift
 final class ProfileContentView: UIView {
     let disposeBag = DisposeBag()
 
-    private lazy var profileHeaderView: UITableViewHeaderFooterView = {
+    internal lazy var profileHeaderView: UITableViewHeaderFooterView = {
         let headerView = UITableViewHeaderFooterView()
         let backgroundView = UIView(frame: .zero)
         backgroundView.backgroundColor = .Togaether.mainGreen
@@ -21,22 +21,6 @@ final class ProfileContentView: UIView {
         headerView.frame = CGRect(origin: .zero, size: CGSize(width: UIScreen.main.bounds.width, height: 373))
         
         return headerView
-    }()
-    
-    internal lazy var profileModifyButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("프로필 수정", for: .normal)
-        button.titleLabel?.textColor = .white
-        button.titleLabel?.textAlignment = .center
-        button.titleLabel?.font = .customFont(size: 12.0, style: .Medium)
-        button.setImage(.Togaether.profileSetting, for: .normal)
-        button.semanticContentAttribute = .forceRightToLeft
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: -2, bottom: 0, right: 0)
-        button.layer.cornerRadius = 12
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.white.cgColor
-        
-        return button
     }()
     
     private lazy var profileImageView: UIImageView = {
@@ -88,26 +72,27 @@ final class ProfileContentView: UIView {
         return view
     }()
     
-    private lazy var initailIntroduceView: UIView = {
+    internal lazy var initailIntroduceView: UIView = {
         var view = InitialIntroductionView()
         view.layer.cornerRadius = 10
         
         return view
     }()
     
-    private lazy var introduceView: IntroduceView = {
+    internal lazy var introduceView: IntroduceView = {
         var view = IntroduceView()
         view.layer.cornerRadius = 10
         
         return view
     }()
     
-    private lazy var profileFooterView: UIView = {
-        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 100))
+    internal lazy var emptyPetView: EmptyNoticeView = {
+        let view = EmptyNoticeView(frame: .zero, type: .pet)
+        view.isHidden = true
 
-        return footerView
+        return view
     }()
-    
+
     internal lazy var addPuppyButton: UIButton = {
         let button = UIButton()
         button.setTitle("반려견 추가", for: .normal)
@@ -122,6 +107,12 @@ final class ProfileContentView: UIView {
         
         return button
     }()
+    
+    private lazy var profileFooterView: UIView = {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 500))
+
+        return footerView
+    }()
 
     private lazy var dogListView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -131,7 +122,7 @@ final class ProfileContentView: UIView {
         tableView.allowsSelection = false
         tableView.tableHeaderView = profileHeaderView
         tableView.tableFooterView = profileFooterView
-        tableView.registerCell(type: DogTableViewCell.self)
+        tableView.register(DogTableViewCell.self, forCellReuseIdentifier: DogTableViewCell.identifier)
         
         return tableView
     }()
@@ -149,7 +140,6 @@ final class ProfileContentView: UIView {
     }
     
     private func addSubviews() {
-        profileHeaderView.addSubview(profileModifyButton)
         profileHeaderView.addSubview(profileImageView)
         profileHeaderView.addSubview(userNameLabel)
         profileHeaderView.addSubview(addressLabel)
@@ -159,23 +149,19 @@ final class ProfileContentView: UIView {
         profileHeaderView.addSubview(initailIntroduceView)
         profileHeaderView.addSubview(introduceView)
         addSubview(dogListView)
+        profileFooterView.addSubview(emptyPetView)
         profileFooterView.addSubview(addPuppyButton)
     }
     
     private func configureLayout() {
         NSLayoutConstraint.useAndActivateConstraints([
-            profileModifyButton.topAnchor.constraint(equalTo: profileHeaderView.topAnchor, constant: 20),
-            profileModifyButton.trailingAnchor.constraint(equalTo: profileHeaderView.trailingAnchor, constant: -19),
-            profileModifyButton.widthAnchor.constraint(equalToConstant: 93),
-            profileModifyButton.heightAnchor.constraint(equalToConstant: 26),
-
             profileImageView.topAnchor.constraint(equalTo: profileHeaderView.topAnchor, constant: 40),
             profileImageView.leadingAnchor.constraint(equalTo: profileHeaderView.leadingAnchor, constant: 20),
             profileImageView.widthAnchor.constraint(equalToConstant: 120),
             profileImageView.heightAnchor.constraint(equalToConstant: 120),
             
-            userNameLabel.topAnchor.constraint(equalTo: profileModifyButton.bottomAnchor, constant: 26),
             userNameLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 20),
+            userNameLabel.centerYAnchor.constraint(equalTo: profileImageView.centerYAnchor),
             
             addressLabel.topAnchor.constraint(equalTo: userNameLabel.bottomAnchor, constant: 7.5),
             addressLabel.leadingAnchor.constraint(equalTo: userNameLabel.leadingAnchor),
@@ -207,9 +193,14 @@ final class ProfileContentView: UIView {
             dogListView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             dogListView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             dogListView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            
+
+            emptyPetView.topAnchor.constraint(equalTo: profileFooterView.topAnchor, constant: 50),
+            emptyPetView.leadingAnchor.constraint(equalTo: profileFooterView.leadingAnchor),
+            emptyPetView.trailingAnchor.constraint(equalTo: profileFooterView.trailingAnchor),
+            emptyPetView.heightAnchor.constraint(equalToConstant: 250),
+
+            addPuppyButton.topAnchor.constraint(equalTo: emptyPetView.bottomAnchor),
             addPuppyButton.centerXAnchor.constraint(equalTo: profileFooterView.centerXAnchor),
-            addPuppyButton.centerYAnchor.constraint(equalTo: profileFooterView.centerYAnchor),
             addPuppyButton.widthAnchor.constraint(equalToConstant: 102),
             addPuppyButton.heightAnchor.constraint(equalToConstant: 33)
         ])
@@ -219,33 +210,20 @@ final class ProfileContentView: UIView {
         backgroundColor = .Togaether.background
     }
     
-    internal func configureData(_ myPage: Bool, _ accountInfo: AccountInfo?, petInfo: [PetInfo]?) {
+    internal func configureData(_ accountInfo: AccountInfo?, petInfo: [PetInfo]?) {
         guard let accountData = accountInfo,
               let petData = petInfo else {
             return
-        }
-        
-        if !myPage {
-            initailIntroduceView.isHidden = true
-            introduceView.isHidden = false
-            introduceView.configureData(accountData)
-            addPuppyButton.isHidden = true
-        } else {
-            if accountData.Introduction != nil {
-                initailIntroduceView.isHidden = true
-                introduceView.isHidden = false
-                introduceView.configureData(accountData)
-            } else {
-                initailIntroduceView.isHidden = false
-                introduceView.isHidden = true
-                profileHeaderView.frame = CGRect(origin: .zero, size: CGSize(width: UIScreen.main.bounds.width, height: 273))
-            }
         }
 
         profileImageView.imageWithURL(accountData.profileImageURL ?? "")
         userNameLabel.text = accountData.nickName
         addressLabel.text = accountData.address
         ageLabel.text = accountData.age
+        
+        if petData.isEmpty {
+            emptyPetView.isHidden = false
+        }
         
         Observable.of(petData)
             .asDriver(onErrorJustReturn: [])

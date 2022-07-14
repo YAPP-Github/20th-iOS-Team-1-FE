@@ -14,6 +14,13 @@ final class ProfileViewController: BaseViewController {
     var disposeBag = DisposeBag()
     var nickName = ""
     
+    private lazy var settingBarButton: UIBarButtonItem = {
+        let button = UIBarButtonItem()
+        button.image = UIImage.Togaether.setting
+        
+        return button
+    }()
+    
     private lazy var scrollView = UIScrollView()
     private lazy var contentView = UIView()
     private lazy var profileContentView = ProfileContentView()
@@ -68,8 +75,9 @@ final class ProfileViewController: BaseViewController {
     
     private func configureUI() {
         view.backgroundColor = .Togaether.background
-        navigationController?.navigationBar.titleTextAttributes = [ .foregroundColor: UIColor.Togaether.primaryLabel ]
         navigationItem.title = "프로필"
+        navigationItem.rightBarButtonItem = settingBarButton
+        navigationController?.navigationBar.tintColor = .Togaether.primaryLabel
     }
     
     private func bindAction(with reactor: ProfileReactor) {
@@ -79,10 +87,15 @@ final class ProfileViewController: BaseViewController {
                     Reactor.Action.profileInfo(nickname: nickName) }
                 .bind(to: reactor.action)
             
-            profileContentView.profileModifyButton.rx.tap
-                .map { Reactor.Action.profileEditButtonDidTap }
+            settingBarButton.rx.tap
+                .map { Reactor.Action.settingButtonDidTap }
                 .bind(to: reactor.action)
             
+            profileContentView.initailIntroduceView.rx.tapGesture()
+                .when(.recognized)
+                .map { _ in Reactor.Action.profileEditButtonDidTap }
+                .bind(to: reactor.action)
+
             profileContentView.addPuppyButton.rx.tap
                 .map { Reactor.Action.petAddButtonDidTap }
                 .bind(to: reactor.action)
@@ -96,7 +109,47 @@ final class ProfileViewController: BaseViewController {
                 .distinctUntilChanged()
                 .asDriver(onErrorJustReturn: ProfileInfo())
                 .drive(onNext: { data in
-                    self.profileContentView.configureData(data.myPage, data.accountInfo, petInfo: data.petInfos)
+                    self.profileContentView.configureData(data.accountInfo, petInfo: data.petInfos)
+                })
+            
+            reactor.state
+                .map { $0.profileInfo }
+                .distinctUntilChanged()
+                .asDriver(onErrorJustReturn: ProfileInfo())
+                .filter { $0.myPage == false }
+                .drive(onNext: { data in
+                    self.profileContentView.initailIntroduceView.isHidden = true
+                    self.profileContentView.introduceView.isHidden = false
+                    self.profileContentView.introduceView.configureData(data.accountInfo)
+                    self.profileContentView.emptyPetView.isHidden = true
+                    self.profileContentView.addPuppyButton.isHidden = true
+                })
+            
+            reactor.state
+                .map { $0.profileInfo }
+                .distinctUntilChanged()
+                .asDriver(onErrorJustReturn: ProfileInfo())
+                .filter { $0.myPage == true }
+                .drive(onNext: { data in
+                    switch data.accountInfo?.Introduction {
+                    case nil:
+                        self.profileContentView.initailIntroduceView.isHidden = false
+                        self.profileContentView.introduceView.isHidden = true
+                        self.profileContentView.profileHeaderView.frame = CGRect(origin: .zero, size: CGSize(width: UIScreen.main.bounds.width, height: 273))
+                    default:
+                        self.profileContentView.initailIntroduceView.isHidden = true
+                        self.profileContentView.introduceView.isHidden = false
+                        self.profileContentView.introduceView.configureData(data.accountInfo)
+                    }
+                })
+            
+            reactor.state
+                .map { $0.shouldPresentAlertSheet }
+                .filter { $0 == true }
+                .observe(on: MainScheduler.instance)
+                .subscribe(with: self,
+                   onNext: { this, isEnabled in
+                    self.presentAlertSheet()
                 })
             
             reactor.state
@@ -127,5 +180,19 @@ final class ProfileViewController: BaseViewController {
     func bind(reactor: ProfileReactor) {
         bindAction(with: reactor)
         bindState(with: reactor)
+    }
+                           
+    
+    private func presentAlertSheet() {
+        let alertController = UIAlertController(title: "내 메뉴", message: nil, preferredStyle: .actionSheet)
+
+        let logoutAction = UIAlertAction(title: "로그아웃", style: .default, handler: nil)
+        let withdrawalAction = UIAlertAction(title: "투개더 탈퇴", style: .default, handler: nil)
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+
+        alertController.addAction(logoutAction)
+        alertController.addAction(withdrawalAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
     }
 }
