@@ -8,11 +8,13 @@
 import UIKit
 
 import ReactorKit
+import RxCocoa
 import RxSwift
 
 final class ProfileReactor: Reactor {
     enum Action {
         case profileInfo(nickname: String?)
+        case settingButtonDidTap
         case profileEditButtonDidTap
         case petAddButtonDidTap
     }
@@ -20,6 +22,7 @@ final class ProfileReactor: Reactor {
     enum Mutation {
         case loadingProfile(Bool)
         case readyToProfileInfo(ProfileInfo)
+        case readyToPresentAlertSheet
         case readyToProceedEditProfile
         case readyToProceedAddPet
     }
@@ -27,11 +30,13 @@ final class ProfileReactor: Reactor {
     struct State {
         var profileInfo = ProfileInfo()
         var isLoadingProfile = true
+        var shouldPresentAlertSheet = false
         var isReadyToProceedEditProfile = false
         var isReadyToProceedAddPet = false
     }
     
     let initialState = State()
+    
     private let profileMainRepository: ProfileMainRepositoryInterface
     private let keychainUseCase: KeychainUseCaseInterface
     private let disposeBag = DisposeBag()
@@ -49,6 +54,8 @@ final class ProfileReactor: Reactor {
             return Observable.just(Mutation.readyToProceedEditProfile)
         case .petAddButtonDidTap:
             return Observable.just(Mutation.readyToProceedAddPet)
+        case .settingButtonDidTap:
+            return Observable.just(Mutation.readyToPresentAlertSheet)
         }
     }
     
@@ -59,12 +66,16 @@ final class ProfileReactor: Reactor {
             newState.isLoadingProfile = isLoading
         case .readyToProfileInfo(let profileInfo):
             newState.profileInfo = profileInfo
+        case .readyToPresentAlertSheet:
+            newState.shouldPresentAlertSheet = true
         case .readyToProceedEditProfile:
             newState.isReadyToProceedEditProfile = true
             newState.isReadyToProceedAddPet = false
+            newState.shouldPresentAlertSheet = false
         case .readyToProceedAddPet:
             newState.isReadyToProceedAddPet = true
             newState.isReadyToProceedEditProfile = false
+            newState.shouldPresentAlertSheet = false
         }
         return newState
     }

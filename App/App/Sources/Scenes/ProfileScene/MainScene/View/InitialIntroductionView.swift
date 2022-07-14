@@ -12,7 +12,7 @@ final class InitialIntroductionView: UIView {
 
     private lazy var introLabel: UILabel = {
         let label = UILabel()
-        label.text = "자기소개와 관심 카테고리를 추가해보세요!"
+        label.text = "나와 반려견을 소개해주세요!"
         label.textColor = .white
         label.font = .customFont(size: 14, style: .SemiBold)
         
