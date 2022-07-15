@@ -67,6 +67,12 @@ final class AddPetReactor: Reactor {
     }
     
     let initialState = State()
+    private let addPetRepository: AddPetRepositoryInterface
+    private let disposeBag = DisposeBag()
+    
+    init(addPetRepository: AddPetRepositoryInterface) {
+        self.addPetRepository = addPetRepository
+    }
     
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
