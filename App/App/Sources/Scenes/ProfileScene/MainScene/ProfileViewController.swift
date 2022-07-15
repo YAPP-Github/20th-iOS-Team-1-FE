@@ -35,7 +35,7 @@ final class ProfileViewController: BaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
+    override func viewDidLoad(){
         super.viewDidLoad()
         addSubviews()
         configureLayout()
@@ -109,40 +109,8 @@ final class ProfileViewController: BaseViewController {
                 .distinctUntilChanged()
                 .asDriver(onErrorJustReturn: ProfileInfo())
                 .drive(onNext: { data in
-                    self.profileContentView.configureData(data.accountInfo, petInfo: data.petInfos)
+                    self.profileContentView.configureData(data.myPage, data.accountInfo, petInfo: data.petInfos)
                 })
-            
-            reactor.state
-                .map { $0.profileInfo }
-                .distinctUntilChanged()
-                .asDriver(onErrorJustReturn: ProfileInfo())
-                .filter { $0.myPage == false }
-                .drive(onNext: { data in
-                    self.profileContentView.initailIntroduceView.isHidden = true
-                    self.profileContentView.introduceView.isHidden = false
-                    self.profileContentView.introduceView.configureData(data.accountInfo)
-                    self.profileContentView.emptyPetView.isHidden = true
-                    self.profileContentView.addPuppyButton.isHidden = true
-                })
-            
-            reactor.state
-                .map { $0.profileInfo }
-                .distinctUntilChanged()
-                .asDriver(onErrorJustReturn: ProfileInfo())
-                .filter { $0.myPage == true }
-                .drive(onNext: { data in
-                    switch data.accountInfo?.Introduction {
-                    case nil:
-                        self.profileContentView.initailIntroduceView.isHidden = false
-                        self.profileContentView.introduceView.isHidden = true
-                        self.profileContentView.profileHeaderView.frame = CGRect(origin: .zero, size: CGSize(width: UIScreen.main.bounds.width, height: 273))
-                    default:
-                        self.profileContentView.initailIntroduceView.isHidden = true
-                        self.profileContentView.introduceView.isHidden = false
-                        self.profileContentView.introduceView.configureData(data.accountInfo)
-                    }
-                })
-            
             reactor.state
                 .map { $0.shouldPresentAlertSheet }
                 .filter { $0 == true }
@@ -150,28 +118,6 @@ final class ProfileViewController: BaseViewController {
                 .subscribe(with: self,
                    onNext: { this, isEnabled in
                     self.presentAlertSheet()
-                })
-            
-            reactor.state
-                .map { $0.isReadyToProceedEditProfile }
-                .filter { $0 == true }
-                .observe(on: MainScheduler.instance)
-                .subscribe(with: self,
-                   onNext: { this, isEnabled in
-                    let editProfileReactor = EditProflieReactor()
-                    let editProfileViewController = EditProfileViewController(reactor: editProfileReactor)
-                    this.navigationController?.pushViewController(editProfileViewController, animated: true)
-                })
-            
-            reactor.state
-                .map { $0.isReadyToProceedAddPet }
-                .filter { $0 == true }
-                .observe(on: MainScheduler.instance)
-                .subscribe(with: self,
-                   onNext: { this, isEnabled in
-                    let addPetReactor = AddPetReactor()
-                    let addPetViewController = AddPetViewController(reactor: addPetReactor)
-                    this.navigationController?.pushViewController(addPetViewController, animated: true)
                 })
         }
         

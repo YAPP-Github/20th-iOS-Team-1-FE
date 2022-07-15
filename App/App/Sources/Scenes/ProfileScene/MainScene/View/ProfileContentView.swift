@@ -88,7 +88,6 @@ final class ProfileContentView: UIView {
     
     internal lazy var emptyPetView: EmptyNoticeView = {
         let view = EmptyNoticeView(frame: .zero, type: .pet)
-        view.isHidden = true
 
         return view
     }()
@@ -115,7 +114,7 @@ final class ProfileContentView: UIView {
     }()
 
     private lazy var dogListView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .plain)
+        let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.rowHeight = 132
         tableView.separatorStyle = .none
         tableView.backgroundColor = .Togaether.background
@@ -193,7 +192,7 @@ final class ProfileContentView: UIView {
             dogListView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             dogListView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             dogListView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-
+            
             emptyPetView.topAnchor.constraint(equalTo: profileFooterView.topAnchor, constant: 50),
             emptyPetView.leadingAnchor.constraint(equalTo: profileFooterView.leadingAnchor),
             emptyPetView.trailingAnchor.constraint(equalTo: profileFooterView.trailingAnchor),
@@ -210,19 +209,37 @@ final class ProfileContentView: UIView {
         backgroundColor = .Togaether.background
     }
     
-    internal func configureData(_ accountInfo: AccountInfo?, petInfo: [PetInfo]?) {
-        guard let accountData = accountInfo,
+    internal func configureData(_ myPage: Bool, _ accountInfo: AccountInfo?, petInfo: [PetInfo]?) {
+        guard var accountData = accountInfo,
               let petData = petInfo else {
             return
+        }
+        
+        if !myPage {
+            initailIntroduceView.removeFromSuperview()
+            introduceView.isHidden = false
+            introduceView.configureData(accountData)
+            addPuppyButton.removeFromSuperview()
+        } else {
+            accountData.Introduction = nil
+            if accountData.Introduction != nil {
+                initailIntroduceView.removeFromSuperview()
+                introduceView.isHidden = false
+                introduceView.configureData(accountData)
+            } else {
+                initailIntroduceView.isHidden = false
+                introduceView.removeFromSuperview()
+                profileHeaderView.frame = CGRect(origin: .zero, size: CGSize(width: UIScreen.main.bounds.width, height: 273))
+            }
         }
 
         profileImageView.imageWithURL(accountData.profileImageURL ?? "")
         userNameLabel.text = accountData.nickName
         addressLabel.text = accountData.address
         ageLabel.text = accountData.age
-        
-        if petData.isEmpty {
-            emptyPetView.isHidden = false
+                  
+        if !petData.isEmpty {
+            emptyPetView.removeFromSuperview()
         }
         
         Observable.of(petData)

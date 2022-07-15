@@ -1,15 +1,15 @@
 //
-//  SignUpRepository.swift
+//  EditProfileRepository.swift
 //  App
 //
-//  Created by Hani on 2022/06/27.
+//  Created by 김나희 on 7/14/22.
 //
 
 import Foundation
 
-import RxSwift 
+import RxSwift
 
-final class SignUpRepository: SignUpRepositoryInterface {
+final class EditProfileRepository: EditProfileRepositoryInterface {
     private let networkManager: NetworkManageable
     private let disposeBag = DisposeBag()
     
@@ -17,47 +17,37 @@ final class SignUpRepository: SignUpRepositoryInterface {
         self.networkManager = networkManager
     }
     
-    internal func signUp(user: UserAccount, accessToken: Data) -> Single<Void> {
+    internal func editProfile(introduction: String, accessToken: Data) -> Single<Void> {
         return Single<Void>.create { [weak self] observer in
             guard let self = self else {
                 return Disposables.create()
             }
-            
-            guard let url = URL(string: "https://yapp-togather.com/api/accounts/sign-up") else {
+        
+            guard let url = URL(string: APIConstants.BaseURL + APIConstants.EditProfile) else {
                 return Disposables.create()
             }
             
             let boundary = NetworkManager.shared.generateBoundaryString()
             let accessToken = String(decoding: accessToken, as: UTF8.self).makePrefixBearer()
-            
+
             var urlRequest = URLRequest(url: url)
-            urlRequest.httpMethod = HTTPMethod.post
+            urlRequest.httpMethod = HTTPMethod.patch
             urlRequest.addValue(accessToken, forHTTPHeaderField: "Authorization")
             urlRequest.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
             
-            let formFields: [String: String] = ["nickname": user.nickName ?? "",
-                                                "age": String(user.age ?? 0),
-                                                "sex": user.sex ?? "MAN",
-                                                "city": user.bigCity ?? "서울시",
-                                                "detail": user.smallCity ?? "강남구"]
-            
+            let formFields: [String: String] = ["selfIntroduction": introduction]
             let httpBody = NSMutableData()
 
             for (key, value) in formFields {
                 httpBody.appendString(NetworkManager.shared.convertFormField(named: key, value: value, using: boundary))
             }
 
-            httpBody.append(NetworkManager.shared.convertFileData(fieldName: "imageFile",
-                                            fileName: "[PROXY]",
-                                            mimeType: "image/jpg",
-                                            fileData:  user.profileImageData ?? Data(),
-                                            using: boundary))
-
             httpBody.appendString("--\(boundary)--")
 
             urlRequest.httpBody = httpBody as Data
 
-            let response: Single<Int> = self.networkManager.requestDataTask(with: urlRequest)
+            struct NoReply: Decodable {}
+            let response: Single<NoReply> = self.networkManager.requestDataTask(with: urlRequest)
             
             response.subscribe { result in
                 switch result {
