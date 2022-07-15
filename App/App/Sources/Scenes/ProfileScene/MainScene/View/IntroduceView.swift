@@ -23,36 +23,36 @@ final class IntroduceView: UIView {
         return label
     }()
     
-    
-    private lazy var divisionView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .Togaether.mainGreen
-        
-        return view
-    }()
-    
-    private lazy var category: UILabel = {
-        let label = UILabel()
-        label.text = "관심 카테고리"
-        label.font = .customFont(size: 14, style: .Medium)
-        label.textColor = .white
-        
-        return label
-    }()
-    
-    private lazy var categoryTagCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .Togaether.subGreen
-        collectionView.register(TagCollectionViewCell.self, forCellWithReuseIdentifier: TagCollectionViewCell.identifier)
-        collectionView.delegate = self
-        collectionView.showsHorizontalScrollIndicator = false
-        
-        return collectionView
-    }()
-    
+//
+//    private lazy var divisionView: UIView = {
+//        let view = UIView()
+//        view.backgroundColor = .Togaether.mainGreen
+//
+//        return view
+//    }()
+//
+//    private lazy var category: UILabel = {
+//        let label = UILabel()
+//        label.text = "관심 카테고리"
+//        label.font = .customFont(size: 14, style: .Medium)
+//        label.textColor = .white
+//
+//        return label
+//    }()
+//
+//    private lazy var categoryTagCollectionView: UICollectionView = {
+//        let layout = UICollectionViewFlowLayout()
+//        layout.scrollDirection = .horizontal
+//
+//        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+//        collectionView.backgroundColor = .Togaether.subGreen
+//        collectionView.register(TagCollectionViewCell.self, forCellWithReuseIdentifier: TagCollectionViewCell.identifier)
+//        collectionView.delegate = self
+//        collectionView.showsHorizontalScrollIndicator = false
+//
+//        return collectionView
+//    }()
+//
     var disposeBag = DisposeBag()
 
     override init(frame: CGRect) {
@@ -69,30 +69,30 @@ final class IntroduceView: UIView {
     
     private func addSubviews() {
         addSubview(introduceLabel)
-        addSubview(divisionView)
-        addSubview(category)
-        addSubview(categoryTagCollectionView)
+//        addSubview(divisionView)
+//        addSubview(category)
+//        addSubview(categoryTagCollectionView)
     }
     
     private func configureLayout() {
         NSLayoutConstraint.useAndActivateConstraints([
             introduceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
             introduceLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
-            introduceLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -28),
+            introduceLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             
-            divisionView.topAnchor.constraint(equalTo: introduceLabel.bottomAnchor, constant: 10),
-            divisionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            divisionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
-            divisionView.heightAnchor.constraint(equalToConstant: 1),
-
-            category.topAnchor.constraint(equalTo: divisionView.bottomAnchor, constant: 18),
-            category.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            category.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -29),
-            
-            categoryTagCollectionView.topAnchor.constraint(equalTo: category.topAnchor),
-            categoryTagCollectionView.leadingAnchor.constraint(equalTo: category.trailingAnchor, constant: 16),
-            categoryTagCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            categoryTagCollectionView.bottomAnchor.constraint(equalTo: category.bottomAnchor, constant: 2)
+//            divisionView.topAnchor.constraint(equalTo: introduceLabel.bottomAnchor, constant: 10),
+//            divisionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+//            divisionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+//            divisionView.heightAnchor.constraint(equalToConstant: 1),
+//
+//            category.topAnchor.constraint(equalTo: divisionView.bottomAnchor, constant: 18),
+//            category.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+//            category.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -29),
+//
+//            categoryTagCollectionView.topAnchor.constraint(equalTo: category.topAnchor),
+//            categoryTagCollectionView.leadingAnchor.constraint(equalTo: category.trailingAnchor, constant: 16),
+//            categoryTagCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+//            categoryTagCollectionView.bottomAnchor.constraint(equalTo: category.bottomAnchor, constant: 2)
             ])
     }
     
@@ -113,19 +113,19 @@ final class IntroduceView: UIView {
                 .drive(onNext: { data in
                     self.introduceLabel.text = data
                 })
-            
-            Observable.of(tags)
-                .asDriver(onErrorJustReturn: [])
-                .drive(categoryTagCollectionView.rx.items) { collectionView, row, data in
-                    let indexPath = IndexPath(row: row, section: 0)
-                    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.identifier, for: indexPath) as? TagCollectionViewCell else {
-                        return UICollectionViewCell()
-                    }
-                    cell.changeTagStyle()
-                    cell.configureData(data)
-                    
-                    return cell
-                }
+//
+//            Observable.of(tags)
+//                .asDriver(onErrorJustReturn: [])
+//                .drive(categoryTagCollectionView.rx.items) { collectionView, row, data in
+//                    let indexPath = IndexPath(row: row, section: 0)
+//                    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.identifier, for: indexPath) as? TagCollectionViewCell else {
+//                        return UICollectionViewCell()
+//                    }
+//                    cell.changeTagStyle()
+//                    cell.configureData(data)
+//
+//                    return cell
+//                }
         }
     }
 }

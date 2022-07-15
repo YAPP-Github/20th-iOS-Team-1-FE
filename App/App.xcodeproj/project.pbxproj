@@ -168,6 +168,10 @@
 		37ECC53E2871BA9300CFE8E9 /* RxImagePickerDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ECC53D2871BA9300CFE8E9 /* RxImagePickerDelegateProxy.swift */; };
 		37F67CC5286A1C270073FE8C /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F67CC4286A1C270073FE8C /* AuthCoordinator.swift */; };
 		FD0870BE287DB15600DF3553 /* EmptyNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0870BD287DB15600DF3553 /* EmptyNoticeView.swift */; };
+		FD0870D028805B4200DF3553 /* EditProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0870CF28805B4200DF3553 /* EditProfileRepository.swift */; };
+		FD0870D228805B6E00DF3553 /* AddPetRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0870D128805B6E00DF3553 /* AddPetRepository.swift */; };
+		FD0870D428805BC300DF3553 /* AddPetRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0870D328805BC300DF3553 /* AddPetRepositoryInterface.swift */; };
+		FD0870D62880631A00DF3553 /* EditProfileRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0870D52880631A00DF3553 /* EditProfileRepositoryInterface.swift */; };
 		FD5AEE86286DDC2A00001838 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5AEE85286DDC2A00001838 /* EditProfileViewController.swift */; };
 		FD5AEE88286DDC3600001838 /* AddPetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5AEE87286DDC3600001838 /* AddPetViewController.swift */; };
 		FD5AEE8A286DDD5100001838 /* EditProflieReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5AEE89286DDD5100001838 /* EditProflieReactor.swift */; };
@@ -377,6 +381,10 @@
 		37ECC53D2871BA9300CFE8E9 /* RxImagePickerDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxImagePickerDelegateProxy.swift; sourceTree = "<group>"; };
 		37F67CC4286A1C270073FE8C /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		FD0870BD287DB15600DF3553 /* EmptyNoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyNoticeView.swift; sourceTree = "<group>"; };
+		FD0870CF28805B4200DF3553 /* EditProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileRepository.swift; sourceTree = "<group>"; };
+		FD0870D128805B6E00DF3553 /* AddPetRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPetRepository.swift; sourceTree = "<group>"; };
+		FD0870D328805BC300DF3553 /* AddPetRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPetRepositoryInterface.swift; sourceTree = "<group>"; };
+		FD0870D52880631A00DF3553 /* EditProfileRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileRepositoryInterface.swift; sourceTree = "<group>"; };
 		FD5AEE85286DDC2A00001838 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		FD5AEE87286DDC3600001838 /* AddPetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPetViewController.swift; sourceTree = "<group>"; };
 		FD5AEE89286DDD5100001838 /* EditProflieReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProflieReactor.swift; sourceTree = "<group>"; };
@@ -516,6 +524,8 @@
 				FDE18E172873586C00A7369D /* GatherListRepository.swift */,
 				37499038287720E100D07211 /* DetailGatherRepository.swift */,
 				3731F775287C5AD70058635D /* CommentRepository.swift */,
+				FD0870CF28805B4200DF3553 /* EditProfileRepository.swift */,
+				FD0870D128805B6E00DF3553 /* AddPetRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -1116,6 +1126,7 @@
 			children = (
 				FD5AEE85286DDC2A00001838 /* EditProfileViewController.swift */,
 				FD5AEE89286DDD5100001838 /* EditProflieReactor.swift */,
+				FD0870D52880631A00DF3553 /* EditProfileRepositoryInterface.swift */,
 			);
 			path = EditProfileScene;
 			sourceTree = "<group>";
@@ -1126,6 +1137,7 @@
 				FD5AEE87286DDC3600001838 /* AddPetViewController.swift */,
 				FD5AEE8B286DDD7000001838 /* AddPetReactor.swift */,
 				FDD22683287A5C560042F488 /* AddPetContentView.swift */,
+				FD0870D328805BC300DF3553 /* AddPetRepositoryInterface.swift */,
 			);
 			path = AddPetScene;
 			sourceTree = "<group>";
@@ -1364,6 +1376,7 @@
 				374380A9284FDDC600CB02A5 /* TokenResponseDTO.swift in Sources */,
 				37605E01283A2AE200394929 /* RxASAuthorizationControllerPresentationContextProvidingProxy.swift in Sources */,
 				37D1E505287716D300A955C4 /* FileExtension.swift in Sources */,
+				FD0870D428805BC300DF3553 /* AddPetRepositoryInterface.swift in Sources */,
 				378F348D281DC0660063CE4F /* ChattingCoordinator.swift in Sources */,
 				3749904728772A4F00D07211 /* CommentInfoDTO.swift in Sources */,
 				378F347E281DBE070063CE4F /* GatherListViewController.swift in Sources */,
@@ -1384,6 +1397,7 @@
 				37479B9F283EAE140078386E /* UIImage+Extension.swift in Sources */,
 				37912CA628144A530087B95E /* TabCoordinator.swift in Sources */,
 				FDE6F146285215BD005E4783 /* UIFont+Extension.swift in Sources */,
+				FD0870D62880631A00DF3553 /* EditProfileRepositoryInterface.swift in Sources */,
 				375558BF2866E0AC00D13208 /* SignUpAreaReactor.swift in Sources */,
 				374380AB284FDFDD00CB02A5 /* SearchingRequestDTO.swift in Sources */,
 				FD8191582871E2CC00B49961 /* UIImageView+Extension.swift in Sources */,
@@ -1406,6 +1420,7 @@
 				3731F778287C606B0058635D /* CommentRepositoryInterface.swift in Sources */,
 				37499039287720E100D07211 /* DetailGatherRepository.swift in Sources */,
 				FD8AD7052851E26200454AC3 /* GatherListTableView.swift in Sources */,
+				FD0870D028805B4200DF3553 /* EditProfileRepository.swift in Sources */,
 				37912CA0281449230087B95E /* Coordinator.swift in Sources */,
 				FDBC1237286D6A6600FCADF4 /* APIConstants.swift in Sources */,
 				375558BE2866E0AC00D13208 /* SignUpAreaViewController.swift in Sources */,
@@ -1418,6 +1433,7 @@
 				294A0C1E287963F000D1CEB3 /* SearchGatherReactor.swift in Sources */,
 				FDFD017228735DBB00C625B1 /* GatherConfigurationForSheetResponseDTO.swift in Sources */,
 				29AE223D284D71DC00EDF34B /* LocationManageable.swift in Sources */,
+				FD0870D228805B6E00DF3553 /* AddPetRepository.swift in Sources */,
 				29AE223D284D71DC00EDF34B /* LocationManageable.swift in Sources */,
 				FD8AD7072851E28000454AC3 /* GatherListCell.swift in Sources */,
 				FDBC120C2868BF6200FCADF4 /* InitialIntroductionView.swift in Sources */,
