@@ -1,2 +1,2 @@
-# 20th-iOS-Team-1-FE
+# 투개더(Togaether)
 [20th] iOS 1팀 FrontEnd
