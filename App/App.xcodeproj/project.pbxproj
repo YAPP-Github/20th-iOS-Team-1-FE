@@ -119,7 +119,6 @@
 		378F3487281DBE210063CE4F /* ProfileReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F3485281DBE210063CE4F /* ProfileReactor.swift */; };
 		378F348B281DC0560063CE4F /* GatherListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F348A281DC0560063CE4F /* GatherListCoordinator.swift */; };
 		378F348D281DC0660063CE4F /* ChattingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F348C281DC0660063CE4F /* ChattingCoordinator.swift */; };
-		378F348F281DC0770063CE4F /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F348E281DC0760063CE4F /* ProfileCoordinator.swift */; };
 		37912C65281445AC0087B95E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37912C64281445AC0087B95E /* AppDelegate.swift */; };
 		37912C67281445AC0087B95E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37912C66281445AC0087B95E /* SceneDelegate.swift */; };
 		37912C6E281445AD0087B95E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37912C6D281445AD0087B95E /* Assets.xcassets */; };
@@ -178,6 +177,7 @@
 		FD5AEE8C286DDD7000001838 /* AddPetReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5AEE8B286DDD7000001838 /* AddPetReactor.swift */; };
 		FD5AEE8E286E265700001838 /* AccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5AEE8D286E265700001838 /* AccountInfo.swift */; };
 		FD5AEE90286E266800001838 /* PetInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5AEE8F286E266800001838 /* PetInfo.swift */; };
+		FD6D485C28859930005D9669 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6D485B28859930005D9669 /* ProfileCoordinator.swift */; };
 		FD7E2554287C18AC008E9E24 /* PetSizeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7E2553287C18AC008E9E24 /* PetSizeButton.swift */; };
 		FD8191582871E2CC00B49961 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8191572871E2CC00B49961 /* UIImageView+Extension.swift */; };
 		FD8AD7052851E26200454AC3 /* GatherListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8AD7042851E26200454AC3 /* GatherListTableView.swift */; };
@@ -328,7 +328,6 @@
 		378F3485281DBE210063CE4F /* ProfileReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileReactor.swift; sourceTree = "<group>"; };
 		378F348A281DC0560063CE4F /* GatherListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListCoordinator.swift; sourceTree = "<group>"; };
 		378F348C281DC0660063CE4F /* ChattingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingCoordinator.swift; sourceTree = "<group>"; };
-		378F348E281DC0760063CE4F /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		37912C61281445AC0087B95E /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37912C64281445AC0087B95E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37912C66281445AC0087B95E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -391,6 +390,7 @@
 		FD5AEE8B286DDD7000001838 /* AddPetReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPetReactor.swift; sourceTree = "<group>"; };
 		FD5AEE8D286E265700001838 /* AccountInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInfo.swift; sourceTree = "<group>"; };
 		FD5AEE8F286E266800001838 /* PetInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetInfo.swift; sourceTree = "<group>"; };
+		FD6D485B28859930005D9669 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		FD7E2553287C18AC008E9E24 /* PetSizeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetSizeButton.swift; sourceTree = "<group>"; };
 		FD8191572871E2CC00B49961 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		FD8AD7042851E26200454AC3 /* GatherListTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListTableView.swift; sourceTree = "<group>"; };
@@ -558,17 +558,9 @@
 			path = FileManager;
 			sourceTree = "<group>";
 		};
-		373F0CB2287ED636003A5369 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
-			sourceTree = "<group>";
-		};
 		37438093284FD8A300CB02A5 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
-				373F0CB2287ED636003A5369 /* New Group */,
 				37499041287726F000D07211 /* Common */,
 				37499043287727B400D07211 /* Token */,
 				37499042287726FA00D07211 /* Account */,
@@ -836,6 +828,7 @@
 		378F3477281DBDC30063CE4F /* ProfileScene */ = {
 			isa = PBXGroup;
 			children = (
+				FD6D485B28859930005D9669 /* ProfileCoordinator.swift */,
 				FDBC1227286C317500FCADF4 /* MainScene */,
 				FD5AEE83286DDBD200001838 /* EditProfileScene */,
 				FD5AEE84286DDBE200001838 /* AddPetScene */,
@@ -1182,7 +1175,6 @@
 				FDBC12022866857800FCADF4 /* View */,
 				378F3484281DBE210063CE4F /* ProfileViewController.swift */,
 				378F3485281DBE210063CE4F /* ProfileReactor.swift */,
-				378F348E281DC0760063CE4F /* ProfileCoordinator.swift */,
 				FDBC1228286C31D200FCADF4 /* ProfileMainRepositoryInterface.swift */,
 			);
 			path = MainScene;
@@ -1428,7 +1420,6 @@
 				374F41E1286619C90074F04B /* Area.swift in Sources */,
 				3749903B2877239600D07211 /* ClubInfosResponseDTO.swift in Sources */,
 				37C3F4ED284BF4380006CB02 /* KeychainProvidable.swift in Sources */,
-				378F348F281DC0770063CE4F /* ProfileCoordinator.swift in Sources */,
 				376006C82848A16400B27015 /* RegularExpressionValidatable.swift in Sources */,
 				294A0C1E287963F000D1CEB3 /* SearchGatherReactor.swift in Sources */,
 				FDFD017228735DBB00C625B1 /* GatherConfigurationForSheetResponseDTO.swift in Sources */,
@@ -1497,6 +1488,7 @@
 				37912C65281445AC0087B95E /* AppDelegate.swift in Sources */,
 				3734CEAC2869E72100EEF38D /* SignUpRepository.swift in Sources */,
 				FDE18E1F2873598E00A7369D /* GatherListRepositoryInterface.swift in Sources */,
+				FD6D485C28859930005D9669 /* ProfileCoordinator.swift in Sources */,
 				374380AF284FE13300CB02A5 /* SearchingResponseDTO.swift in Sources */,
 				374F41D72864E97A0074F04B /* KeychainAccount.swift in Sources */,
 				29AE222D284B7DAA00EDF34B /* SearchViewController.swift in Sources */,
