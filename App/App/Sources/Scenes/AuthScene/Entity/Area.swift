@@ -326,9 +326,9 @@ enum Area: String, CaseIterable {
         case jeju = " 제주시"
     }
 
-    static func getSmallCity(bigCity: String) -> [String]? {
+    static func getSmallCity(bigCity: String) -> [String] {
         guard let area = Area(rawValue: bigCity) else {
-            return nil
+            return []
         }
         
         switch area {
