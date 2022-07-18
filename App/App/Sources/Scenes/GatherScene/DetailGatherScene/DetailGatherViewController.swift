@@ -14,6 +14,14 @@ final class DetailGatherViewController: BaseViewController {
     typealias Reactor = DetailGatherReactor
     
     private let contentView = UIView()
+    
+    private lazy var settingBarButton: UIBarButtonItem = {
+        let button = UIBarButtonItem()
+        button.image = UIImage.Togaether.setting
+        
+        return button
+    }()
+    
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.keyboardDismissMode = .onDrag
@@ -291,7 +299,7 @@ final class DetailGatherViewController: BaseViewController {
     }()
 
     private lazy var gatherButtonDivider = Divider()
-
+    private let reportSubject = PublishSubject<Void>()
     private lazy var gatherButton: EnableButton = {
         let button = EnableButton()
         button.isEnabled = false
@@ -378,22 +386,44 @@ final class DetailGatherViewController: BaseViewController {
     
     private func configureUI() {
         
+        navigationItem.rightBarButtonItem = settingBarButton
     }
     
     private func bindAction(with reactor: Reactor) {
         disposeBag.insert {
+            settingBarButton.rx.tap
+                .observe(on: MainScheduler.instance)
+                .subscribe(with: self,
+                   onNext: { this, isEnabled in
+                    this.presentAlertSheet()
+                })
             
+            reportSubject
+                .map { Reactor.Action.reportDidOccur }
+                .bind(to: reactor.action)
         }
     }
     
     private func bindState(with reactor: Reactor) {
         disposeBag.insert {
-            
         }
     }
     
     func bind(reactor: Reactor) {
         bindAction(with: reactor)
         bindState(with: reactor)
+    }
+    
+    private func presentAlertSheet() {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        let reportAction = UIAlertAction(title: "부적절한 모임 신고", style: .destructive, handler: { [weak self] _ in
+            self?.reportSubject.onNext(())
+        })
+        let cancelAction = UIAlertAction(title: "취소", style: .default, handler: nil)
+
+        alertController.addAction(reportAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
     }
 }

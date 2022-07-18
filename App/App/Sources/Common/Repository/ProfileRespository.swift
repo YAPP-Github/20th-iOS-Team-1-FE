@@ -18,7 +18,8 @@ final class ProfileRespository: ProfileMainRepositoryInterface {
     }
     
     internal func requestProfileInfo(accessToken: Data, nickname: String? = nil) -> Single<ProfileInfo> {
-        return Single.create { [weak self] observer in
+        
+        return Single<ProfileInfo>.create { [weak self] observer in
             guard let self = self else {
                 return Disposables.create()
             }
