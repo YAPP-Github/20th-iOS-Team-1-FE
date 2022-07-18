@@ -12,7 +12,7 @@ import RxSwift
 
 final class DetailGatherReactor: Reactor {
     enum Action {
-        
+        case reportDidOccur
     }
     
     enum Mutation {
@@ -21,6 +21,7 @@ final class DetailGatherReactor: Reactor {
     
     struct State {
         let clubID: Int
+        var shouldPresentAlertSheet: Bool = false 
     }
     
     let initialState: State
@@ -32,6 +33,8 @@ final class DetailGatherReactor: Reactor {
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
             
+        case .reportDidOccur:
+            return Observable.empty()
         }
     }
     

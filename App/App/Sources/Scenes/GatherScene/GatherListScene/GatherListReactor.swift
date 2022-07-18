@@ -18,18 +18,16 @@ final class GatherListReactor: Reactor {
     
     enum Mutation {
         case readyToListInfo(GatherListInfo)
-        case readyToProceedDetailGatherView(Int)
     }
     
     struct State {
         var gatherListInfo = GatherListInfo(hasNotClub: false)
-        var isReadyToProceedDetailGatherView = (false, 0)
     }
     
     private let disposeBag = DisposeBag()
     private let gatherListRepository: GatherListRepositoryInterface
     private let keychainUseCase: KeychainUseCaseInterface
-    
+    internal var readyToDetailGather = PublishSubject<Int>()
     init(gatherListRepository: GatherListRepositoryInterface, keychainUseCase: KeychainUseCaseInterface) {
         self.gatherListRepository = gatherListRepository
         self.keychainUseCase = keychainUseCase
@@ -46,7 +44,8 @@ final class GatherListReactor: Reactor {
             
             return getGatherList(gatherCondition)
         case .gatherListCellDidTap(clubID: let clubID):
-            return Observable.just(Mutation.readyToProceedDetailGatherView(clubID))
+            readyToDetailGather.onNext(clubID)
+            return Observable.empty()
         }
     }
     
@@ -56,9 +55,6 @@ final class GatherListReactor: Reactor {
         switch mutation {
         case .readyToListInfo(let data):
             newState.gatherListInfo = data
-            newState.isReadyToProceedDetailGatherView = (false, 0)
-        case .readyToProceedDetailGatherView(let clubID):
-            newState.isReadyToProceedDetailGatherView = (true, clubID)
         }
         
         return newState
@@ -74,14 +70,11 @@ final class GatherListReactor: Reactor {
             self.keychainUseCase.getAccessToken()
                 .subscribe(with: self,
                    onSuccess: { this, token in
-                    
-                    
-                    
                     this.gatherListRepository.requestGatherList(lastID: nil, endDate: nil, gatherCondition: gather, accessToken: token)
                         .subscribe { result in
                         switch result {
                         case .success(let gatherListInfo):
-                            observer.onNext(Mutation.readyToListInfo(GatherListInfo(hasNotClub: gatherListInfo.hasNotClub, clubInfos: gatherListInfo.clubInfos)))
+                            observer.onNext(Mutation.readyToListInfo(gatherListInfo))
                         case .failure(let error):
                             print("RESULT FAILURE: ", error.localizedDescription)
                         }
