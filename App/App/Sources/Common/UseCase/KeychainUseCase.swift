@@ -63,7 +63,7 @@ final class KeychainUsecase: KeychainUseCaseInterface {
                         try self.keychainProvider.create(accessToken, service: KeychainService.apple, account: KeychainAccount.accessToken)
                         try self.keychainProvider.delete(service: KeychainService.apple, account: KeychainAccount.refreshToken)
                         try self.keychainProvider.create(refreshToken, service: KeychainService.apple, account: KeychainAccount.refreshToken)
-                        if let accessToken = try self.keychainProvider.read(service: KeychainService.apple, account: KeychainAccount.refreshToken) {
+                        if let accessToken = try self.keychainProvider.read(service: KeychainService.apple, account: KeychainAccount.accessToken) {
                             single(.success(accessToken))
                             return
                         }

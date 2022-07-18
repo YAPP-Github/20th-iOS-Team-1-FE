@@ -90,28 +90,10 @@ final class GatherListViewController: BaseViewController {
         disposeBag.insert {
             reactor.state
                 .map { $0.gatherListInfo.clubInfos?.content ?? [] }
-                .distinctUntilChanged()
-                .asDriver(onErrorJustReturn: [])
-                .drive(self.contentTableView.rx.items) { tableView, row, data in
-                    let indexPath = IndexPath(row: row, section: 0)
-                    guard let cell = tableView.dequeueReusableCell(withIdentifier: GatherListCell.identifier, for: indexPath) as? GatherListCell else {
-                        return UITableViewCell()
-                    }
-                    cell.configureData(data)
-                    
-                    return cell
-                }
-            
-            reactor.state
-                .map { $0.isReadyToProceedDetailGatherView }
-                .filter { $0.0 == true }
                 .observe(on: MainScheduler.instance)
-                .subscribe(with: self,
-                   onNext: { this, data in
-                    let detailGatherReactor = DetailGatherReactor(clubID: data.1)
-                    let detailGatherViewController = DetailGatherViewController(reactor: detailGatherReactor)
-                    this.navigationController?.pushViewController(detailGatherViewController, animated: true)
-                })
+                .bind(to: contentTableView.rx.items(cellIdentifier: GatherListCell.identifier, cellType: GatherListCell.self)) { index, item, cell in
+                    cell.configureData(item)
+                }
         }
     }
     
