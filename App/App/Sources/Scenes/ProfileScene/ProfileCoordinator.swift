@@ -29,10 +29,18 @@ final class ProfileCoordinator: SceneCoordinator {
         let viewController = ProfileViewController(reactor: reactor)
         
         reactor.readyToProceedEditProfile
+            .asDriver(onErrorJustReturn: "")
+            .drive(with: self,
+                   onNext: { this, text in
+                this.pushEditProfileViewController(text)
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.readyToProceedRegisterProfile
             .asDriver(onErrorJustReturn: ())
             .drive(with: self,
                    onNext: { this, _ in
-                this.pushEditProfileViewController()
+                this.pushEditProfileViewController(nil)
             })
             .disposed(by: disposeBag)
         
@@ -47,15 +55,22 @@ final class ProfileCoordinator: SceneCoordinator {
         navigationController.setViewControllers([viewController], animated: false)
     }
     
-    func pushEditProfileViewController() {
+    func pushEditProfileViewController(_ text: String?) {
         let networkManager = NetworkManager.shared
         let keychain = KeychainQueryRequester()
         let keychainProvider = KeychainProvider(keyChain: keychain)
         let keychainUseCase = KeychainUsecase(keychainProvider: keychainProvider, networkManager: networkManager)
-
         let editProfileRepository = EditProfileRepository(networkManager: NetworkManager.shared)
-        let editProflieReactor = EditProflieReactor(editProfileRepository: editProfileRepository, keychainUseCase: keychainUseCase)
-        let editProfileViewController = EditProfileViewController(reactor: editProflieReactor)
+        let editProfileReactor = EditProflieReactor(editProfileRepository: editProfileRepository, keychainUseCase: keychainUseCase)
+        let editProfileViewController = EditProfileViewController(reactor: editProfileReactor)
+        editProfileViewController.introduceTextView.text = text ?? "내용을 입력해주세요."
+        
+        editProfileReactor.didRegisterProfile
+            .asDriver(onErrorJustReturn: ())
+            .drive(onNext: {
+                self.dismiss(animated: true)
+            })
+            .disposed(by: disposeBag)
                 
         navigationController.pushViewController(editProfileViewController, animated: true)
     }
@@ -66,5 +81,10 @@ final class ProfileCoordinator: SceneCoordinator {
         let addPetViewController = AddPetViewController(reactor: addPetReactor)
 
         navigationController.pushViewController(addPetViewController, animated: true)
+    }
+    
+    func dismiss(animated: Bool) {
+        navigationController.popViewController(animated: animated)
+        start()
     }
 }

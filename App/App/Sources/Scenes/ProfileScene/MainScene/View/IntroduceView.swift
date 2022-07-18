@@ -13,7 +13,7 @@ import RxSwift
 final class IntroduceView: UIView {
     private var tags = [String]()
     
-    private lazy var introduceLabel: UILabel = {
+    internal lazy var introduceLabel: UILabel = {
         let label = UILabel()
         label.text = "우리 초코랑 같이 산책하실 분 구해요! 평행산책 같이 연습해요~"
         label.numberOfLines = 0

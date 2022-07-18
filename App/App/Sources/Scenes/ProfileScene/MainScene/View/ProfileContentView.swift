@@ -210,7 +210,7 @@ final class ProfileContentView: UIView {
     }
     
     internal func configureData(_ myPage: Bool, _ accountInfo: AccountInfo?, petInfo: [PetInfo]?) {
-        guard var accountData = accountInfo,
+        guard let accountData = accountInfo,
               let petData = petInfo else {
             return
         }
@@ -221,7 +221,6 @@ final class ProfileContentView: UIView {
             introduceView.configureData(accountData)
             addPuppyButton.removeFromSuperview()
         } else {
-            accountData.Introduction = nil
             if accountData.Introduction != nil {
                 initailIntroduceView.removeFromSuperview()
                 introduceView.isHidden = false

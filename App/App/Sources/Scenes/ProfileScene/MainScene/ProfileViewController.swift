@@ -86,14 +86,19 @@ final class ProfileViewController: BaseViewController {
                 .map { nickName in
                     Reactor.Action.profileInfo(nickname: nickName) }
                 .bind(to: reactor.action)
-            
+
             settingBarButton.rx.tap
                 .map { Reactor.Action.settingButtonDidTap }
                 .bind(to: reactor.action)
             
+            profileContentView.introduceView.rx.tapGesture()
+                .when(.recognized)
+                .map { _ in Reactor.Action.introductionEditButtonDidTap(text: self.profileContentView.introduceView.introduceLabel.text ?? "") }
+                .bind(to: reactor.action)
+            
             profileContentView.initailIntroduceView.rx.tapGesture()
                 .when(.recognized)
-                .map { _ in Reactor.Action.profileEditButtonDidTap }
+                .map { _ in Reactor.Action.introductionRegisterButtonDidTap }
                 .bind(to: reactor.action)
 
             profileContentView.addPuppyButton.rx.tap
