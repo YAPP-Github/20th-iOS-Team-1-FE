@@ -59,8 +59,8 @@ final class SignUpAreaReactor: Reactor {
                 return Observable.empty()
             }
         case .smallCityTextFieldDidTap:
-            if let smallCities = getSmallCities(bigCity: currentState.selectedBigCity) {
-                return Observable.just(.showSmallCities(smallCities))
+            if let selectedBigCity = currentState.selectedBigCity {
+                return Observable.just(.showSmallCities(getSmallCities(bigCity: selectedBigCity)))
             } else {
                 return Observable.empty()
             }
@@ -85,9 +85,10 @@ final class SignUpAreaReactor: Reactor {
         case .updateBigCity(let city):
             newState.user.bigCity = city
             newState.selectedBigCity = city
-            newState.user.smallCity = "종로구"
-            newState.selectedSmallCity = "종로구"
-            newState.isNextButtonEnabled = true
+            newState.user.smallCity = nil
+            newState.selectedSmallCity = nil
+            newState.isNextButtonEnabled = false
+            newState.smallCityList = getSmallCities(bigCity: city)
         case .showSmallCities(let cities):
             newState.smallCityList = cities
         case .updateSmallCity(let city):
@@ -99,11 +100,7 @@ final class SignUpAreaReactor: Reactor {
         return newState
     }
 
-    private func getSmallCities(bigCity: String?) -> [String]? {
-        guard let bigCity = bigCity else {
-            return nil
-        }
-        
+    private func getSmallCities(bigCity: String) -> [String] {
         let smallCities = Area.getSmallCity(bigCity: bigCity)
     
         return smallCities
