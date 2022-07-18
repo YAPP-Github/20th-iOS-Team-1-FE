@@ -13,9 +13,10 @@ import RxSwift
 
 final class ProfileReactor: Reactor {
     enum Action {
-        case profileInfo(nickname: String?)
+        case profileInfo(nickname: String)
         case settingButtonDidTap
-        case profileEditButtonDidTap
+        case introductionRegisterButtonDidTap
+        case introductionEditButtonDidTap(text: String)
         case petAddButtonDidTap
     }
     
@@ -37,7 +38,8 @@ final class ProfileReactor: Reactor {
     private let keychainUseCase: KeychainUseCaseInterface
     private let disposeBag = DisposeBag()
     
-    internal var readyToProceedEditProfile = PublishSubject<Void>()
+    internal var readyToProceedRegisterProfile = PublishSubject<Void>()
+    internal var readyToProceedEditProfile = PublishSubject<String>()
     internal var readyToProceedAddPet = PublishSubject<Void>()
     
     init(keychainUseCase: KeychainUseCaseInterface, profileMainRepository: ProfileMainRepositoryInterface) {
@@ -49,8 +51,11 @@ final class ProfileReactor: Reactor {
         switch action {
         case .profileInfo(nickname: let nickname):
             return getProfileInfo(nickname: nickname)
-        case .profileEditButtonDidTap:
-            readyToProceedEditProfile.onNext(())
+        case .introductionRegisterButtonDidTap:
+            readyToProceedRegisterProfile.onNext(())
+            return Observable.empty()
+        case .introductionEditButtonDidTap(text: let text):
+            readyToProceedEditProfile.onNext(text)
             return Observable.empty()
         case .petAddButtonDidTap:
             readyToProceedAddPet.onNext(())
@@ -80,8 +85,6 @@ final class ProfileReactor: Reactor {
                 return Disposables.create()
             }
             
-//            var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ5YXBwIiwic3ViIjoidW5pcXVlMSIsImF1ZCI6IkFDQ0VTUyIsImV4cCI6MTY2Nzg0MDQ4NSwiaWF0IjoxNjU0NzAwNDg1LCJhdXRoIjoiVVNFUiJ9.pt_MstkRfFOI_qFn0d1FEmRaOFRsTc2XIAYvtEJHWeJCHAjkTD74Yq-Xl7SbmwUEFvi2FWGma8SToDvu2fXK6A"
-//            Single.just(Data(token.utf8))
             self.keychainUseCase.getAccessToken()
                 .subscribe(with: self,
                    onSuccess: { this, token in

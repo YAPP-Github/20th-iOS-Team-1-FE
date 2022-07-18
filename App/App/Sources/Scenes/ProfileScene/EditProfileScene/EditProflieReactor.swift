@@ -33,7 +33,7 @@ final class EditProflieReactor: Reactor {
     private let keychainUseCase: KeychainUseCaseInterface
     private let disposeBag = DisposeBag()
     
-    internal var readyToReturnProfileView = PublishSubject<Void>()
+    internal var didRegisterProfile = PublishSubject<Void>()
 
     init(editProfileRepository: EditProfileRepositoryInterface, keychainUseCase: KeychainUseCaseInterface) {
         self.editProfileRepository = editProfileRepository
@@ -74,8 +74,6 @@ final class EditProflieReactor: Reactor {
                 return Disposables.create()
             }
             
-//            var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ5YXBwIiwic3ViIjoidW5pcXVlMSIsImF1ZCI6IkFDQ0VTUyIsImV4cCI6MTY2Nzg0MDQ4NSwiaWF0IjoxNjU0NzAwNDg1LCJhdXRoIjoiVVNFUiJ9.pt_MstkRfFOI_qFn0d1FEmRaOFRsTc2XIAYvtEJHWeJCHAjkTD74Yq-Xl7SbmwUEFvi2FWGma8SToDvu2fXK6A"
-//            Single.just(Data(token.utf8))
             self.keychainUseCase.getAccessToken()
                 .subscribe(with: self,
                    onSuccess: { this, token in
@@ -83,6 +81,7 @@ final class EditProflieReactor: Reactor {
                         .subscribe(
                             onSuccess: {
                                 observer.onNext(Mutation.readyToProceedParentView(true))
+                                self.didRegisterProfile.onNext(())
                                 return
                             }, onFailure: { _ in
                                 observer.onNext(Mutation.readyToProceedParentView(false))

@@ -34,7 +34,7 @@ final class EditProfileViewController: BaseViewController {
         return label
     }()
     
-    private lazy var introduceTextView: UITextView = {
+    internal lazy var introduceTextView: UITextView = {
         let textView = UITextView()
         textView.layer.cornerRadius = 12
         textView.text = "내용을 입력해주세요."
@@ -154,7 +154,15 @@ final class EditProfileViewController: BaseViewController {
                         this.registerButton.becomeFirstResponder()
                     }
                 })
-        
+            
+            reactor.state
+                .map { $0.registeredIntroduction }
+                .distinctUntilChanged()
+                .filter { $0 == true }
+                .asDriver(onErrorJustReturn: false)
+                .drive(onNext: { _ in
+                    self.navigationController?.popViewController(animated: true)
+                })
         }
     }
     
@@ -172,7 +180,9 @@ extension EditProfileViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         guard textView.textColor == .Togaether.secondaryLabel else { return }
         textView.textColor = .Togaether.primaryLabel
-        textView.text = nil
+        if textView.text == "내용을 입력해주세요." {
+            textView.text = nil
+        }
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {

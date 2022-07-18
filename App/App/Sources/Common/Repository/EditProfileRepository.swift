@@ -46,8 +46,7 @@ final class EditProfileRepository: EditProfileRepositoryInterface {
 
             urlRequest.httpBody = httpBody as Data
 
-            struct NoReply: Decodable {}
-            let response: Single<NoReply> = self.networkManager.requestDataTask(with: urlRequest)
+            let response: Single<Int> = self.networkManager.requestDataTask(with: urlRequest)
             
             response.subscribe { result in
                 switch result {
