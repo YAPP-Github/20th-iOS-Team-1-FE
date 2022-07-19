@@ -82,8 +82,18 @@ final class AddPetViewController: BaseViewController {
                 }
                 .map { $0[.editedImage] as? UIImage }
                 .map { $0?.pngData() }
-                .map { Reactor.Action.gallaryImageDidPick($0) }
+                .map { Reactor.Action.profileImageDidPick($0) }
                 .bind(to: reactor.action)
+            
+            addPetContentView.nameTextField.rx.text
+                .orEmpty
+                .distinctUntilChanged()
+                .map { Reactor.Action.nameTextFieldDidEndEditing($0) }
+                .bind(to: reactor.action)
+
+//            addPetContentView.ageTextField.rx.text
+//                .map { Reactor.Action.dateDidEndEditing($0) }
+//                .bind(to: reactor.action)
 
             addPetContentView.smallPetButton.rx.throttleTap
                 .map { Reactor.Action.smallPetButtonDidTap }
@@ -95,6 +105,11 @@ final class AddPetViewController: BaseViewController {
                 
             addPetContentView.largePetButton.rx.throttleTap
                 .map { Reactor.Action.largePetButtonDidTap }
+                .bind(to: reactor.action)
+            
+            addPetContentView.searchBreedBar.rx.tapGesture()
+                .when(.recognized)
+                .map { _ in Reactor.Action.searchBarDidTap }
                 .bind(to: reactor.action)
             
             addPetContentView.manButton.rx.throttleTap
@@ -141,6 +156,19 @@ final class AddPetViewController: BaseViewController {
     
     private func bindState(with reactor: AddPetReactor) {
         disposeBag.insert {
+            reactor.state
+                .map { $0.petInfo.imageFile }
+                .distinctUntilChanged()
+                .asDriver(onErrorJustReturn: nil)
+                .drive(with: self,
+                   onNext: { this, imageData in
+                    guard let imageData = imageData else {
+                        return
+                    }
+                    
+                    this.addPetContentView.profileImageButton.setImage(UIImage(data: imageData), for: .normal)
+                })
+            
             reactor.state
                 .map { $0.isSmallSelected }
                 .distinctUntilChanged()
@@ -218,6 +246,12 @@ final class AddPetViewController: BaseViewController {
                 .distinctUntilChanged()
                 .asDriver(onErrorJustReturn: false)
                 .drive(addPetContentView.inadaptableButton.rx.isSelected)
+            
+            reactor.state
+                .map { $0.petInfo }
+                .subscribe(onNext: {
+                    print($0)
+                })
         }
         
     }
@@ -225,6 +259,10 @@ final class AddPetViewController: BaseViewController {
     func bind(reactor: AddPetReactor) {
         bindAction(with: reactor)
         bindState(with: reactor)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
 
 }

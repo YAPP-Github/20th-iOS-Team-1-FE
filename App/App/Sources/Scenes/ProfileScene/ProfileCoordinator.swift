@@ -79,8 +79,26 @@ final class ProfileCoordinator: SceneCoordinator {
         let addPetRepository = AddPetRepository(networkManager: NetworkManager.shared)
         let addPetReactor = AddPetReactor(addPetRepository: addPetRepository)
         let addPetViewController = AddPetViewController(reactor: addPetReactor)
+        
+        addPetReactor.readyToProceedSearchBreed
+            .asDriver(onErrorJustReturn: ())
+            .drive(with: self,
+                   onNext: { this, _ in
+                this.pushSearchBreedViewController()
+            })
+            .disposed(by: disposeBag)
 
         navigationController.pushViewController(addPetViewController, animated: true)
+    }
+    
+    func pushSearchBreedViewController() {
+        let networkManager = NetworkManager.shared
+        let keychain = KeychainQueryRequester()
+        let keychainProvider = KeychainProvider(keyChain: keychain)
+        let keychainUseCase = KeychainUsecase(keychainProvider: keychainProvider, networkManager: networkManager)
+        let viewController = SearchBreedViewController(reactor: SearchBreedReactor())
+
+        navigationController.pushViewController(viewController, animated: true)
     }
     
     func dismiss(animated: Bool) {
