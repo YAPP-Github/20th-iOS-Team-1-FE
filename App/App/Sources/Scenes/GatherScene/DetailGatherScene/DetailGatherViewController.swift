@@ -398,8 +398,12 @@ final class DetailGatherViewController: BaseViewController {
                     this.presentAlertSheet()
                 })
             
+            rx.viewWillAppear
+                .map { _ in Reactor.Action.viewWillAppear }
+                .bind(to: reactor.action)
+            
             reportSubject
-                .map { Reactor.Action.reportDidOccur }
+                .map { Reactor.Action.clubReportDidOccur }
                 .bind(to: reactor.action)
         }
     }

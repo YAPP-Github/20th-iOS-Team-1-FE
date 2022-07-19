@@ -19,4 +19,15 @@ struct CommentInfoDTO: Codable {
     let author: String
     let leader: String
     let updatedTime: String
+    
+    func toDomain() -> CommentInfo {
+        CommentInfo(content: content, author: author, leader: leader, updatedTime: updatedTime)
+    }
+}
+
+struct CommentInfo {
+    let content: String
+    let author: String
+    let leader: String
+    let updatedTime: String
 }
