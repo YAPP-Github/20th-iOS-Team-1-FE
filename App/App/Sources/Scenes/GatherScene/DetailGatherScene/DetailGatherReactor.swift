@@ -12,28 +12,45 @@ import RxSwift
 
 final class DetailGatherReactor: Reactor {
     enum Action {
-        case reportDidOccur
+        case viewWillAppear
+        case clubReportDidOccur
+        case commentReportDidOccur(Int)
+        case commentDidOccur(String)
     }
     
     enum Mutation {
-        
+        case updateDetailGather(ClubFindDetail)
+        case updateCommentReportSuccess(Bool)
+        case updateClubReportSuccess(Bool)
     }
     
     struct State {
         let clubID: Int
-        var shouldPresentAlertSheet: Bool = false 
+        var isClubReportSuccess = false
+        var isCommentReportSuccess = false
+        var clubFindDetail: ClubFindDetail?
     }
     
     let initialState: State
+    private let disposeBag = DisposeBag()
+    private let detailGatherRepository: DetailGatherRepositoryInterface
+    private let keychainUseCase: KeychainUseCaseInterface
     
-    init(clubID: Int) {
+    init(clubID: Int, detailGatherRepository: DetailGatherRepositoryInterface, keychainUseCase: KeychainUseCaseInterface) {
         initialState = State(clubID: clubID)
+        self.detailGatherRepository = detailGatherRepository
+        self.keychainUseCase = keychainUseCase
     }
     
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
-            
-        case .reportDidOccur:
+        case .viewWillAppear:
+            return getGatherDetail(clubID: currentState.clubID)
+        case .clubReportDidOccur:
+            return reportClub(clubID: currentState.clubID)
+        case .commentReportDidOccur(_):
+            return reportComment(commentID: 0)
+        case .commentDidOccur(_):
             return Observable.empty()
         }
     }
@@ -42,9 +59,93 @@ final class DetailGatherReactor: Reactor {
         var newState = state
         
         switch mutation {
-            
-        }
         
+        case .updateDetailGather(let clubFindDetail):
+            newState.clubFindDetail = clubFindDetail
+        case .updateCommentReportSuccess(let isSuccess):
+            newState.isCommentReportSuccess = isSuccess
+        case .updateClubReportSuccess(let isSuccess):
+            newState.isClubReportSuccess = isSuccess
+        }
         return newState
     }
+    
+    private func getGatherDetail(clubID: Int) -> Observable<Mutation> {
+        return Observable.create { [weak self] observer in
+            guard let self = self else {
+                return Disposables.create()
+            }
+            
+            self.keychainUseCase.getAccessToken()
+                .subscribe(with: self,
+                   onSuccess: { this, token in
+                    this.detailGatherRepository.requestDetailGather(accessToken: token, clubID: clubID)
+                        .subscribe { result in
+                        switch result {
+                        case .success(let clubFindDetail):
+                            observer.onNext(Mutation.updateDetailGather(clubFindDetail))
+                        case .failure(let error):
+                            print("RESULT FAILURE: ", error.localizedDescription)
+                        }
+                    }.disposed(by: self.disposeBag)
+                },
+                onFailure: { _,_ in
+                     return
+                }).disposed(by: self.disposeBag)
+            return Disposables.create()
+        }
+    }
+    
+    private func reportClub(clubID: Int) -> Observable<Mutation> {
+        return Observable.create { [weak self] observer in
+            guard let self = self else {
+                return Disposables.create()
+            }
+            
+            self.keychainUseCase.getAccessToken()
+                .subscribe(with: self,
+                   onSuccess: { this, token in
+                    this.detailGatherRepository.reportClub(accessToken: token, clubID: clubID)
+                        .subscribe { result in
+                        switch result {
+                        case .success(let isSuccess):
+                            observer.onNext(Mutation.updateClubReportSuccess(isSuccess))
+                        case .failure(let error):
+                            print("RESULT FAILURE: ", error.localizedDescription)
+                        }
+                    }.disposed(by: self.disposeBag)
+                },
+                onFailure: { _,_ in
+                     return
+                }).disposed(by: self.disposeBag)
+            return Disposables.create()
+        }
+    }
+    
+    private func reportComment(commentID: Int) -> Observable<Mutation> {
+        return Observable.create { [weak self] observer in
+            guard let self = self else {
+                return Disposables.create()
+            }
+            
+            self.keychainUseCase.getAccessToken()
+                .subscribe(with: self,
+                   onSuccess: { this, token in
+                    this.detailGatherRepository.reportComment(accessToken: token, commentID: commentID)
+                        .subscribe { result in
+                        switch result {
+                        case .success(let isSuccess):
+                            observer.onNext(Mutation.updateCommentReportSuccess(isSuccess))
+                        case .failure(let error):
+                            print("RESULT FAILURE: ", error.localizedDescription)
+                        }
+                    }.disposed(by: self.disposeBag)
+                },
+                onFailure: { _,_ in
+                     return
+                }).disposed(by: self.disposeBag)
+            return Disposables.create()
+        }
+    }
+    
 }

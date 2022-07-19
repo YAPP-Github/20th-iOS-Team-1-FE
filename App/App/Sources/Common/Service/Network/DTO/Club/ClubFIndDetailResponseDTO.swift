@@ -15,10 +15,22 @@ struct ClubFIndDetailResponseDTO: Codable {
         case leaderInfo
         case commentInfos
     }
-    #warning("디티오 다시 만들어라")
+    
     let participating: Bool
     let leader: Bool
     let clubDetailInfo: ClubDetailInfoDTO
     let leaderInfo: LeaderInfoDTO
     let commentInfos: [CommentInfoDTO]
+    
+    func toDomain() -> ClubFindDetail {
+        ClubFindDetail(participating: participating, leader: leader, clubDetailInfo: clubDetailInfo.toDomain(), leaderInfo: leaderInfo.toDomain(), commentInfos: commentInfos.map { $0.toDomain() })
+    }
+}
+
+struct ClubFindDetail {
+    let participating: Bool
+    let leader: Bool
+    let clubDetailInfo: ClubDetailInfo
+    let leaderInfo: LeaderInfo
+    let commentInfos: [CommentInfo]
 }

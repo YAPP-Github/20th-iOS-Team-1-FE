@@ -19,4 +19,7 @@ enum PetSizeTypeDTO: Codable {
         case small = "SMALL"
         case all = "ALL"
     }
+    
+    
 }
+

@@ -28,4 +28,9 @@ struct APIConstants {
 
     static let comment = "api/comments"
     
+    // MARK: Report
+    static let reportClub = "/api/reports/club"
+    
+    static let reportComment = "/api/reports/comment"
+    
 }
