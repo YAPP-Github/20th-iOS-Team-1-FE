@@ -133,7 +133,7 @@ final class AddPetContentView: UIView {
         searchBar.searchTextField.font = UIFont.customFont(size: 15, style: .Regular)
         searchBar.placeholder = "견종 검색하기"
         searchBar.setImage(UIImage.Togaether.breedSearchIcon, for: UISearchBar.Icon.search, state: .normal)
-
+        
         return searchBar
     }()
     
@@ -460,4 +460,7 @@ final class AddPetContentView: UIView {
         backgroundColor = .Togaether.background
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        endEditing(true)
+    }
 }
