@@ -128,6 +128,9 @@
 		37912CA0281449230087B95E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37912C9F281449230087B95E /* Coordinator.swift */; };
 		37912CA2281449610087B95E /* SceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37912CA1281449610087B95E /* SceneCoordinator.swift */; };
 		37912CA628144A530087B95E /* TabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37912CA528144A530087B95E /* TabCoordinator.swift */; };
+		3797D944288860C30068C831 /* ClubDetailInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797D943288860C30068C831 /* ClubDetailInfo.swift */; };
+		3797D946288860EE0068C831 /* LeaderInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797D945288860EE0068C831 /* LeaderInfo.swift */; };
+		3797D9482888611E0068C831 /* CommentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797D9472888611E0068C831 /* CommentInfo.swift */; };
 		379B1A77285A4F7700E58A34 /* AppleCredentialRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379B1A76285A4F7700E58A34 /* AppleCredentialRequestDTO.swift */; };
 		379B1A79285A52DA00E58A34 /* AppleLoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379B1A78285A52DA00E58A34 /* AppleLoginRepository.swift */; };
 		379B1A7B285A52EA00E58A34 /* AppleLoginRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379B1A7A285A52EA00E58A34 /* AppleLoginRepositoryInterface.swift */; };
@@ -343,6 +346,9 @@
 		37912C9F281449230087B95E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		37912CA1281449610087B95E /* SceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCoordinator.swift; sourceTree = "<group>"; };
 		37912CA528144A530087B95E /* TabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCoordinator.swift; sourceTree = "<group>"; };
+		3797D943288860C30068C831 /* ClubDetailInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubDetailInfo.swift; sourceTree = "<group>"; };
+		3797D945288860EE0068C831 /* LeaderInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderInfo.swift; sourceTree = "<group>"; };
+		3797D9472888611E0068C831 /* CommentInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentInfo.swift; sourceTree = "<group>"; };
 		379B1A76285A4F7700E58A34 /* AppleCredentialRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleCredentialRequestDTO.swift; sourceTree = "<group>"; };
 		379B1A78285A52DA00E58A34 /* AppleLoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginRepository.swift; sourceTree = "<group>"; };
 		379B1A7A285A52EA00E58A34 /* AppleLoginRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginRepositoryInterface.swift; sourceTree = "<group>"; };
@@ -1237,6 +1243,9 @@
 			isa = PBXGroup;
 			children = (
 				FDE18E1B2873596300A7369D /* GatherListInfo.swift */,
+				3797D943288860C30068C831 /* ClubDetailInfo.swift */,
+				3797D945288860EE0068C831 /* LeaderInfo.swift */,
+				3797D9472888611E0068C831 /* CommentInfo.swift */,
 			);
 			path = Entitiy;
 			sourceTree = "<group>";
@@ -1449,6 +1458,7 @@
 				FDFD017228735DBB00C625B1 /* GatherConfigurationForSheetResponseDTO.swift in Sources */,
 				29AE223D284D71DC00EDF34B /* LocationManageable.swift in Sources */,
 				FD0870D228805B6E00DF3553 /* AddPetRepository.swift in Sources */,
+				3797D944288860C30068C831 /* ClubDetailInfo.swift in Sources */,
 				29AE223D284D71DC00EDF34B /* LocationManageable.swift in Sources */,
 				FD8AD7072851E28000454AC3 /* GatherListCell.swift in Sources */,
 				FD6F4DC32882A2C70031F747 /* PetTag.swift in Sources */,
@@ -1556,10 +1566,12 @@
 				FDE18E1C2873596300A7369D /* GatherListInfo.swift in Sources */,
 				37AA7E1A2850B1B600B4B5C2 /* EligibleSexDTO.swift in Sources */,
 				37348B0C2866CA5E00C38F70 /* BorderButton.swift in Sources */,
+				3797D946288860EE0068C831 /* LeaderInfo.swift in Sources */,
 				37AC3106284930E6003C3FA2 /* SignUpInfomationReactor.swift in Sources */,
 				294A0C29287B085800D1CEB3 /* CategorySelectButtonView.swift in Sources */,
 				FDBC1226286C309C00FCADF4 /* ProfileRespository.swift in Sources */,
 				37DA2520287317EE002E4D67 /* DetailGatherViewController.swift in Sources */,
+				3797D9482888611E0068C831 /* CommentInfo.swift in Sources */,
 				37C14518284DC94A00D11CC3 /* NetworkError.swift in Sources */,
 				37C3F4EF284BF4450006CB02 /* KeychainProvider.swift in Sources */,
 				377370842841BE1000D5CCB6 /* UIButton+Rx.swift in Sources */,
