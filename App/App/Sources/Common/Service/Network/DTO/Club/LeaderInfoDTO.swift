@@ -9,19 +9,15 @@ import Foundation
 
 struct LeaderInfoDTO: Codable {
     private enum CodingKeys: String, CodingKey {
+        case id
         case nickname
         case imageURL = "imageUrl"
     }
-
+    let id: Int
     let nickname: String
     let imageURL: String
     
     func toDomain() -> LeaderInfo {
-        LeaderInfo(nickname: nickname, imageURL: imageURL)
+        LeaderInfo(id: id, nickname: nickname, imageURL: imageURL)
     }
-}
-
-struct LeaderInfo {
-    internal let nickname: String
-    internal let imageURL: String
 }

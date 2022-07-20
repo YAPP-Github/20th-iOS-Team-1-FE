@@ -8,17 +8,18 @@
 import Foundation
 
 struct PetInfoDTO: Codable {
+    let id: Int
     let nickname, breed, age, sex: String
     let tags: [String]
     let imageURL: String?
 
     enum CodingKeys: String, CodingKey {
-        case nickname, breed, age, sex, tags
+        case id, nickname, breed, age, sex, tags
         case imageURL = "imageUrl"
     }
     
     internal func toDomain() -> PetInfo {
-        let petInfo = PetInfo(nickName: nickname, breed: breed, age: age, sex: sex, tags: tags, imageURL: imageURL)
+        let petInfo = PetInfo(id: id, nickName: nickname, breed: breed, age: age, sex: sex, tags: tags, imageURL: imageURL)
         
         return petInfo
     }
