@@ -8,6 +8,7 @@
 import Foundation
 
 struct AccountInfo: Equatable {
+    let id: Int
     var nickName: String? = nil
     var address: String? = nil
     var age: String? = nil

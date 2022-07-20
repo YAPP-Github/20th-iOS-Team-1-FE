@@ -9,6 +9,7 @@ import Foundation
 
 struct ClubDetailInfoDTO: Codable {
     private enum CodingKeys: String, CodingKey {
+        case id
         case title
         case description
         case category
@@ -24,6 +25,7 @@ struct ClubDetailInfoDTO: Codable {
         case participants
     }
     
+    let id: Int
     let title: String
     let description: String
     let category: String
@@ -39,7 +41,8 @@ struct ClubDetailInfoDTO: Codable {
     let participants: Int
     
     func toDomain() -> ClubDetailInfo {
-        ClubDetailInfo(title: title,
+        ClubDetailInfo(id: id,
+                       title: title,
                        description: description,
                        category: category,
                        meetingPlace: meetingPlace,
@@ -54,20 +57,3 @@ struct ClubDetailInfoDTO: Codable {
                        participants: participants)
     }
 }
-
-struct ClubDetailInfo {
-    let title: String
-    let description: String
-    let category: String
-    let meetingPlace: String
-    let latitude: Double
-    let longitude: Double
-    let startDate: String
-    let endDate: String
-    let eligiblePetSizeTypes: [String]
-    let eligibleBreeds: [String]
-    let eligibleSex: String
-    let maximumPeople: Int
-    let participants: Int
-}
-
