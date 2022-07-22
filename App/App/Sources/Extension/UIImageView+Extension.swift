@@ -14,7 +14,14 @@ extension UIImageView {
                 if let data = data {
                     DispatchQueue.main.async {
                         self?.clipsToBounds = true
-                        self?.layer.cornerRadius = 60
+                        guard let width = self?.bounds.width else {
+                            return
+                        }
+                        if width.isZero {
+                            self?.layer.cornerRadius = 60
+                        } else {
+                            self?.layer.cornerRadius = width / 2
+                        }
                         self?.image = UIImage(data: data)
                     }
                 }

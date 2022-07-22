@@ -137,6 +137,17 @@ final class AddPetContentView: UIView {
         return searchBar
     }()
     
+    internal lazy var breedLabel: UILabel = {
+        let label = PaddingLabel(padding: UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 8.0))
+        label.backgroundColor = UIColor.Togaether.divider
+        label.font = UIFont.customFont(size: 14, style: .Medium)
+        label.textColor = UIColor.Togaether.secondaryLabel
+        label.layer.masksToBounds = true
+        label.layer.cornerRadius = 15
+    
+        return label
+    }()
+    
     private lazy var genderLabel: UILabel = {
         let label = UILabel()
         label.text = "성별 선택"
@@ -316,7 +327,7 @@ final class AddPetContentView: UIView {
     
     internal let addButton: EnableButton = {
         let button = EnableButton()
-        button.setTitle("다음", for: .normal)
+        button.setTitle("반려견 등록하기", for: .normal)
         button.isEnabled = false
 
         return button
@@ -345,6 +356,7 @@ final class AddPetContentView: UIView {
         addSubview(petSizeStackView)
         addSubview(searchBreedLabel)
         addSubview(searchBreedBar)
+        addSubview(breedLabel)
         addSubview(genderLabel)
         addSubview(sexStackView)
         addSubview(neutralizationLabel)
@@ -401,7 +413,10 @@ final class AddPetContentView: UIView {
             searchBreedBar.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 10),
             searchBreedBar.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10),
 
-            genderLabel.topAnchor.constraint(equalTo: searchBreedBar.bottomAnchor, constant: 44),
+            breedLabel.topAnchor.constraint(equalTo: searchBreedBar.bottomAnchor, constant: 10),
+            breedLabel.leadingAnchor.constraint(equalTo: searchBreedBar.leadingAnchor, constant: 10),
+            
+            genderLabel.topAnchor.constraint(equalTo: breedLabel.bottomAnchor, constant: 44),
             genderLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
             
             sexStackView.topAnchor.constraint(equalTo: genderLabel.bottomAnchor, constant: 20),

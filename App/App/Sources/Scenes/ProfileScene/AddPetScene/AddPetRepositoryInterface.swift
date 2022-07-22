@@ -10,4 +10,5 @@ import Foundation
 import RxSwift
 
 protocol AddPetRepositoryInterface {
+    func addPet(pet: PetRequestInfo, accessToken: Data) -> Single<Void>
 }

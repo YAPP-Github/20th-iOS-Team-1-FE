@@ -183,7 +183,7 @@
 		FD6D485F2885AE10005D9669 /* SearchBreedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6D485E2885AE10005D9669 /* SearchBreedViewController.swift */; };
 		FD6D48612885AE94005D9669 /* SearchBreedReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6D48602885AE94005D9669 /* SearchBreedReactor.swift */; };
 		FD6D486928870CE4005D9669 /* 견종목록.csv in Resources */ = {isa = PBXBuildFile; fileRef = FD6D486828870CE4005D9669 /* 견종목록.csv */; };
-		FD6F4DBF28829E710031F747 /* PetRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6F4DBE28829E710031F747 /* PetRequestDTO.swift */; };
+		FD6F4DBF28829E710031F747 /* PetRequestInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6F4DBE28829E710031F747 /* PetRequestInfo.swift */; };
 		FD6F4DC32882A2C70031F747 /* PetTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6F4DC22882A2C70031F747 /* PetTag.swift */; };
 		FD7E2554287C18AC008E9E24 /* PetSizeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7E2553287C18AC008E9E24 /* PetSizeButton.swift */; };
 		FD8191582871E2CC00B49961 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8191572871E2CC00B49961 /* UIImageView+Extension.swift */; };
@@ -197,9 +197,8 @@
 		FD8AD7242852130E00454AC3 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD8AD71F2852130E00454AC3 /* Pretendard-SemiBold.otf */; };
 		FD9D38EE28543409005A0C86 /* SegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9D38ED28543409005A0C86 /* SegmentView.swift */; };
 		FDBC12042866858900FCADF4 /* ProfileContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC12032866858900FCADF4 /* ProfileContentView.swift */; };
-		FDBC12062866867600FCADF4 /* IntroduceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC12052866867600FCADF4 /* IntroduceView.swift */; };
 		FDBC120C2868BF6200FCADF4 /* InitialIntroductionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC120B2868BF6200FCADF4 /* InitialIntroductionView.swift */; };
-		FDBC12102868CD4C00FCADF4 /* DogTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC120F2868CD4C00FCADF4 /* DogTableViewCell.swift */; };
+		FDBC12102868CD4C00FCADF4 /* PetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC120F2868CD4C00FCADF4 /* PetTableViewCell.swift */; };
 		FDBC1226286C309C00FCADF4 /* ProfileRespository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC1225286C309C00FCADF4 /* ProfileRespository.swift */; };
 		FDBC1229286C31D200FCADF4 /* ProfileMainRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC1228286C31D200FCADF4 /* ProfileMainRepositoryInterface.swift */; };
 		FDBC122C286C328C00FCADF4 /* ProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC122B286C328C00FCADF4 /* ProfileInfo.swift */; };
@@ -402,7 +401,7 @@
 		FD6D485E2885AE10005D9669 /* SearchBreedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBreedViewController.swift; sourceTree = "<group>"; };
 		FD6D48602885AE94005D9669 /* SearchBreedReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBreedReactor.swift; sourceTree = "<group>"; };
 		FD6D486828870CE4005D9669 /* 견종목록.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "견종목록.csv"; sourceTree = "<group>"; };
-		FD6F4DBE28829E710031F747 /* PetRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetRequestDTO.swift; sourceTree = "<group>"; };
+		FD6F4DBE28829E710031F747 /* PetRequestInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetRequestInfo.swift; sourceTree = "<group>"; };
 		FD6F4DC22882A2C70031F747 /* PetTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetTag.swift; sourceTree = "<group>"; };
 		FD7E2553287C18AC008E9E24 /* PetSizeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetSizeButton.swift; sourceTree = "<group>"; };
 		FD8191572871E2CC00B49961 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
@@ -416,9 +415,8 @@
 		FD8AD71F2852130E00454AC3 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		FD9D38ED28543409005A0C86 /* SegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentView.swift; sourceTree = "<group>"; };
 		FDBC12032866858900FCADF4 /* ProfileContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileContentView.swift; sourceTree = "<group>"; };
-		FDBC12052866867600FCADF4 /* IntroduceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroduceView.swift; sourceTree = "<group>"; };
 		FDBC120B2868BF6200FCADF4 /* InitialIntroductionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialIntroductionView.swift; sourceTree = "<group>"; };
-		FDBC120F2868CD4C00FCADF4 /* DogTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogTableViewCell.swift; sourceTree = "<group>"; };
+		FDBC120F2868CD4C00FCADF4 /* PetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetTableViewCell.swift; sourceTree = "<group>"; };
 		FDBC1225286C309C00FCADF4 /* ProfileRespository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRespository.swift; sourceTree = "<group>"; };
 		FDBC1228286C31D200FCADF4 /* ProfileMainRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMainRepositoryInterface.swift; sourceTree = "<group>"; };
 		FDBC122B286C328C00FCADF4 /* ProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfo.swift; sourceTree = "<group>"; };
@@ -1161,7 +1159,7 @@
 		FD6F4DBD28829E660031F747 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				FD6F4DBE28829E710031F747 /* PetRequestDTO.swift */,
+				FD6F4DBE28829E710031F747 /* PetRequestInfo.swift */,
 				FD6F4DC22882A2C70031F747 /* PetTag.swift */,
 			);
 			path = Entity;
@@ -1191,10 +1189,9 @@
 		FDBC12022866857800FCADF4 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				FDBC120F2868CD4C00FCADF4 /* PetTableViewCell.swift */,
 				FDBC12032866858900FCADF4 /* ProfileContentView.swift */,
-				FDBC12052866867600FCADF4 /* IntroduceView.swift */,
 				FDBC120B2868BF6200FCADF4 /* InitialIntroductionView.swift */,
-				FDBC120F2868CD4C00FCADF4 /* DogTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1471,14 +1468,13 @@
 				37AA7E1C2850B1C400B4B5C2 /* StatusDTO.swift in Sources */,
 				374990452877299900D07211 /* LeaderInfoDTO.swift in Sources */,
 				378F347F281DBE070063CE4F /* GatherListReactor.swift in Sources */,
-				FDBC12062866867600FCADF4 /* IntroduceView.swift in Sources */,
 				294A0C1C2874783000D1CEB3 /* UILabel+Extension.swift in Sources */,
 				FD0870BE287DB15600DF3553 /* EmptyNoticeView.swift in Sources */,
 				374F41D12864E70F0074F04B /* AccountValidation.swift in Sources */,
 				374F41CF2864E6C60074F04B /* AccountValidationResponseDTO.swift in Sources */,
 				37605DF62839FB4100394929 /* RxASAuthorizationControllerDelegateProxy.swift in Sources */,
 				374380A3284FDCE500CB02A5 /* SexDTO.swift in Sources */,
-				FDBC12102868CD4C00FCADF4 /* DogTableViewCell.swift in Sources */,
+				FDBC12102868CD4C00FCADF4 /* PetTableViewCell.swift in Sources */,
 				37AA7E212851FCA200B4B5C2 /* Authentification.swift in Sources */,
 				37AA7E162850B17600B4B5C2 /* EligibleBreedDTO.swift in Sources */,
 				3734CEAA2869E70C00EEF38D /* SignUpRepositoryInterface.swift in Sources */,
@@ -1543,7 +1539,7 @@
 				37DA2521287317EE002E4D67 /* DetailGatherReactor.swift in Sources */,
 				FDBC12042866858900FCADF4 /* ProfileContentView.swift in Sources */,
 				378F348B281DC0560063CE4F /* GatherListCoordinator.swift in Sources */,
-				FD6F4DBF28829E710031F747 /* PetRequestDTO.swift in Sources */,
+				FD6F4DBF28829E710031F747 /* PetRequestInfo.swift in Sources */,
 				FD5AEE90286E266800001838 /* PetInfo.swift in Sources */,
 				3749904928772D0C00D07211 /* ClubFIndDetailResponseDTO.swift in Sources */,
 				37438095284FD9BA00CB02A5 /* ExceptionDetailResponseDTO.swift in Sources */,

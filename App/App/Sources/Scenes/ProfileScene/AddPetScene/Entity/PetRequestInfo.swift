@@ -9,12 +9,12 @@ import Foundation
 
 struct PetRequestInfo {
     var name: String? = nil
-    var year: Int = 0
-    var month: Int = 0
+    var year: Int?
+    var month: Int?
     var breed: String? = nil
-    var sex: SexDTO = .private
-    var neutering: Bool = false
-    var sizeType: PetSizeTypeDTO = .small
+    var sex: String?
+    var neutering: Bool?
+    var sizeType: String?
     var tags: [String]? = []
     var imageFile: Data?
 }

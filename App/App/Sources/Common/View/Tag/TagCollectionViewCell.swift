@@ -26,6 +26,7 @@ final class TagCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         addSubviews()
         configureLayout()
+        configureUI()
     }
     
     @available(*, unavailable)
@@ -46,14 +47,11 @@ final class TagCollectionViewCell: UICollectionViewCell {
         ])
     }
     
-    internal func configureData(_ tag: String) {
-        tagLabel.text = tag        
+    private func configureUI() {
+        backgroundColor = .Togaether.background
     }
     
-    internal func changeTagStyle() {
-        tagLabel.backgroundColor = .Togaether.subGreen
-        tagLabel.layer.borderWidth = 0.5
-        tagLabel.layer.borderColor = UIColor.white.cgColor
-        tagLabel.textColor = .white
+    internal func configureData(_ tag: String) {
+        tagLabel.text = tag        
     }
 }

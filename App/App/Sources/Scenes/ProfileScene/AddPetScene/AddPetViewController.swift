@@ -15,8 +15,7 @@ final class AddPetViewController: BaseViewController {
     
     private lazy var scrollView = UIScrollView()
     private lazy var contentView = UIView()
-    private lazy var addPetContentView = AddPetContentView()
-
+    internal lazy var addPetContentView = AddPetContentView()
     
     init(reactor: AddPetReactor) {
         super.init(nibName: nil, bundle: nil)
@@ -90,10 +89,20 @@ final class AddPetViewController: BaseViewController {
                 .distinctUntilChanged()
                 .map { Reactor.Action.nameTextFieldDidEndEditing($0) }
                 .bind(to: reactor.action)
+            
+            addPetContentView.ageTextField.rx.text
+                .orEmpty
+                .distinctUntilChanged()
+                .map { Reactor.Action.dateDidEndEditing($0) }
+                .bind(to: reactor.action)
 
-//            addPetContentView.ageTextField.rx.text
-//                .map { Reactor.Action.dateDidEndEditing($0) }
-//                .bind(to: reactor.action)
+            addPetContentView.breedLabel.rx.observe(String.self, "text")
+                .subscribe(onNext: { text in
+                    Observable.just(text ?? "")
+                        .map { Reactor.Action.selectedBreed($0) }
+                        .bind(to: reactor.action)
+                        .disposed(by: self.disposeBag)
+                    })
 
             addPetContentView.smallPetButton.rx.throttleTap
                 .map { Reactor.Action.smallPetButtonDidTap }
@@ -150,6 +159,10 @@ final class AddPetViewController: BaseViewController {
                 
             addPetContentView.inadaptableButton.rx.throttleTap
                 .map { Reactor.Action.inadaptableButtonDidTap }
+                .bind(to: reactor.action)
+            
+            addPetContentView.addButton.rx.throttleTap
+                .map { Reactor.Action.addButtonDidTap }
                 .bind(to: reactor.action)
         }
     }
@@ -248,9 +261,15 @@ final class AddPetViewController: BaseViewController {
                 .drive(addPetContentView.inadaptableButton.rx.isSelected)
             
             reactor.state
-                .map { $0.petInfo }
-                .subscribe(onNext: {
-                    print($0)
+                .map { $0.isAddButtonEnabled }
+                .distinctUntilChanged()
+                .asDriver(onErrorJustReturn: false)
+                .drive(with: self,
+                   onNext: { this, isEnabled in
+                    this.addPetContentView.addButton.isEnabled = isEnabled
+                    if isEnabled {
+                        this.addPetContentView.addButton.becomeFirstResponder()
+                    }
                 })
         }
         
@@ -264,5 +283,11 @@ final class AddPetViewController: BaseViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
-
 }
+
+extension AddPetViewController: SendData {
+    func sendData(data: String) {
+        addPetContentView.breedLabel.text = data
+    }
+}
+
