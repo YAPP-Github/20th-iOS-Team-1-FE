@@ -18,6 +18,7 @@ final class ProfileReactor: Reactor {
         case introductionRegisterButtonDidTap
         case introductionEditButtonDidTap(text: String)
         case petAddButtonDidTap
+        case deletePetList(id: Int)
     }
     
     enum Mutation {
@@ -41,6 +42,7 @@ final class ProfileReactor: Reactor {
     internal var readyToProceedRegisterProfile = PublishSubject<Void>()
     internal var readyToProceedEditProfile = PublishSubject<String>()
     internal var readyToProceedAddPet = PublishSubject<Void>()
+    internal var readyToReloadPetList = PublishSubject<Void>()
     
     init(keychainUseCase: KeychainUseCaseInterface, profileMainRepository: ProfileMainRepositoryInterface) {
         self.profileMainRepository = profileMainRepository
@@ -62,6 +64,9 @@ final class ProfileReactor: Reactor {
             return Observable.empty()
         case .settingButtonDidTap:
             return Observable.just(Mutation.readyToPresentAlertSheet)
+        case .deletePetList(id: let id):
+            deletePet(petID: id)
+            return Observable.empty()
         }
     }
     
@@ -109,7 +114,30 @@ final class ProfileReactor: Reactor {
                         observer.onNext(Mutation.loadingProfile(false))
                         return
                    })
+                .disposed(by: self.disposeBag)
+            
             return Disposables.create()
         }
+    }
+    
+    private func deletePet(petID : Int) {
+        self.keychainUseCase.getAccessToken()
+            .subscribe(with: self,
+               onSuccess: { this, token in
+                this.profileMainRepository.deletePet(accessToken: token, id: petID)
+                    .subscribe { result in
+                        switch result {
+                        case .success:
+                            self.readyToReloadPetList.onNext(())
+                            return
+                        case .failure(let error):
+                            print("RESULT FAILURE: ", error.localizedDescription)
+                        }
+                    }.disposed(by: self.disposeBag)
+                },
+               onFailure: { _,_ in
+                    return
+               })
+            .disposed(by: self.disposeBag)
     }
 }

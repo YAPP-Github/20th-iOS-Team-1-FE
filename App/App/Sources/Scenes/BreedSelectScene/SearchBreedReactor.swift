@@ -13,23 +13,27 @@ import RxSwift
 final class SearchBreedReactor: Reactor {
     enum Action {
         case searchBreedDidEndEditing(String)
-        case breedDidTap(Int)
+        case breedSelected(Int)
+        case breedDeselected(Int)
+        case registerButtonDidTap
     }
     
     enum Mutation {
         case readyToSearch(String)
         case readyToSelectBreed(String)
+        case readyToDeselectBreed(String)
     }
     
     struct State {
+        var isEnabledRegister = false
         var searchResult = [String]()
         var selectedBreeds = [String]()
-
     }
     
     let initialState = State()
     private var data = [String]()
     private let disposeBag = DisposeBag()
+    internal var readyToRegisterBreed = PublishSubject<[String]>()
     
     init() {
         self.data = loadBreedFromCSV()
@@ -39,8 +43,13 @@ final class SearchBreedReactor: Reactor {
         switch action {
         case .searchBreedDidEndEditing(let text):
             return Observable.just(Mutation.readyToSearch(text))
-        case .breedDidTap(let idx):
+        case .breedSelected(let idx):
             return Observable.just(Mutation.readyToSelectBreed(currentState.searchResult[idx]))
+        case .breedDeselected(let idx):
+            return Observable.just(Mutation.readyToDeselectBreed(currentState.searchResult[idx]))
+        case .registerButtonDidTap:
+            readyToRegisterBreed.onNext(currentState.selectedBreeds)
+            return Observable.empty()
         }
     }
     
@@ -50,7 +59,15 @@ final class SearchBreedReactor: Reactor {
         case .readyToSearch(let text):
             newState.searchResult = data.filter { $0.hasPrefix(text) }
         case .readyToSelectBreed(let breed):
-            newState.selectedBreeds.append(breed)
+            if !currentState.selectedBreeds.contains(breed) {
+                newState.selectedBreeds.append(breed)
+            }
+            newState.isEnabledRegister = true
+        case .readyToDeselectBreed(let breed):
+            newState.selectedBreeds = currentState.selectedBreeds.filter { $0 != breed }
+            if newState.selectedBreeds.count < 1 {
+                newState.isEnabledRegister = false
+            }
         }
         
         return newState

@@ -12,6 +12,7 @@ import RxCocoa
 
 final class SearchBreedViewController: BaseViewController {
     var disposeBag = DisposeBag()
+    weak var delegate: SendData?
 
     private lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
@@ -41,6 +42,16 @@ final class SearchBreedViewController: BaseViewController {
 
         return tableView
     }()
+    
+    private let addButtonDivider = Divider()
+    
+    private let addButton: EnableButton = {
+        let button = EnableButton()
+        button.setTitle("견종 선택 완료", for: .normal)
+        button.isEnabled = false
+
+        return button
+    }()
 
     init(reactor: SearchBreedReactor) {
         super.init(nibName: nil, bundle: nil)
@@ -63,6 +74,8 @@ final class SearchBreedViewController: BaseViewController {
         view.addSubview(searchBar)
         view.addSubview(selectionView)
         view.addSubview(breedTableView)
+        view.addSubview(addButtonDivider)
+        view.addSubview(addButton)
     }
     
     private func configureLayout() {
@@ -80,7 +93,17 @@ final class SearchBreedViewController: BaseViewController {
             breedTableView.topAnchor.constraint(equalTo: selectionView.bottomAnchor, constant: 16),
             breedTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             breedTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            breedTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            breedTableView.bottomAnchor.constraint(equalTo: addButtonDivider.topAnchor, constant: -10),
+            
+            addButtonDivider.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            addButtonDivider.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            addButtonDivider.heightAnchor.constraint(equalToConstant: 1),
+            
+            addButton.topAnchor.constraint(equalTo: addButtonDivider.bottomAnchor, constant: 8),
+            addButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            addButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            addButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            addButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     
@@ -98,7 +121,15 @@ final class SearchBreedViewController: BaseViewController {
                 .bind(to: reactor.action)
             
             breedTableView.rx.itemSelected
-                .map { Reactor.Action.breedDidTap($0.row) }
+                .map { Reactor.Action.breedSelected($0.row) }
+                .bind(to: reactor.action)
+            
+            breedTableView.rx.itemDeselected
+                .map { Reactor.Action.breedDeselected($0.row) }
+                .bind(to: reactor.action)
+            
+            addButton.rx.tap
+                .map { Reactor.Action.registerButtonDidTap}
                 .bind(to: reactor.action)
         }
     }
@@ -123,6 +154,18 @@ final class SearchBreedViewController: BaseViewController {
                 .asDriver(onErrorJustReturn: [])
                 .drive(onNext: {
                     self.selectionView.reactor = TagCollectionViewReactor(state: $0)
+                })
+            
+            reactor.state
+                .map { $0.isEnabledRegister }
+                .distinctUntilChanged()
+                .asDriver(onErrorJustReturn: false)
+                .drive(with: self,
+                   onNext: { this, isEnabled in
+                    this.addButton.isEnabled = isEnabled
+                    if isEnabled {
+                        this.addButton.becomeFirstResponder()
+                    }
                 })
         }
     }

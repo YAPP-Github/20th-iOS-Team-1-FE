@@ -11,10 +11,5 @@ import RxSwift
 
 protocol ProfileMainRepositoryInterface {
     func requestProfileInfo(accessToken: Data, nickname: String?) -> Single<ProfileInfo>
-}
-
-extension ProfileMainRepositoryInterface {
-    func requestProfileInfo(accessToken: Data) -> Single<ProfileInfo> {
-        requestProfileInfo(accessToken: accessToken, nickname: nil)
-    }
+    func deletePet(accessToken: Data, id: Int) -> Single<Void>
 }
