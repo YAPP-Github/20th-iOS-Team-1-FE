@@ -1,5 +1,5 @@
 //
-//  DogTableViewCell.swift
+//  PetTableViewCell.swift
 //  App
 //
 //  Created by 김나희 on 6/27/22.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DogTableViewCell: UITableViewCell {
+final class PetTableViewCell: UITableViewCell {
     private lazy var profileImageView: UIImageView = {
         let view = UIImageView()
         view.image = .Togaether.petDefaultProfile
@@ -57,13 +57,11 @@ final class DogTableViewCell: UITableViewCell {
         return view
     }()
         
-    private lazy var tagStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.distribution = .equalSpacing
-        stackView.spacing = 4
+    private lazy var tagCollectionView: TagCollectionView = {
+        let reactor = TagCollectionViewReactor(state: [])
+        let view = TagCollectionView(reactor: reactor, frame: .zero)
         
-        return stackView
+        return view
     }()
     
     override func layoutSubviews() {
@@ -75,25 +73,25 @@ final class DogTableViewCell: UITableViewCell {
     }
     
     private func addSubviews() {
-        addSubview(profileImageView)
-        addSubview(dogNameLabel)
-        addSubview(breedLabel)
-        addSubview(divisionView)
-        addSubview(ageLabel)
-        addSubview(genderImageView)
-        addSubview(tagStackView)
+        contentView.addSubview(profileImageView)
+        contentView.addSubview(dogNameLabel)
+        contentView.addSubview(breedLabel)
+        contentView.addSubview(divisionView)
+        contentView.addSubview(ageLabel)
+        contentView.addSubview(genderImageView)
+        contentView.addSubview(tagCollectionView)
     }
     
     private func configureLayout() {
         NSLayoutConstraint.useAndActivateConstraints([
-            profileImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 40),
-            profileImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 38),
+            profileImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 18),
+            profileImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             profileImageView.widthAnchor.constraint(equalToConstant: 72),
             profileImageView.heightAnchor.constraint(equalToConstant: 72),
             
             dogNameLabel.topAnchor.constraint(equalTo: profileImageView.topAnchor),
             dogNameLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 10),
-            dogNameLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -43),
+            dogNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -43),
             
             breedLabel.topAnchor.constraint(equalTo: dogNameLabel.bottomAnchor),
             breedLabel.leadingAnchor.constraint(equalTo: dogNameLabel.leadingAnchor),
@@ -111,17 +109,24 @@ final class DogTableViewCell: UITableViewCell {
             genderImageView.widthAnchor.constraint(equalToConstant: 20),
             genderImageView.heightAnchor.constraint(equalToConstant: 20),
             
-            tagStackView.topAnchor.constraint(equalTo: divisionView.bottomAnchor, constant: 12),
-            tagStackView.leadingAnchor.constraint(equalTo: dogNameLabel.leadingAnchor),
-            tagStackView.heightAnchor.constraint(equalToConstant: 18)
+            tagCollectionView.topAnchor.constraint(equalTo: divisionView.bottomAnchor, constant: 12),
+            tagCollectionView.leadingAnchor.constraint(equalTo: dogNameLabel.leadingAnchor),
+            tagCollectionView.trailingAnchor.constraint(equalTo: dogNameLabel.trailingAnchor),
+            tagCollectionView.heightAnchor.constraint(equalToConstant: 18)
             ])
     }
     
     func configureUI() {
+        contentView.backgroundColor = .Togaether.background
         contentView.layer.masksToBounds = true
         contentView.layer.borderWidth = 1
         contentView.layer.borderColor = UIColor.Togaether.divider.cgColor
         contentView.layer.cornerRadius = 10
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        profileImageView.image = .Togaether.petDefaultProfile
     }
     
     internal func configureData(_ petData: PetInfo?) {
@@ -133,11 +138,7 @@ final class DogTableViewCell: UITableViewCell {
         dogNameLabel.text = data.nickName
         breedLabel.text = data.breed
         ageLabel.text = data.age
-        data.tags?.forEach({ tag in
-            let label = PaddingLabel().tagLabel(tag)
-            label.sizeToFit()
-            tagStackView.addArrangedSubview(label)
-        })
+        tagCollectionView.reactor = TagCollectionViewReactor(state: data.tags ?? [])
     }
 
 }

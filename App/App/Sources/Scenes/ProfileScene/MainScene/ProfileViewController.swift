@@ -93,7 +93,7 @@ final class ProfileViewController: BaseViewController {
             
             profileContentView.introduceView.rx.tapGesture()
                 .when(.recognized)
-                .map { _ in Reactor.Action.introductionEditButtonDidTap(text: self.profileContentView.introduceView.introduceLabel.text ?? "") }
+                .map { _ in Reactor.Action.introductionEditButtonDidTap(text: self.profileContentView.introduceLabel.text ?? "") }
                 .bind(to: reactor.action)
             
             profileContentView.initailIntroduceView.rx.tapGesture()
@@ -103,6 +103,10 @@ final class ProfileViewController: BaseViewController {
 
             profileContentView.addPuppyButton.rx.tap
                 .map { Reactor.Action.petAddButtonDidTap }
+                .bind(to: reactor.action)
+            
+            profileContentView.petListView.rx.modelDeleted(PetInfo.self)
+                .map { Reactor.Action.deletePetList(id: $0.id ?? -1)}
                 .bind(to: reactor.action)
         }
     }
@@ -116,6 +120,7 @@ final class ProfileViewController: BaseViewController {
                 .drive(onNext: { data in
                     self.profileContentView.configureData(data.myPage, data.accountInfo, petInfo: data.petInfos)
                 })
+            
             reactor.state
                 .map { $0.shouldPresentAlertSheet }
                 .filter { $0 == true }

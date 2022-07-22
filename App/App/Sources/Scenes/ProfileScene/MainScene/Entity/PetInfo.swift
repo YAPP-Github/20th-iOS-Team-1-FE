@@ -8,7 +8,7 @@
 import Foundation
 
 struct PetInfo: Equatable {
-    let id: Int
+    var id: Int?
     var nickName: String? = nil
     var breed: String? = nil
     var age: String? = nil

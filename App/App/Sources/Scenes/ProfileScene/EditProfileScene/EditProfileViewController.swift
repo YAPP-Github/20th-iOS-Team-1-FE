@@ -49,7 +49,7 @@ final class EditProfileViewController: BaseViewController {
     
     private lazy var countLettersLabel: UILabel = {
         let label = UILabel()
-        label.text = "0/60자"
+        label.text = "(0/60자)"
         label.font = UIFont.customFont(size: 14, style: .Medium)
         label.textColor = .secondaryLabel
         

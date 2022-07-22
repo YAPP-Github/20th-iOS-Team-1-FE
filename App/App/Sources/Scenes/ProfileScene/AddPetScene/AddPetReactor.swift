@@ -19,6 +19,7 @@ final class AddPetReactor: Reactor {
         case middlePetButtonDidTap
         case largePetButtonDidTap
         case searchBarDidTap
+        case selectedBreed(String)
         case manButtonDidTap
         case womanButtonDidTap
         case sexlessButtonDidTap
@@ -29,6 +30,7 @@ final class AddPetReactor: Reactor {
         case independentButtonDidTap
         case adaptableButtonDidTap
         case inadaptableButtonDidTap
+        case addButtonDidTap
     }
     
     enum Mutation {
@@ -39,6 +41,7 @@ final class AddPetReactor: Reactor {
         case selectSmall
         case selectMiddle
         case selectLarge
+        case updateBreed(String)
         case selectMan
         case selectWoman
         case selectSexLess
@@ -49,7 +52,6 @@ final class AddPetReactor: Reactor {
         case selectIndependent
         case selectAdaptable
         case selectInadaptable
-        case selectAddButton
     }
     
     struct State {
@@ -67,18 +69,20 @@ final class AddPetReactor: Reactor {
         var isIndependentSelected = false
         var isAdaptableSelected = false
         var isInadaptableSelected = false
-        var isAddButtonSelected = false
+        var isAddButtonEnabled = false
     }
     
-    let initialState = State()
+    var initialState = State()
     private let addPetRepository: AddPetRepositoryInterface
+    private let keychainUseCase: KeychainUseCaseInterface
     private let disposeBag = DisposeBag()
     
     internal var readyToProceedSearchBreed = PublishSubject<Void>()
+    internal var readyToProceedProfile = PublishSubject<Void>()
 
-    
-    init(addPetRepository: AddPetRepositoryInterface) {
+    init(addPetRepository: AddPetRepositoryInterface, keychainUseCase: KeychainUseCaseInterface) {
         self.addPetRepository = addPetRepository
+        self.keychainUseCase = keychainUseCase
     }
     
     func mutate(action: Action) -> Observable<Mutation> {
@@ -88,6 +92,7 @@ final class AddPetReactor: Reactor {
         case .nameTextFieldDidEndEditing(let name):
             return Observable.just(.updateNickname(name))
         case .dateDidEndEditing(let date):
+            if date == "" { return Observable.empty() }
             let birth = date.components(separatedBy: "/").map{ Int($0)! }
             let year = birth.first!
             let month = birth.last!
@@ -103,6 +108,8 @@ final class AddPetReactor: Reactor {
         case .searchBarDidTap:
             readyToProceedSearchBreed.onNext(())
             return Observable.empty()
+        case .selectedBreed(let breed):
+            return Observable.just(.updateBreed(breed))
         case .manButtonDidTap:
             return Observable.just(.selectMan)
         case .womanButtonDidTap:
@@ -123,85 +130,131 @@ final class AddPetReactor: Reactor {
             return Observable.just(.selectAdaptable)
         case .inadaptableButtonDidTap:
             return Observable.just(.selectInadaptable)
+        case .addButtonDidTap:
+            addPet(currentState.petInfo)
+            return Observable.empty()
         }
     }
     
     func reduce(state: State, mutation: Mutation) -> State {
         var newState = state
-        
         switch mutation {
         case .changeProfileImage(let data):
             newState.petInfo.imageFile = data
-            break
+            newState.isAddButtonEnabled = check()
         case .updateNickname(let name):
             newState.petInfo.name = name
-            break
+            newState.isAddButtonEnabled = check()
         case .updateYearOfBirth(let year):
             newState.petInfo.year = year
-            break
+            newState.isAddButtonEnabled = check()
         case .updateMonthOfBirth(let month):
             newState.petInfo.month = month
-            break
+            newState.isAddButtonEnabled = check()
         case .selectSmall:
-            newState.petInfo.sizeType = .small
+            newState.petInfo.sizeType = "SMALL"
             newState.isSmallSelected = true
             newState.isMiddleSelected = false
             newState.isLargeSelected = false
+            newState.isAddButtonEnabled = check()
         case .selectMiddle:
-            newState.petInfo.sizeType = .medium
+            newState.petInfo.sizeType = "MEDIUM"
             newState.isSmallSelected = false
             newState.isMiddleSelected = true
             newState.isLargeSelected = false
+            newState.isAddButtonEnabled = check()
         case .selectLarge:
-            newState.petInfo.sizeType = .large
+            newState.petInfo.sizeType = "LARGE"
             newState.isSmallSelected = false
             newState.isMiddleSelected = false
             newState.isLargeSelected = true
+            newState.isAddButtonEnabled = check()
+        case .updateBreed(let breed):
+            newState.petInfo.breed = breed
+            newState.isAddButtonEnabled = check()
         case .selectMan:
-            newState.petInfo.sex = .man
+            newState.petInfo.sex = "MALE"
             newState.isManSelected = true
             newState.isWomanSelected = false
+            newState.isAddButtonEnabled = check()
         case .selectWoman:
-            newState.petInfo.sex = .woman
+            newState.petInfo.sex = "FEMALE"
             newState.isManSelected = false
             newState.isWomanSelected = true
+            newState.isAddButtonEnabled = check()
         case .selectSexLess:
             newState.petInfo.neutering = true
             newState.isSexlessSelected = true
             newState.isGenderedSelected = false
+            newState.isAddButtonEnabled = check()
         case .selectGendered:
             newState.petInfo.neutering = false
             newState.isSexlessSelected = false
             newState.isGenderedSelected = true
+            newState.isAddButtonEnabled = check()
         case .selectActive:
             newState.petInfo.tags?.append(PetTag.active.toString())
             newState.petInfo.neutering = false
             newState.isActiveSelected = true
             newState.isDocileSelected = false
+            newState.isAddButtonEnabled = check()
         case .selectDocile:
             newState.petInfo.tags?.append(PetTag.docile.toString())
             newState.isActiveSelected = false
             newState.isDocileSelected = true
+            newState.isAddButtonEnabled = check()
         case .selectSociable:
             newState.petInfo.tags?.append(PetTag.sociable.toString())
             newState.isSociableSelected = true
             newState.isIndependentSelected = false
+            newState.isAddButtonEnabled = check()
         case .selectIndependent:
             newState.petInfo.tags?.append(PetTag.independent.toString())
             newState.isSociableSelected = false
             newState.isIndependentSelected = true
+            newState.isAddButtonEnabled = check()
         case .selectAdaptable:
             newState.petInfo.tags?.append(PetTag.adaptable.toString())
             newState.isAdaptableSelected = true
             newState.isInadaptableSelected = false
+            newState.isAddButtonEnabled = check()
         case .selectInadaptable:
             newState.petInfo.tags?.append(PetTag.inadaptable.toString())
             newState.isAdaptableSelected = false
             newState.isInadaptableSelected = true
-        case .selectAddButton:
-            break
+            newState.isAddButtonEnabled = check()
         }
         
         return newState
+    }
+    
+    func check() -> Bool {
+        return currentState.petInfo.name != nil &&
+        currentState.petInfo.year != nil &&
+        currentState.petInfo.sizeType != nil &&
+        currentState.petInfo.breed != nil &&
+        currentState.petInfo.sex != nil &&
+        currentState.petInfo.neutering != nil &&
+        currentState.petInfo.tags != nil
+    }
+    
+    func addPet(_ petInfo: PetRequestInfo) {
+        keychainUseCase.getAccessToken()
+            .subscribe(with: self,
+               onSuccess: { this, token in
+                this.addPetRepository.addPet(pet: petInfo, accessToken: token)
+                    .subscribe(
+                        onSuccess: {
+                            this.readyToProceedProfile.onNext(())
+                            return
+                        }, onFailure: { _ in
+                            return
+                        }
+                    ).disposed(by: self.disposeBag)
+               },
+               onFailure: { _, _ in
+                }
+            ).disposed(by: self.disposeBag)
+        
     }
 }

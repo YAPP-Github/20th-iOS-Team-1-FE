@@ -15,7 +15,7 @@ final class ProfileContentView: UIView {
 
     internal lazy var profileHeaderView: UITableViewHeaderFooterView = {
         let headerView = UITableViewHeaderFooterView()
-        let backgroundView = UIView(frame: .zero)
+        let backgroundView = UIView()
         backgroundView.backgroundColor = .Togaether.mainGreen
         headerView.backgroundView = backgroundView
         headerView.frame = CGRect(origin: .zero, size: CGSize(width: UIScreen.main.bounds.width, height: 373))
@@ -79,11 +79,21 @@ final class ProfileContentView: UIView {
         return view
     }()
     
-    internal lazy var introduceView: IntroduceView = {
-        var view = IntroduceView()
+    internal lazy var introduceView: UIView = {
+        var view = UIView()
+        view.backgroundColor = .Togaether.subGreen
         view.layer.cornerRadius = 10
         
         return view
+    }()
+    
+    internal lazy var introduceLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textColor = .white
+        label.font = .customFont(size: 16, style: .Medium)
+        
+        return label
     }()
     
     internal lazy var emptyPetView: EmptyNoticeView = {
@@ -108,12 +118,12 @@ final class ProfileContentView: UIView {
     }()
     
     private lazy var profileFooterView: UIView = {
-        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 500))
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 300))
 
         return footerView
     }()
 
-    private lazy var dogListView: UITableView = {
+    internal lazy var petListView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.rowHeight = 132
         tableView.separatorStyle = .none
@@ -121,7 +131,7 @@ final class ProfileContentView: UIView {
         tableView.allowsSelection = false
         tableView.tableHeaderView = profileHeaderView
         tableView.tableFooterView = profileFooterView
-        tableView.register(DogTableViewCell.self, forCellReuseIdentifier: DogTableViewCell.identifier)
+        tableView.register(PetTableViewCell.self, forCellReuseIdentifier: PetTableViewCell.identifier)
         
         return tableView
     }()
@@ -147,8 +157,9 @@ final class ProfileContentView: UIView {
         profileHeaderView.addSubview(genderImageView)
         profileHeaderView.addSubview(initailIntroduceView)
         profileHeaderView.addSubview(introduceView)
-        addSubview(dogListView)
-        profileFooterView.addSubview(emptyPetView)
+        introduceView.addSubview(introduceLabel)
+        addSubview(petListView)
+        addSubview(emptyPetView)
         profileFooterView.addSubview(addPuppyButton)
     }
     
@@ -181,25 +192,30 @@ final class ProfileContentView: UIView {
             initailIntroduceView.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 20),
             initailIntroduceView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
             initailIntroduceView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            initailIntroduceView.heightAnchor.constraint(equalToConstant: 48),
+            initailIntroduceView.bottomAnchor.constraint(equalTo: profileHeaderView.bottomAnchor, constant: -30),
             
             introduceView.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 20),
             introduceView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
             introduceView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            introduceView.heightAnchor.constraint(equalToConstant: 151),
+            introduceView.bottomAnchor.constraint(equalTo: profileHeaderView.bottomAnchor, constant: -30),
             
-            dogListView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            dogListView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            dogListView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            dogListView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            introduceLabel.topAnchor.constraint(equalTo: introduceView.topAnchor, constant: 10),
+            introduceLabel.leadingAnchor.constraint(equalTo: introduceView.leadingAnchor, constant: 10),
+            introduceLabel.trailingAnchor.constraint(equalTo: introduceView.trailingAnchor, constant: -10),
+            introduceLabel.bottomAnchor.constraint(equalTo: introduceView.bottomAnchor, constant: -10),
             
-            emptyPetView.topAnchor.constraint(equalTo: profileFooterView.topAnchor, constant: 50),
-            emptyPetView.leadingAnchor.constraint(equalTo: profileFooterView.leadingAnchor),
-            emptyPetView.trailingAnchor.constraint(equalTo: profileFooterView.trailingAnchor),
+            petListView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            petListView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            petListView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            petListView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            
+            emptyPetView.topAnchor.constraint(equalTo: profileHeaderView.bottomAnchor, constant: 50),
+            emptyPetView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            emptyPetView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             emptyPetView.heightAnchor.constraint(equalToConstant: 250),
-
-            addPuppyButton.topAnchor.constraint(equalTo: emptyPetView.bottomAnchor),
+            
             addPuppyButton.centerXAnchor.constraint(equalTo: profileFooterView.centerXAnchor),
+            addPuppyButton.bottomAnchor.constraint(equalTo: profileFooterView.bottomAnchor),
             addPuppyButton.widthAnchor.constraint(equalToConstant: 102),
             addPuppyButton.heightAnchor.constraint(equalToConstant: 33)
         ])
@@ -207,6 +223,16 @@ final class ProfileContentView: UIView {
     
     private func configureUI() {
         backgroundColor = .Togaether.background
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        guard let headerView = petListView.tableHeaderView else {
+            return
+        }
+        let headerSize = headerView.systemLayoutSizeFitting(CGSize(width: bounds.size.width, height: UIView.layoutFittingCompressedSize.height))
+        headerView.frame.size.height = headerSize.height + 50.0
+        petListView.tableHeaderView = headerView
     }
     
     internal func configureData(_ myPage: Bool, _ accountInfo: AccountInfo?, petInfo: [PetInfo]?) {
@@ -218,17 +244,16 @@ final class ProfileContentView: UIView {
         if !myPage {
             initailIntroduceView.removeFromSuperview()
             introduceView.isHidden = false
-            introduceView.configureData(accountData)
+            introduceLabel.text = accountData.Introduction
             addPuppyButton.removeFromSuperview()
         } else {
             if accountData.Introduction != nil {
                 initailIntroduceView.removeFromSuperview()
                 introduceView.isHidden = false
-                introduceView.configureData(accountData)
+                introduceLabel.text = accountData.Introduction
             } else {
                 initailIntroduceView.isHidden = false
                 introduceView.removeFromSuperview()
-                profileHeaderView.frame = CGRect(origin: .zero, size: CGSize(width: UIScreen.main.bounds.width, height: 273))
             }
         }
 
@@ -237,19 +262,19 @@ final class ProfileContentView: UIView {
         addressLabel.text = accountData.address
         ageLabel.text = accountData.age
                   
-        if !petData.isEmpty {
+        if !petData.isEmpty || !myPage {
             emptyPetView.removeFromSuperview()
         }
         
         Observable.of(petData)
             .asDriver(onErrorJustReturn: [])
-            .drive(dogListView.rx.items) { tableView, row, data in
+            .drive(petListView.rx.items) { tableView, row, data in
                 let indexPath = IndexPath(row: row, section: 0)
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: DogTableViewCell.identifier, for: indexPath) as? DogTableViewCell else {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: PetTableViewCell.identifier, for: indexPath) as? PetTableViewCell else {
                     return UITableViewCell()
                 }
                 cell.configureData(data)
-                
+            
                 return cell
             }
             .disposed(by: disposeBag)
