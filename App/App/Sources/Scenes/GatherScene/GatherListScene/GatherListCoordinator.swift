@@ -23,6 +23,18 @@ final class GatherListCoordinator: SceneCoordinator {
         let networkManager = NetworkManager.shared
         let keychainProvider = KeychainProvider.shared
         let keychainUseCase = KeychainUsecase(keychainProvider: keychainProvider, networkManager: networkManager)
+        let detailGatherRepository = DetailGatherRepository(networkManager: networkManager)
+        
+        let reactor = DetailGatherReactor(clubID: 6, detailGatherRepository: detailGatherRepository, keychainUseCase: keychainUseCase)
+        let viewController = DetailGatherViewController(reactor: reactor)
+        
+        navigationController.setViewControllers([viewController], animated: false)
+    }
+    
+    func start1() {
+        let networkManager = NetworkManager.shared
+        let keychainProvider = KeychainProvider.shared
+        let keychainUseCase = KeychainUsecase(keychainProvider: keychainProvider, networkManager: networkManager)
         let gatherListRepository = GatherListRepository(networkManager: networkManager)
         let reactor = GatherListReactor(gatherListRepository: gatherListRepository, keychainUseCase: keychainUseCase)
         let viewController = GatherListViewController(reactor: reactor)

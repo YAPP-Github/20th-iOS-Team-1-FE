@@ -165,6 +165,9 @@
 		37DA2520287317EE002E4D67 /* DetailGatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA251E287317EE002E4D67 /* DetailGatherViewController.swift */; };
 		37DA2521287317EE002E4D67 /* DetailGatherReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA251F287317EE002E4D67 /* DetailGatherReactor.swift */; };
 		37DA252328732816002E4D67 /* Divider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA252228732816002E4D67 /* Divider.swift */; };
+		37DBF4B2288B685B0050E4FF /* ParticipantCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DBF4B1288B685B0050E4FF /* ParticipantCollectionView.swift */; };
+		37DBF4B4288B700B0050E4FF /* ParticipantCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DBF4B3288B700B0050E4FF /* ParticipantCollectionViewCell.swift */; };
+		37DBF4B6288B73640050E4FF /* AccountSummaryInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DBF4B5288B73640050E4FF /* AccountSummaryInfoDTO.swift */; };
 		37ECC53C2871B4B000CFE8E9 /* UIImagePickerViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ECC53B2871B4B000CFE8E9 /* UIImagePickerViewController+Rx.swift */; };
 		37ECC53E2871BA9300CFE8E9 /* RxImagePickerDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ECC53D2871BA9300CFE8E9 /* RxImagePickerDelegateProxy.swift */; };
 		37F67CC5286A1C270073FE8C /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F67CC4286A1C270073FE8C /* AuthCoordinator.swift */; };
@@ -382,6 +385,9 @@
 		37DA251E287317EE002E4D67 /* DetailGatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGatherViewController.swift; sourceTree = "<group>"; };
 		37DA251F287317EE002E4D67 /* DetailGatherReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGatherReactor.swift; sourceTree = "<group>"; };
 		37DA252228732816002E4D67 /* Divider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Divider.swift; sourceTree = "<group>"; };
+		37DBF4B1288B685B0050E4FF /* ParticipantCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantCollectionView.swift; sourceTree = "<group>"; };
+		37DBF4B3288B700B0050E4FF /* ParticipantCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantCollectionViewCell.swift; sourceTree = "<group>"; };
+		37DBF4B5288B73640050E4FF /* AccountSummaryInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSummaryInfoDTO.swift; sourceTree = "<group>"; };
 		37ECC53A287166C200CFE8E9 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		37ECC53B2871B4B000CFE8E9 /* UIImagePickerViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImagePickerViewController+Rx.swift"; sourceTree = "<group>"; };
 		37ECC53D2871BA9300CFE8E9 /* RxImagePickerDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxImagePickerDelegateProxy.swift; sourceTree = "<group>"; };
@@ -632,6 +638,7 @@
 				379B1A76285A4F7700E58A34 /* AppleCredentialRequestDTO.swift */,
 				374380A2284FDCE500CB02A5 /* SexDTO.swift */,
 				374380A6284FDD8A00CB02A5 /* SocialTypeDTO.swift */,
+				37DBF4B5288B73640050E4FF /* AccountSummaryInfoDTO.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -1121,6 +1128,8 @@
 				37DA251E287317EE002E4D67 /* DetailGatherViewController.swift */,
 				37DA251F287317EE002E4D67 /* DetailGatherReactor.swift */,
 				370AEEF12886EF4800E217FB /* DetailGatherRepositoryInterface.swift */,
+				37DBF4B1288B685B0050E4FF /* ParticipantCollectionView.swift */,
+				37DBF4B3288B700B0050E4FF /* ParticipantCollectionViewCell.swift */,
 			);
 			path = DetailGatherScene;
 			sourceTree = "<group>";
@@ -1436,6 +1445,7 @@
 				29AE2232284B7F1100EDF34B /* UIView+Extension.swift in Sources */,
 				29AE2246284E02EB00EDF34B /* MKCoordinateRegion+Extension.swift in Sources */,
 				379B1A7B285A52EA00E58A34 /* AppleLoginRepositoryInterface.swift in Sources */,
+				37DBF4B4288B700B0050E4FF /* ParticipantCollectionViewCell.swift in Sources */,
 				37479BA1283EBB220078386E /* UIButton+Extension.swift in Sources */,
 				374F41DA2864EB060074F04B /* KeychainUseCase.swift in Sources */,
 				FDD226712875F4900042F488 /* TagCollectionViewReactor.swift in Sources */,
@@ -1543,12 +1553,14 @@
 				FD5AEE90286E266800001838 /* PetInfo.swift in Sources */,
 				3749904928772D0C00D07211 /* ClubFIndDetailResponseDTO.swift in Sources */,
 				37438095284FD9BA00CB02A5 /* ExceptionDetailResponseDTO.swift in Sources */,
+				37DBF4B2288B685B0050E4FF /* ParticipantCollectionView.swift in Sources */,
 				294A0C162873A46500D1CEB3 /* OwnerSex.swift in Sources */,
 				37D1E4FF2877019100A955C4 /* FileManageable.swift in Sources */,
 				374F41DE2864F0780074F04B /* KeychainUseCaseInterface.swift in Sources */,
 				37AC3105284930E6003C3FA2 /* SignUpInfomationViewController.swift in Sources */,
 				29AE22522869E47100EDF34B /* MapViewAnnotation.swift in Sources */,
 				3743809F284FDBB600CB02A5 /* SignInResponseDTO.swift in Sources */,
+				37DBF4B6288B73640050E4FF /* AccountSummaryInfoDTO.swift in Sources */,
 				378F347A281DBDF10063CE4F /* LoginViewController.swift in Sources */,
 				FD7E2554287C18AC008E9E24 /* PetSizeButton.swift in Sources */,
 				29AE2244284DF18200EDF34B /* Coordinate.swift in Sources */,

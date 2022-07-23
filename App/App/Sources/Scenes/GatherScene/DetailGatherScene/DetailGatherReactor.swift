@@ -79,7 +79,7 @@ final class DetailGatherReactor: Reactor {
             self.keychainUseCase.getAccessToken()
                 .subscribe(with: self,
                    onSuccess: { this, token in
-                    this.detailGatherRepository.requestDetailGather(accessToken: token, clubID: clubID)
+                    this.detailGatherRepository.requestDetailGather(accessToken: token, clubID: 6)
                         .subscribe { result in
                         switch result {
                         case .success(let clubFindDetail):
