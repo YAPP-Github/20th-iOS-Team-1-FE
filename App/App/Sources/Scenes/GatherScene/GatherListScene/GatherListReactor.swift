@@ -38,6 +38,7 @@ final class GatherListReactor: Reactor {
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .segmentIndex(index: let index):
+            
             guard let gatherCondition = Gather.init(rawValue: index) else {
                 return Observable.empty()
             }

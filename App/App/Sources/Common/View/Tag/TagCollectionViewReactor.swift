@@ -13,9 +13,13 @@ final class TagCollectionViewReactor: Reactor {
     
     typealias Action = NoAction
     
-    let initialState: [String]
+    var initialState: [String]
     
     init(state: [String]) {
         self.initialState = state
+    }
+    
+    func updateState(_ strings: [String]) {
+        initialState = strings
     }
 }

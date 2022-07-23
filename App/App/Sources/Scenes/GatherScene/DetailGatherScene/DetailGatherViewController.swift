@@ -5,6 +5,7 @@
 //  Created by Hani on 2022/07/04.
 //
 
+import MapKit
 import UIKit
 
 import ReactorKit
@@ -57,7 +58,7 @@ final class DetailGatherViewController: BaseViewController {
         let label = UILabel()
         label.layer.cornerRadius = 10
         label.layer.masksToBounds = true
-        label.font = .customFont(size: 10)
+        label.font = .customFont(size: 14)
         label.backgroundColor = .Togaether.mainGreen
         
         return label
@@ -71,16 +72,6 @@ final class DetailGatherViewController: BaseViewController {
         
         return label
     }()
-    
-    private var gatherTimeStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 8
-        stackView.alignment = .fill
-        stackView.distribution = .fillProportionally
-        
-        return stackView
-    }()
         
     private var gatherDayLabel: UILabel = {
         let label = UILabel()
@@ -90,22 +81,15 @@ final class DetailGatherViewController: BaseViewController {
         return label
     }()
     
-    private let gatherTimeDivider = Divider()
-    
-    private var gatherDurationLabel: UILabel = {
-        let label = UILabel()
-        
-        return label
-    }()
-    
     private lazy var gatherGuideStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 12
-        stackView.alignment = .leading
+        stackView.alignment = .fill
         stackView.distribution = .fillProportionally
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        stackView.backgroundColor = .Togaether.background
         
         return stackView
     }()
@@ -116,12 +100,16 @@ final class DetailGatherViewController: BaseViewController {
         stackView.spacing = 8
         stackView.alignment = .fill
         stackView.distribution = .fillProportionally
+        stackView.backgroundColor = .Togaether.background
         
         return stackView
     }()
 
-    private lazy var leaderProfileImageView: UIImageView = {
+    private let leaderProfileImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.image = .Togaether.userDefaultProfile
+        imageView.layer.cornerRadius = 16
+        imageView.clipsToBounds = true
         
         return imageView
     }()
@@ -150,8 +138,7 @@ final class DetailGatherViewController: BaseViewController {
         stackView.spacing = 8
         stackView.alignment = .leading
         stackView.distribution = .fillProportionally
-        stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.layoutMargins = UIEdgeInsets(top: 12, left: 20, bottom: 30, right: 20)
+        stackView.backgroundColor = .Togaether.background
         
         return stackView
     }()
@@ -161,7 +148,8 @@ final class DetailGatherViewController: BaseViewController {
         stackView.axis = .horizontal
         stackView.spacing = 16
         stackView.alignment = .fill
-        stackView.distribution = .fillProportionally
+        stackView.distribution = .fill
+        stackView.backgroundColor = .Togaether.background
         
         return stackView
     }()
@@ -172,14 +160,15 @@ final class DetailGatherViewController: BaseViewController {
         return label
     }()
     
-    private lazy var eligiblePetSizeView = UIView()
+    private lazy var eligiblePetSizeView = TagCollectionView(reactor: TagCollectionViewReactor(state: []), frame: .zero)
     
     private lazy var eligiblePetBreedStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = 16
         stackView.alignment = .fill
-        stackView.distribution = .fillProportionally
+        stackView.distribution = .fill
+        stackView.backgroundColor = .Togaether.background
         
         return stackView
     }()
@@ -191,14 +180,15 @@ final class DetailGatherViewController: BaseViewController {
         return label
     }()
     
-    private lazy var eligiblePetBreedView = UIView()
+    private lazy var eligiblePetBreedView = TagCollectionView(reactor: TagCollectionViewReactor(state: []), frame: .zero)
     
     private lazy var eligibleSexStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = 16
         stackView.alignment = .fill
-        stackView.distribution = .fillProportionally
+        stackView.distribution = .fill
+        stackView.backgroundColor = .Togaether.background
         
         return stackView
     }()
@@ -210,17 +200,8 @@ final class DetailGatherViewController: BaseViewController {
         return label
     }()
     
-    private lazy var eligibleSexView = UIView()
-    
-    private lazy var gatherPlaceLabel: UILabel = {
-        let label = UILabel()
-        label.text = "모임 위치"
-        label.font = .customFont(size: 16, style: .Bold)
-        return label
-    }()
-    
-    private lazy var mapView = UIView()
-    
+    private lazy var eligibleSexView = TagCollectionView(reactor: TagCollectionViewReactor(state: []), frame: .zero)
+
     private lazy var gatherAddressStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -229,8 +210,27 @@ final class DetailGatherViewController: BaseViewController {
         stackView.distribution = .fillProportionally
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 30, right: 20)
+        stackView.backgroundColor = .Togaether.background
         
         return stackView
+    }()
+    
+    private lazy var gatherPlaceLabel: UILabel = {
+        let label = UILabel()
+        label.text = "모임 위치"
+        label.font = .customFont(size: 16, style: .Bold)
+        return label
+    }()
+    
+    private lazy var mapView: MKMapView = {
+        let mapView = MKMapView()
+        
+        mapView.isPitchEnabled = false
+        mapView.setCameraZoomRange(
+            MKMapView.CameraZoomRange(minCenterCoordinateDistance: 1000, maxCenterCoordinateDistance: 10000),
+            animated: false
+        )
+        return mapView
     }()
     
     private lazy var gatherAddressLabel: UILabel = {
@@ -251,26 +251,65 @@ final class DetailGatherViewController: BaseViewController {
         return label
     }()
     
-    private let gatherPlaceDivider = Divider()
+    private lazy var participantStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 8
+        stackView.alignment = .leading
+        stackView.distribution = .fillProportionally
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.layoutMargins = UIEdgeInsets(top: 12, left: 20, bottom: 30, right: 20)
+        stackView.backgroundColor = .Togaether.background
+        
+        return stackView
+    }()
+    
+    private lazy var participantDescriptionStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 4
+        stackView.alignment = .leading
+        stackView.distribution = .fillProportionally
+        stackView.backgroundColor = .Togaether.background
+        
+        return stackView
+    }()
     
     private lazy var participantLabel: UILabel = {
         let label = UILabel()
         label.text = "참여 인원"
-        
+        label.font = .customFont(size: 16, style: .Bold)
         return label
     }()
     
     private lazy var participantDescriptionLabel: UILabel = {
         let label = UILabel()
+        label.font = .customFont(size: 16, style: .Bold)
         
         return label
     }()
     
-    private let gatherParticipantDivider = Divider()
+    private lazy var participantCollectionView = ParticipantCollectionView(frame: .zero)
+    
+    private lazy var commentStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 8
+        stackView.alignment = .leading
+        stackView.distribution = .fillProportionally
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.layoutMargins = UIEdgeInsets(top: 12, left: 20, bottom: 30, right: 20)
+        stackView.backgroundColor = .Togaether.background
+        
+        return stackView
+    }()
+    
+    private var commentCollectionView = UIView()
     
     private lazy var gatherCommentLabel: UILabel = {
         let label = UILabel()
-        
+        label.text = "모임 댓글"
+        label.font = .customFont(size: 16, style: .Bold)
         return label
     }()
     
@@ -336,16 +375,16 @@ final class DetailGatherViewController: BaseViewController {
         detailGatherStackView.addArrangedSubview(gatherDescriptionStackView)
         gatherDescriptionStackView.addArrangedSubview(gatherCategoryLabel)
         gatherDescriptionStackView.addArrangedSubview(gatherTitleLabel)
-        gatherDescriptionStackView.addArrangedSubview(gatherTimeStackView)
-        gatherTimeStackView.addArrangedSubview(gatherDayLabel)
-        gatherTimeStackView.addArrangedSubview(gatherTimeDivider)
-        gatherTimeStackView.addArrangedSubview(gatherDurationLabel)
+        gatherDescriptionStackView.addArrangedSubview(gatherDayLabel)
         
         detailGatherStackView.addArrangedSubview(gatherGuideStackView)
         gatherGuideStackView.addArrangedSubview(leaderStackView)
         leaderStackView.addArrangedSubview(leaderProfileImageView)
         leaderStackView.addArrangedSubview(leaderNicknameLabel)
+        gatherGuideStackView.addArrangedSubview(gatherDescriptionLabel)
+        
         gatherGuideStackView.addArrangedSubview(gatherRequirementDivider)
+        
         gatherGuideStackView.addArrangedSubview(gatherRequirementStackView)
         gatherRequirementStackView.addArrangedSubview(eligiblePetSizeStackView)
         eligiblePetSizeStackView.addArrangedSubview(eligiblePetSizeLabel)
@@ -356,8 +395,24 @@ final class DetailGatherViewController: BaseViewController {
         gatherRequirementStackView.addArrangedSubview(eligibleSexStackView)
         eligibleSexStackView.addArrangedSubview(eligibleSexLabel)
         eligibleSexStackView.addArrangedSubview(eligibleSexView)
-                
-        //
+        
+        detailGatherStackView.addArrangedSubview(gatherAddressStackView)
+        gatherAddressStackView.addArrangedSubview(gatherPlaceLabel)
+        gatherAddressStackView.addArrangedSubview(mapView)
+        gatherAddressStackView.addArrangedSubview(gatherAddressLabel)
+        gatherAddressStackView.addArrangedSubview(gatherAddressDescriptionLabel)
+        
+        detailGatherStackView.addArrangedSubview(participantStackView)
+        participantStackView.addArrangedSubview(participantDescriptionStackView)
+        participantDescriptionStackView.addArrangedSubview(participantLabel)
+        participantDescriptionStackView.addArrangedSubview(participantDescriptionLabel)
+        participantStackView.addArrangedSubview(participantCollectionView)
+        
+        detailGatherStackView.addArrangedSubview(commentStackView)
+        commentStackView.addArrangedSubview(gatherCommentLabel)
+        commentStackView.addArrangedSubview(commentCollectionView)
+        commentStackView.addArrangedSubview(addCommentButton)
+        
         
         detailGatherStackView.addArrangedSubview(gatherButtonDivider)
         detailGatherStackView.addArrangedSubview(gatherButton)
@@ -380,12 +435,15 @@ final class DetailGatherViewController: BaseViewController {
             detailGatherStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             detailGatherStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             detailGatherStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            detailGatherStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
+            detailGatherStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            
+            leaderProfileImageView.widthAnchor.constraint(equalToConstant: 32),
+            leaderProfileImageView.heightAnchor.constraint(equalToConstant: 32),
+            participantCollectionView.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
     
     private func configureUI() {
-        
         navigationItem.rightBarButtonItem = settingBarButton
     }
     
@@ -410,6 +468,38 @@ final class DetailGatherViewController: BaseViewController {
     
     private func bindState(with reactor: Reactor) {
         disposeBag.insert {
+            reactor.state
+                .filter { $0.clubFindDetail != nil }
+                .map { $0.clubFindDetail }
+                .observe(on: MainScheduler.instance)
+                .bind(onNext: { [weak self] club in
+                    guard let self = self,
+                          let club = club else {
+                        return
+                    }
+
+                    self.gatherCategoryLabel.text = "  " + club.clubDetailInfo.category + "  "
+                    self.gatherTitleLabel.text = club.clubDetailInfo.title
+                    self.gatherDayLabel.text = club.clubDetailInfo.startDate + club.clubDetailInfo.endDate
+                    
+                    self.leaderProfileImageView.imageWithURL(club.leaderInfo.imageURL)
+                    self.leaderNicknameLabel.text = club.leaderInfo.nickname
+                    self.gatherDescriptionLabel.text = club.clubDetailInfo.description
+                    
+                    self.gatherAddressDescriptionLabel.text = club.clubDetailInfo.meetingPlace
+                    self.participantDescriptionLabel.text = "\(club.clubDetailInfo.participants)/\(club.clubDetailInfo.maximumPeople)"
+ 
+                    self.eligiblePetSizeView.reactor = TagCollectionViewReactor(state: club.clubDetailInfo.eligiblePetSizeTypes)
+                    self.eligibleSexView.reactor = TagCollectionViewReactor(state: [club.clubDetailInfo.eligibleSex])
+                    self.eligiblePetBreedView.reactor = TagCollectionViewReactor(state: club.clubDetailInfo.eligibleBreeds)
+                })
+            
+            reactor.state
+                .map { $0.clubFindDetail?.accountInfos ?? [] }
+                .observe(on: MainScheduler.instance)
+                .bind(to: participantCollectionView.rx.items(cellIdentifier: ParticipantCollectionViewCell.identifier, cellType: ParticipantCollectionViewCell.self)) { index, data, cell in
+                    cell.configure(imageURLString: data.imageURL, nickname: data.nickname)
+                }
         }
     }
     
