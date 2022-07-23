@@ -27,6 +27,7 @@ final class ProfileContentView: UIView {
         let view = UIImageView()
         view.image = .Togaether.userDefaultProfile
         view.layer.cornerRadius = 60
+        view.clipsToBounds = true
         
         return view
     }()
