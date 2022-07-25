@@ -263,7 +263,7 @@ final class SearchViewController: BaseViewController {
     }
     
     private func bindAction(with reactor: SearchReactor) {
-        disposeBag.insert(
+        disposeBag.insert (
             searchButton.rx.throttleTap
                 .map { Reactor.Action.searchButtonTapped }
                 .bind(to: reactor.action),
@@ -303,7 +303,17 @@ final class SearchViewController: BaseViewController {
                             longitude: coordinate.longitude
                         )
                     )
+                },
+            
+            createGatherButton.rx.throttleTap
+                .map { [unowned self] in
+                    let coordinate = mapView.selectedCoordinate(point: self.selectLocationPinImageView.center)
+                    return Reactor.Action.createGatherButtonTapped(
+                        addressLabel.text ?? "",
+                        CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+                    )
                 }
+                .bind(to: reactor.action)
         )
     }
     

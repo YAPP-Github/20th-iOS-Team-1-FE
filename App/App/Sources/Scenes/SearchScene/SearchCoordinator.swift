@@ -28,10 +28,12 @@ final class SearchCoordinator: SceneCoordinator {
         let viewController = SearchViewController(reactor: searchReactor, locationManager: locationManger)
         
         searchReactor.readyToCreateGather
-            .asDriver(onErrorJustReturn: ("", CLLocationCoordinate2D.init()))
+            .asDriver(onErrorJustReturn: ("", CLLocation.init()))
             .drive(with: self,
-                   onNext: { this, _ in
-                this.pushCreateGatherViewController()
+                   onNext: { this, data in
+                let address = data.0
+                let location = data.1
+                this.pushCreateGatherViewController(address, location)
             })
             .disposed(by:disposeBag)
         
@@ -57,7 +59,14 @@ final class SearchCoordinator: SceneCoordinator {
         
     }
     
-    func pushCreateGatherViewController() {
-        // 여행 생성 페이지
+    func pushCreateGatherViewController(_ address: String, _ location: CLLocation) {
+        let networkManager = NetworkManager.shared
+        let keychain = KeychainQueryRequester()
+        let keychainProvider = KeychainProvider(keyChain: keychain)
+        let keychainUseCase = KeychainUsecase(keychainProvider: keychainProvider, networkManager: networkManager)
+        let createGatherRepository = CreateGatherRepository(networkManager: networkManager)
+        let createGatherReactor = CreateGatherReactor(createGatherRepository: createGatherRepository, keychainUseCase: keychainUseCase)
+        let createGathreViewController = CreateGatherViewController(reactor: createGatherReactor)
+        navigationController.pushViewController(createGathreViewController, animated: true)
     }
 }
