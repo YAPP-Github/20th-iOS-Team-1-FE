@@ -21,10 +21,11 @@ final class CreateGatherReactor: Reactor {
     }
     
     struct State {
+        var address: String?
         
     }
     
-    let initialState = State()
+    var initialState = State()
     private let createGatherRepository: CreateGatherRepositoryInterface
     private let keychainUseCase: KeychainUseCaseInterface
     

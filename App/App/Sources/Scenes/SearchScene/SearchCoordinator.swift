@@ -67,6 +67,9 @@ final class SearchCoordinator: SceneCoordinator {
         let createGatherRepository = CreateGatherRepository(networkManager: networkManager)
         let createGatherReactor = CreateGatherReactor(createGatherRepository: createGatherRepository, keychainUseCase: keychainUseCase)
         let createGathreViewController = CreateGatherViewController(reactor: createGatherReactor)
+        createGatherReactor.initialState.address = address
+        createGathreViewController.createGatherView.addressTextField.text = address
+        
         navigationController.pushViewController(createGathreViewController, animated: true)
     }
 }

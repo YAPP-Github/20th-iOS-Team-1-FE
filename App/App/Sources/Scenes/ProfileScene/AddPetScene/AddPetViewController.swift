@@ -279,10 +279,6 @@ final class AddPetViewController: BaseViewController {
         bindAction(with: reactor)
         bindState(with: reactor)
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
-    }
 }
 
 extension AddPetViewController: SendData {
