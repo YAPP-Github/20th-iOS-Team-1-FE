@@ -186,6 +186,10 @@
 		FD6D485F2885AE10005D9669 /* SearchBreedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6D485E2885AE10005D9669 /* SearchBreedViewController.swift */; };
 		FD6D48612885AE94005D9669 /* SearchBreedReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6D48602885AE94005D9669 /* SearchBreedReactor.swift */; };
 		FD6D486928870CE4005D9669 /* 견종목록.csv in Resources */ = {isa = PBXBuildFile; fileRef = FD6D486828870CE4005D9669 /* 견종목록.csv */; };
+		FD6D487A288E6C9C005D9669 /* CreateGatherRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6D4879288E6C9C005D9669 /* CreateGatherRepository.swift */; };
+		FD6D487C288E6CC0005D9669 /* CreateGatherRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6D487B288E6CC0005D9669 /* CreateGatherRepositoryInterface.swift */; };
+		FD6D487E288E6DF5005D9669 /* CreateGatherReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6D487D288E6DF5005D9669 /* CreateGatherReactor.swift */; };
+		FD6D4880288E7008005D9669 /* CreateGatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6D487F288E7008005D9669 /* CreateGatherViewController.swift */; };
 		FD6F4DBF28829E710031F747 /* PetRequestInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6F4DBE28829E710031F747 /* PetRequestInfo.swift */; };
 		FD6F4DC32882A2C70031F747 /* PetTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6F4DC22882A2C70031F747 /* PetTag.swift */; };
 		FD7E2554287C18AC008E9E24 /* PetSizeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7E2553287C18AC008E9E24 /* PetSizeButton.swift */; };
@@ -407,6 +411,10 @@
 		FD6D485E2885AE10005D9669 /* SearchBreedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBreedViewController.swift; sourceTree = "<group>"; };
 		FD6D48602885AE94005D9669 /* SearchBreedReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBreedReactor.swift; sourceTree = "<group>"; };
 		FD6D486828870CE4005D9669 /* 견종목록.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "견종목록.csv"; sourceTree = "<group>"; };
+		FD6D4879288E6C9C005D9669 /* CreateGatherRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGatherRepository.swift; sourceTree = "<group>"; };
+		FD6D487B288E6CC0005D9669 /* CreateGatherRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGatherRepositoryInterface.swift; sourceTree = "<group>"; };
+		FD6D487D288E6DF5005D9669 /* CreateGatherReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGatherReactor.swift; sourceTree = "<group>"; };
+		FD6D487F288E7008005D9669 /* CreateGatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGatherViewController.swift; sourceTree = "<group>"; };
 		FD6F4DBE28829E710031F747 /* PetRequestInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetRequestInfo.swift; sourceTree = "<group>"; };
 		FD6F4DC22882A2C70031F747 /* PetTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetTag.swift; sourceTree = "<group>"; };
 		FD7E2553287C18AC008E9E24 /* PetSizeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetSizeButton.swift; sourceTree = "<group>"; };
@@ -541,6 +549,7 @@
 				37499038287720E100D07211 /* DetailGatherRepository.swift */,
 				FD0870CF28805B4200DF3553 /* EditProfileRepository.swift */,
 				FD0870D128805B6E00DF3553 /* AddPetRepository.swift */,
+				FD6D4879288E6C9C005D9669 /* CreateGatherRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -795,6 +804,7 @@
 		378F3473281DBCFC0063CE4F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				FD6D4878288E6C25005D9669 /* CreateGatherScene */,
 				29AE222A284B7CEC00EDF34B /* SearchScene */,
 				378F3476281DBDB10063CE4F /* AuthScene */,
 				378F3475281DBD4C0063CE4F /* GatherScene */,
@@ -1165,6 +1175,16 @@
 			path = BreedSelectScene;
 			sourceTree = "<group>";
 		};
+		FD6D4878288E6C25005D9669 /* CreateGatherScene */ = {
+			isa = PBXGroup;
+			children = (
+				FD6D487B288E6CC0005D9669 /* CreateGatherRepositoryInterface.swift */,
+				FD6D487D288E6DF5005D9669 /* CreateGatherReactor.swift */,
+				FD6D487F288E7008005D9669 /* CreateGatherViewController.swift */,
+			);
+			path = CreateGatherScene;
+			sourceTree = "<group>";
+		};
 		FD6F4DBD28829E660031F747 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
@@ -1459,8 +1479,10 @@
 				379B1A77285A4F7700E58A34 /* AppleCredentialRequestDTO.swift in Sources */,
 				374F41E1286619C90074F04B /* Area.swift in Sources */,
 				3749903B2877239600D07211 /* ClubInfosResponseDTO.swift in Sources */,
+				FD6D487A288E6C9C005D9669 /* CreateGatherRepository.swift in Sources */,
 				37C3F4ED284BF4380006CB02 /* KeychainProvidable.swift in Sources */,
 				376006C82848A16400B27015 /* RegularExpressionValidatable.swift in Sources */,
+				FD6D4880288E7008005D9669 /* CreateGatherViewController.swift in Sources */,
 				294A0C1E287963F000D1CEB3 /* SearchGatherReactor.swift in Sources */,
 				FDFD017228735DBB00C625B1 /* GatherConfigurationForSheetResponseDTO.swift in Sources */,
 				29AE223D284D71DC00EDF34B /* LocationManageable.swift in Sources */,
@@ -1538,9 +1560,11 @@
 				377370882841DE3500D5CCB6 /* SignUpProfileViewController.swift in Sources */,
 				29AE223A284B97DA00EDF34B /* GatherConfigurationForAnnotation.swift in Sources */,
 				FDE18E182873586C00A7369D /* GatherListRepository.swift in Sources */,
+				FD6D487E288E6DF5005D9669 /* CreateGatherReactor.swift in Sources */,
 				37D1E5012877116A00A955C4 /* FileManager+Extension.swift in Sources */,
 				376006CA28490EFD00B27015 /* EnableButton.swift in Sources */,
 				37DA252328732816002E4D67 /* Divider.swift in Sources */,
+				FD6D487C288E6CC0005D9669 /* CreateGatherRepositoryInterface.swift in Sources */,
 				379B1A79285A52DA00E58A34 /* AppleLoginRepository.swift in Sources */,
 				37F67CC5286A1C270073FE8C /* AuthCoordinator.swift in Sources */,
 				378F3486281DBE210063CE4F /* ProfileViewController.swift in Sources */,
