@@ -16,6 +16,7 @@ final class SearchReactor: Reactor {
         case mapViewVisibleRegionDidChanged(CLLocationCoordinate2D, CLLocationCoordinate2D)
         case annotationViewDidSelect(Int, CLLocation)
         case searchButtonTapped
+        case createGatherButtonTapped(String, CLLocation)
     }
     
     enum Mutation {
@@ -24,6 +25,7 @@ final class SearchReactor: Reactor {
         case loadingAnnotation(Bool)
         case setSelectedGather(GatherConfigurationForSheet)
         case loadingBottomSheet(Bool)
+        
     }
     
     struct State {
@@ -39,7 +41,7 @@ final class SearchReactor: Reactor {
     private let disposeBag = DisposeBag()
     private let gatherRepository: GatherRepositoryInterface
     internal var readyToSearchGather = PublishSubject<Void>()
-    internal var readyToCreateGather = PublishSubject<(String, CLLocationCoordinate2D)>()
+    internal var readyToCreateGather = PublishSubject<(String, CLLocation)>()
     
     init(gatherRepository: GatherRepositoryInterface) {
         self.initialState = State()
@@ -64,6 +66,8 @@ final class SearchReactor: Reactor {
                 gatherID: gatherID,
                 userLocation: location
             )
+        case .createGatherButtonTapped(let address, let location):            readyToCreateGather.onNext((address, location))
+            return Observable.empty()
         }
     }
     
