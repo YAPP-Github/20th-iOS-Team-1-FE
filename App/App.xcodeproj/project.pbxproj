@@ -190,6 +190,8 @@
 		FD6D487C288E6CC0005D9669 /* CreateGatherRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6D487B288E6CC0005D9669 /* CreateGatherRepositoryInterface.swift */; };
 		FD6D487E288E6DF5005D9669 /* CreateGatherReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6D487D288E6DF5005D9669 /* CreateGatherReactor.swift */; };
 		FD6D4880288E7008005D9669 /* CreateGatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6D487F288E7008005D9669 /* CreateGatherViewController.swift */; };
+		FD6D4883288E7A3A005D9669 /* CreateGatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6D4882288E7A3A005D9669 /* CreateGatherView.swift */; };
+		FD6D4889288ED06F005D9669 /* DatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6D4888288ED06F005D9669 /* DatePicker.swift */; };
 		FD6F4DBF28829E710031F747 /* PetRequestInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6F4DBE28829E710031F747 /* PetRequestInfo.swift */; };
 		FD6F4DC32882A2C70031F747 /* PetTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6F4DC22882A2C70031F747 /* PetTag.swift */; };
 		FD7E2554287C18AC008E9E24 /* PetSizeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7E2553287C18AC008E9E24 /* PetSizeButton.swift */; };
@@ -415,6 +417,8 @@
 		FD6D487B288E6CC0005D9669 /* CreateGatherRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGatherRepositoryInterface.swift; sourceTree = "<group>"; };
 		FD6D487D288E6DF5005D9669 /* CreateGatherReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGatherReactor.swift; sourceTree = "<group>"; };
 		FD6D487F288E7008005D9669 /* CreateGatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGatherViewController.swift; sourceTree = "<group>"; };
+		FD6D4882288E7A3A005D9669 /* CreateGatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGatherView.swift; sourceTree = "<group>"; };
+		FD6D4888288ED06F005D9669 /* DatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePicker.swift; sourceTree = "<group>"; };
 		FD6F4DBE28829E710031F747 /* PetRequestInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetRequestInfo.swift; sourceTree = "<group>"; };
 		FD6F4DC22882A2C70031F747 /* PetTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetTag.swift; sourceTree = "<group>"; };
 		FD7E2553287C18AC008E9E24 /* PetSizeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetSizeButton.swift; sourceTree = "<group>"; };
@@ -774,6 +778,7 @@
 				37DA252228732816002E4D67 /* Divider.swift */,
 				FD7E2553287C18AC008E9E24 /* PetSizeButton.swift */,
 				FD0870BD287DB15600DF3553 /* EmptyNoticeView.swift */,
+				FD6D4888288ED06F005D9669 /* DatePicker.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1178,11 +1183,20 @@
 		FD6D4878288E6C25005D9669 /* CreateGatherScene */ = {
 			isa = PBXGroup;
 			children = (
+				FD6D4881288E78AB005D9669 /* View */,
 				FD6D487B288E6CC0005D9669 /* CreateGatherRepositoryInterface.swift */,
 				FD6D487D288E6DF5005D9669 /* CreateGatherReactor.swift */,
 				FD6D487F288E7008005D9669 /* CreateGatherViewController.swift */,
 			);
 			path = CreateGatherScene;
+			sourceTree = "<group>";
+		};
+		FD6D4881288E78AB005D9669 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FD6D4882288E7A3A005D9669 /* CreateGatherView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		FD6F4DBD28829E660031F747 /* Entity */ = {
@@ -1561,6 +1575,7 @@
 				29AE223A284B97DA00EDF34B /* GatherConfigurationForAnnotation.swift in Sources */,
 				FDE18E182873586C00A7369D /* GatherListRepository.swift in Sources */,
 				FD6D487E288E6DF5005D9669 /* CreateGatherReactor.swift in Sources */,
+				FD6D4883288E7A3A005D9669 /* CreateGatherView.swift in Sources */,
 				37D1E5012877116A00A955C4 /* FileManager+Extension.swift in Sources */,
 				376006CA28490EFD00B27015 /* EnableButton.swift in Sources */,
 				37DA252328732816002E4D67 /* Divider.swift in Sources */,
@@ -1576,6 +1591,7 @@
 				FD6F4DBF28829E710031F747 /* PetRequestInfo.swift in Sources */,
 				FD5AEE90286E266800001838 /* PetInfo.swift in Sources */,
 				3749904928772D0C00D07211 /* ClubFIndDetailResponseDTO.swift in Sources */,
+				FD6D4889288ED06F005D9669 /* DatePicker.swift in Sources */,
 				37438095284FD9BA00CB02A5 /* ExceptionDetailResponseDTO.swift in Sources */,
 				37DBF4B2288B685B0050E4FF /* ParticipantCollectionView.swift in Sources */,
 				294A0C162873A46500D1CEB3 /* OwnerSex.swift in Sources */,
