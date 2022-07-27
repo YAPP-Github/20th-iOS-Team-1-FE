@@ -82,9 +82,8 @@ final class ProfileViewController: BaseViewController {
     
     private func bindAction(with reactor: ProfileReactor) {
         disposeBag.insert {
-            Observable.just(nickName)
-                .map { nickName in
-                    Reactor.Action.profileInfo(nickname: nickName) }
+            rx.viewWillAppear
+                .map { _ in Reactor.Action.viewWillAppear }
                 .bind(to: reactor.action)
 
             settingBarButton.rx.tap

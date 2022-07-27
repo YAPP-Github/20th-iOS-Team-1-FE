@@ -59,6 +59,27 @@ final class GatherListCoordinator: SceneCoordinator {
         let reactor = DetailGatherReactor(clubID: clubID, detailGatherRepository: detailGatherRepository, keychainUseCase: keychainUseCase)
         let viewController = DetailGatherViewController(reactor: reactor)
         
+        reactor.readyToProfile
+            .asDriver(onErrorJustReturn: "")
+            .drive(with: self,
+                   onNext: { this, nickname in
+                this.pushProfileViewController(nickname: nickname)
+            })
+            .disposed(by:disposeBag)
+        
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func pushProfileViewController(nickname: String) {
+        let networkManager = NetworkManager.shared
+        let profileMainRepository = ProfileRespository(networkManager: networkManager)
+        let keychain = KeychainQueryRequester()
+        let keychainProvider = KeychainProvider(keyChain: keychain)
+        let keychainUseCase = KeychainUsecase(keychainProvider: keychainProvider, networkManager: networkManager)
+        let reactor = ProfileReactor(nickname: nickname, keychainUseCase: keychainUseCase, profileMainRepository: profileMainRepository)
+        let viewController = ProfileViewController(reactor: reactor)
+        
+        
         navigationController.pushViewController(viewController, animated: true)
     }
 }
