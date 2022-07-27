@@ -44,16 +44,22 @@ extension UIImage {
         static let walkButton          = UIImage(named: "walkButton")!
         static let fairButton          = UIImage(named: "fairButton")!
         static let etcButton           = UIImage(named: "etcButton")!
+        static let dofCafeButtonFill       = UIImage(named: "dofCafeButton.fill")!
+        static let dogRestaurantButtonFill = UIImage(named: "dogRestaurantButton.fill")!
+        static let playgroundButtonFill    = UIImage(named: "playgroundButton.fill")!
+        static let walkButtonFill          = UIImage(named: "walkButton.fill")!
+        static let fairButtonFill          = UIImage(named: "fairButton.fill")!
+        static let etcButtonFill           = UIImage(named: "etcButton.fill")!
         
         static let defaultWalkMapViewAnnotation = UIImage(named: "defaultWalkMapViewAnnotation")!
-        static let defaultDogCafeMapViewAnnotation = UIImage(named: "defaultDogCafeMapViewAnnotation")!
+        static let defaultDogCafeMapViewAnnotation = UIImage(named: "defaultDogCafeMapviewAnnotation")!
         static let defaultDogRestaurantMapviewAnnotation = UIImage(named: "defaultDogRestaurantMapviewAnnotation")!
         static let defaultETCMapViewAnnotation = UIImage(named: "defaultETCMapViewAnnotation")!
         static let defaultExhibitionMapViewAnnotation = UIImage(named: "defaultExhibitionMapViewAnnotation")!
         static let defaultPlaygroundMapViewAnnotation = UIImage(named: "defaultPlaygroundMapViewAnnotation")!
         static let focusWalkMapViewAnnotation = UIImage(named: "focusWalkMapViewAnnotation")!
-        static let focusDogCafeMapviewAnnotation = UIImage(named: "focusDogCafeMapviewAnnotation")!
-        static let focusDogRestaurantMapviewAnnotation = UIImage(named: "focusDogRestaurantMapviewAnnotation")!
+        static let focusDogCafeMapviewAnnotation = UIImage(named: "focusDogCafeMapViewAnnotation")!
+        static let focusDogRestaurantMapviewAnnotation = UIImage(named: "focusDogRestaurantMapViewAnnotation")!
         static let focusETCMapViewAnnotation = UIImage(named: "focusETCMapViewAnnotation")!
         static let focusExhibitionMapViewAnnotation = UIImage(named: "focusExhibitionMapViewAnnotation")!
         static let focusPlaygroundMapViewAnnotation = UIImage(named: "focusPlaygroundMapViewAnnotation")!

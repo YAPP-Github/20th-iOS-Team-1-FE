@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "Component 26.png",
+      "filename" : "icon_y_dogrestaurant_active.svg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Component 26@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Component 26@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
