@@ -46,6 +46,7 @@ final class ParticipantCollectionViewCell: UICollectionViewCell {
         NSLayoutConstraint.useAndActivateConstraints([
             profileImageButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             profileImageButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            profileImageButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             profileImageButton.widthAnchor.constraint(equalToConstant: 56),
             profileImageButton.heightAnchor.constraint(equalToConstant: 56),
             
