@@ -19,7 +19,7 @@ final class GatherListCoordinator: SceneCoordinator {
         self.navigationController = navigationController
     }
     
-    func start() {
+    func start1() {
         let networkManager = NetworkManager.shared
         let keychainProvider = KeychainProvider.shared
         let keychainUseCase = KeychainUsecase(keychainProvider: keychainProvider, networkManager: networkManager)
@@ -31,7 +31,7 @@ final class GatherListCoordinator: SceneCoordinator {
         navigationController.setViewControllers([viewController], animated: false)
     }
     
-    func start1() {
+    func start() {
         let networkManager = NetworkManager.shared
         let keychainProvider = KeychainProvider.shared
         let keychainUseCase = KeychainUsecase(keychainProvider: keychainProvider, networkManager: networkManager)
