@@ -9,8 +9,8 @@ import UIKit
 
 import RxSwift
 
-protocol SendData: AnyObject {
-    func sendData(data: String)
+protocol SendBreed: AnyObject {
+    func sendData(data: [String])
 }
 
 final class ProfileCoordinator: SceneCoordinator {
@@ -123,7 +123,7 @@ final class ProfileCoordinator: SceneCoordinator {
             .asDriver(onErrorJustReturn: [])
             .drive(with: self,
                    onNext: { this, breed in
-                viewController.delegate?.sendData(data: breed.first!)
+                viewController.delegate?.sendData(data: breed)
                 self.navigationController.popViewController(animated: true)
             })
             .disposed(by: disposeBag)

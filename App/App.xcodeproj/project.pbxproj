@@ -192,6 +192,8 @@
 		FD6D4880288E7008005D9669 /* CreateGatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6D487F288E7008005D9669 /* CreateGatherViewController.swift */; };
 		FD6D4883288E7A3A005D9669 /* CreateGatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6D4882288E7A3A005D9669 /* CreateGatherView.swift */; };
 		FD6D4889288ED06F005D9669 /* DatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6D4888288ED06F005D9669 /* DatePicker.swift */; };
+		FD6D488D288FB7EA005D9669 /* ClubInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6D488C288FB7E9005D9669 /* ClubInfo.swift */; };
+		FD6D48912890F4AF005D9669 /* CreateClubRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6D48902890F4AF005D9669 /* CreateClubRequestDTO.swift */; };
 		FD6F4DBF28829E710031F747 /* PetRequestInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6F4DBE28829E710031F747 /* PetRequestInfo.swift */; };
 		FD6F4DC32882A2C70031F747 /* PetTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6F4DC22882A2C70031F747 /* PetTag.swift */; };
 		FD7E2554287C18AC008E9E24 /* PetSizeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7E2553287C18AC008E9E24 /* PetSizeButton.swift */; };
@@ -419,6 +421,8 @@
 		FD6D487F288E7008005D9669 /* CreateGatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGatherViewController.swift; sourceTree = "<group>"; };
 		FD6D4882288E7A3A005D9669 /* CreateGatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGatherView.swift; sourceTree = "<group>"; };
 		FD6D4888288ED06F005D9669 /* DatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePicker.swift; sourceTree = "<group>"; };
+		FD6D488C288FB7E9005D9669 /* ClubInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubInfo.swift; sourceTree = "<group>"; };
+		FD6D48902890F4AF005D9669 /* CreateClubRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateClubRequestDTO.swift; sourceTree = "<group>"; };
 		FD6F4DBE28829E710031F747 /* PetRequestInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetRequestInfo.swift; sourceTree = "<group>"; };
 		FD6F4DC22882A2C70031F747 /* PetTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetTag.swift; sourceTree = "<group>"; };
 		FD7E2553287C18AC008E9E24 /* PetSizeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetSizeButton.swift; sourceTree = "<group>"; };
@@ -497,8 +501,6 @@
 			isa = PBXGroup;
 			children = (
 				294A0C24287B081300D1CEB3 /* GatherSearchTextFieldView.swift */,
-				294A0C28287B085800D1CEB3 /* CategorySelectButtonView.swift */,
-				294A0C2A287B089000D1CEB3 /* CategorySelectView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -625,6 +627,7 @@
 				3749904628772A4F00D07211 /* CommentInfoDTO.swift */,
 				3749904828772D0C00D07211 /* ClubFIndDetailResponseDTO.swift */,
 				3749904D28772F5600D07211 /* ClubCreateRequestDTO.swift */,
+				FD6D48902890F4AF005D9669 /* CreateClubRequestDTO.swift */,
 			);
 			path = Club;
 			sourceTree = "<group>";
@@ -767,6 +770,7 @@
 		37605E0E283C50C800394929 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				FD6D488A288EDE9F005D9669 /* Category */,
 				FDD2266D2875F4530042F488 /* Tag */,
 				3773707D2841B95000D5CCB6 /* CheckBox.swift */,
 				29AE2233284B829200EDF34B /* CircularButton.swift */,
@@ -1183,6 +1187,7 @@
 		FD6D4878288E6C25005D9669 /* CreateGatherScene */ = {
 			isa = PBXGroup;
 			children = (
+				FD6D488B288FB7DB005D9669 /* Entity */,
 				FD6D4881288E78AB005D9669 /* View */,
 				FD6D487B288E6CC0005D9669 /* CreateGatherRepositoryInterface.swift */,
 				FD6D487D288E6DF5005D9669 /* CreateGatherReactor.swift */,
@@ -1197,6 +1202,23 @@
 				FD6D4882288E7A3A005D9669 /* CreateGatherView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		FD6D488A288EDE9F005D9669 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				294A0C28287B085800D1CEB3 /* CategorySelectButtonView.swift */,
+				294A0C2A287B089000D1CEB3 /* CategorySelectView.swift */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		FD6D488B288FB7DB005D9669 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				FD6D488C288FB7E9005D9669 /* ClubInfo.swift */,
+			);
+			path = Entity;
 			sourceTree = "<group>";
 		};
 		FD6F4DBD28829E660031F747 /* Entity */ = {
@@ -1492,6 +1514,7 @@
 				375558BE2866E0AC00D13208 /* SignUpAreaViewController.swift in Sources */,
 				379B1A77285A4F7700E58A34 /* AppleCredentialRequestDTO.swift in Sources */,
 				374F41E1286619C90074F04B /* Area.swift in Sources */,
+				FD6D488D288FB7EA005D9669 /* ClubInfo.swift in Sources */,
 				3749903B2877239600D07211 /* ClubInfosResponseDTO.swift in Sources */,
 				FD6D487A288E6C9C005D9669 /* CreateGatherRepository.swift in Sources */,
 				37C3F4ED284BF4380006CB02 /* KeychainProvidable.swift in Sources */,
@@ -1596,6 +1619,7 @@
 				37DBF4B2288B685B0050E4FF /* ParticipantCollectionView.swift in Sources */,
 				294A0C162873A46500D1CEB3 /* OwnerSex.swift in Sources */,
 				37D1E4FF2877019100A955C4 /* FileManageable.swift in Sources */,
+				FD6D48912890F4AF005D9669 /* CreateClubRequestDTO.swift in Sources */,
 				374F41DE2864F0780074F04B /* KeychainUseCaseInterface.swift in Sources */,
 				37AC3105284930E6003C3FA2 /* SignUpInfomationViewController.swift in Sources */,
 				29AE22522869E47100EDF34B /* MapViewAnnotation.swift in Sources */,

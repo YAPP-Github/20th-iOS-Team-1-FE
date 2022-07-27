@@ -281,9 +281,9 @@ final class AddPetViewController: BaseViewController {
     }
 }
 
-extension AddPetViewController: SendData {
-    func sendData(data: String) {
-        addPetContentView.breedLabel.text = data
+extension AddPetViewController: SendBreed {
+    func sendData(data: [String]) {
+        addPetContentView.breedLabel.text = data.first!
     }
 }
 

@@ -141,89 +141,72 @@ final class AddPetReactor: Reactor {
         switch mutation {
         case .changeProfileImage(let data):
             newState.petInfo.imageFile = data
-            newState.isAddButtonEnabled = check()
         case .updateNickname(let name):
             newState.petInfo.name = name
-            newState.isAddButtonEnabled = check()
         case .updateYearOfBirth(let year):
             newState.petInfo.year = year
-            newState.isAddButtonEnabled = check()
         case .updateMonthOfBirth(let month):
             newState.petInfo.month = month
-            newState.isAddButtonEnabled = check()
         case .selectSmall:
             newState.petInfo.sizeType = "SMALL"
             newState.isSmallSelected = true
             newState.isMiddleSelected = false
             newState.isLargeSelected = false
-            newState.isAddButtonEnabled = check()
         case .selectMiddle:
             newState.petInfo.sizeType = "MEDIUM"
             newState.isSmallSelected = false
             newState.isMiddleSelected = true
             newState.isLargeSelected = false
-            newState.isAddButtonEnabled = check()
         case .selectLarge:
             newState.petInfo.sizeType = "LARGE"
             newState.isSmallSelected = false
             newState.isMiddleSelected = false
             newState.isLargeSelected = true
-            newState.isAddButtonEnabled = check()
         case .updateBreed(let breed):
             newState.petInfo.breed = breed
-            newState.isAddButtonEnabled = check()
         case .selectMan:
             newState.petInfo.sex = "MALE"
             newState.isManSelected = true
             newState.isWomanSelected = false
-            newState.isAddButtonEnabled = check()
         case .selectWoman:
             newState.petInfo.sex = "FEMALE"
             newState.isManSelected = false
             newState.isWomanSelected = true
-            newState.isAddButtonEnabled = check()
         case .selectSexLess:
             newState.petInfo.neutering = true
             newState.isSexlessSelected = true
             newState.isGenderedSelected = false
-            newState.isAddButtonEnabled = check()
         case .selectGendered:
             newState.petInfo.neutering = false
             newState.isSexlessSelected = false
             newState.isGenderedSelected = true
-            newState.isAddButtonEnabled = check()
         case .selectActive:
             newState.petInfo.tags?.append(PetTag.active.toString())
             newState.petInfo.neutering = false
             newState.isActiveSelected = true
             newState.isDocileSelected = false
-            newState.isAddButtonEnabled = check()
         case .selectDocile:
             newState.petInfo.tags?.append(PetTag.docile.toString())
             newState.isActiveSelected = false
             newState.isDocileSelected = true
-            newState.isAddButtonEnabled = check()
         case .selectSociable:
             newState.petInfo.tags?.append(PetTag.sociable.toString())
             newState.isSociableSelected = true
             newState.isIndependentSelected = false
-            newState.isAddButtonEnabled = check()
         case .selectIndependent:
             newState.petInfo.tags?.append(PetTag.independent.toString())
             newState.isSociableSelected = false
             newState.isIndependentSelected = true
-            newState.isAddButtonEnabled = check()
         case .selectAdaptable:
             newState.petInfo.tags?.append(PetTag.adaptable.toString())
             newState.isAdaptableSelected = true
             newState.isInadaptableSelected = false
-            newState.isAddButtonEnabled = check()
         case .selectInadaptable:
             newState.petInfo.tags?.append(PetTag.inadaptable.toString())
             newState.isAdaptableSelected = false
             newState.isInadaptableSelected = true
-            newState.isAddButtonEnabled = check()
         }
+        newState.isAddButtonEnabled = check()
         
         return newState
     }
