@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "icon_y_walk_active.svg",
+      "filename" : "Component 27.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Component 27@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "Component 27@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

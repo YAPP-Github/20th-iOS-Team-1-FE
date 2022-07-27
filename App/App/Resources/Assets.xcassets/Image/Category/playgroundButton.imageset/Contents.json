@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Component 21.svg",
+      "filename" : "Component 21.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Component 21@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "Component 21@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
