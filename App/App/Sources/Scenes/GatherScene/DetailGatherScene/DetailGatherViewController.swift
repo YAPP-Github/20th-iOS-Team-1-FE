@@ -33,7 +33,7 @@ final class DetailGatherViewController: BaseViewController {
     private let detailGatherStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 8
+        stackView.spacing = 1
         stackView.alignment = .fill
         stackView.distribution = .fillProportionally
         stackView.backgroundColor = .Togaether.divider
@@ -136,8 +136,8 @@ final class DetailGatherViewController: BaseViewController {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 8
-        stackView.alignment = .leading
-        stackView.distribution = .fillProportionally
+        stackView.alignment = .fill
+        stackView.distribution = .fill
         stackView.backgroundColor = .Togaether.background
         
         return stackView
@@ -247,7 +247,7 @@ final class DetailGatherViewController: BaseViewController {
         label.textColor = .Togaether.secondaryLabel
         label.font = .customFont(size: 14)
         label.numberOfLines = 0
-        
+        label.text = "상세 주소"
         return label
     }()
     
@@ -256,7 +256,7 @@ final class DetailGatherViewController: BaseViewController {
         stackView.axis = .vertical
         stackView.spacing = 8
         stackView.alignment = .leading
-        stackView.distribution = .fillProportionally
+        stackView.distribution = .fill
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: 12, left: 20, bottom: 30, right: 20)
         stackView.backgroundColor = .Togaether.background
@@ -289,7 +289,16 @@ final class DetailGatherViewController: BaseViewController {
         return label
     }()
     
-    private lazy var participantCollectionView = ParticipantCollectionView(frame: .zero)
+    private lazy var participantCollectionView: UICollectionView = {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.register(ParticipantCollectionViewCell.self, forCellWithReuseIdentifier: ParticipantCollectionViewCell.identifier)
+        collectionView.backgroundColor = .Togaether.background
+       // collectionView.contentInset = UIEdgeInsets(top: 6, left: 6, bottom: 6, right: 6)
+        
+        return collectionView
+    }()
     
     private lazy var commentStackView: UIStackView = {
         let stackView = UIStackView()
@@ -304,7 +313,17 @@ final class DetailGatherViewController: BaseViewController {
         return stackView
     }()
     
-    private var commentCollectionView = UIView()
+    private var commentCollectionView: UICollectionView = {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .vertical
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.isScrollEnabled = false
+        collectionView.register(CommentCell.self, forCellWithReuseIdentifier: CommentCell.identifier)
+        collectionView.backgroundColor = .Togaether.background
+        //collectionView.contentInset = UIEdgeInsets(top: 16, left: 20, bottom: 16, right: 20)
+        
+        return collectionView
+    }()
     
     private lazy var gatherCommentLabel: UILabel = {
         let label = UILabel()
@@ -392,9 +411,11 @@ final class DetailGatherViewController: BaseViewController {
         gatherRequirementStackView.addArrangedSubview(eligiblePetBreedStackView)
         eligiblePetBreedStackView.addArrangedSubview(eligiblePetBreedLabel)
         eligiblePetBreedStackView.addArrangedSubview(eligiblePetBreedView)
+        
         gatherRequirementStackView.addArrangedSubview(eligibleSexStackView)
         eligibleSexStackView.addArrangedSubview(eligibleSexLabel)
         eligibleSexStackView.addArrangedSubview(eligibleSexView)
+        
         
         detailGatherStackView.addArrangedSubview(gatherAddressStackView)
         gatherAddressStackView.addArrangedSubview(gatherPlaceLabel)
@@ -403,17 +424,16 @@ final class DetailGatherViewController: BaseViewController {
         gatherAddressStackView.addArrangedSubview(gatherAddressDescriptionLabel)
         
         detailGatherStackView.addArrangedSubview(participantStackView)
-        participantStackView.addArrangedSubview(participantDescriptionStackView)
-        participantDescriptionStackView.addArrangedSubview(participantLabel)
-        participantDescriptionStackView.addArrangedSubview(participantDescriptionLabel)
-        participantStackView.addArrangedSubview(participantCollectionView)
+            participantStackView.addArrangedSubview(participantDescriptionStackView)
+                participantDescriptionStackView.addArrangedSubview(participantLabel)
+                participantDescriptionStackView.addArrangedSubview(participantDescriptionLabel)
+           participantStackView.addArrangedSubview(participantCollectionView)
         
         detailGatherStackView.addArrangedSubview(commentStackView)
-        commentStackView.addArrangedSubview(gatherCommentLabel)
+            commentStackView.addArrangedSubview(gatherCommentLabel)
         commentStackView.addArrangedSubview(commentCollectionView)
-        commentStackView.addArrangedSubview(addCommentButton)
         
-        
+        detailGatherStackView.addArrangedSubview(addCommentButton)
         detailGatherStackView.addArrangedSubview(gatherButtonDivider)
         detailGatherStackView.addArrangedSubview(gatherButton)
     }
@@ -439,7 +459,12 @@ final class DetailGatherViewController: BaseViewController {
             
             leaderProfileImageView.widthAnchor.constraint(equalToConstant: 32),
             leaderProfileImageView.heightAnchor.constraint(equalToConstant: 32),
-            participantCollectionView.heightAnchor.constraint(equalToConstant: 60)
+            
+            eligiblePetSizeView.heightAnchor.constraint(equalToConstant: 30),
+            eligiblePetBreedView.heightAnchor.constraint(equalToConstant: 30),
+            eligibleSexView.heightAnchor.constraint(equalToConstant: 30),
+            
+            gatherButton.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
     
@@ -453,7 +478,7 @@ final class DetailGatherViewController: BaseViewController {
                 .observe(on: MainScheduler.instance)
                 .subscribe(with: self,
                    onNext: { this, isEnabled in
-                    this.presentAlertSheet()
+                    this.presentActionSheet()
                 })
             
             rx.viewWillAppear
@@ -463,13 +488,16 @@ final class DetailGatherViewController: BaseViewController {
             reportSubject
                 .map { Reactor.Action.clubReportDidOccur }
                 .bind(to: reactor.action)
+            
+            participantCollectionView.rx.itemSelected
+                .map { Reactor.Action.participantDidTap($0.item) }
+                .bind(to: reactor.action)
         }
     }
     
     private func bindState(with reactor: Reactor) {
         disposeBag.insert {
             reactor.state
-                .filter { $0.clubFindDetail != nil }
                 .map { $0.clubFindDetail }
                 .observe(on: MainScheduler.instance)
                 .bind(onNext: { [weak self] club in
@@ -485,7 +513,6 @@ final class DetailGatherViewController: BaseViewController {
                     self.leaderProfileImageView.imageWithURL(club.leaderInfo.imageURL)
                     self.leaderNicknameLabel.text = club.leaderInfo.nickname
                     self.gatherDescriptionLabel.text = club.clubDetailInfo.description
-                    
                     self.gatherAddressDescriptionLabel.text = club.clubDetailInfo.meetingPlace
                     self.participantDescriptionLabel.text = "\(club.clubDetailInfo.participants)/\(club.clubDetailInfo.maximumPeople)"
  
@@ -500,6 +527,22 @@ final class DetailGatherViewController: BaseViewController {
                 .bind(to: participantCollectionView.rx.items(cellIdentifier: ParticipantCollectionViewCell.identifier, cellType: ParticipantCollectionViewCell.self)) { index, data, cell in
                     cell.configure(imageURLString: data.imageURL, nickname: data.nickname)
                 }
+            
+            reactor.state
+                .map { $0.clubFindDetail?.commentInfos ?? [] }
+                .observe(on: MainScheduler.instance)
+                .bind(to: commentCollectionView.rx.items(cellIdentifier: CommentCell.identifier, cellType: CommentCell.self)) { index, data, cell in
+                    cell.configure(imageURLString: "", nickname: data.author, isLeader: data.leader, dog: "", date: data.updatedTime, comment: data.content)
+                }
+
+            reactor.state
+                .map { $0.isClubReportSuccess }
+                .distinctUntilChanged()
+                .observe(on: MainScheduler.instance)
+                .subscribe(with: self,
+                   onNext: { this, _ in
+                    this.presentAlert()
+                })
         }
     }
     
@@ -508,15 +551,22 @@ final class DetailGatherViewController: BaseViewController {
         bindState(with: reactor)
     }
     
-    private func presentAlertSheet() {
+    private func presentActionSheet() {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
         let reportAction = UIAlertAction(title: "부적절한 모임 신고", style: .destructive, handler: { [weak self] _ in
             self?.reportSubject.onNext(())
         })
-        let cancelAction = UIAlertAction(title: "취소", style: .default, handler: nil)
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
 
         alertController.addAction(reportAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    private func presentAlert() {
+        let alertController = UIAlertController(title: "신고가 완료되었습니다.", message: nil, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "확인", style: .default, handler: nil)
         alertController.addAction(cancelAction)
         present(alertController, animated: true, completion: nil)
     }

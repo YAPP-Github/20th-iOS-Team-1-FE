@@ -42,6 +42,7 @@
 		3719183B286E184F00169FC2 /* GuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3719183A286E184F00169FC2 /* GuideView.swift */; };
 		3719183E286E235E00169FC2 /* SignUpPrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3719183D286E235E00169FC2 /* SignUpPrivacyPolicyViewController.swift */; };
 		3724CC482875C37100E3C65C /* FileManagerProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724CC472875C37100E3C65C /* FileManagerProxy.swift */; };
+		372ACA7628919D1300CD9F07 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372ACA7528919D1300CD9F07 /* CommentCell.swift */; };
 		3732EF44286F4DDC0037404E /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3732EF43286F4DDC0037404E /* String+Extension.swift */; };
 		37348B0C2866CA5E00C38F70 /* BorderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37348B0B2866CA5E00C38F70 /* BorderButton.swift */; };
 		3734CEAA2869E70C00EEF38D /* SignUpRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3734CEA92869E70C00EEF38D /* SignUpRepositoryInterface.swift */; };
@@ -276,6 +277,7 @@
 		3719183A286E184F00169FC2 /* GuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideView.swift; sourceTree = "<group>"; };
 		3719183D286E235E00169FC2 /* SignUpPrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		3724CC472875C37100E3C65C /* FileManagerProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerProxy.swift; sourceTree = "<group>"; };
+		372ACA7528919D1300CD9F07 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		3732EF43286F4DDC0037404E /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		37348B0B2866CA5E00C38F70 /* BorderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderButton.swift; sourceTree = "<group>"; };
 		3734CEA92869E70C00EEF38D /* SignUpRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRepositoryInterface.swift; sourceTree = "<group>"; };
@@ -1149,6 +1151,7 @@
 				370AEEF12886EF4800E217FB /* DetailGatherRepositoryInterface.swift */,
 				37DBF4B1288B685B0050E4FF /* ParticipantCollectionView.swift */,
 				37DBF4B3288B700B0050E4FF /* ParticipantCollectionViewCell.swift */,
+				372ACA7528919D1300CD9F07 /* CommentCell.swift */,
 			);
 			path = DetailGatherScene;
 			sourceTree = "<group>";
@@ -1476,6 +1479,7 @@
 				37479B9B283E763B0078386E /* UIColor+Extension.swift in Sources */,
 				374380AD284FE05100CB02A5 /* SearchingClubDTO.swift in Sources */,
 				37AA7E182850B19D00B4B5C2 /* PetSizeTypeDTO.swift in Sources */,
+				372ACA7628919D1300CD9F07 /* CommentCell.swift in Sources */,
 				37605E05283C12D400394929 /* SignUpAgreementViewController.swift in Sources */,
 				37605DFB2839FF4A00394929 /* ASAuthorizationAppleIDButton+Rx.swift in Sources */,
 				29AE222E284B7DAA00EDF34B /* SearchReactor.swift in Sources */,

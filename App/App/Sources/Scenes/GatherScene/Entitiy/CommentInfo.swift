@@ -11,6 +11,6 @@ struct CommentInfo {
     let id: Int
     let content: String
     let author: String
-    let leader: String
+    let leader: Bool
     let updatedTime: String
 }

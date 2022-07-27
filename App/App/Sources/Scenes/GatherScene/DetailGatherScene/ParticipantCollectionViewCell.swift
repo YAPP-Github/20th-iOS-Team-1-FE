@@ -18,7 +18,7 @@ final class ParticipantCollectionViewCell: UICollectionViewCell {
     
     private var nicknameLabel: UILabel = {
         let label = UILabel()
-        label.font = .customFont(size: 14)
+        label.font = .customFont(size: 12)
         label.textColor = .Togaether.primaryLabel
         label.lineBreakMode = .byTruncatingTail
         
@@ -44,19 +44,20 @@ final class ParticipantCollectionViewCell: UICollectionViewCell {
     
     private func configureLayout() {
         NSLayoutConstraint.useAndActivateConstraints([
-            profileImageButton.topAnchor.constraint(equalTo: topAnchor),
-            profileImageButton.leadingAnchor.constraint(equalTo: leadingAnchor),
-            profileImageButton.widthAnchor.constraint(equalToConstant: 50),
-            profileImageButton.heightAnchor.constraint(equalToConstant: 50),
+            profileImageButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            profileImageButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            profileImageButton.widthAnchor.constraint(equalToConstant: 56),
+            profileImageButton.heightAnchor.constraint(equalToConstant: 56),
             
             nicknameLabel.centerXAnchor.constraint(equalTo: profileImageButton.centerXAnchor),
-            nicknameLabel.topAnchor.constraint(equalTo: profileImageButton.bottomAnchor, constant: 10)
+            nicknameLabel.topAnchor.constraint(equalTo: profileImageButton.bottomAnchor, constant: 8)
         ])
     }
     
     private func configureUI() {
         backgroundColor = .Togaether.background
     }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         profileImageButton.setImage(.Togaether.userDefaultProfile, for: .normal)

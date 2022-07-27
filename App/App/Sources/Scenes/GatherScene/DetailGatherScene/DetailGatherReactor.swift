@@ -16,6 +16,7 @@ final class DetailGatherReactor: Reactor {
         case clubReportDidOccur
         case commentReportDidOccur(Int)
         case commentDidOccur(String)
+        case participantDidTap(Int)
     }
     
     enum Mutation {
@@ -26,8 +27,12 @@ final class DetailGatherReactor: Reactor {
     
     struct State {
         let clubID: Int
-        var isClubReportSuccess = false
+        var isClubReportSuccess = 0
         var isCommentReportSuccess = false
+        
+        var gatherButtonText = ""
+        var gatherButtonEnabled = false
+        
         var clubFindDetail: ClubFindDetail?
     }
     
@@ -35,7 +40,7 @@ final class DetailGatherReactor: Reactor {
     private let disposeBag = DisposeBag()
     private let detailGatherRepository: DetailGatherRepositoryInterface
     private let keychainUseCase: KeychainUseCaseInterface
-    
+    internal var readyToProfile = PublishSubject<String>()
     init(clubID: Int, detailGatherRepository: DetailGatherRepositoryInterface, keychainUseCase: KeychainUseCaseInterface) {
         initialState = State(clubID: clubID)
         self.detailGatherRepository = detailGatherRepository
@@ -52,6 +57,13 @@ final class DetailGatherReactor: Reactor {
             return reportComment(commentID: 0)
         case .commentDidOccur(_):
             return Observable.empty()
+        case .participantDidTap(let id):
+            guard let index = currentState.clubFindDetail?.accountInfos.firstIndex(where: { $0.id == id }),
+                  let nickname = currentState.clubFindDetail?.accountInfos[safe: index]?.nickname else {
+                return Observable.empty()
+            }
+            readyToProfile.onNext(nickname)
+            return Observable.empty()
         }
     }
     
@@ -65,7 +77,7 @@ final class DetailGatherReactor: Reactor {
         case .updateCommentReportSuccess(let isSuccess):
             newState.isCommentReportSuccess = isSuccess
         case .updateClubReportSuccess(let isSuccess):
-            newState.isClubReportSuccess = isSuccess
+            newState.isClubReportSuccess += 1
         }
         return newState
     }
@@ -110,8 +122,8 @@ final class DetailGatherReactor: Reactor {
                         switch result {
                         case .success(let isSuccess):
                             observer.onNext(Mutation.updateClubReportSuccess(isSuccess))
-                        case .failure(let error):
-                            print("RESULT FAILURE: ", error.localizedDescription)
+                        case .failure(_):
+                            observer.onNext(Mutation.updateClubReportSuccess(true))
                         }
                     }.disposed(by: self.disposeBag)
                 },

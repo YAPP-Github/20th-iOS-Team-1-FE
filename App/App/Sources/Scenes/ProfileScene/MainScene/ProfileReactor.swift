@@ -13,7 +13,7 @@ import RxSwift
 
 final class ProfileReactor: Reactor {
     enum Action {
-        case profileInfo(nickname: String)
+        case viewWillAppear
         case settingButtonDidTap
         case introductionRegisterButtonDidTap
         case introductionEditButtonDidTap(text: String)
@@ -28,31 +28,33 @@ final class ProfileReactor: Reactor {
     }
     
     struct State {
+        let nickname: String?
         var profileInfo = ProfileInfo()
         var isLoadingProfile = true
         var shouldPresentAlertSheet = false
     }
     
-    let initialState = State()
+    let initialState: State
     
     private let profileMainRepository: ProfileMainRepositoryInterface
     private let keychainUseCase: KeychainUseCaseInterface
     private let disposeBag = DisposeBag()
-    
+
     internal var readyToProceedRegisterProfile = PublishSubject<Void>()
     internal var readyToProceedEditProfile = PublishSubject<String>()
     internal var readyToProceedAddPet = PublishSubject<Void>()
     internal var readyToReloadPetList = PublishSubject<Void>()
     
-    init(keychainUseCase: KeychainUseCaseInterface, profileMainRepository: ProfileMainRepositoryInterface) {
+    init(nickname: String? = nil, keychainUseCase: KeychainUseCaseInterface, profileMainRepository: ProfileMainRepositoryInterface) {
+        initialState = State(nickname: nickname)
         self.profileMainRepository = profileMainRepository
         self.keychainUseCase = keychainUseCase
     }
     
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
-        case .profileInfo(nickname: let nickname):
-            return getProfileInfo(nickname: nickname)
+        case .viewWillAppear:
+            return getProfileInfo(nickname: currentState.nickname)
         case .introductionRegisterButtonDidTap:
             readyToProceedRegisterProfile.onNext(())
             return Observable.empty()
