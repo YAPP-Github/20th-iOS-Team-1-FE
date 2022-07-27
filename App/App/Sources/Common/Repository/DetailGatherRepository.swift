@@ -96,7 +96,7 @@ final class DetailGatherRepository: DetailGatherRepositoryInterface {
                 return Disposables.create()
             }
         
-            guard let url = URL(string: APIConstants.BaseURL + APIConstants.reportClub + "/\(clubID))") else {
+            guard let url = URL(string: APIConstants.BaseURL + APIConstants.reportClub + "/\(clubID)") else {
                 return Disposables.create()
             }
             
