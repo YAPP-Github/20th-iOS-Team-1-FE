@@ -96,10 +96,10 @@ final class CommentCell: UICollectionViewCell {
     
     private func configureLayout() {
         NSLayoutConstraint.useAndActivateConstraints([
-            profileImageButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            profileImageButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            profileImageButton.topAnchor.constraint(equalTo: contentView.topAnchor),
+            profileImageButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             
-            nicknameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            nicknameLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
             nicknameLabel.leadingAnchor.constraint(equalTo: profileImageButton.trailingAnchor, constant: 12),
             
             leaderLabel.centerYAnchor.constraint(equalTo: nicknameLabel.centerYAnchor),
@@ -114,8 +114,8 @@ final class CommentCell: UICollectionViewCell {
             commentLabel.topAnchor.constraint(equalTo: dogLabel.bottomAnchor, constant: 8),
             commentLabel.leadingAnchor.constraint(equalTo: profileImageButton.trailingAnchor, constant: 12),
             
-            reportButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            reportButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            reportButton.topAnchor.constraint(equalTo: contentView.topAnchor),
+            reportButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
         ])
     }
     
