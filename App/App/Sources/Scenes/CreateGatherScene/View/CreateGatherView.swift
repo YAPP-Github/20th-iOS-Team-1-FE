@@ -42,7 +42,7 @@ final class CreateGatherView: UIView {
         return label
     }()
     
-    private let categorySelectView = CategorySelectView()
+    internal let categorySelectView = CategorySelectView()
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -53,7 +53,7 @@ final class CreateGatherView: UIView {
         return label
     }()
 
-    private lazy var titleTextField: UITextField = {
+    internal lazy var titleTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "입력해주세요."
         textField.font = .customFont(size: 16, style: .Medium)
@@ -71,7 +71,7 @@ final class CreateGatherView: UIView {
         return label
     }()
 
-    internal lazy var cotentTextView: UITextView = {
+    internal lazy var contentTextView: UITextView = {
         let textView = UITextView()
         textView.layer.cornerRadius = 12
         textView.text = "내용을 입력해주세요."
@@ -172,7 +172,7 @@ final class CreateGatherView: UIView {
         return label
     }()
     
-    private lazy var numberTextField: UITextField = {
+    internal lazy var numberTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "최대 10"
         textField.font = .customFont(size: 18, style: .Medium)
@@ -201,7 +201,7 @@ final class CreateGatherView: UIView {
         return label
     }()
     
-    internal lazy var allButton: BorderButton = {
+    internal lazy var allGenderButton: BorderButton = {
         let button = BorderButton()
         button.setTitle("성별 무관", for: .normal)
         button.titleLabel?.font = UIFont.customFont(size: 16, style: .Medium)
@@ -229,7 +229,7 @@ final class CreateGatherView: UIView {
     }()
     
     private lazy var sexStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [allButton, manButton, womanButton])
+        let stackView = UIStackView(arrangedSubviews: [allGenderButton, manButton, womanButton])
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.spacing = 10
@@ -303,7 +303,7 @@ final class CreateGatherView: UIView {
         return searchBar
     }()
     
-    private lazy var breedCollectionView: TagCollectionView = {
+    internal lazy var breedCollectionView: TagCollectionView = {
         let collectionView = TagCollectionView(reactor: TagCollectionViewReactor(state: []), frame: .zero)
         
         return collectionView
@@ -339,7 +339,7 @@ final class CreateGatherView: UIView {
         addSubview(titleLabel)
         addSubview(titleTextField)
         addSubview(contentLabel)
-        addSubview(cotentTextView)
+        addSubview(contentTextView)
         addSubview(countLettersLabel)
         addSubview(startDateLabel)
         addSubview(startStackView)
@@ -386,15 +386,15 @@ final class CreateGatherView: UIView {
             contentLabel.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 44),
             contentLabel.leadingAnchor.constraint(equalTo: locationLabel.leadingAnchor),
             
-            cotentTextView.topAnchor.constraint(equalTo: contentLabel.bottomAnchor, constant: 20),
-            cotentTextView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            cotentTextView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            cotentTextView.heightAnchor.constraint(equalToConstant: 150),
+            contentTextView.topAnchor.constraint(equalTo: contentLabel.bottomAnchor, constant: 20),
+            contentTextView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            contentTextView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            contentTextView.heightAnchor.constraint(equalToConstant: 150),
             
-            countLettersLabel.trailingAnchor.constraint(equalTo: cotentTextView.trailingAnchor, constant: -20),
-            countLettersLabel.bottomAnchor.constraint(equalTo: cotentTextView.bottomAnchor, constant: -20),
+            countLettersLabel.trailingAnchor.constraint(equalTo: contentTextView.trailingAnchor, constant: -20),
+            countLettersLabel.bottomAnchor.constraint(equalTo: contentTextView.bottomAnchor, constant: -20),
             
-            startDateLabel.topAnchor.constraint(equalTo: cotentTextView.bottomAnchor, constant: 44),
+            startDateLabel.topAnchor.constraint(equalTo: contentTextView.bottomAnchor, constant: 44),
             startDateLabel.leadingAnchor.constraint(equalTo: locationLabel.leadingAnchor),
             
             startStackView.topAnchor.constraint(equalTo: startDateLabel.bottomAnchor, constant: 20),
@@ -444,7 +444,12 @@ final class CreateGatherView: UIView {
             searchBreedBar.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 10),
             searchBreedBar.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10),
             
-            addButtonDivider.topAnchor.constraint(equalTo: searchBreedBar.bottomAnchor, constant: 90),
+            breedCollectionView.topAnchor.constraint(equalTo: searchBreedBar.bottomAnchor, constant: 10),
+            breedCollectionView.leadingAnchor.constraint(equalTo: searchBreedBar.leadingAnchor, constant: 10),
+            breedCollectionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            breedCollectionView.heightAnchor.constraint(equalToConstant: 30),
+            
+            addButtonDivider.topAnchor.constraint(equalTo: breedCollectionView.bottomAnchor, constant: 90),
             addButtonDivider.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             addButtonDivider.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             addButtonDivider.heightAnchor.constraint(equalToConstant: 1),

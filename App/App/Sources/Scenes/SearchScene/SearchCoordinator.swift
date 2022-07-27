@@ -65,11 +65,44 @@ final class SearchCoordinator: SceneCoordinator {
         let keychainProvider = KeychainProvider(keyChain: keychain)
         let keychainUseCase = KeychainUsecase(keychainProvider: keychainProvider, networkManager: networkManager)
         let createGatherRepository = CreateGatherRepository(networkManager: networkManager)
-        let createGatherReactor = CreateGatherReactor(createGatherRepository: createGatherRepository, keychainUseCase: keychainUseCase)
-        let createGathreViewController = CreateGatherViewController(reactor: createGatherReactor)
-        createGatherReactor.initialState.address = address
-        createGathreViewController.createGatherView.addressTextField.text = address
+        let createGatherReactor = CreateGatherReactor(location: (address, location), createGatherRepository: createGatherRepository, keychainUseCase: keychainUseCase)
+        let createGatherViewController = CreateGatherViewController(reactor: createGatherReactor)
         
-        navigationController.pushViewController(createGathreViewController, animated: true)
+        createGatherReactor.readyToProceedSearchBreed
+            .asDriver(onErrorJustReturn: ())
+            .drive(with: self,
+                   onNext: { this, _ in
+                let reactor = SearchBreedReactor()
+                let viewController = SearchBreedViewController(reactor: reactor)
+                viewController.delegate = createGatherViewController
+                this.pushSearchBreedViewController(viewController)
+            })
+            .disposed(by: disposeBag)
+        
+        createGatherReactor.readyToProceedMap
+            .asDriver(onErrorJustReturn: ())
+            .drive(with: self,
+                   onNext: { this, _ in
+                self.navigationController.popViewController(animated: true)
+                self.start()
+            })
+            .disposed(by: disposeBag)
+        
+        
+        navigationController.pushViewController(createGatherViewController, animated: true)
+    }
+    
+    func pushSearchBreedViewController(_ viewController: SearchBreedViewController) {
+        viewController.reactor?.readyToRegisterBreed
+            .asDriver(onErrorJustReturn: [])
+            .drive(with: self,
+                   onNext: { this, breed in
+                viewController.delegate?.sendData(data: breed)
+                self.navigationController.popViewController(animated: true)
+            })
+            .disposed(by: disposeBag)
+
+
+        navigationController.pushViewController(viewController, animated: true)
     }
 }

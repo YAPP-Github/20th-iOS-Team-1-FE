@@ -10,20 +10,6 @@ import UIKit
 final class CategorySelectButtonView: UIView {
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
-        switch self.category {
-        case .walk:
-            imageView.image = .Togaether.walkButton
-        case .playground:
-            imageView.image = .Togaether.playgroundButton
-        case .dogCafe:
-            imageView.image = .Togaether.dofCafeButton
-        case .dogRestaurant:
-            imageView.image = .Togaether.dogRestaurantButton
-        case .exhibition:
-            imageView.image = .Togaether.fairButton
-        case .etc:
-            imageView.image = .Togaether.etcButton
-        }
         
         return imageView
     }()
@@ -37,9 +23,48 @@ final class CategorySelectButtonView: UIView {
     }()
     
     private var category: GatherCategory
+    internal var isSelected: Bool {
+        didSet {
+            switch isSelected {
+            case true:
+                switch self.category {
+                case .walk:
+                    imageView.image = .Togaether.walkButtonFill
+                case .playground:
+                    imageView.image = .Togaether.playgroundButtonFill
+                case .dogCafe:
+                    imageView.image = .Togaether.dofCafeButtonFill
+                case .dogRestaurant:
+                    imageView.image = .Togaether.dogRestaurantButtonFill
+                case .exhibition:
+                    imageView.image = .Togaether.fairButtonFill
+                case .etc:
+                    imageView.image = .Togaether.etcButtonFill
+                }
+                label.textColor = .Togaether.primaryLabel
+            case false:
+                switch self.category {
+                case .walk:
+                    imageView.image = .Togaether.walkButton
+                case .playground:
+                    imageView.image = .Togaether.playgroundButton
+                case .dogCafe:
+                    imageView.image = .Togaether.dofCafeButton
+                case .dogRestaurant:
+                    imageView.image = .Togaether.dogRestaurantButton
+                case .exhibition:
+                    imageView.image = .Togaether.fairButton
+                case .etc:
+                    imageView.image = .Togaether.etcButton
+                }
+                label.textColor = .Togaether.secondaryLabel
+            }
+        }
+    }
     
-    init(category: GatherCategory) {
+    init(category: GatherCategory, isSelected: Bool) {
         self.category = category
+        self.isSelected = isSelected
         super.init(frame: .zero)
         addSubviews()
         configureLayout()
@@ -76,4 +101,5 @@ final class CategorySelectButtonView: UIView {
     private func configureUI() {
         self.backgroundColor = UIColor.Togaether.divider
     }
+    
 }

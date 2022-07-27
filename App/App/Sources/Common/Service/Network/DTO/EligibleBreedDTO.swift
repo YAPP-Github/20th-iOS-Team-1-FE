@@ -7,17 +7,10 @@
 
 import Foundation
 
-enum EligibleBreedDTO: Codable {
-    case maltese
-    case welshCorgi
-    case retriever
-    case all
-    
-    enum CodingKeys: String, CodingKey {
-        case maltese = "WALK"
-        case welshCorgi = "WELSH_CORGI"
-        case retriever = "RETRIEVER"
-        case all = "ALL"
-    }
+enum EligibleBreedDTO: String, Codable {
+    case maltese = "WALK"
+    case welshCorgi = "WELSH_CORGI"
+    case retriever = "RETRIEVER"
+    case all = "ALL"
 }
 
