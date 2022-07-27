@@ -12,7 +12,7 @@ import RxCocoa
 
 final class SearchBreedViewController: BaseViewController {
     var disposeBag = DisposeBag()
-    weak var delegate: SendData?
+    weak var delegate: SendBreed?
 
     private lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()

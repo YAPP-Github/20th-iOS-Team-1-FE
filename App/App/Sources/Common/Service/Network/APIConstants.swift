@@ -20,6 +20,9 @@ struct APIConstants {
     static let EditProfile = "/api/accounts"
     
     static let Pet = "/api/pets"
+    
+    // MARK: Club
+    static let Club = "/api/clubs"
 
     
     // MARK: Search

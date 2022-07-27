@@ -8,17 +8,17 @@
 import UIKit
 
 final class CategorySelectView: UIView {
-    lazy var walkButton: CategorySelectButtonView = CategorySelectButtonView(category: .walk)
+    lazy var walkButton: CategorySelectButtonView = CategorySelectButtonView(category: .walk, isSelected: false)
     
-    lazy var playgroundButton: CategorySelectButtonView = CategorySelectButtonView(category: .playground)
+    lazy var playgroundButton: CategorySelectButtonView = CategorySelectButtonView(category: .playground, isSelected: false)
     
-    lazy var dogCafeButton: CategorySelectButtonView = CategorySelectButtonView(category: .dogCafe)
+    lazy var dogCafeButton: CategorySelectButtonView = CategorySelectButtonView(category: .dogCafe, isSelected: false)
     
-    lazy var dogRestaurantButton: CategorySelectButtonView = CategorySelectButtonView(category: .dogRestaurant)
+    lazy var dogRestaurantButton: CategorySelectButtonView = CategorySelectButtonView(category: .dogRestaurant, isSelected: false)
     
-    lazy var fairButton: CategorySelectButtonView = CategorySelectButtonView(category: .exhibition)
+    lazy var fairButton: CategorySelectButtonView = CategorySelectButtonView(category: .exhibition, isSelected: false)
     
-    lazy var etcButton: CategorySelectButtonView = CategorySelectButtonView(category: .etc)
+    lazy var etcButton: CategorySelectButtonView = CategorySelectButtonView(category: .etc, isSelected: false)
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -67,7 +67,6 @@ final class CategorySelectView: UIView {
             etcButton.heightAnchor.constraint(equalTo: walkButton.heightAnchor),
             etcButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             etcButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
-            
         ])
     }
 }

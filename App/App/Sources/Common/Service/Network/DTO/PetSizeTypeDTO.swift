@@ -7,19 +7,10 @@
 
 import Foundation
 
-enum PetSizeTypeDTO: Codable {
-    case large
-    case medium
-    case small
-    case all
-
-    enum CodingKeys: String, CodingKey {
-        case large = "LARGE"
-        case medium = "MEDIUM"
-        case small = "SMALL"
-        case all = "ALL"
-    }
-    
-    
+enum PetSizeTypeDTO: String, Codable {
+    case large = "LARGE"
+    case medium = "MEDIUM"
+    case small = "SMALL"
+    case all = "ALL"
 }
 

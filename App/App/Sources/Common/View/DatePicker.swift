@@ -15,7 +15,7 @@ final class TextFieldWithDatePicker: UITextField {
     
     private lazy var dateText: String = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "MM월 dd일"
+        formatter.dateFormat = "yyyy-MM-dd"
         let date = formatter.string(from: Date())
         
         return date
@@ -23,7 +23,7 @@ final class TextFieldWithDatePicker: UITextField {
     
     private lazy var timeText: String = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "a hh:mm"
+        formatter.dateFormat = "HH:mm:s"
         let date = formatter.string(from: Date())
         
         return date
@@ -36,8 +36,19 @@ final class TextFieldWithDatePicker: UITextField {
         datePicker.datePickerMode = .date
         datePicker.locale = Locale(identifier: "ko-KR")
         datePicker.addTarget(self, action: #selector(datePickerValueDidChange(_:)), for: .valueChanged)
+        let calendar = Calendar(identifier: .gregorian)
+        let currentDate = Date()
+        var components = DateComponents()
+        components.calendar = calendar
+        components.year = 100
+        components.month = 12
+        let maxDate = calendar.date(byAdding: components, to: currentDate)!
+        components.year = -1
+        let minDate = calendar.date(byAdding: components, to: currentDate)!
+        datePicker.minimumDate = minDate
+        datePicker.maximumDate = maxDate
         endEditing(true)
-        
+
         return datePicker
     }()
     
@@ -66,13 +77,13 @@ final class TextFieldWithDatePicker: UITextField {
     
     @objc private func datePickerValueDidChange(_ datePicker: UIDatePicker) {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM월 dd일"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         text = dateFormatter.string(from: datePicker.date)
     }
     
     @objc private func timePickerValueDidChange(_ datePicker: UIDatePicker) {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "a hh:mm"
+        dateFormatter.dateFormat = "HH:mm:s"
         text = dateFormatter.string(from: datePicker.date)
     }
     

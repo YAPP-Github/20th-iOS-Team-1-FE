@@ -10,5 +10,5 @@ import Foundation
 import RxSwift
 
 protocol CreateGatherRepositoryInterface {
-
+    func createGather(accessToken: Data, club: ClubInfo) -> Single<Void>
 }

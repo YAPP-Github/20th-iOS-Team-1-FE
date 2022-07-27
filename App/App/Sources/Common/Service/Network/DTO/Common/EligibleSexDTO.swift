@@ -7,14 +7,8 @@
 
 import Foundation
 
-enum EligibleSexDTO: Codable {
-    case man
-    case woman
-    case all
-    
-    enum CodingKeys: String, CodingKey {
-        case man = "MAN"
-        case woman = "WOMAN"
-        case all = "ALL"
-    }
+enum EligibleSexDTO: String, Codable {
+    case man = "MAN"
+    case woman = "WOMAN"
+    case all = "ALL"
 }
