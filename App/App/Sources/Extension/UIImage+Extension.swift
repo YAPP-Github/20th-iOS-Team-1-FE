@@ -10,6 +10,12 @@ import UIKit
 extension UIImage {
     enum Togaether {
         static let logo                = UIImage(named: "logo")!
+        static let searchIcon          = UIImage(named: "searchIcon")!
+        static let gatherIcon          = UIImage(named: "gatherIcon")!
+        static let myPageIcon          = UIImage(named: "myPageIcon")!
+        static let searchIconFill      = UIImage(named: "searchIcon.fill")!
+        static let gatherIconFill      = UIImage(named: "gatherIcon.fill")!
+        static let myPageIconFill      = UIImage(named: "myPageIcon.fill")!
         static let setting             = UIImage(named: "setting")!
         static let emptyIcon           = UIImage(named: "emptyIcon")!
         static let checkMarkCircle     = UIImage(systemName: "checkmark.circle")!
