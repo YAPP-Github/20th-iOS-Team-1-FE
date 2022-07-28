@@ -192,6 +192,7 @@ final class DetailGatherViewController: BaseViewController {
         tableView.register(CommentCell.self, forCellReuseIdentifier: CommentCell.identifier)
         tableView.backgroundColor = .Togaether.background
         tableView.rowHeight = UITableView.automaticDimension
+        tableView.allowsSelection = false
         
         return tableView
     }()
@@ -444,6 +445,7 @@ final class DetailGatherViewController: BaseViewController {
             participantCollectionView.rx.itemSelected
                 .map { Reactor.Action.participantDidTap($0.item) }
                 .bind(to: reactor.action)
+            
         }
     }
     
@@ -496,7 +498,8 @@ final class DetailGatherViewController: BaseViewController {
                 .map { $0.clubFindDetail?.commentInfos ?? [] }
                 .observe(on: MainScheduler.instance)
                 .bind(to: commentTableView.rx.items(cellIdentifier: CommentCell.identifier, cellType: CommentCell.self)) { index, data, cell in
-                    cell.configure(imageURLString: data.imageURL,
+                    cell.configure(id: data.id,
+                                   imageURLString: data.imageURL,
                                    nickname: data.author,
                                    isLeader: data.leader,
                                    dog: data.breeds.first ?? "",
