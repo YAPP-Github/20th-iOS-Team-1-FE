@@ -44,11 +44,10 @@ final class ParticipantCollectionViewCell: UICollectionViewCell {
     
     private func configureLayout() {
         NSLayoutConstraint.useAndActivateConstraints([
-            profileImageButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            profileImageButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            profileImageButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            profileImageButton.widthAnchor.constraint(equalToConstant: 56),
-            profileImageButton.heightAnchor.constraint(equalToConstant: 56),
+            profileImageButton.topAnchor.constraint(equalTo: contentView.topAnchor),
+            profileImageButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            profileImageButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            profileImageButton.heightAnchor.constraint(equalToConstant: contentView.frame.width),
             
             nicknameLabel.centerXAnchor.constraint(equalTo: profileImageButton.centerXAnchor),
             nicknameLabel.topAnchor.constraint(equalTo: profileImageButton.bottomAnchor, constant: 8)

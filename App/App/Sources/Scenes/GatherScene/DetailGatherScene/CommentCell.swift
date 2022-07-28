@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CommentCell: UICollectionViewCell {
+final class CommentCell: UITableViewCell {
     private let profileImageButton: CircularButton = {
         let button = CircularButton()
         button.setBackgroundImage(.Togaether.userDefaultProfile, for: .normal)
@@ -68,8 +68,8 @@ final class CommentCell: UICollectionViewCell {
         return button
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)   
         addSubviews()
         configureLayout()
         configureUI()
@@ -96,10 +96,12 @@ final class CommentCell: UICollectionViewCell {
     
     private func configureLayout() {
         NSLayoutConstraint.useAndActivateConstraints([
-            profileImageButton.topAnchor.constraint(equalTo: contentView.topAnchor),
-            profileImageButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            profileImageButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            profileImageButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            profileImageButton.heightAnchor.constraint(equalToConstant: 50),
+            profileImageButton.widthAnchor.constraint(equalToConstant: 50),
             
-            nicknameLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
+            nicknameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             nicknameLabel.leadingAnchor.constraint(equalTo: profileImageButton.trailingAnchor, constant: 12),
             
             leaderLabel.centerYAnchor.constraint(equalTo: nicknameLabel.centerYAnchor),
@@ -110,12 +112,14 @@ final class CommentCell: UICollectionViewCell {
             
             dateLabel.centerYAnchor.constraint(equalTo: dogLabel.centerYAnchor),
             dateLabel.leadingAnchor.constraint(equalTo: nicknameLabel.trailingAnchor, constant: 6),
+            dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
             commentLabel.topAnchor.constraint(equalTo: dogLabel.bottomAnchor, constant: 8),
             commentLabel.leadingAnchor.constraint(equalTo: profileImageButton.trailingAnchor, constant: 12),
+            commentLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
             
-            reportButton.topAnchor.constraint(equalTo: contentView.topAnchor),
-            reportButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            reportButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            reportButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
         ])
     }
     
@@ -128,7 +132,7 @@ final class CommentCell: UICollectionViewCell {
     }
 
     func configure(imageURLString: String, nickname: String, isLeader: Bool, dog: String, date: String, comment: String) {
-        profileImageButton.setImage(UIImage.Togaether.userDefaultProfile, for: .normal)
+        profileImageButton.imageWithURL(imageURLString)
         nicknameLabel.text = nickname
         leaderLabel.isHidden = !isLeader
         dogLabel.text = dog
