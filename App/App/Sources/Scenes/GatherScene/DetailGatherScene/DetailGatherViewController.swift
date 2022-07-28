@@ -178,23 +178,22 @@ final class DetailGatherViewController: BaseViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.register(ParticipantCollectionViewCell.self, forCellWithReuseIdentifier: ParticipantCollectionViewCell.identifier)
         collectionView.backgroundColor = .Togaether.background
-       // collectionView.contentInset = UIEdgeInsets(top: 6, left: 6, bottom: 6, right: 6)
+        collectionView.contentInset = UIEdgeInsets(top: 6, left: 6, bottom: 6, right: 6)
         
         return collectionView
     }()
     
     private let divider4 = Divider()
     
-    private var commentCollectionView: UICollectionView = {
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .vertical
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        collectionView.isScrollEnabled = false
-        collectionView.register(CommentCell.self, forCellWithReuseIdentifier: CommentCell.identifier)
-        collectionView.backgroundColor = .Togaether.background
-        //collectionView.contentInset = UIEdgeInsets(top: 16, left: 20, bottom: 16, right: 20)
+    private lazy var commentTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.isScrollEnabled = false
+        tableView.alwaysBounceVertical = false
+        tableView.register(CommentCell.self, forCellReuseIdentifier: CommentCell.identifier)
+        tableView.backgroundColor = .Togaether.background
+        tableView.rowHeight = UITableView.automaticDimension
         
-        return collectionView
+        return tableView
     }()
     
     private lazy var gatherCommentLabel: UILabel = {
@@ -292,7 +291,7 @@ final class DetailGatherViewController: BaseViewController {
         contentView.addSubview(divider4)
         
         contentView.addSubview(gatherCommentLabel)
-        contentView.addSubview(commentCollectionView)
+        contentView.addSubview(commentTableView)
         contentView.addSubview(addCommentButton)
         
         contentView.addSubview(divider5)
@@ -346,18 +345,21 @@ final class DetailGatherViewController: BaseViewController {
             eligiblePetSizeView.leadingAnchor.constraint(equalTo: eligiblePetSizeLabel.trailingAnchor, constant: 12),
             eligiblePetSizeView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             eligiblePetSizeView.centerYAnchor.constraint(equalTo: eligiblePetSizeLabel.centerYAnchor),
+            eligiblePetSizeView.heightAnchor.constraint(equalToConstant: 30),
             
             eligiblePetBreedLabel.topAnchor.constraint(equalTo: eligiblePetSizeLabel.bottomAnchor, constant: 8),
             eligiblePetBreedLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             eligiblePetBreedView.leadingAnchor.constraint(equalTo: eligiblePetBreedLabel.trailingAnchor, constant: 12),
             eligiblePetBreedView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             eligiblePetBreedView.centerYAnchor.constraint(equalTo: eligiblePetBreedLabel.centerYAnchor),
+            eligiblePetBreedView.heightAnchor.constraint(equalToConstant: 30),
             
             eligibleSexLabel.topAnchor.constraint(equalTo: eligiblePetBreedLabel.bottomAnchor, constant: 8),
             eligibleSexLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             eligibleSexView.leadingAnchor.constraint(equalTo: eligibleSexLabel.trailingAnchor, constant: 12),
             eligibleSexView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             eligibleSexView.centerYAnchor.constraint(equalTo: eligibleSexLabel.centerYAnchor),
+            eligibleSexView.heightAnchor.constraint(equalToConstant: 30),
             
             divider2.topAnchor.constraint(equalTo: eligibleSexLabel.bottomAnchor, constant: 30),
             divider2.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -397,12 +399,12 @@ final class DetailGatherViewController: BaseViewController {
             
             gatherCommentLabel.topAnchor.constraint(equalTo: divider4.bottomAnchor, constant: 12),
             gatherCommentLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            commentCollectionView.topAnchor.constraint(equalTo: gatherCommentLabel.bottomAnchor, constant: 12),
-            commentCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            commentCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            commentTableView.topAnchor.constraint(equalTo: gatherCommentLabel.bottomAnchor, constant: 12),
+            commentTableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            commentTableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
-            addCommentButton.topAnchor.constraint(equalTo: commentCollectionView.bottomAnchor, constant: 12),
-            addCommentButton.centerXAnchor.constraint(equalTo: commentCollectionView.centerXAnchor),
+            addCommentButton.topAnchor.constraint(equalTo: commentTableView.bottomAnchor, constant: 12),
+            addCommentButton.centerXAnchor.constraint(equalTo: commentTableView.centerXAnchor),
             
             divider5.topAnchor.constraint(equalTo: addCommentButton.bottomAnchor, constant: 60),
             divider5.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -419,6 +421,7 @@ final class DetailGatherViewController: BaseViewController {
     
     private func configureUI() {
         navigationItem.rightBarButtonItem = settingBarButton
+        view.backgroundColor = .Togaether.background
     }
     
     private func bindAction(with reactor: Reactor) {
@@ -439,7 +442,7 @@ final class DetailGatherViewController: BaseViewController {
                 .bind(to: reactor.action)
             
             participantCollectionView.rx.itemSelected
-                .map { Reactor.Action.participantDidTap($0.row) }
+                .map { Reactor.Action.participantDidTap($0.item) }
                 .bind(to: reactor.action)
         }
     }
@@ -454,7 +457,11 @@ final class DetailGatherViewController: BaseViewController {
                           let club = club else {
                         return
                     }
-
+                    
+                    self.eligiblePetSizeView.reactor = TagCollectionViewReactor(state: club.clubDetailInfo.eligiblePetSizeTypes)
+                    self.eligibleSexView.reactor = TagCollectionViewReactor(state: [club.clubDetailInfo.eligibleSex])
+                    self.eligiblePetBreedView.reactor = TagCollectionViewReactor(state: club.clubDetailInfo.eligibleBreeds)
+                    
                     self.gatherCategoryLabel.text = "  " + club.clubDetailInfo.category + "  "
                     self.gatherTitleLabel.text = club.clubDetailInfo.title
                     self.gatherDayLabel.text = club.clubDetailInfo.startDate + club.clubDetailInfo.endDate
@@ -474,9 +481,8 @@ final class DetailGatherViewController: BaseViewController {
                     annotation.coordinate = pLocation
                     self.mapView.addAnnotation(annotation)
                     
-                    self.eligiblePetSizeView.reactor = TagCollectionViewReactor(state: club.clubDetailInfo.eligiblePetSizeTypes)
-                    self.eligibleSexView.reactor = TagCollectionViewReactor(state: [club.clubDetailInfo.eligibleSex])
-                    self.eligiblePetBreedView.reactor = TagCollectionViewReactor(state: club.clubDetailInfo.eligibleBreeds)
+                    
+                    self.commentTableView.heightAnchor.constraint(equalToConstant: CGFloat(club.commentInfos.count) * 120).isActive = true
                 })
             
             reactor.state
@@ -489,9 +495,15 @@ final class DetailGatherViewController: BaseViewController {
             reactor.state
                 .map { $0.clubFindDetail?.commentInfos ?? [] }
                 .observe(on: MainScheduler.instance)
-                .bind(to: commentCollectionView.rx.items(cellIdentifier: CommentCell.identifier, cellType: CommentCell.self)) { index, data, cell in
-                    cell.configure(imageURLString: "", nickname: data.author, isLeader: data.leader, dog: "", date: data.updatedTime, comment: data.content)
+                .bind(to: commentTableView.rx.items(cellIdentifier: CommentCell.identifier, cellType: CommentCell.self)) { index, data, cell in
+                    cell.configure(imageURLString: data.imageURL,
+                                   nickname: data.author,
+                                   isLeader: data.leader,
+                                   dog: data.breeds.first ?? "",
+                                   date: data.updatedTime,
+                                   comment: data.content)
                 }
+                
 
             reactor.state
                 .map { $0.isClubReportSuccess }
