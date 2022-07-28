@@ -17,4 +17,12 @@ extension UILabel {
         attributedString.addAttribute(.font, value: font, range: range)
         self.attributedText = attributedString
     }
+    
+    func countIcon(countString: String) {
+        let attributedString = NSMutableAttributedString(string: countString)
+        let imageAttachment = NSTextAttachment()
+        imageAttachment.image = .Togaether.participantIcon
+        attributedString.append(NSAttributedString(attachment: imageAttachment))
+        self.attributedText = attributedString
+    }
 }

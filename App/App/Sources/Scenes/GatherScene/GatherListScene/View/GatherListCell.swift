@@ -32,12 +32,7 @@ final class GatherListCell: UITableViewCell {
         label.clipsToBounds = true
         label.textColor = .Togaether.primaryLabel
         label.font = .customFont(size: 14, style: .Medium)
-        
-        let attributedString = NSMutableAttributedString(string: label.text ?? "")
-        let imageAttachment = NSTextAttachment()
-        imageAttachment.image = .Togaether.participantIcon
-        attributedString.append(NSAttributedString(attachment: imageAttachment))
-        label.attributedText = attributedString
+        label.countIcon(countString: label.text ?? "")
 
         return label
     }()
@@ -60,9 +55,9 @@ final class GatherListCell: UITableViewCell {
         return label
     }()
     
-    private lazy var dateLabel: UILabel = {
+    private lazy var startDateLabel: UILabel = {
         let label = UILabel()
-        label.text = "12월 31일(월)"
+        label.text = "12월 31일(월) 10:10"
         label.textColor = .Togaether.mainGreen
         label.font = .customFont(size: 14, style: .Bold)
 
@@ -76,11 +71,11 @@ final class GatherListCell: UITableViewCell {
         return view
     }()
     
-    private lazy var timeLabel: UILabel = {
+    private lazy var endDateLabel: UILabel = {
         let label = UILabel()
-        label.text = "오후 10시 30분 - 12시"
-        label.textColor = .Togaether.primaryLabel
-        label.font = .customFont(size: 14, style: .Medium)
+        label.text = "12월 31일(월) 10:10"
+        label.textColor = .Togaether.mainGreen
+        label.font = .customFont(size: 14, style: .Bold)
 
         return label
     }()
@@ -103,9 +98,9 @@ final class GatherListCell: UITableViewCell {
         addSubview(countLabel)
         addSubview(titleLabel)
         addSubview(addressLabel)
-        addSubview(dateLabel)
+        addSubview(startDateLabel)
         addSubview(divisionView)
-        addSubview(timeLabel)
+        addSubview(endDateLabel)
         addSubview(tagCollectionView)
     }
     
@@ -128,17 +123,17 @@ final class GatherListCell: UITableViewCell {
             addressLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             addressLabel.trailingAnchor.constraint(equalTo: countLabel.leadingAnchor, constant: -14.0),
             
-            dateLabel.topAnchor.constraint(equalTo: addressLabel.bottomAnchor, constant: 12.0),
-            dateLabel.leadingAnchor.constraint(equalTo: addressLabel.leadingAnchor),
+            startDateLabel.topAnchor.constraint(equalTo: addressLabel.bottomAnchor, constant: 12.0),
+            startDateLabel.leadingAnchor.constraint(equalTo: addressLabel.leadingAnchor),
 
-            divisionView.leadingAnchor.constraint(equalTo: dateLabel.trailingAnchor, constant: 8.0),
-            divisionView.centerYAnchor.constraint(equalTo: dateLabel.centerYAnchor),
+            divisionView.leadingAnchor.constraint(equalTo: startDateLabel.trailingAnchor, constant: 8.0),
+            divisionView.centerYAnchor.constraint(equalTo: startDateLabel.centerYAnchor),
             divisionView.widthAnchor.constraint(equalToConstant: 1.0),
             divisionView.heightAnchor.constraint(equalToConstant: 12.0),
             
-            timeLabel.topAnchor.constraint(equalTo: dateLabel.topAnchor),
-            timeLabel.leadingAnchor.constraint(equalTo: divisionView.trailingAnchor, constant: 8.0),
-            timeLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -8.0),
+            endDateLabel.topAnchor.constraint(equalTo: startDateLabel.topAnchor),
+            endDateLabel.leadingAnchor.constraint(equalTo: divisionView.trailingAnchor, constant: 8.0),
+            endDateLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -8.0),
             
             tagCollectionView.topAnchor.constraint(equalTo: divisionView.bottomAnchor, constant: 16.0),
             tagCollectionView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
@@ -154,15 +149,19 @@ final class GatherListCell: UITableViewCell {
     }
     
     internal func configureData(_ data: Content) {
-        categoryLabel.text = data.category
+        let size = data.eligiblePetSizeTypes.map { Array(arrayLiteral: $0.toKorean())[0] }.joined(separator: ",")
+        let breed = data.eligibleBreeds ?? []
+        let sex = data.eligibleSex.toKorean()
+        let tag = breed + [size, sex]
+        
+        categoryLabel.text = data.category?.korean
         titleLabel.text = data.title
         addressLabel.text = data.meetingPlace
-        dateLabel.text = data.startDate
-        timeLabel.text = data.startDate
-        
-        var tags = (data.eligibleBreeds ?? []) + (data.eligiblePetSizeTypes ?? [])
-        tags.append(data.eligibleSex ?? "")
-        tagCollectionView.reactor = TagCollectionViewReactor(state: tags)
+        startDateLabel.text = data.startDate?.toDateLabelText()
+        endDateLabel.text = data.endDate?.toDateLabelText()
+        countLabel.countIcon(countString: "\(data.participants)/\(data.maximumPeople)")
+        tagCollectionView.reactor = TagCollectionViewReactor(state: tag)
     }
 }
+
 
