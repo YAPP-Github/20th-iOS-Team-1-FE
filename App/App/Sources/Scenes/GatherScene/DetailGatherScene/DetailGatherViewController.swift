@@ -446,6 +446,10 @@ final class DetailGatherViewController: BaseViewController {
                 .map { Reactor.Action.participantDidTap($0.item) }
                 .bind(to: reactor.action)
             
+            //addCommentButton.rx.tap 되면
+            //키보드를 띄우고 발바닥 누르면 댓글 로직
+            // 서버로 전송하기
+            
         }
     }
     
@@ -456,7 +460,9 @@ final class DetailGatherViewController: BaseViewController {
                 .observe(on: MainScheduler.instance)
                 .bind(onNext: { [weak self] club in
                     guard let self = self,
-                          let club = club else {
+                          let club = club,
+                          let startDate = club.clubDetailInfo.startDate.toDate(),
+                          let endDate = club.clubDetailInfo.endDate.toDate() else {
                         return
                     }
                     
@@ -466,7 +472,7 @@ final class DetailGatherViewController: BaseViewController {
                     
                     self.gatherCategoryLabel.text = "  " + club.clubDetailInfo.category + "  "
                     self.gatherTitleLabel.text = club.clubDetailInfo.title
-                    self.gatherDayLabel.text = club.clubDetailInfo.startDate + club.clubDetailInfo.endDate
+                    self.gatherDayLabel.text = startDate.toDateLabelText() + " - " + endDate.toDateLabelText()
                     
                     self.leaderProfileImageView.imageWithURL(club.leaderInfo.imageURL)
                     self.leaderNicknameLabel.text = club.leaderInfo.nickname
