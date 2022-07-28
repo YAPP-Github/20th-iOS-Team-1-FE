@@ -14,6 +14,8 @@ struct CommentInfoDTO: Codable {
         case author
         case leader
         case updatedTime
+        case breeds
+        case imageURL = "imageUrl"
     }
     
     let id: Int
@@ -21,8 +23,16 @@ struct CommentInfoDTO: Codable {
     let author: String
     let leader: Bool
     let updatedTime: String
+    let breeds: [String]
+    let imageURL: String
     
     func toDomain() -> CommentInfo {
-        CommentInfo(id: id, content: content, author: author, leader: leader, updatedTime: updatedTime)
+        CommentInfo(id: id,
+                    content: content,
+                    author: author,
+                    leader: leader,
+                    updatedTime: updatedTime,
+                    breeds: breeds,
+                    imageURL: imageURL)
     }
 }

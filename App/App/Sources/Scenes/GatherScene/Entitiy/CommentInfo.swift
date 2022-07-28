@@ -13,4 +13,6 @@ struct CommentInfo {
     let author: String
     let leader: Bool
     let updatedTime: String
+    let breeds: [String]
+    let imageURL: String
 }
