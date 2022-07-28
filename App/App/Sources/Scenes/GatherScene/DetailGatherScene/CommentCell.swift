@@ -117,8 +117,7 @@ final class CommentCell: UITableViewCell {
             dogLabel.leadingAnchor.constraint(equalTo: profileImageButton.trailingAnchor, constant: 12),
             
             dateLabel.centerYAnchor.constraint(equalTo: dogLabel.centerYAnchor),
-            dateLabel.leadingAnchor.constraint(equalTo: nicknameLabel.trailingAnchor, constant: 6),
-            dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            dateLabel.leadingAnchor.constraint(equalTo: dogLabel.trailingAnchor, constant: 6),
             
             commentLabel.topAnchor.constraint(equalTo: dogLabel.bottomAnchor, constant: 8),
             commentLabel.leadingAnchor.constraint(equalTo: profileImageButton.trailingAnchor, constant: 12),

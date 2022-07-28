@@ -74,6 +74,15 @@ final class DetailGatherReactor: Reactor {
         
         case .updateDetailGather(let clubFindDetail):
             newState.clubFindDetail = clubFindDetail
+            
+            // if clubFindDetail.clubDetailInfo.endDate 지났으면 "종료된 모임이예요." 비활
+            // if clubFindDetail.leader                 내가 만든 모임이면 "모임을 삭제할래요" 짙회
+            // if clubFindDetail.participating          내가 참여하고 있는 모임이면 "모임을 나갈래요" 짙회
+            // if 전체참여가능 or 성별 맞으면                      "참여할래요" 활성화
+            // 아니면                                      "ㅌㅌ 견주만 참여할 수 있어요" 비활성화
+            
+            
+            
         case .updateCommentReportSuccess(let isSuccess):
             newState.isCommentReportSuccess = isSuccess
         case .updateClubReportSuccess(let isSuccess):
