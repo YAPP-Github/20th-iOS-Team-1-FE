@@ -14,11 +14,11 @@ struct ContentResponseDTO: Codable {
     }
     
     internal let clubID: Int
-    internal let title, category, meetingPlace: String?
-    internal let startDate, endDate: String?
+    internal let title, category, meetingPlace: String
+    internal let startDate, endDate: String
     internal let eligibleBreeds: [String]?
-    internal let eligiblePetSizeTypes: [String]?
-    internal let eligibleSex: String?
+    internal let eligiblePetSizeTypes: [String]
+    internal let eligibleSex: String
     internal let maximumPeople, participants: Int
     
     func toDomain() -> Content {
