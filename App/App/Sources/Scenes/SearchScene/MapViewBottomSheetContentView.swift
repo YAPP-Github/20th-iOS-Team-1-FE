@@ -62,11 +62,10 @@ class MapViewBottomSheetContentView: UIView {
         return label
     }()
     
-    private lazy var dateLabel: UILabel = {
+    private lazy var startDateLabel: UILabel = {
         let label = UILabel()
-        label.text = "12월 31일(월)"
         label.textColor = .Togaether.mainGreen
-        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.font = .customFont(size: 14, style: .Bold)
 
         return label
     }()
@@ -78,12 +77,11 @@ class MapViewBottomSheetContentView: UIView {
         return view
     }()
     
-    private lazy var timeLabel: UILabel = {
+    private lazy var endDateLabel: UILabel = {
         let label = UILabel()
-        label.text = "오후 10시 30분 - 12시"
-        label.textColor = .Togaether.primaryLabel
-        label.font = UIFont.systemFont(ofSize: 14)
-        
+        label.textColor = .Togaether.mainGreen
+        label.font = .customFont(size: 14, style: .Bold)
+
         return label
     }()
     
@@ -158,6 +156,11 @@ class MapViewBottomSheetContentView: UIView {
         return label
     }()
 
+    private lazy var tagCollectionView: TagCollectionView = {
+        let collectionView = TagCollectionView(reactor: TagCollectionViewReactor(state: []), frame: .zero)
+        
+        return collectionView
+    }()
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -171,16 +174,13 @@ class MapViewBottomSheetContentView: UIView {
         addSubview(countLabel)
         addSubview(titleLabel)
         addSubview(addressLabel)
-        addSubview(dateLabel)
+        addSubview(startDateLabel)
         addSubview(divisionView)
-        addSubview(timeLabel)
+        addSubview(endDateLabel)
         addSubview(hostProfileImageView)
         addSubview(hostNickNameLabel)
-        addSubview(tagStackView)
         addSubview(distanceLabel)
-        tagStackView.addSubview(dogTypeTagLabel)
-        tagStackView.addSubview(dogSizeTagLabel)
-        tagStackView.addSubview(sexTagLabel)
+        addSubview(tagCollectionView)
     }
     
     private func configureLayout() {
@@ -200,40 +200,27 @@ class MapViewBottomSheetContentView: UIView {
             
             distanceLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 6),
             distanceLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            distanceLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 60),
-            
             
             addressLabel.topAnchor.constraint(equalTo: distanceLabel.topAnchor),
             addressLabel.leadingAnchor.constraint(equalTo: distanceLabel.trailingAnchor, constant: 10),
             addressLabel.trailingAnchor.constraint(equalTo: countLabel.leadingAnchor, constant: -14.0),
             
-            dateLabel.topAnchor.constraint(equalTo: distanceLabel.bottomAnchor, constant: 12.0),
-            dateLabel.leadingAnchor.constraint(equalTo: distanceLabel.leadingAnchor),
+            startDateLabel.topAnchor.constraint(equalTo: distanceLabel.bottomAnchor, constant: 12.0),
+            startDateLabel.leadingAnchor.constraint(equalTo: distanceLabel.leadingAnchor),
 
-            divisionView.leadingAnchor.constraint(equalTo: dateLabel.trailingAnchor, constant: 8.0),
-            divisionView.centerYAnchor.constraint(equalTo: dateLabel.centerYAnchor),
+            divisionView.leadingAnchor.constraint(equalTo: startDateLabel.trailingAnchor, constant: 8.0),
+            divisionView.centerYAnchor.constraint(equalTo: startDateLabel.centerYAnchor),
             divisionView.widthAnchor.constraint(equalToConstant: 1.0),
             divisionView.heightAnchor.constraint(equalToConstant: 12.0),
             
-            timeLabel.topAnchor.constraint(equalTo: dateLabel.topAnchor),
-            timeLabel.leadingAnchor.constraint(equalTo: divisionView.trailingAnchor, constant: 8.0),
-            timeLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -8.0),
+            endDateLabel.topAnchor.constraint(equalTo: startDateLabel.topAnchor),
+            endDateLabel.leadingAnchor.constraint(equalTo: divisionView.trailingAnchor, constant: 8.0),
+            endDateLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -8.0),
     
-            tagStackView.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 16.0),
-            tagStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
-            tagStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
-            tagStackView.heightAnchor.constraint(equalToConstant: 18),
-            
-            dogTypeTagLabel.heightAnchor.constraint(equalTo: tagStackView.heightAnchor),
-            dogTypeTagLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 150),
-            
-            dogSizeTagLabel.leadingAnchor.constraint(equalTo: dogTypeTagLabel.trailingAnchor, constant: 4),
-            dogSizeTagLabel.heightAnchor.constraint(equalTo:tagStackView.heightAnchor),
-            dogSizeTagLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 50),
-            
-            sexTagLabel.leadingAnchor.constraint(equalTo: dogSizeTagLabel.trailingAnchor, constant: 4),
-            sexTagLabel.heightAnchor.constraint(equalTo: tagStackView.heightAnchor),
-            sexTagLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 50)
+            tagCollectionView.topAnchor.constraint(equalTo: divisionView.bottomAnchor, constant: 16.0),
+            tagCollectionView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            tagCollectionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            tagCollectionView.heightAnchor.constraint(equalToConstant: 30)
             ])
     }
     
@@ -242,59 +229,21 @@ class MapViewBottomSheetContentView: UIView {
     }
     
     internal func configure(gatherConfiguration: GatherConfigurationForSheet?) {
-        if let gatherConfiguration = gatherConfiguration {
-            titleLabel.text = gatherConfiguration.title
-            categoryLabel.text = gatherConfiguration.category.korean
-            distanceLabel.text = "거리 \(gatherConfiguration.distance)m"
-            addressLabel.text = gatherConfiguration.meetingPlace
-            countLabel.text = "\(gatherConfiguration.participants)/\(gatherConfiguration.maximumPeople)"
-            dateLabel.text = gatherConfiguration.startDate.monthDayWeekDay()
-            timeLabel.text = gatherConfiguration.startDate.hourMinute() + "-" + gatherConfiguration.endDate.hourMinute()
-            dogTypeTagLabel.text = gatherConfiguration.eligibleBreeds.count == 1 ? gatherConfiguration.eligibleBreeds.first : (gatherConfiguration.eligibleBreeds.first ?? "말티즈") + " 외 \(gatherConfiguration.eligibleBreeds.count - 1)종"
-            dogSizeTagLabel.text = gatherConfiguration.eligiblePetSizeTypes.map { Array(arrayLiteral: $0.toKorean())[0] }.joined(separator: ",") + "형견"
-            sexTagLabel.text = gatherConfiguration.eligibleSex.toKorean()
+        if let data = gatherConfiguration {
+            let size = data.eligiblePetSizeTypes.map { Array(arrayLiteral: $0.toKorean())[0] }.joined(separator: ",")
+            let breed = data.eligibleBreeds
+            let sex = data.eligibleSex.toKorean()
+            let tag = (breed + [size, sex]).filter { $0 != "" }
+            
+            categoryLabel.text = data.category.korean
+            distanceLabel.text = "거리 \(data.distance)m"
+            titleLabel.text = data.title
+            addressLabel.text = data.meetingPlace
+            startDateLabel.text = data.startDate.toDateLabelText()
+            endDateLabel.text = data.endDate.toDateLabelText()
+            countLabel.countIcon(countString: "\(data.participants)/\(data.maximumPeople)")
+            tagCollectionView.reactor = TagCollectionViewReactor(state: tag)
         }
-    }
-}
-
-extension String {
-    func toDate() -> Date? { //"yyyy-MM-dd HH:mm:ss"
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
-        dateFormatter.timeZone = TimeZone(identifier: "UTC")
-        if let date = dateFormatter.date(from: self) {
-            return date
-        } else {
-            return nil
-        }
-    }
-}
-
-extension Date {
-    func get(_ components: Calendar.Component..., calendar: Calendar = Calendar.current) -> DateComponents {
-        return calendar.dateComponents(Set(components), from: self)
-    }
-
-    func get(_ component: Calendar.Component, calendar: Calendar = Calendar.current) -> Int {
-        return calendar.component(component, from: self)
-    }
-    
-    func toString() -> String {
-           let dateFormatter = DateFormatter()
-           dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
-           dateFormatter.timeZone = TimeZone(identifier: "UTC")
-           return dateFormatter.string(from: self)
-       }
-    
-    func monthDayWeekDay() -> String {
-        "\(self.get(.month))월 \(self.get(.day))일(\(Weekday.init(rawValue: self.get(.weekday))?.korean ?? "월"))"
-    }
-    
-    func hourMinute() -> String {
-        let hour = self.get(.hour) < 10 ? "0\(self.get(.hour))" : "\(self.get(.hour))"
-        let minute = self.get(.minute) < 10 ? "0\(self.get(.minute))" : "\(self.get(.minute))"
-        
-        return "\(hour):\(minute)"
     }
 }
 
