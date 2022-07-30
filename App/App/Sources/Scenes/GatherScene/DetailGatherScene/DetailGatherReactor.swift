@@ -79,7 +79,7 @@ final class DetailGatherReactor: Reactor {
             let commentRequest = CommentRequest(clubID: currentState.clubID, content: currentState.textFieldComment)
             return addComment(comment: commentRequest)
         case .gatherButtonDidTap:
-            return Observable.empty()
+            return participateGather(clubID: currentState.clubID)
         case .textFieldDidEndEditing(let comment):
             return Observable.just(.updateTextFieldComment(comment))
         case .clubQuitDidOccur:
@@ -104,6 +104,9 @@ final class DetailGatherReactor: Reactor {
             } else if clubFindDetail.participating {
                 newState.gatherButtonState = .warning
                 newState.gatherButtonText = "모임을 나갈래요."
+            } else if clubFindDetail.clubDetailInfo.maximumPeople <= clubFindDetail.clubDetailInfo.participants {
+                newState.gatherButtonState = .disabled
+                newState.gatherButtonText = "꽉찬 방이에요."
             } else if clubFindDetail.clubDetailInfo.eligibleSex == "ALL" ||
                    clubFindDetail.accountSex == clubFindDetail.clubDetailInfo.eligibleSex {
                 newState.gatherButtonState = .enabled
@@ -143,6 +146,40 @@ final class DetailGatherReactor: Reactor {
                         switch result {
                         case .success(let clubFindDetail):
                             observer.onNext(Mutation.updateDetailGather(clubFindDetail))
+                        case .failure(let error):
+                            print("RESULT FAILURE: ", error.localizedDescription)
+                        }
+                    }.disposed(by: self.disposeBag)
+                },
+                onFailure: { _,_ in
+                     return
+                }).disposed(by: self.disposeBag)
+            return Disposables.create()
+        }
+    }
+    
+    private func participateGather(clubID: Int) -> Observable<Mutation> {
+        return Observable.create { [weak self] observer in
+            guard let self = self else {
+                return Disposables.create()
+            }
+            
+            self.keychainUseCase.getAccessToken()
+                .subscribe(with: self,
+                   onSuccess: { this, token in
+                    this.detailGatherRepository.participateGather(accessToken: token, clubID: clubID)
+                        .subscribe { result in
+                        switch result {
+                        case .success(_):
+                            this.detailGatherRepository.requestDetailGather(accessToken: token, clubID: clubID)
+                                .subscribe { result in
+                                    switch result {
+                                    case .success(let clubFindDetail):
+                                        observer.onNext(Mutation.updateDetailGather(clubFindDetail))
+                                    case .failure(let error):
+                                        print("RESULT FAILURE: ", error.localizedDescription)
+                                    }
+                                }
                         case .failure(let error):
                             print("RESULT FAILURE: ", error.localizedDescription)
                         }
@@ -296,11 +333,11 @@ private extension Date {
         let comparisonResult: ComparisonResult = compare(fromDate)
         switch comparisonResult {
         case .orderedAscending:
-            result = true
+            result = false
             break
 
         default:
-            result = false
+            result = true
             break
         }
         return result
