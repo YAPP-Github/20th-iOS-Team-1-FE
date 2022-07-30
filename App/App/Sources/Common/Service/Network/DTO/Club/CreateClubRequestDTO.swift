@@ -16,8 +16,8 @@ struct CreateClubRequestDTO: Codable {
     internal let endDate: String
     internal let maximumPeople: Int
     internal let eligibleSex: String
-    internal let petSizeType: [String]
-    internal let eligibleBreed: [String]
+    internal let eligiblePetSizeTypes: [String]
+    internal let eligibleBreeds: [String]
     internal let latitude: Double
     internal let longitude: Double
     
@@ -30,8 +30,8 @@ struct CreateClubRequestDTO: Codable {
         case endDate
         case maximumPeople
         case eligibleSex
-        case petSizeType
-        case eligibleBreed
+        case eligiblePetSizeTypes
+        case eligibleBreeds
         case latitude
         case longitude
     }
@@ -45,8 +45,8 @@ struct CreateClubRequestDTO: Codable {
         self.endDate = clubInfo.endDate + " " + clubInfo.endTime
         self.maximumPeople = clubInfo.maximumPeople
         self.eligibleSex = clubInfo.eligibleSex?.rawValue ?? "ALL"
-        self.petSizeType = clubInfo.petSizeType.map { $0.rawValue }
-        self.eligibleBreed = clubInfo.eligibleBreed ?? []
+        self.eligiblePetSizeTypes = clubInfo.petSizeType.map { $0.rawValue }
+        self.eligibleBreeds = clubInfo.eligibleBreed ?? []
         self.latitude = clubInfo.latitude
         self.longitude = clubInfo.longitude
     }
