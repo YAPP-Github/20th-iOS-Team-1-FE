@@ -241,7 +241,11 @@ final class CreateGatherReactor: Reactor {
         case .updateBreeds(let breeds):
             newState.clubInfo.eligibleBreed = breeds
         }
-        newState.isCreateButtonEnabled = check()
+        newState.isCreateButtonEnabled = !newState.clubInfo.meetingPlace.isEmpty &&
+                                         newState.clubInfo.category != nil &&
+                                         !newState.clubInfo.title.isEmpty &&
+                                         !newState.clubInfo.petSizeType.isEmpty &&
+                                         newState.clubInfo.maximumPeople > 0
         
         return newState
     }
@@ -256,12 +260,6 @@ final class CreateGatherReactor: Reactor {
         newState.isEtcButtonSelected = false
         
         return newState
-    }
-    
-    func check() -> Bool {
-        return !currentState.clubInfo.meetingPlace.isEmpty &&
-               currentState.clubInfo.category != nil &&
-               !currentState.clubInfo.title.isEmpty
     }
     
     func createGather(_ gather: ClubInfo) {
