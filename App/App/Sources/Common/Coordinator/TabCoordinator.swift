@@ -40,7 +40,7 @@ final class TabCoordinator: Coordinator {
         fourthViewController.tabBarItem = UITabBarItem(title: "마이페이지", image: .Togaether.myPageIcon, selectedImage: .Togaether.myPageIconFill)
         
         let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [fourthViewController, secondViewController, thirdViewController, fourthViewController]
+        tabBarController.viewControllers = [secondViewController, thirdViewController, fourthViewController]
         tabBarController.tabBar.tintColor = .Togaether.primaryLabel
         
         window?.rootViewController = tabBarController
