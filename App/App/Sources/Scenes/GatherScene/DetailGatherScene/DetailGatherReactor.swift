@@ -100,7 +100,7 @@ final class DetailGatherReactor: Reactor {
                 newState.gatherButtonText = "종료된 모임이에요."
             } else if clubFindDetail.leader {
                 newState.gatherButtonState = .warning
-                newState.gatherButtonText = "종료된 모임이에요."
+                newState.gatherButtonText = "모임을 삭제할래요."
             } else if clubFindDetail.participating {
                 newState.gatherButtonState = .warning
                 newState.gatherButtonText = "모임을 나갈래요."

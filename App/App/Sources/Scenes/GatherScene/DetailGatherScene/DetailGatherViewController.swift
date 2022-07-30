@@ -223,8 +223,8 @@ final class DetailGatherViewController: BaseViewController {
         
         return textField
     }()
-    //private let commentTextFieldConstraint: NSLayoutConstraint?
-    
+    private var commentTextFieldBottomConstraint: NSLayoutConstraint?
+    private var commentTableViewHeightConstraint: NSLayoutConstraint?
     private let addCommentButton: UIButton = {
         let button = UIButton(type: .system)
       //  button.layer.cornerRadius = 10
@@ -422,7 +422,7 @@ final class DetailGatherViewController: BaseViewController {
             commentTextField.topAnchor.constraint(equalTo: commentTableView.bottomAnchor, constant: 40),
             commentTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             commentTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            commentTextField.heightAnchor.constraint(equalToConstant: 50),
+           // commentTextField.heightAnchor.constraint(equalToConstant: 50),
             
             addCommentButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             addCommentButton.widthAnchor.constraint(equalToConstant: 40),
@@ -435,6 +435,10 @@ final class DetailGatherViewController: BaseViewController {
             gatherButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4),
             gatherButton.heightAnchor.constraint(equalToConstant: 50),
         ])
+        
+        commentTextFieldBottomConstraint = commentTextField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -58)
+        commentTextFieldBottomConstraint?.isActive = true
+        commentTableViewHeightConstraint = commentTableView.heightAnchor.constraint(equalToConstant: 0)
     }
     
     private func configureUI() {
@@ -486,10 +490,10 @@ final class DetailGatherViewController: BaseViewController {
                 .bind(to: reactor.action)
             
 //            RxKeyboard.instance.visibleHeight
-//                .skip(1)
+//          //      .skip(1)
 //                .drive(with: self,
 //                   onNext: { this, keyboardHeight in
-//                    this.commentTextFieldConstraint?.constant = -1 * keyboardHeight
+//                    this.commentTextFieldBottomConstraint?.constant = -1 * keyboardHeight //- 58
 //                    UIView.animate(withDuration: 0.3) {
 //                        this.view.layoutIfNeeded()
 //                    }
@@ -532,9 +536,14 @@ final class DetailGatherViewController: BaseViewController {
                     let annotation = MKPointAnnotation()
                     annotation.coordinate = pLocation
                     self.mapView.addAnnotation(annotation)
-
-
-                 //   self.commentTableView.heightAnchor.constraint(equalToConstant: CGFloat(club.commentInfos.count) * 120).isActive = true
+                    
+                  //  commentTableViewHeightConstraint
+                
+                    UIView.animate(withDuration: 0.3) {
+                        self.commentTableViewHeightConstraint?.constant = CGFloat(club.accountInfos.count) * 120
+                        self.view.layoutIfNeeded()
+                    }
+                //    self.commentTableView.heightAnchor.constraint(equalToConstant: CGFloat(club.accountInfos.count) * 120).isActive = true
                 })
             
             reactor.state
@@ -549,6 +558,9 @@ final class DetailGatherViewController: BaseViewController {
                 .map { $0.clubFindDetail?.commentInfos ?? [] }
                 .distinctUntilChanged()
                 .observe(on: MainScheduler.instance)
+                .do(onNext: { [weak self] in
+                    self?.commentTableView.heightAnchor.constraint(equalToConstant: CGFloat($0.count) * 120).isActive = true
+                })
                 .bind(to: commentTableView.rx.items(cellIdentifier: CommentCell.identifier, cellType: CommentCell.self)) { index, data, cell in
                     cell.configure(id: data.id,
                                    imageURLString: data.imageURL,
