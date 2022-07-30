@@ -10,6 +10,7 @@ import UIKit
 
 import ReactorKit
 import RxSwift
+import RxKeyboard
 
 final class DetailGatherViewController: BaseViewController {
     typealias Reactor = DetailGatherReactor
@@ -215,29 +216,40 @@ final class DetailGatherViewController: BaseViewController {
         return label
     }()
     
+    private let commentTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "댓글을 입력하세요"
+        textField.keyboardType = .default
+        
+        return textField
+    }()
+    //private let commentTextFieldConstraint: NSLayoutConstraint?
+    
     private let addCommentButton: UIButton = {
         let button = UIButton(type: .system)
-        button.layer.cornerRadius = 10
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.Togaether.mainGreen.cgColor
-        button.setTitle("  댓글 달기  ", for: .normal)
-        button.setTitleColor(UIColor.Togaether.mainGreen, for: .normal)
-        //button.setImage(UIImage(systemName: "plus.bubble"), for: .normal)
-        button.semanticContentAttribute = .forceRightToLeft
-        button.titleLabel?.font = .customFont(size: 12)
+      //  button.layer.cornerRadius = 10
+     //   button.layer.borderWidth = 1
+      //  button.layer.borderColor = UIColor.Togaether.mainGreen.cgColor
+        button.setImage(UIImage(systemName: "plus.bubble")?.withTintColor(UIColor.Togaether.mainGreen, renderingMode: .alwaysTemplate), for: .normal)
+     //   button.semanticContentAttribute = .forceRightToLeft
+            // button.titleLabel?.font = .customFont(size: 12)
         
         return button
     }()
 
     private let divider5 = Divider()
-    private let gatherButton: EnableButton = {
-        let button = EnableButton()
+    private let gatherButton: UIButton = {
+        let button = UIButton()
         button.isEnabled = false
-        
+        button.setBackgroundColor(.Togaether.secondaryButton, for: .disabled)
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
         return button
     }()
     
     private let reportSubject = PublishSubject<Void>()
+    private let gatherQuitSubject = PublishSubject<Void>()
+    private let gatherDeleteSubject = PublishSubject<Void>()
     var disposeBag = DisposeBag()
     
     init(reactor: Reactor) {
@@ -258,7 +270,11 @@ final class DetailGatherViewController: BaseViewController {
         configureLayout()
         configureUI()
     }
-
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        commentTextField.resignFirstResponder()
+    }
+    
     private func addSubviews() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
@@ -293,9 +309,8 @@ final class DetailGatherViewController: BaseViewController {
         
         contentView.addSubview(gatherCommentLabel)
         contentView.addSubview(commentTableView)
+        contentView.addSubview(commentTextField)
         contentView.addSubview(addCommentButton)
-        
-        contentView.addSubview(divider5)
         contentView.addSubview(gatherButton)
     }
     
@@ -404,17 +419,19 @@ final class DetailGatherViewController: BaseViewController {
             commentTableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             commentTableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
-            addCommentButton.topAnchor.constraint(equalTo: commentTableView.bottomAnchor, constant: 12),
-            addCommentButton.centerXAnchor.constraint(equalTo: commentTableView.centerXAnchor),
+            commentTextField.topAnchor.constraint(equalTo: commentTableView.bottomAnchor, constant: 40),
+            commentTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            commentTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            commentTextField.heightAnchor.constraint(equalToConstant: 50),
             
-            divider5.topAnchor.constraint(equalTo: addCommentButton.bottomAnchor, constant: 60),
-            divider5.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            divider5.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            divider5.heightAnchor.constraint(equalToConstant: 1),
+            addCommentButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            addCommentButton.widthAnchor.constraint(equalToConstant: 40),
+            addCommentButton.heightAnchor.constraint(equalToConstant: 40),
+            addCommentButton.centerYAnchor.constraint(equalTo: commentTextField.centerYAnchor),
             
+            gatherButton.topAnchor.constraint(equalTo: commentTextField.bottomAnchor, constant: 4),
             gatherButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             gatherButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            gatherButton.topAnchor.constraint(equalTo: divider5.bottomAnchor, constant: 4),
             gatherButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4),
             gatherButton.heightAnchor.constraint(equalToConstant: 50),
         ])
@@ -442,14 +459,41 @@ final class DetailGatherViewController: BaseViewController {
                 .map { Reactor.Action.clubReportDidOccur }
                 .bind(to: reactor.action)
             
+            gatherQuitSubject
+                .map { Reactor.Action.clubQuitDidOccur }
+                .bind(to: reactor.action)
+            
+            gatherDeleteSubject
+                .map { Reactor.Action.clubDeleteDidOccur }
+                .bind(to: reactor.action)
+            
             participantCollectionView.rx.itemSelected
                 .map { Reactor.Action.participantDidTap($0.item) }
                 .bind(to: reactor.action)
             
-            //addCommentButton.rx.tap 되면
-            //키보드를 띄우고 발바닥 누르면 댓글 로직
-            // 서버로 전송하기
+            commentTextField.rx.text
+                .orEmpty
+                .distinctUntilChanged()
+                .map { Reactor.Action.textFieldDidEndEditing($0) }
+                .bind(to: reactor.action)
             
+            addCommentButton.rx.throttleTap
+                .map { Reactor.Action.addCommentButtonDidTap }
+                .bind(to: reactor.action)
+            
+            gatherButton.rx.throttleTap
+                .map { Reactor.Action.gatherButtonDidTap }
+                .bind(to: reactor.action)
+            
+//            RxKeyboard.instance.visibleHeight
+//                .skip(1)
+//                .drive(with: self,
+//                   onNext: { this, keyboardHeight in
+//                    this.commentTextFieldConstraint?.constant = -1 * keyboardHeight
+//                    UIView.animate(withDuration: 0.3) {
+//                        this.view.layoutIfNeeded()
+//                    }
+//                })
         }
     }
     
@@ -465,43 +509,45 @@ final class DetailGatherViewController: BaseViewController {
                           let endDate = club.clubDetailInfo.endDate.toDate() else {
                         return
                     }
-                    
+
                     self.eligiblePetSizeView.reactor = TagCollectionViewReactor(state: club.clubDetailInfo.eligiblePetSizeTypes)
                     self.eligibleSexView.reactor = TagCollectionViewReactor(state: [club.clubDetailInfo.eligibleSex])
                     self.eligiblePetBreedView.reactor = TagCollectionViewReactor(state: club.clubDetailInfo.eligibleBreeds)
-                    
+
                     self.gatherCategoryLabel.text = "  " + club.clubDetailInfo.category + "  "
                     self.gatherTitleLabel.text = club.clubDetailInfo.title
                     self.gatherDayLabel.text = startDate.toDateLabelText() + " - " + endDate.toDateLabelText()
-                    
+
                     self.leaderProfileImageView.imageWithURL(club.leaderInfo.imageURL)
                     self.leaderNicknameLabel.text = club.leaderInfo.nickname
                     self.gatherDescriptionLabel.text = club.clubDetailInfo.description
                     self.gatherAddressDescriptionLabel.text = club.clubDetailInfo.meetingPlace
                     self.participantDescriptionLabel.text = "\(club.clubDetailInfo.participants)/\(club.clubDetailInfo.maximumPeople)"
-                    
+
                     let pLocation = CLLocationCoordinate2DMake(club.clubDetailInfo.latitude, club.clubDetailInfo.longitude)
                     let pSpanValue = MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1)
                     let pRegion = MKCoordinateRegion(center: pLocation, span: pSpanValue)
                     self.mapView.setRegion(pRegion, animated: false)
-                    
+
                     let annotation = MKPointAnnotation()
                     annotation.coordinate = pLocation
                     self.mapView.addAnnotation(annotation)
-                    
-                    
-                    self.commentTableView.heightAnchor.constraint(equalToConstant: CGFloat(club.commentInfos.count) * 120).isActive = true
+
+
+                 //   self.commentTableView.heightAnchor.constraint(equalToConstant: CGFloat(club.commentInfos.count) * 120).isActive = true
                 })
             
             reactor.state
                 .map { $0.clubFindDetail?.accountInfos ?? [] }
+                .distinctUntilChanged()
                 .observe(on: MainScheduler.instance)
                 .bind(to: participantCollectionView.rx.items(cellIdentifier: ParticipantCollectionViewCell.identifier, cellType: ParticipantCollectionViewCell.self)) { index, data, cell in
                     cell.configure(imageURLString: data.imageURL, nickname: data.nickname)
                 }
-            
+
             reactor.state
                 .map { $0.clubFindDetail?.commentInfos ?? [] }
+                .distinctUntilChanged()
                 .observe(on: MainScheduler.instance)
                 .bind(to: commentTableView.rx.items(cellIdentifier: CommentCell.identifier, cellType: CommentCell.self)) { index, data, cell in
                     cell.configure(id: data.id,
@@ -512,7 +558,33 @@ final class DetailGatherViewController: BaseViewController {
                                    date: data.updatedTime,
                                    comment: data.content)
                 }
-                
+
+            reactor.state
+                .map { $0.gatherButtonText }
+                .distinctUntilChanged()
+                .observe(on: MainScheduler.instance)
+                .subscribe(with: self,
+                   onNext: { this, text in
+                    this.gatherButton.setTitle(text, for: .normal)
+                })
+
+            reactor.state
+                .map { $0.gatherButtonState }
+                .distinctUntilChanged()
+                .observe(on: MainScheduler.instance)
+                .subscribe(with: self,
+                   onNext: { this, state in
+                    switch state {
+                    case .disabled:
+                        this.gatherButton.isEnabled = false
+                    case .enabled:
+                        this.gatherButton.isEnabled = true
+                        this.gatherButton.setBackgroundColor(.Togaether.mainGreen, for: .normal)
+                    case .warning:
+                        this.gatherButton.isEnabled = true
+                        this.gatherButton.setBackgroundColor(.Togaether.divider, for: .normal)
+                    }
+                })
 
             reactor.state
                 .map { $0.isClubReportSuccess }
@@ -520,7 +592,7 @@ final class DetailGatherViewController: BaseViewController {
                 .observe(on: MainScheduler.instance)
                 .subscribe(with: self,
                    onNext: { this, _ in
-                    this.presentAlert()
+                    this.presentReportAlert()
                 })
         }
     }
@@ -543,10 +615,38 @@ final class DetailGatherViewController: BaseViewController {
         present(alertController, animated: true, completion: nil)
     }
     
-    private func presentAlert() {
+    private func presentQuitGatherAlert() {
+        let alertController = UIAlertController(title: "정말 모임을 나가시겠어요?", message: nil, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "확인", style: .cancel, handler: { [weak self] _ in
+            self?.gatherQuitSubject.onNext(())
+        })
+        let cancelAction = UIAlertAction(title: "취소", style: .default, handler: nil)
+        alertController.addAction(confirmAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    private func presentDeleteGatherAlert() {
+        let alertController = UIAlertController(title: "정말 모임을 삭제하시겠어요?", message: nil, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "확인", style: .cancel, handler: { [weak self] _ in
+            self?.gatherDeleteSubject.onNext(())
+        })
+        let cancelAction = UIAlertAction(title: "취소", style: .default, handler: nil)
+        alertController.addAction(confirmAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    private func presentReportAlert() {
         let alertController = UIAlertController(title: "신고가 완료되었습니다.", message: nil, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "확인", style: .default, handler: nil)
         alertController.addAction(cancelAction)
         present(alertController, animated: true, completion: nil)
     }
+}
+
+enum GatherButtonState {
+    case enabled
+    case disabled
+    case warning
 }

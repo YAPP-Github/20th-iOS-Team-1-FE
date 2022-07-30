@@ -19,18 +19,6 @@ final class GatherListCoordinator: SceneCoordinator {
         self.navigationController = navigationController
     }
     
-    func start1() {
-        let networkManager = NetworkManager.shared
-        let keychainProvider = KeychainProvider.shared
-        let keychainUseCase = KeychainUsecase(keychainProvider: keychainProvider, networkManager: networkManager)
-        let detailGatherRepository = DetailGatherRepository(networkManager: networkManager)
-        
-        let reactor = DetailGatherReactor(clubID: 6, detailGatherRepository: detailGatherRepository, keychainUseCase: keychainUseCase)
-        let viewController = DetailGatherViewController(reactor: reactor)
-        
-        navigationController.setViewControllers([viewController], animated: false)
-    }
-    
     func start() {
         let networkManager = NetworkManager.shared
         let keychainProvider = KeychainProvider.shared
@@ -54,9 +42,10 @@ final class GatherListCoordinator: SceneCoordinator {
         let networkManager = NetworkManager.shared
         let keychainProvider = KeychainProvider.shared
         let keychainUseCase = KeychainUsecase(keychainProvider: keychainProvider, networkManager: networkManager)
+        let profileMainRepository = ProfileRespository(networkManager: networkManager)
         let detailGatherRepository = DetailGatherRepository(networkManager: networkManager)
         
-        let reactor = DetailGatherReactor(clubID: clubID, detailGatherRepository: detailGatherRepository, keychainUseCase: keychainUseCase)
+        let reactor = DetailGatherReactor(clubID: clubID, detailGatherRepository: detailGatherRepository, profileMainRepository: profileMainRepository, keychainUseCase: keychainUseCase)
         let viewController = DetailGatherViewController(reactor: reactor)
         
         reactor.readyToProfile
@@ -64,6 +53,14 @@ final class GatherListCoordinator: SceneCoordinator {
             .drive(with: self,
                    onNext: { this, nickname in
                 this.pushProfileViewController(nickname: nickname)
+            })
+            .disposed(by:disposeBag)
+        
+        reactor.readyToDismiss
+            .asDriver(onErrorJustReturn: ())
+            .drive(with: self,
+                   onNext: { this, nickname in
+                this.navigationController.dismiss(animated: true)
             })
             .disposed(by:disposeBag)
         

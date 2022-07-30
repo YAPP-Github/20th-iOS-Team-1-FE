@@ -11,6 +11,7 @@ struct ClubFIndDetailResponseDTO: Codable {
     private enum CodingKeys: String, CodingKey {
         case participating
         case leader
+        case accountSex
         case clubDetailInfo
         case leaderInfo
         case accountInfos
@@ -19,6 +20,7 @@ struct ClubFIndDetailResponseDTO: Codable {
     
     let participating: Bool
     let leader: Bool
+    let accountSex: String
     let clubDetailInfo: ClubDetailInfoDTO
     let leaderInfo: LeaderInfoDTO
     let accountInfos: [AccountSummaryInfoDTO]
@@ -27,6 +29,7 @@ struct ClubFIndDetailResponseDTO: Codable {
     func toDomain() -> ClubFindDetail {
         ClubFindDetail(participating: participating,
                        leader: leader,
+                       accountSex: accountSex,
                        clubDetailInfo: clubDetailInfo.toDomain(),
                        leaderInfo: leaderInfo.toDomain(),
                        accountInfos: accountInfos.map { $0.toDomain() },
@@ -38,6 +41,7 @@ struct ClubFIndDetailResponseDTO: Codable {
 struct ClubFindDetail {
     let participating: Bool
     let leader: Bool
+    let accountSex: String
     let clubDetailInfo: ClubDetailInfo
     let leaderInfo: LeaderInfo
     let accountInfos: [AccountSummaryInfo]
