@@ -16,8 +16,6 @@ final class DetailGatherReactor: Reactor {
         case clubReportDidOccur
         case clubQuitDidOccur
         case clubDeleteDidOccur
-        case commentReportDidOccur(Int)
-        case commentDidOccur(String)
         case participantDidTap(Int)
         case textFieldDidEndEditing(String)
         case addCommentButtonDidTap
@@ -30,12 +28,16 @@ final class DetailGatherReactor: Reactor {
         case updateClubReportSuccess(Bool)
         case updateTextFieldComment(String)
         case empty
+        case deleteClubCall
+        case quitClubCall
     }
     
     struct State {
         let clubID: Int
         var textFieldComment = ""
         var isClubReportSuccess = 0
+        var deleteClubCallCount = 0
+        var quitClubCallCount = 0
         var isCommentReportSuccess = false
         
         var gatherButtonText = ""
@@ -64,10 +66,6 @@ final class DetailGatherReactor: Reactor {
             return getGatherDetail(clubID: currentState.clubID)
         case .clubReportDidOccur:
             return reportClub(clubID: currentState.clubID)
-        case .commentReportDidOccur(_):
-            return reportComment(commentID: -1)
-        case .commentDidOccur(_):
-            return Observable.empty()
         case .participantDidTap(let id):
             guard let index = currentState.clubFindDetail?.accountInfos.firstIndex(where: { $0.id == id }),
                   let nickname = currentState.clubFindDetail?.accountInfos[safe: index]?.nickname else {
@@ -79,7 +77,14 @@ final class DetailGatherReactor: Reactor {
             let commentRequest = CommentRequest(clubID: currentState.clubID, content: currentState.textFieldComment)
             return addComment(comment: commentRequest)
         case .gatherButtonDidTap:
-            return participateGather(clubID: currentState.clubID)
+            switch currentState.gatherButtonText {
+            case "모임을 삭제할래요.":
+                return Observable.just(.deleteClubCall)
+            case "모임을 나갈래요.":
+                return Observable.just(.quitClubCall)
+            default: // "참여할래요."
+                return participateGather(clubID: currentState.clubID)
+            }
         case .textFieldDidEndEditing(let comment):
             return Observable.just(.updateTextFieldComment(comment))
         case .clubQuitDidOccur:
@@ -128,6 +133,10 @@ final class DetailGatherReactor: Reactor {
             newState.textFieldComment = comment
         case .empty:
             print("dismiss")
+        case .deleteClubCall:
+            newState.deleteClubCallCount += 1
+        case .quitClubCall:
+            newState.quitClubCallCount += 1
         }
         return newState
     }
@@ -179,7 +188,7 @@ final class DetailGatherReactor: Reactor {
                                     case .failure(let error):
                                         print("RESULT FAILURE: ", error.localizedDescription)
                                     }
-                                }
+                                }.disposed(by: self.disposeBag)
                         case .failure(let error):
                             print("RESULT FAILURE: ", error.localizedDescription)
                         }
