@@ -220,6 +220,9 @@ final class DetailGatherViewController: BaseViewController {
         let textField = UITextField()
         textField.placeholder = "댓글을 입력하세요"
         textField.keyboardType = .default
+        textField.backgroundColor = .Togaether.divider
+        textField.layer.cornerRadius = 10
+        textField.layer.masksToBounds = true
         
         return textField
     }()
@@ -418,11 +421,10 @@ final class DetailGatherViewController: BaseViewController {
             commentTableView.topAnchor.constraint(equalTo: gatherCommentLabel.bottomAnchor, constant: 12),
             commentTableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             commentTableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            
             commentTextField.topAnchor.constraint(equalTo: commentTableView.bottomAnchor, constant: 40),
             commentTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             commentTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-           // commentTextField.heightAnchor.constraint(equalToConstant: 50),
+            commentTextField.heightAnchor.constraint(equalToConstant: 30),
             
             addCommentButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             addCommentButton.widthAnchor.constraint(equalToConstant: 40),
@@ -438,7 +440,8 @@ final class DetailGatherViewController: BaseViewController {
         
         commentTextFieldBottomConstraint = commentTextField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -58)
         commentTextFieldBottomConstraint?.isActive = true
-        commentTableViewHeightConstraint = commentTableView.heightAnchor.constraint(equalToConstant: 0)
+        commentTableViewHeightConstraint = commentTableView.heightAnchor.constraint(equalToConstant: 120)
+        commentTableViewHeightConstraint?.isActive = true
     }
     
     private func configureUI() {
@@ -536,14 +539,7 @@ final class DetailGatherViewController: BaseViewController {
                     let annotation = MKPointAnnotation()
                     annotation.coordinate = pLocation
                     self.mapView.addAnnotation(annotation)
-                    
-                  //  commentTableViewHeightConstraint
-                
-                    UIView.animate(withDuration: 0.3) {
-                        self.commentTableViewHeightConstraint?.constant = CGFloat(club.accountInfos.count) * 120
-                        self.view.layoutIfNeeded()
-                    }
-                //    self.commentTableView.heightAnchor.constraint(equalToConstant: CGFloat(club.accountInfos.count) * 120).isActive = true
+        
                 })
             
             reactor.state
@@ -559,7 +555,25 @@ final class DetailGatherViewController: BaseViewController {
                 .distinctUntilChanged()
                 .observe(on: MainScheduler.instance)
                 .do(onNext: { [weak self] in
-                    self?.commentTableView.heightAnchor.constraint(equalToConstant: CGFloat($0.count) * 120).isActive = true
+                    guard let self = self else {
+                        return
+                    }
+                    
+                    self.commentTableViewHeightConstraint?.constant = CGFloat($0.count * 120)
+//                    UIView.animate(withDuration: 0.3,
+//                                   delay: 0.0,
+//                                   options: [.curveEaseOut],
+//                                   animations: {
+//                        self.commentTableViewHeightConstraint?.constant = CGFloat($0.count * 120)
+//                        self.view.layoutIfNeeded()
+//                    }, completion: {
+//                        self.scrollView.setContentOffset(
+//                            CGPoint(x: 0,
+//                                    y: self.scrollView.contentSize.height -
+//                                    self.scrollView.bounds.size.height +
+//                                    self.scrollView.contentInset.bottom)
+//                            , animated: true)
+//                    })
                 })
                 .bind(to: commentTableView.rx.items(cellIdentifier: CommentCell.identifier, cellType: CommentCell.self)) { index, data, cell in
                     cell.configure(id: data.id,
@@ -605,6 +619,24 @@ final class DetailGatherViewController: BaseViewController {
                 .subscribe(with: self,
                    onNext: { this, _ in
                     this.presentReportAlert()
+                })
+            
+            reactor.state
+                .map { $0.quitClubCallCount }
+                .distinctUntilChanged()
+                .observe(on: MainScheduler.instance)
+                .subscribe(with: self,
+                   onNext: { this, _ in
+                    this.presentQuitGatherAlert()
+                })
+            
+            reactor.state
+                .map { $0.deleteClubCallCount }
+                .distinctUntilChanged()
+                .observe(on: MainScheduler.instance)
+                .subscribe(with: self,
+                   onNext: { this, _ in
+                    this.presentDeleteGatherAlert()
                 })
         }
     }
