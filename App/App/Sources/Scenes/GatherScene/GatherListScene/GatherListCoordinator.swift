@@ -60,7 +60,7 @@ final class GatherListCoordinator: SceneCoordinator {
             .asDriver(onErrorJustReturn: ())
             .drive(with: self,
                    onNext: { this, nickname in
-                this.navigationController.dismiss(animated: true)
+                this.navigationController.popViewController(animated: true)
             })
             .disposed(by:disposeBag)
         
