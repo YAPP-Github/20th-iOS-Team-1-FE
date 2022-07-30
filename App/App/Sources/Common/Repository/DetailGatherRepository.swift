@@ -56,13 +56,47 @@ final class DetailGatherRepository: DetailGatherRepositoryInterface {
         }
     }
     
+    internal func participateGather(accessToken: Data, clubID: Int) -> Single<Void> {
+        return Single<Void>.create { [weak self] observer in
+            guard let self = self else {
+                return Disposables.create()
+            }
+        
+            guard let url = URL(string: APIConstants.BaseURL + APIConstants.participate + "/\(clubID)") else {
+                return Disposables.create()
+            }
+            
+            let accessToken = String(decoding: accessToken, as: UTF8.self).makePrefixBearer()
+
+            var urlRequest = URLRequest(url: url)
+            urlRequest.httpMethod = HTTPMethod.post
+            urlRequest.addValue(accessToken, forHTTPHeaderField: "Authorization")
+            urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
+            
+            let response: Single<Int> = self.networkManager.requestDataTask(with: urlRequest)
+            
+            response.subscribe { result in
+                switch result {
+                case .success(_):
+                    observer(.success(()))
+                case .failure(let error):
+                    observer(.failure(error))
+                }
+            }
+            .disposed(by: self.disposeBag)
+            
+            return Disposables.create()
+        }
+    }
+    
     internal func deleteComment(accessToken: Data, commentID: String) -> Single<Void> {
         return Single<Void>.create { [weak self] observer in
             guard let self = self else {
                 return Disposables.create()
             }
         
-            guard let url = URL(string: APIConstants.BaseURL + APIConstants.comment + "/\(commentID))") else {
+            guard let url = URL(string: APIConstants.BaseURL + APIConstants.comment + "/\(commentID)") else {
                 return Disposables.create()
             }
             
@@ -198,7 +232,7 @@ final class DetailGatherRepository: DetailGatherRepositoryInterface {
                 return Disposables.create()
             }
         
-            guard let url = URL(string: APIConstants.BaseURL + APIConstants.reportComment + "/\(commentID))") else {
+            guard let url = URL(string: APIConstants.BaseURL + APIConstants.reportComment + "/\(commentID)") else {
                 return Disposables.create()
             }
             

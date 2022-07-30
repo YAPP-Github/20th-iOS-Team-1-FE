@@ -241,7 +241,7 @@ final class DetailGatherViewController: BaseViewController {
     private let gatherButton: UIButton = {
         let button = UIButton()
         button.isEnabled = false
-        button.setBackgroundColor(.Togaether.secondaryButton, for: .disabled)
+        button.setBackgroundColor(.Togaether.divider, for: .disabled)
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
         return button
@@ -594,7 +594,7 @@ final class DetailGatherViewController: BaseViewController {
                         this.gatherButton.setBackgroundColor(.Togaether.mainGreen, for: .normal)
                     case .warning:
                         this.gatherButton.isEnabled = true
-                        this.gatherButton.setBackgroundColor(.Togaether.divider, for: .normal)
+                        this.gatherButton.setBackgroundColor(.Togaether.secondaryButton, for: .normal)
                     }
                 })
 
