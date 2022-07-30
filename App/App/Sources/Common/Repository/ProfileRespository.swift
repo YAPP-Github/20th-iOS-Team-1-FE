@@ -18,17 +18,17 @@ final class ProfileRespository: ProfileMainRepositoryInterface {
     }
     
     internal func requestProfileInfo(accessToken: Data, nickname: String? = nil) -> Single<ProfileInfo> {
-        
+        let query = [URLQueryItem(name: "nickname", value: nickname)]
         return Single<ProfileInfo>.create { [weak self] observer in
             guard let self = self else {
                 return Disposables.create()
             }
             
-            guard var urlComponents = URLComponents(string: APIConstants.BaseURL + APIConstants.GetMyPage) else {
+            guard var urlComponents = URLComponents(string: "https://yapp-togather.com/api/accounts/my-page") else {
                 return Disposables.create()
             }
-                        
-            urlComponents.queryItems = [URLQueryItem(name: "nickname", value: nickname)]
+            
+            urlComponents.queryItems = query
             
             guard let url = urlComponents.url else {
                 return Disposables.create()

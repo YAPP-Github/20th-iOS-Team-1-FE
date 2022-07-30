@@ -23,7 +23,7 @@ struct AccountSummaryInfoDTO: Codable {
     }
 }
 
-struct AccountSummaryInfo {
+struct AccountSummaryInfo: Equatable {
     let id: Int
     let nickname: String
     let imageURL: String
