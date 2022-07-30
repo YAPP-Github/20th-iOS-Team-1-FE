@@ -46,7 +46,7 @@ final class GatherListRepository: GatherListRepositoryInterface {
                 return Disposables.create()
             }
             
-            urlComponents.queryItems = [conditionQuery]
+            urlComponents.queryItems = [cursorQuery, cursorEndDateQuery, conditionQuery]
             
             guard let url = urlComponents.url else {
                 return Disposables.create()

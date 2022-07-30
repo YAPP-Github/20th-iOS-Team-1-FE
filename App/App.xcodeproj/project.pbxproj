@@ -113,12 +113,9 @@
 		378F347B281DBDF10063CE4F /* LoginReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F3479281DBDF10063CE4F /* LoginReactor.swift */; };
 		378F347E281DBE070063CE4F /* GatherListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F347C281DBE070063CE4F /* GatherListViewController.swift */; };
 		378F347F281DBE070063CE4F /* GatherListReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F347D281DBE070063CE4F /* GatherListReactor.swift */; };
-		378F3482281DBE140063CE4F /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F3480281DBE140063CE4F /* ChattingViewController.swift */; };
-		378F3483281DBE140063CE4F /* ChattingReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F3481281DBE140063CE4F /* ChattingReactor.swift */; };
 		378F3486281DBE210063CE4F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F3484281DBE210063CE4F /* ProfileViewController.swift */; };
 		378F3487281DBE210063CE4F /* ProfileReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F3485281DBE210063CE4F /* ProfileReactor.swift */; };
 		378F348B281DC0560063CE4F /* GatherListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F348A281DC0560063CE4F /* GatherListCoordinator.swift */; };
-		378F348D281DC0660063CE4F /* ChattingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F348C281DC0660063CE4F /* ChattingCoordinator.swift */; };
 		37912C65281445AC0087B95E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37912C64281445AC0087B95E /* AppDelegate.swift */; };
 		37912C67281445AC0087B95E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37912C66281445AC0087B95E /* SceneDelegate.swift */; };
 		37912C6E281445AD0087B95E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37912C6D281445AD0087B95E /* Assets.xcassets */; };
@@ -341,12 +338,9 @@
 		378F3479281DBDF10063CE4F /* LoginReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginReactor.swift; sourceTree = "<group>"; };
 		378F347C281DBE070063CE4F /* GatherListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListViewController.swift; sourceTree = "<group>"; };
 		378F347D281DBE070063CE4F /* GatherListReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListReactor.swift; sourceTree = "<group>"; };
-		378F3480281DBE140063CE4F /* ChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
-		378F3481281DBE140063CE4F /* ChattingReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingReactor.swift; sourceTree = "<group>"; };
 		378F3484281DBE210063CE4F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		378F3485281DBE210063CE4F /* ProfileReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileReactor.swift; sourceTree = "<group>"; };
 		378F348A281DC0560063CE4F /* GatherListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListCoordinator.swift; sourceTree = "<group>"; };
-		378F348C281DC0660063CE4F /* ChattingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingCoordinator.swift; sourceTree = "<group>"; };
 		37912C61281445AC0087B95E /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37912C64281445AC0087B95E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37912C66281445AC0087B95E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -824,21 +818,10 @@
 				29AE222A284B7CEC00EDF34B /* SearchScene */,
 				378F3476281DBDB10063CE4F /* AuthScene */,
 				378F3475281DBD4C0063CE4F /* GatherScene */,
-				378F3474281DBD230063CE4F /* ChattingScene */,
 				378F3477281DBDC30063CE4F /* ProfileScene */,
 				FD6D48622885AEEC005D9669 /* BreedSelectScene */,
 			);
 			path = Scenes;
-			sourceTree = "<group>";
-		};
-		378F3474281DBD230063CE4F /* ChattingScene */ = {
-			isa = PBXGroup;
-			children = (
-				378F3480281DBE140063CE4F /* ChattingViewController.swift */,
-				378F3481281DBE140063CE4F /* ChattingReactor.swift */,
-				378F348C281DC0660063CE4F /* ChattingCoordinator.swift */,
-			);
-			path = ChattingScene;
 			sourceTree = "<group>";
 		};
 		378F3475281DBD4C0063CE4F /* GatherScene */ = {
@@ -1475,7 +1458,6 @@
 				37605E01283A2AE200394929 /* RxASAuthorizationControllerPresentationContextProvidingProxy.swift in Sources */,
 				37D1E505287716D300A955C4 /* FileExtension.swift in Sources */,
 				FD0870D428805BC300DF3553 /* AddPetRepositoryInterface.swift in Sources */,
-				378F348D281DC0660063CE4F /* ChattingCoordinator.swift in Sources */,
 				3749904728772A4F00D07211 /* CommentInfoDTO.swift in Sources */,
 				378F347E281DBE070063CE4F /* GatherListViewController.swift in Sources */,
 				3749903D287723C700D07211 /* ContentResponseDTO.swift in Sources */,
@@ -1564,7 +1546,6 @@
 				FDBC122C286C328C00FCADF4 /* ProfileInfo.swift in Sources */,
 				3732EF44286F4DDC0037404E /* String+Extension.swift in Sources */,
 				294A0C1A2873A49500D1CEB3 /* ClubStatus.swift in Sources */,
-				378F3483281DBE140063CE4F /* ChattingReactor.swift in Sources */,
 				376006C528489A2B00B27015 /* RegularExpressionValidator.swift in Sources */,
 				29AE224C2853711F00EDF34B /* RxMKMapViewDelegateProxy.swift in Sources */,
 				374F41CD2864E5250074F04B /* AccountValidationRepository.swift in Sources */,
@@ -1590,7 +1571,6 @@
 				294A0C142873962700D1CEB3 /* GatherConfigurationForSheet.swift in Sources */,
 				FD9D38EE28543409005A0C86 /* SegmentView.swift in Sources */,
 				37D1E507287716E900A955C4 /* FileManagerUseCaseInterface.swift in Sources */,
-				378F3482281DBE140063CE4F /* ChattingViewController.swift in Sources */,
 				379B1A7D285A580D00E58A34 /* SignInResult.swift in Sources */,
 				37ECC53E2871BA9300CFE8E9 /* RxImagePickerDelegateProxy.swift in Sources */,
 				FD6D48612885AE94005D9669 /* SearchBreedReactor.swift in Sources */,
