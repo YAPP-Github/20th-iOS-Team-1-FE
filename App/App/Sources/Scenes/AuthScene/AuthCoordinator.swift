@@ -31,7 +31,26 @@ final class AuthCoordinator: SceneCoordinator {
             .asDriver(onErrorJustReturn: ())
             .drive(with: self,
                    onNext: { this, _ in
-                this.pushSignUpAgreementViewController()
+                let keychainUseCase = KeychainUsecase(keychainProvider: keychainProvider, networkManager: networkManager)
+                let profileMainRepository = ProfileRespository(networkManager: networkManager)
+                keychainUseCase.getAccessToken()
+                    .subscribe(with: self,
+                       onSuccess: { this, token in
+                        profileMainRepository.requestProfileInfo(accessToken: token)
+                            .subscribe { result in
+                                switch result {
+                                case .success(_):
+                                    this.delegate?.switchToTabBar()
+                                    return
+                                case .failure(_):
+                                    this.pushSignUpAgreementViewController()
+                                    return
+                                }
+                            }.disposed(by: this.disposeBag)
+                        },
+                       onFailure: { this, _ in
+                        this.pushSignUpAgreementViewController()
+                    }).disposed(by: self.disposeBag)
             })
             .disposed(by:disposeBag)
         

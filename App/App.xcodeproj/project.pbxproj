@@ -172,6 +172,7 @@
 		37ECC53C2871B4B000CFE8E9 /* UIImagePickerViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ECC53B2871B4B000CFE8E9 /* UIImagePickerViewController+Rx.swift */; };
 		37ECC53E2871BA9300CFE8E9 /* RxImagePickerDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ECC53D2871BA9300CFE8E9 /* RxImagePickerDelegateProxy.swift */; };
 		37F67CC5286A1C270073FE8C /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F67CC4286A1C270073FE8C /* AuthCoordinator.swift */; };
+		37FB852B289419C300328F90 /* CommentRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FB852A289419C300328F90 /* CommentRequestDTO.swift */; };
 		FD0870BE287DB15600DF3553 /* EmptyNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0870BD287DB15600DF3553 /* EmptyNoticeView.swift */; };
 		FD0870D028805B4200DF3553 /* EditProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0870CF28805B4200DF3553 /* EditProfileRepository.swift */; };
 		FD0870D228805B6E00DF3553 /* AddPetRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0870D128805B6E00DF3553 /* AddPetRepository.swift */; };
@@ -403,6 +404,7 @@
 		37ECC53B2871B4B000CFE8E9 /* UIImagePickerViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImagePickerViewController+Rx.swift"; sourceTree = "<group>"; };
 		37ECC53D2871BA9300CFE8E9 /* RxImagePickerDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxImagePickerDelegateProxy.swift; sourceTree = "<group>"; };
 		37F67CC4286A1C270073FE8C /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
+		37FB852A289419C300328F90 /* CommentRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRequestDTO.swift; sourceTree = "<group>"; };
 		FD0870BD287DB15600DF3553 /* EmptyNoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyNoticeView.swift; sourceTree = "<group>"; };
 		FD0870CF28805B4200DF3553 /* EditProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileRepository.swift; sourceTree = "<group>"; };
 		FD0870D128805B6E00DF3553 /* AddPetRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPetRepository.swift; sourceTree = "<group>"; };
@@ -632,6 +634,7 @@
 				3749904828772D0C00D07211 /* ClubFIndDetailResponseDTO.swift */,
 				3749904D28772F5600D07211 /* ClubCreateRequestDTO.swift */,
 				FD6D48902890F4AF005D9669 /* CreateClubRequestDTO.swift */,
+				37FB852A289419C300328F90 /* CommentRequestDTO.swift */,
 			);
 			path = Club;
 			sourceTree = "<group>";
@@ -1510,6 +1513,7 @@
 				379B1A7B285A52EA00E58A34 /* AppleLoginRepositoryInterface.swift in Sources */,
 				37DBF4B4288B700B0050E4FF /* ParticipantCollectionViewCell.swift in Sources */,
 				37479BA1283EBB220078386E /* UIButton+Extension.swift in Sources */,
+				37FB852B289419C300328F90 /* CommentRequestDTO.swift in Sources */,
 				374F41DA2864EB060074F04B /* KeychainUseCase.swift in Sources */,
 				FDD226712875F4900042F488 /* TagCollectionViewReactor.swift in Sources */,
 				37605DFD283A003B00394929 /* ASAuthorizationAppleIDProvider+Rx.swift in Sources */,

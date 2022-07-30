@@ -14,24 +14,32 @@ final class DetailGatherReactor: Reactor {
     enum Action {
         case viewWillAppear
         case clubReportDidOccur
+        case clubQuitDidOccur
+        case clubDeleteDidOccur
         case commentReportDidOccur(Int)
         case commentDidOccur(String)
         case participantDidTap(Int)
+        case textFieldDidEndEditing(String)
+        case addCommentButtonDidTap
+        case gatherButtonDidTap
     }
     
     enum Mutation {
         case updateDetailGather(ClubFindDetail)
         case updateCommentReportSuccess(Bool)
         case updateClubReportSuccess(Bool)
+        case updateTextFieldComment(String)
+        case empty
     }
     
     struct State {
         let clubID: Int
+        var textFieldComment = ""
         var isClubReportSuccess = 0
         var isCommentReportSuccess = false
         
         var gatherButtonText = ""
-        var gatherButtonEnabled = false
+        var gatherButtonState = GatherButtonState.disabled
         
         var clubFindDetail: ClubFindDetail?
     }
@@ -39,11 +47,14 @@ final class DetailGatherReactor: Reactor {
     let initialState: State
     private let disposeBag = DisposeBag()
     private let detailGatherRepository: DetailGatherRepositoryInterface
+    private let profileMainRepository: ProfileMainRepositoryInterface
     private let keychainUseCase: KeychainUseCaseInterface
     internal var readyToProfile = PublishSubject<String>()
-    init(clubID: Int, detailGatherRepository: DetailGatherRepositoryInterface, keychainUseCase: KeychainUseCaseInterface) {
+    internal var readyToDismiss = PublishSubject<Void>()
+    init(clubID: Int, detailGatherRepository: DetailGatherRepositoryInterface, profileMainRepository: ProfileMainRepositoryInterface, keychainUseCase: KeychainUseCaseInterface) {
         initialState = State(clubID: clubID)
         self.detailGatherRepository = detailGatherRepository
+        self.profileMainRepository = profileMainRepository
         self.keychainUseCase = keychainUseCase
     }
     
@@ -54,7 +65,7 @@ final class DetailGatherReactor: Reactor {
         case .clubReportDidOccur:
             return reportClub(clubID: currentState.clubID)
         case .commentReportDidOccur(_):
-            return reportComment(commentID: 0)
+            return reportComment(commentID: -1)
         case .commentDidOccur(_):
             return Observable.empty()
         case .participantDidTap(let id):
@@ -64,6 +75,17 @@ final class DetailGatherReactor: Reactor {
             }
             readyToProfile.onNext(nickname)
             return Observable.empty()
+        case .addCommentButtonDidTap:
+            let commentRequest = CommentRequest(clubID: currentState.clubID, content: currentState.textFieldComment)
+            return addComment(comment: commentRequest)
+        case .gatherButtonDidTap:
+            return Observable.empty()
+        case .textFieldDidEndEditing(let comment):
+            return Observable.just(.updateTextFieldComment(comment))
+        case .clubQuitDidOccur:
+            return leaveClub(clubID: currentState.clubID)
+        case .clubDeleteDidOccur:
+            return deleteClub(clubID: currentState.clubID)
         }
     }
     
@@ -71,22 +93,38 @@ final class DetailGatherReactor: Reactor {
         var newState = state
         
         switch mutation {
-        
         case .updateDetailGather(let clubFindDetail):
+            if let endDate = clubFindDetail.clubDetailInfo.endDate.toDate(),
+               Date().isFuture(than: endDate) {
+                newState.gatherButtonState = .disabled
+                newState.gatherButtonText = "종료된 모임이에요."
+            } else if clubFindDetail.leader {
+                newState.gatherButtonState = .warning
+                newState.gatherButtonText = "종료된 모임이에요."
+            } else if clubFindDetail.participating {
+                newState.gatherButtonState = .warning
+                newState.gatherButtonText = "모임을 나갈래요."
+            } else if clubFindDetail.clubDetailInfo.eligibleSex == "ALL" ||
+                   clubFindDetail.accountSex == clubFindDetail.clubDetailInfo.eligibleSex {
+                newState.gatherButtonState = .enabled
+                newState.gatherButtonText = "참여할래요."
+            } else if clubFindDetail.clubDetailInfo.eligibleSex == "WOMAN" {
+                newState.gatherButtonState = .disabled
+                newState.gatherButtonText = "여성 견주만 참여할 수 있어요."
+            } else {
+                newState.gatherButtonState = .disabled
+                newState.gatherButtonText = "남성 견주만 참여할 수 있어요."
+            }
+            
             newState.clubFindDetail = clubFindDetail
-            
-            // if clubFindDetail.clubDetailInfo.endDate 지났으면 "종료된 모임이예요." 비활
-            // if clubFindDetail.leader                 내가 만든 모임이면 "모임을 삭제할래요" 짙회
-            // if clubFindDetail.participating          내가 참여하고 있는 모임이면 "모임을 나갈래요" 짙회
-            // if 전체참여가능 or 성별 맞으면                      "참여할래요" 활성화
-            // 아니면                                      "ㅌㅌ 견주만 참여할 수 있어요" 비활성화
-            
-            
-            
         case .updateCommentReportSuccess(let isSuccess):
             newState.isCommentReportSuccess = isSuccess
-        case .updateClubReportSuccess(let isSuccess):
+        case .updateClubReportSuccess(_):
             newState.isClubReportSuccess += 1
+        case .updateTextFieldComment(let comment):
+            newState.textFieldComment = comment
+        case .empty:
+            print("dismiss")
         }
         return newState
     }
@@ -117,6 +155,32 @@ final class DetailGatherReactor: Reactor {
         }
     }
     
+    private func addComment(comment: CommentRequest) -> Observable<Mutation> {
+        return Observable.create { [weak self] observer in
+            guard let self = self else {
+                return Disposables.create()
+            }
+            
+            self.keychainUseCase.getAccessToken()
+                .subscribe(with: self,
+                   onSuccess: { this, token in
+                    this.detailGatherRepository.addComment(accessToken: token, comment: comment)
+                        .subscribe { result in
+                        switch result {
+                        case .success(let clubFindDetail):
+                            observer.onNext(Mutation.updateDetailGather(clubFindDetail))
+                        case .failure(let error):
+                            print("RESULT FAILURE: ", error.localizedDescription)
+                        }
+                    }.disposed(by: self.disposeBag)
+                },
+                onFailure: { _,_ in
+                     return
+                }).disposed(by: self.disposeBag)
+            return Disposables.create()
+        }
+    }
+    
     private func reportClub(clubID: Int) -> Observable<Mutation> {
         return Observable.create { [weak self] observer in
             guard let self = self else {
@@ -130,9 +194,64 @@ final class DetailGatherReactor: Reactor {
                         .subscribe { result in
                         switch result {
                         case .success(let isSuccess):
+                            this.readyToDismiss.onNext(())
                             observer.onNext(Mutation.updateClubReportSuccess(isSuccess))
                         case .failure(_):
                             observer.onNext(Mutation.updateClubReportSuccess(true))
+                        }
+                    }.disposed(by: self.disposeBag)
+                },
+                onFailure: { _,_ in
+                     return
+                }).disposed(by: self.disposeBag)
+            return Disposables.create()
+        }
+    }
+    
+    private func deleteClub(clubID: Int) -> Observable<Mutation> {
+        return Observable.create { [weak self] observer in
+            guard let self = self else {
+                return Disposables.create()
+            }
+            
+            self.keychainUseCase.getAccessToken()
+                .subscribe(with: self,
+                   onSuccess: { this, token in
+                    this.detailGatherRepository.deleteClub(accessToken: token, clubID: clubID)
+                        .subscribe { result in
+                        switch result {
+                        case .success(_):
+                            this.readyToDismiss.onNext(())
+                            observer.onNext(.empty)
+                        case .failure(let error):
+                            print("RESULT FAILURE: ", error.localizedDescription)
+                        }
+                    }.disposed(by: self.disposeBag)
+                },
+                onFailure: { _,_ in
+                     return
+                }).disposed(by: self.disposeBag)
+            return Disposables.create()
+        }
+    }
+    
+    private func leaveClub(clubID: Int) -> Observable<Mutation> {
+        return Observable.create { [weak self] observer in
+            guard let self = self else {
+                return Disposables.create()
+            }
+            
+            self.keychainUseCase.getAccessToken()
+                .subscribe(with: self,
+                   onSuccess: { this, token in
+                    this.detailGatherRepository.leaveClub(accessToken: token, clubID: clubID)
+                        .subscribe { result in
+                        switch result {
+                        case .success(_):
+                            this.readyToDismiss.onNext(())
+                            observer.onNext(.empty)
+                        case .failure(let error):
+                            print("RESULT FAILURE: ", error.localizedDescription)
                         }
                     }.disposed(by: self.disposeBag)
                 },
@@ -169,4 +288,21 @@ final class DetailGatherReactor: Reactor {
         }
     }
     
+}
+
+private extension Date {
+    func isFuture(than fromDate: Date) -> Bool {
+        var result: Bool = false
+        let comparisonResult: ComparisonResult = compare(fromDate)
+        switch comparisonResult {
+        case .orderedAscending:
+            result = true
+            break
+
+        default:
+            result = false
+            break
+        }
+        return result
+    }
 }

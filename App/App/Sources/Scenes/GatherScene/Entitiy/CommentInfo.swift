@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CommentInfo {
+struct CommentInfo: Equatable {
     let id: Int
     let content: String
     let author: String

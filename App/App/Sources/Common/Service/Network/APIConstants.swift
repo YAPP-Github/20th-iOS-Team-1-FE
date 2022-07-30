@@ -24,6 +24,9 @@ struct APIConstants {
     // MARK: Club
     static let Club = "/api/clubs"
 
+    static let clubLeave = "api/clubs/leave"
+    
+    static let clubDelete = "api/clubs"
     
     // MARK: Search
     static let GetSearch = "/api/clubs/search"
