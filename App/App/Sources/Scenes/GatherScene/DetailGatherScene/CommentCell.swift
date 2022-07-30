@@ -30,7 +30,7 @@ final class CommentCell: UITableViewCell {
         let label = UILabel()
         label.layer.cornerRadius = 10
         label.layer.borderWidth = 1
-        label.text = "모임 방장"
+        label.text = "  모임 방장  "
         label.tintColor = UIColor.Togaether.secondaryLabel
         label.layer.borderColor = UIColor.Togaether.secondaryLabel.cgColor
         label.font = .customFont(size: 14)
@@ -103,7 +103,7 @@ final class CommentCell: UITableViewCell {
     private func configureLayout() {
         NSLayoutConstraint.useAndActivateConstraints([
             profileImageButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
-            profileImageButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            profileImageButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             profileImageButton.heightAnchor.constraint(equalToConstant: 50),
             profileImageButton.widthAnchor.constraint(equalToConstant: 50),
             
@@ -150,7 +150,7 @@ final class CommentCell: UITableViewCell {
                     
                     keychainUseCase.getAccessToken()
                         .subscribe(onSuccess: { token in
-                            guard let url = URL(string: APIConstants.BaseURL + APIConstants.reportClub + "/\(this.id)") else {
+                            guard let url = URL(string: APIConstants.BaseURL + APIConstants.reportComment + "/\(this.id)") else {
                                 return
                             }
                             
