@@ -31,7 +31,8 @@ extension UIImage {
         
         static let genderSignMan       = UIImage(named: "genderMan")!
         static let genderSignWoman     = UIImage(named: "genderWoman")!
-        static let genderSignGirlPuppy = UIImage(named: "girlPuppy")!
+        static let genderSignFemalePuppy = UIImage(named: "femalePuppy")!
+        static let genderSignMalePuppy = UIImage(named: "malePuppy")!
         static let profileSetting      = UIImage(named: "profileSetting")!
         static let rightArrow          = UIImage(systemName: "chevron.right")!
         static let plus                = UIImage(systemName: "plus")!

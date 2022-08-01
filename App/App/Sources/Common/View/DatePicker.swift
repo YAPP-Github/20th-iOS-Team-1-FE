@@ -9,8 +9,9 @@ import UIKit
 
 final class TextFieldWithDatePicker: UITextField {
     enum PickerType {
-        case date
-        case time
+        case dateWithCreateGather
+        case timeWithCreateGather
+        case dateWithAddPet
     }
     
     private lazy var dateText: String = {
@@ -36,21 +37,13 @@ final class TextFieldWithDatePicker: UITextField {
         datePicker.datePickerMode = .date
         datePicker.locale = Locale(identifier: "ko-KR")
         datePicker.addTarget(self, action: #selector(datePickerValueDidChange(_:)), for: .valueChanged)
-        let calendar = Calendar(identifier: .gregorian)
-        let currentDate = Date()
-        var components = DateComponents()
-        components.calendar = calendar
-        components.year = 100
-        components.month = 12
-        let maxDate = calendar.date(byAdding: components, to: currentDate)!
-        components.year = -1
-        let minDate = calendar.date(byAdding: components, to: currentDate)!
-        datePicker.minimumDate = minDate
-        datePicker.maximumDate = maxDate
+        datePicker.maximumDate = Date()
+        
         endEditing(true)
 
         return datePicker
     }()
+    
     
     private lazy var timePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
@@ -87,16 +80,34 @@ final class TextFieldWithDatePicker: UITextField {
         text = dateFormatter.string(from: datePicker.date)
     }
     
+    func configurePeriod(datePicker: UIDatePicker) {
+        let calendar = Calendar(identifier: .gregorian)
+        let currentDate = Date()
+        var components = DateComponents()
+        components.calendar = calendar
+        components.year = 100
+        components.month = 12
+        let maxDate = calendar.date(byAdding: components, to: currentDate)!
+        components.year = -1
+        let minDate = calendar.date(byAdding: components, to: currentDate)!
+        datePicker.minimumDate = minDate
+        datePicker.maximumDate = maxDate
+    }
+    
     private func configureUI(_ type: PickerType) {
         textAlignment = .center
         backgroundColor = .Togaether.background
         switch type {
-        case .date:
+        case .dateWithCreateGather:
             text = dateText
+            let datePicker = datePicker
+            configurePeriod(datePicker: datePicker)
             inputView = datePicker
-        case .time:
+        case .timeWithCreateGather:
             text = timeText
             inputView = timePicker
+        case .dateWithAddPet:
+            inputView = datePicker
         }
     }
     

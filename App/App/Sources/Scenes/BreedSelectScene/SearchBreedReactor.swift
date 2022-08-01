@@ -25,17 +25,19 @@ final class SearchBreedReactor: Reactor {
     }
     
     struct State {
+        var parent: Parent
         var isEnabledRegister = false
         var searchResult = [String]()
         var selectedBreeds = [String]()
     }
     
-    let initialState = State()
+    let initialState: State
     private var data = [String]()
     private let disposeBag = DisposeBag()
     internal var readyToRegisterBreed = PublishSubject<[String]>()
     
-    init() {
+    init(parent: Parent) {
+        self.initialState = State(parent: parent)
         self.data = loadBreedFromCSV()
     }
     
@@ -86,5 +88,6 @@ final class SearchBreedReactor: Reactor {
             print("Error reading CSV file")
             return []
         }
-   }
+    }
 }
+

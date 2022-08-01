@@ -19,7 +19,7 @@ struct PetInfoDTO: Codable {
     }
     
     internal func toDomain() -> PetInfo {
-        let petInfo = PetInfo(id: id, nickName: nickname, breed: breed, age: age, sex: sex, tags: tags, imageURL: imageURL)
+        let petInfo = PetInfo(id: id, nickName: nickname, breed: breed, age: age, sex: PetGender(rawValue: sex) ?? .male, tags: tags, imageURL: imageURL)
         
         return petInfo
     }

@@ -12,7 +12,6 @@ import RxCocoa
 
 final class ProfileViewController: BaseViewController {
     var disposeBag = DisposeBag()
-    var nickName = ""
     
     private lazy var settingBarButton: UIBarButtonItem = {
         let button = UIBarButtonItem()
@@ -95,7 +94,7 @@ final class ProfileViewController: BaseViewController {
                 .map { _ in Reactor.Action.introductionEditButtonDidTap(text: self.profileContentView.introduceLabel.text ?? "") }
                 .bind(to: reactor.action)
             
-            profileContentView.initailIntroduceView.rx.tapGesture()
+            profileContentView.initialIntroduceView.rx.tapGesture()
                 .when(.recognized)
                 .map { _ in Reactor.Action.introductionRegisterButtonDidTap }
                 .bind(to: reactor.action)
@@ -105,7 +104,11 @@ final class ProfileViewController: BaseViewController {
                 .bind(to: reactor.action)
             
             profileContentView.petListView.rx.modelDeleted(PetInfo.self)
-                .map { Reactor.Action.deletePetList(id: $0.id ?? -1)}
+                .map { Reactor.Action.deletePetList(id: $0.id)}
+                .bind(to: reactor.action)
+        
+            rx.viewWillDisappear
+                .map { _ in Reactor.Action.viewWillDisappear}
                 .bind(to: reactor.action)
         }
     }
@@ -117,9 +120,16 @@ final class ProfileViewController: BaseViewController {
                 .distinctUntilChanged()
                 .asDriver(onErrorJustReturn: ProfileInfo())
                 .drive(onNext: { data in
-                    self.profileContentView.configureData(data.myPage, data.accountInfo, petInfo: data.petInfos)
+                    self.profileContentView.configureData(data)
                 })
-            
+        
+            reactor.state
+                .map { $0.profileInfo.petInfos ?? [] }
+                .distinctUntilChanged()
+                .bind(to: profileContentView.petListView.rx.items(cellIdentifier: PetTableViewCell.identifier, cellType: PetTableViewCell.self)) { index, data, cell in
+                    cell.configureData(data)
+                }
+        
             reactor.state
                 .map { $0.shouldPresentAlertSheet }
                 .filter { $0 == true }
@@ -129,7 +139,6 @@ final class ProfileViewController: BaseViewController {
                     self.presentAlertSheet()
                 })
         }
-        
     }
     
     func bind(reactor: ProfileReactor) {
