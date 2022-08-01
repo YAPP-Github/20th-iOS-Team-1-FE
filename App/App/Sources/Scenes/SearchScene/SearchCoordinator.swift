@@ -72,7 +72,7 @@ final class SearchCoordinator: SceneCoordinator {
             .asDriver(onErrorJustReturn: ())
             .drive(with: self,
                    onNext: { this, _ in
-                let reactor = SearchBreedReactor()
+                let reactor = SearchBreedReactor(parent: .Gather)
                 let viewController = SearchBreedViewController(reactor: reactor)
                 viewController.delegate = createGatherViewController
                 this.pushSearchBreedViewController(viewController)

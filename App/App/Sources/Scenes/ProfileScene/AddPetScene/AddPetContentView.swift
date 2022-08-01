@@ -54,31 +54,24 @@ final class AddPetContentView: UIView {
         
         return label
     }()
-        
-    internal lazy var ageTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "YYYY/MM"
+    
+    internal lazy var startDateTextField: UITextField = {
+        let textField = TextFieldWithDatePicker(frame: .zero, type: .dateWithCreateGather)
+        textField.textColor = .white
+        textField.backgroundColor = .Togaether.mainGreen
+        textField.layer.cornerRadius = 15
         
         return textField
     }()
         
-    private lazy var ageDatePicker: UIDatePicker = {
-        let datePicker = UIDatePicker()
-        datePicker.backgroundColor = UIColor.Togaether.background
-        datePicker.preferredDatePickerStyle = .wheels
-        datePicker.datePickerMode = .date
-        datePicker.locale = Locale(identifier: "ko-KR")
-        datePicker.addTarget(self, action: #selector(datePickerValueDidChange(_:)), for: .valueChanged)
+    internal lazy var ageTextField: UITextField = {
+        let textField = TextFieldWithDatePicker(frame: .zero, type: .dateWithAddPet)
+        textField.placeholder = "생일 입력"
+        textField.textColor = .Togaether.primaryLabel
+        textField.textAlignment = .left
         
-        return datePicker
+        return textField
     }()
-    
-    @objc private func datePickerValueDidChange(_ datePicker: UIDatePicker) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY/MM"
-        ageTextField.text = dateFormatter.string(from: datePicker.date)
-        endEditing(true)
-    }
     
     private lazy var petSizeLabel: UILabel = {
         let label = UILabel()
@@ -471,7 +464,6 @@ final class AddPetContentView: UIView {
     }
     
     private func configureUI() {
-        ageTextField.inputView = ageDatePicker
         backgroundColor = .Togaether.background
     }
     

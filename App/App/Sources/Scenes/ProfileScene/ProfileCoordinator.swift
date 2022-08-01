@@ -29,7 +29,7 @@ final class ProfileCoordinator: SceneCoordinator {
         let keychain = KeychainQueryRequester()
         let keychainProvider = KeychainProvider(keyChain: keychain)
         let keychainUseCase = KeychainUsecase(keychainProvider: keychainProvider, networkManager: networkManager)
-        let reactor = ProfileReactor(keychainUseCase: keychainUseCase, profileMainRepository: profileMainRepository)
+        let reactor = ProfileReactor(nickname: nil, keychainUseCase: keychainUseCase, profileMainRepository: profileMainRepository)
         let viewController = ProfileViewController(reactor: reactor)
         
         reactor.readyToProceedEditProfile
@@ -80,7 +80,7 @@ final class ProfileCoordinator: SceneCoordinator {
         editProfileReactor.didRegisterProfile
             .asDriver(onErrorJustReturn: ())
             .drive(onNext: {
-                self.dismiss(animated: true)
+                self.navigationController.popViewController(animated: true)
             })
             .disposed(by: disposeBag)
                 
@@ -100,7 +100,7 @@ final class ProfileCoordinator: SceneCoordinator {
             .asDriver(onErrorJustReturn: ())
             .drive(with: self,
                    onNext: { this, _ in
-                let reactor = SearchBreedReactor()
+                let reactor = SearchBreedReactor(parent: .Profile)
                 let viewController = SearchBreedViewController(reactor: reactor)
                 viewController.delegate = addPetViewController
                 this.pushSearchBreedViewController(viewController)
@@ -111,7 +111,7 @@ final class ProfileCoordinator: SceneCoordinator {
             .asDriver(onErrorJustReturn: ())
             .drive(with: self,
                    onNext: { this, _ in
-                self.dismiss(animated: true)
+                self.navigationController.popViewController(animated: true)
             })
             .disposed(by: disposeBag)
         
@@ -130,10 +130,5 @@ final class ProfileCoordinator: SceneCoordinator {
 
 
         navigationController.pushViewController(viewController, animated: true)
-    }
-    
-    func dismiss(animated: Bool) {
-        navigationController.popViewController(animated: animated)
-        start()
     }
 }

@@ -102,7 +102,7 @@ final class CreateGatherView: UIView {
     }()
     
     internal lazy var startDateTextField: UITextField = {
-        let textField = TextFieldWithDatePicker(frame: .zero, type: .date)
+        let textField = TextFieldWithDatePicker(frame: .zero, type: .dateWithCreateGather)
         textField.textColor = .white
         textField.backgroundColor = .Togaether.mainGreen
         textField.layer.cornerRadius = 15
@@ -111,7 +111,7 @@ final class CreateGatherView: UIView {
     }()
         
     internal lazy var startTimeTextField: UITextField = {
-        let textField = TextFieldWithDatePicker(frame: .zero, type: .time)
+        let textField = TextFieldWithDatePicker(frame: .zero, type: .timeWithCreateGather)
         textField.textColor = .Togaether.primaryLabel
         textField.backgroundColor = .Togaether.divider
         textField.layer.cornerRadius = 15
@@ -137,7 +137,7 @@ final class CreateGatherView: UIView {
     }()
     
     internal lazy var endDateTextField: UITextField = {
-        let textField = TextFieldWithDatePicker(frame: .zero, type: .date)
+        let textField = TextFieldWithDatePicker(frame: .zero, type: .dateWithCreateGather)
         textField.textColor = .white
         textField.backgroundColor = .Togaether.mainGreen
         textField.layer.cornerRadius = 15
@@ -146,7 +146,7 @@ final class CreateGatherView: UIView {
     }()
         
     internal lazy var endTimeTextField: UITextField = {
-        let textField = TextFieldWithDatePicker(frame: .zero, type: .time)
+        let textField = TextFieldWithDatePicker(frame: .zero, type: .timeWithCreateGather)
         textField.textColor = .Togaether.primaryLabel
         textField.backgroundColor = .Togaether.divider
         textField.layer.cornerRadius = 15

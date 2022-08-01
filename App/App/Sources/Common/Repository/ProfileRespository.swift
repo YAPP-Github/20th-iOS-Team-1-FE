@@ -24,7 +24,7 @@ final class ProfileRespository: ProfileMainRepositoryInterface {
                 return Disposables.create()
             }
             
-            guard var urlComponents = URLComponents(string: "https://yapp-togather.com/api/accounts/my-page") else {
+            guard var urlComponents = URLComponents(string: APIConstants.BaseURL + APIConstants.GetMyPage) else {
                 return Disposables.create()
             }
             

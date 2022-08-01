@@ -231,7 +231,7 @@ final class CreateGatherViewController: BaseViewController {
                 .distinctUntilChanged()
                 .asDriver(onErrorJustReturn: false)
                 .drive(with: self,
-                   onNext: { this, isSelected in
+                       onNext: { this, isSelected in
                     this.createGatherView.categorySelectView.dogRestaurantButton.isSelected = isSelected
                 })
             
@@ -240,7 +240,7 @@ final class CreateGatherViewController: BaseViewController {
                 .distinctUntilChanged()
                 .asDriver(onErrorJustReturn: false)
                 .drive(with: self,
-                   onNext: { this, isSelected in
+                       onNext: { this, isSelected in
                     this.createGatherView.categorySelectView.fairButton.isSelected = isSelected
                 })
             
@@ -249,7 +249,7 @@ final class CreateGatherViewController: BaseViewController {
                 .distinctUntilChanged()
                 .asDriver(onErrorJustReturn: false)
                 .drive(with: self,
-                   onNext: { this, isSelected in
+                       onNext: { this, isSelected in
                     this.createGatherView.categorySelectView.etcButton.isSelected = isSelected
                 })
             

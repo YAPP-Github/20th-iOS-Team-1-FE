@@ -12,6 +12,6 @@ import RxSwift
 
 extension Reactive where Base: UIButton {
     public var throttleTap: ControlEvent<Void> {
-        return ControlEvent(events: tap.throttle(.milliseconds(500), latest: false, scheduler: MainScheduler.instance))
+        return ControlEvent(events: tap.throttle(.milliseconds(1000), latest: false, scheduler: MainScheduler.instance))
     }
 }
