@@ -50,8 +50,4 @@ struct CreateClubRequestDTO: Codable {
         self.latitude = clubInfo.latitude
         self.longitude = clubInfo.longitude
     }
-    
-    func dateFormat() {
-        
-    }
 }

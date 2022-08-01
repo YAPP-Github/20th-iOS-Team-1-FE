@@ -19,12 +19,13 @@ final class ProfileReactor: Reactor {
         case introductionEditButtonDidTap(text: String)
         case petAddButtonDidTap
         case deletePetList(id: Int)
+        case viewWillDisappear
     }
     
     enum Mutation {
         case loadingProfile(Bool)
         case readyToProfileInfo(ProfileInfo)
-        case readyToPresentAlertSheet
+        case readyToPresentAlertSheet(Bool)
     }
     
     struct State {
@@ -45,7 +46,7 @@ final class ProfileReactor: Reactor {
     internal var readyToProceedAddPet = PublishSubject<Void>()
     internal var readyToReloadPetList = PublishSubject<Void>()
     
-    init(nickname: String? = nil, keychainUseCase: KeychainUseCaseInterface, profileMainRepository: ProfileMainRepositoryInterface) {
+    init(nickname: String?, keychainUseCase: KeychainUseCaseInterface, profileMainRepository: ProfileMainRepositoryInterface) {
         initialState = State(nickname: nickname)
         self.profileMainRepository = profileMainRepository
         self.keychainUseCase = keychainUseCase
@@ -65,10 +66,12 @@ final class ProfileReactor: Reactor {
             readyToProceedAddPet.onNext(())
             return Observable.empty()
         case .settingButtonDidTap:
-            return Observable.just(Mutation.readyToPresentAlertSheet)
+            return Observable.just(Mutation.readyToPresentAlertSheet(true))
         case .deletePetList(id: let id):
             deletePet(petID: id)
             return Observable.empty()
+        case .viewWillDisappear:
+            return Observable.just(Mutation.readyToPresentAlertSheet(false))
         }
     }
     
@@ -79,8 +82,8 @@ final class ProfileReactor: Reactor {
             newState.isLoadingProfile = isLoading
         case .readyToProfileInfo(let profileInfo):
             newState.profileInfo = profileInfo
-        case .readyToPresentAlertSheet:
-            newState.shouldPresentAlertSheet = true
+        case .readyToPresentAlertSheet(let isLoading):
+            newState.shouldPresentAlertSheet = isLoading
         }
         return newState
     }

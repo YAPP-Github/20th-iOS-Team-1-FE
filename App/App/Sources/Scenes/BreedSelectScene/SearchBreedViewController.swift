@@ -137,6 +137,20 @@ final class SearchBreedViewController: BaseViewController {
     private func bindState(with reactor: SearchBreedReactor) {
         disposeBag.insert {
             reactor.state
+                .map { $0.parent }
+                .distinctUntilChanged()
+                .asDriver(onErrorJustReturn: .Profile)
+                .drive(with: self,
+                       onNext: { this, parent in
+                    switch parent {
+                    case .Profile:
+                        self.breedTableView.allowsMultipleSelection = false
+                    case .Gather:
+                        self.breedTableView.allowsMultipleSelection = true
+                    }
+                })
+        
+            reactor.state
                 .map { $0.searchResult }
                 .distinctUntilChanged()
                 .asDriver(onErrorJustReturn: [])

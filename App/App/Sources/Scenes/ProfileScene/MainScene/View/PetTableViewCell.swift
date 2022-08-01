@@ -12,7 +12,8 @@ final class PetTableViewCell: UITableViewCell {
         let view = UIImageView()
         view.image = .Togaether.petDefaultProfile
         view.layer.cornerRadius = 36
-        
+        view.clipsToBounds = true
+
         return view
     }()
     
@@ -52,7 +53,7 @@ final class PetTableViewCell: UITableViewCell {
     
     private lazy var genderImageView: UIImageView = {
         let view = UIImageView()
-        view.image = .Togaether.genderSignGirlPuppy
+        view.image = .Togaether.genderSignMalePuppy
         
         return view
     }()
@@ -118,10 +119,10 @@ final class PetTableViewCell: UITableViewCell {
     
     func configureUI() {
         contentView.backgroundColor = .Togaether.background
-        contentView.layer.masksToBounds = true
-        contentView.layer.borderWidth = 1
         contentView.layer.borderColor = UIColor.Togaether.divider.cgColor
+        contentView.layer.borderWidth = 1
         contentView.layer.cornerRadius = 10
+        contentView.layer.masksToBounds = true
     }
     
     override func prepareForReuse() {
@@ -138,6 +139,7 @@ final class PetTableViewCell: UITableViewCell {
         dogNameLabel.text = data.nickName
         breedLabel.text = data.breed
         ageLabel.text = data.age
+        genderImageView.image = data.sex.genderImage()
         tagCollectionView.reactor = TagCollectionViewReactor(state: data.tags ?? [])
     }
 

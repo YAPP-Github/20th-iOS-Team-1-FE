@@ -93,7 +93,7 @@ final class AddPetReactor: Reactor {
             return Observable.just(.updateNickname(name))
         case .dateDidEndEditing(let date):
             if date == "" { return Observable.empty() }
-            let birth = date.components(separatedBy: "/").map{ Int($0)! }
+            let birth = date.components(separatedBy: "-").map{ Int($0)! }
             let year = birth.first!
             let month = birth.last!
             return Observable.concat([
