@@ -23,7 +23,7 @@ final class AddPetRepository: AddPetRepositoryInterface {
                 return Disposables.create()
             }
             
-            guard let url = URL(string: APIConstants.BaseURL + APIConstants.Pet) else {
+            guard let url = URL(string: APIConstants.Pet.register) else {
                 return Disposables.create()
             }
             

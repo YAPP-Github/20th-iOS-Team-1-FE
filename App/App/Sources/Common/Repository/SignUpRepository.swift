@@ -23,7 +23,7 @@ final class SignUpRepository: SignUpRepositoryInterface {
                 return Disposables.create()
             }
             
-            guard let url = URL(string: "https://yapp-togather.com/api/accounts/sign-up") else {
+            guard let url = URL(string: APIConstants.Account.signUp) else {
                 return Disposables.create()
             }
             

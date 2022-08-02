@@ -134,3 +134,7 @@ iOSInjectionProject/
 # End of https://www.toptal.com/developers/gitignore/api/xcode,swift,macos
 
 APIKey.plist
+
+### API Constants ###
+/App/App/Sources/Common/Service/Network/APIConstants.swift
+

@@ -23,7 +23,7 @@ final class DetailGatherRepository: DetailGatherRepositoryInterface {
                 return Disposables.create()
             }
             
-            guard let urlComponents = URLComponents(string: APIConstants.BaseURL + APIConstants.GetGatherList + "/\(clubID)") else {
+            guard let urlComponents = URLComponents(string: APIConstants.Club.detail + "/\(clubID)") else {
                 return Disposables.create()
             }
             
@@ -62,7 +62,7 @@ final class DetailGatherRepository: DetailGatherRepositoryInterface {
                 return Disposables.create()
             }
         
-            guard let url = URL(string: APIConstants.BaseURL + APIConstants.participate + "/\(clubID)") else {
+            guard let url = URL(string: APIConstants.Club.participate + "/\(clubID)") else {
                 return Disposables.create()
             }
             
@@ -96,7 +96,7 @@ final class DetailGatherRepository: DetailGatherRepositoryInterface {
                 return Disposables.create()
             }
         
-            guard let url = URL(string: APIConstants.BaseURL + APIConstants.comment + "/\(commentID)") else {
+            guard let url = URL(string: APIConstants.Comment.delete + "/\(commentID)") else {
                 return Disposables.create()
             }
             
@@ -130,7 +130,7 @@ final class DetailGatherRepository: DetailGatherRepositoryInterface {
                 return Disposables.create()
             }
         
-            guard let url = URL(string: APIConstants.BaseURL + APIConstants.reportClub + "/\(clubID)") else {
+            guard let url = URL(string: APIConstants.Report.club + "/\(clubID)") else {
                 return Disposables.create()
             }
             
@@ -164,7 +164,7 @@ final class DetailGatherRepository: DetailGatherRepositoryInterface {
                 return Disposables.create()
             }
         
-            guard let url = URL(string: APIConstants.BaseURL + APIConstants.clubDelete + "/\(clubID)") else {
+            guard let url = URL(string: APIConstants.Club.delete + "/\(clubID)") else {
                 return Disposables.create()
             }
             
@@ -198,7 +198,7 @@ final class DetailGatherRepository: DetailGatherRepositoryInterface {
                 return Disposables.create()
             }
         
-            guard let url = URL(string: APIConstants.BaseURL + APIConstants.clubLeave + "/\(clubID)") else {
+            guard let url = URL(string: APIConstants.Club.leave + "/\(clubID)") else {
                 return Disposables.create()
             }
             
@@ -232,7 +232,7 @@ final class DetailGatherRepository: DetailGatherRepositoryInterface {
                 return Disposables.create()
             }
         
-            guard let url = URL(string: APIConstants.BaseURL + APIConstants.reportComment + "/\(commentID)") else {
+            guard let url = URL(string: APIConstants.Report.comment + "/\(commentID)") else {
                 return Disposables.create()
             }
             
@@ -268,7 +268,7 @@ final class DetailGatherRepository: DetailGatherRepositoryInterface {
             
             let dto = CommentRequestDTO(comment: comment)
             
-            guard let url = URL(string: APIConstants.BaseURL + APIConstants.comment),
+            guard let url = URL(string: APIConstants.Comment.post),
                   let data = try? JSONEncoder().encode(dto) else {
                 return Disposables.create()
             }

@@ -32,7 +32,7 @@ final class KeychainUsecase: KeychainUseCaseInterface {
             }
             
             guard let refreshToken = try? self.keychainProvider.read(service: KeychainService.apple, account: KeychainAccount.refreshToken),
-                  let url = URL(string: "https://yapp-togather.com/api/tokens/re-issuance") else {
+                  let url = URL(string: APIConstants.Token.reissuance) else {
                 single(.failure(NSError()))
                 return Disposables.create()
             }

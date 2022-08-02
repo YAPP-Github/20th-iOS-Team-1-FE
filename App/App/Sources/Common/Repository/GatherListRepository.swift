@@ -41,7 +41,7 @@ final class GatherListRepository: GatherListRepositoryInterface {
                 return Disposables.create()
             }
             
-            let url = APIConstants.BaseURL + APIConstants.GetGatherList
+            let url = APIConstants.Club.list
             guard var urlComponents = URLComponents(string: url) else {
                 return Disposables.create()
             }
