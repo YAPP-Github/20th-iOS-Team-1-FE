@@ -19,6 +19,8 @@ final class ProfileReactor: Reactor {
         case introductionEditButtonDidTap(text: String)
         case petAddButtonDidTap
         case deletePetList(id: Int)
+        case withdrawalDidTap
+        case logoutDidTap
         case viewWillDisappear
     }
     
@@ -38,18 +40,21 @@ final class ProfileReactor: Reactor {
     let initialState: State
     
     private let profileMainRepository: ProfileMainRepositoryInterface
+    private let keychainProvider: KeychainProvidable
     private let keychainUseCase: KeychainUseCaseInterface
     private let disposeBag = DisposeBag()
 
+    internal var readyToRoot = PublishSubject<Void>()
     internal var readyToProceedRegisterProfile = PublishSubject<Void>()
     internal var readyToProceedEditProfile = PublishSubject<String>()
     internal var readyToProceedAddPet = PublishSubject<Void>()
     internal var readyToReloadPetList = PublishSubject<Void>()
     
-    init(nickname: String?, keychainUseCase: KeychainUseCaseInterface, profileMainRepository: ProfileMainRepositoryInterface) {
+    init(nickname: String?, keychainProvider: KeychainProvider, keychainUseCase: KeychainUseCaseInterface, profileMainRepository: ProfileMainRepositoryInterface) {
         initialState = State(nickname: nickname)
-        self.profileMainRepository = profileMainRepository
+        self.keychainProvider = keychainProvider
         self.keychainUseCase = keychainUseCase
+        self.profileMainRepository = profileMainRepository
     }
     
     func mutate(action: Action) -> Observable<Mutation> {
@@ -69,6 +74,12 @@ final class ProfileReactor: Reactor {
             return Observable.just(Mutation.readyToPresentAlertSheet(true))
         case .deletePetList(id: let id):
             deletePet(petID: id)
+            return Observable.empty()
+        case .withdrawalDidTap:
+            withdraw()
+            return Observable.empty()
+        case .logoutDidTap:
+            logout()
             return Observable.empty()
         case .viewWillDisappear:
             return Observable.just(Mutation.readyToPresentAlertSheet(false))
@@ -134,6 +145,52 @@ final class ProfileReactor: Reactor {
                         switch result {
                         case .success:
                             self.readyToReloadPetList.onNext(())
+                            return
+                        case .failure(let error):
+                            print("RESULT FAILURE: ", error.localizedDescription)
+                        }
+                    }.disposed(by: self.disposeBag)
+                },
+               onFailure: { _,_ in
+                    return
+               })
+            .disposed(by: self.disposeBag)
+    }
+    
+    private func withdraw() {
+        self.keychainUseCase.getAccessToken()
+            .subscribe(with: self,
+               onSuccess: { this, token in
+                this.profileMainRepository.withdraw(accessToken: token)
+                    .subscribe { result in
+                        switch result {
+                        case .success:
+                            try? self.keychainProvider.delete(service: KeychainService.apple, account: KeychainAccount.identifier)
+                            try? self.keychainProvider.delete(service: KeychainService.apple, account: KeychainAccount.refreshToken)
+                            self.readyToRoot.onNext(())
+                            return
+                        case .failure(let error):
+                            print("RESULT FAILURE: ", error.localizedDescription)
+                        }
+                    }.disposed(by: self.disposeBag)
+                },
+               onFailure: { _,_ in
+                    return
+               })
+            .disposed(by: self.disposeBag)
+    }
+    
+    private func logout() {
+        self.keychainUseCase.getAccessToken()
+            .subscribe(with: self,
+               onSuccess: { this, token in
+                this.profileMainRepository.logout(accessToken: token)
+                    .subscribe { result in
+                        switch result {
+                        case .success:
+                            try? self.keychainProvider.delete(service: KeychainService.apple, account: KeychainAccount.identifier)
+                            try? self.keychainProvider.delete(service: KeychainService.apple, account: KeychainAccount.refreshToken)
+                            self.readyToRoot.onNext(())
                             return
                         case .failure(let error):
                             print("RESULT FAILURE: ", error.localizedDescription)

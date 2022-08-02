@@ -17,7 +17,7 @@ struct APIConstants {
     // MARK: My Page
     static let GetMyPage = "/api/accounts/my-page"
     
-    static let EditProfile = "/api/accounts"
+    static let account = "/api/accounts"
     
     static let Pet = "/api/pets"
     
@@ -43,5 +43,8 @@ struct APIConstants {
     static let reportClub = "/api/reports/club"
     
     static let reportComment = "/api/reports/comment"
+    
+    // MARK: Token
+    static let logout = "/api/tokens/expire"
     
 }
