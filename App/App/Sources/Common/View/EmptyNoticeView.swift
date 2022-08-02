@@ -11,8 +11,9 @@ final class EmptyNoticeView: UIView {
     enum PageType {
         case pet
         case participatingGather
-        case madeGather
-        case cloedGather
+        case hostGather
+        case pastGather
+        case none
         
         internal func labelText() -> String {
             switch self {
@@ -20,10 +21,12 @@ final class EmptyNoticeView: UIView {
                 return "아직 반려견 등록을 하지 않으셨나요?\n 나의 반려견을 등록해보세요!"
             case .participatingGather:
                 return "참여중인 모임이 없어요!\n 근처 모임을 참여해보세요."
-            case .madeGather:
+            case .hostGather:
                 return "내가 만든 모임이 없어요.\n 찾기 탭에서 플러스버튼을 눌러보세요!"
-            case .cloedGather:
+            case .pastGather:
                 return "참여 종료된 모임이 없어요!\n 근처 모임을 참여해보세요."
+            case .none:
+                return ""
             }
         }
     }
@@ -61,5 +64,18 @@ final class EmptyNoticeView: UIView {
             textLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 17),
             textLabel.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor)
         ])
+    }
+    
+    internal func switchType(type: Gather) {
+        var pageType: PageType
+        switch type {
+        case .participating:
+            pageType = .participatingGather
+        case .host:
+            pageType = .hostGather
+        case .past:
+            pageType = .pastGather
+        }
+        textLabel.text = pageType.labelText()
     }
 }

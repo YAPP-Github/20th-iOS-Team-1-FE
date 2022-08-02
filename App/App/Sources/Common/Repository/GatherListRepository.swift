@@ -11,8 +11,8 @@ import RxSwift
 
 enum Gather: Int {
     case participating
-    case leader
-    case finish
+    case host
+    case past
 }
 
 final class GatherListRepository: GatherListRepositoryInterface {
@@ -30,9 +30,9 @@ final class GatherListRepository: GatherListRepositoryInterface {
         switch gatherCondition {
         case .participating:
             conditionQuery = URLQueryItem(name: "condition", value: "I_AM_PARTICIPATING")
-        case .leader:
+        case .host:
             conditionQuery = URLQueryItem(name: "condition", value: "I_AM_LEADER")
-        case .finish:
+        case .past:
             conditionQuery = URLQueryItem(name: "condition", value: "I_AM_PARTICIPATED_AND_EXCEED")
         }
         
