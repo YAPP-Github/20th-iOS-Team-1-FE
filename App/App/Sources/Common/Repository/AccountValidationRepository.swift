@@ -23,7 +23,7 @@ final class AccountValidationRepository: AccountValidationRepositoryInterface {
                 return Disposables.create()
             }
             
-            guard let url = URL(string: "https://yapp-togather.com/api/accounts/validation/\(nickname)") else {
+            guard let url = URL(string: APIConstants.Account.nicknameCheck + "/\(nickname)") else {
                 return Disposables.create()
             }
             

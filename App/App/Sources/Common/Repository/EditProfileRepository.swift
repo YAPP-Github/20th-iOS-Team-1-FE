@@ -23,7 +23,7 @@ final class EditProfileRepository: EditProfileRepositoryInterface {
                 return Disposables.create()
             }
         
-            guard let url = URL(string: APIConstants.BaseURL + APIConstants.account) else {
+            guard let url = URL(string: APIConstants.Account.edit) else {
                 return Disposables.create()
             }
             

@@ -24,7 +24,7 @@ final class ProfileRespository: ProfileMainRepositoryInterface {
                 return Disposables.create()
             }
             
-            guard var urlComponents = URLComponents(string: APIConstants.BaseURL + APIConstants.GetMyPage) else {
+            guard var urlComponents = URLComponents(string: APIConstants.Account.mypage) else {
                 return Disposables.create()
             }
             
@@ -65,7 +65,7 @@ final class ProfileRespository: ProfileMainRepositoryInterface {
                 return Disposables.create()
             }
         
-            guard let url = URL(string: APIConstants.BaseURL + APIConstants.Pet + "/\(id)") else {
+            guard let url = URL(string: APIConstants.Pet.delete + "/\(id)") else {
                 return Disposables.create()
             }
             
@@ -98,7 +98,7 @@ final class ProfileRespository: ProfileMainRepositoryInterface {
                 return Disposables.create()
             }
         
-            guard let url = URL(string: APIConstants.BaseURL + APIConstants.account) else {
+            guard let url = URL(string: APIConstants.Account.delete) else {
                 return Disposables.create()
             }
             
@@ -131,7 +131,7 @@ final class ProfileRespository: ProfileMainRepositoryInterface {
                 return Disposables.create()
             }
         
-            guard let url = URL(string: APIConstants.BaseURL + APIConstants.logout) else {
+            guard let url = URL(string: APIConstants.Token.expire) else {
                 return Disposables.create()
             }
             

@@ -150,7 +150,7 @@ final class CommentCell: UITableViewCell {
                     
                     keychainUseCase.getAccessToken()
                         .subscribe(onSuccess: { token in
-                            guard let url = URL(string: APIConstants.BaseURL + APIConstants.reportComment + "/\(this.id)") else {
+                            guard let url = URL(string: APIConstants.Report.comment + "/\(this.id)") else {
                                 return
                             }
                             
