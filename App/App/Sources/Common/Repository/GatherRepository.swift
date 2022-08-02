@@ -107,7 +107,7 @@ final class GatherRepository: GatherRepositoryInterface {
                 bottomRightCoordinate: bottomRightCoordinate
             )
             
-            let url = APIConstants.BaseURL + APIConstants.GetSearch + APIConstants.Range
+            let url = APIConstants.Search.range
             
             guard var urlComponents = URLComponents(string: url)
             else {
@@ -168,7 +168,7 @@ final class GatherRepository: GatherRepositoryInterface {
                 coordinate: userLocation.coordinate
             )
             
-            let url = APIConstants.BaseURL + APIConstants.GetSearch + APIConstants.Simple + "/\(dto.id)"
+            let url = APIConstants.Search.simple + "/\(dto.id)"
             
             guard var urlComponents = URLComponents(string: url)
             else {
@@ -234,7 +234,7 @@ final class GatherRepository: GatherRepositoryInterface {
                 status: status
             )
             
-            let url = APIConstants.BaseURL + APIConstants.GetSearch
+            let url = APIConstants.Search.lookup
             guard var urlComponents = URLComponents(string: url)
             else {
                 return Disposables.create()

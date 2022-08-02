@@ -29,7 +29,7 @@ final class CreateGatherRepository: CreateGatherRepositoryInterface {
             let data = try? JSONEncoder().encode(dto)
             print(String(decoding: data!, as: UTF8.self))
 
-            guard let url = URL(string: APIConstants.BaseURL + APIConstants.Club),
+            guard let url = URL(string: APIConstants.Club.create),
                   let data = try? JSONEncoder().encode(dto) else {
                 return Disposables.create()
             }

@@ -25,7 +25,7 @@ final class AppleLoginRepository: AppleLoginRepositoryInterface {
             
             let dto = AppleCredentialRequestDTO(appleCredential: appleCredential)
             
-            guard let url = URL(string: "https://yapp-togather.com/auth/apple"),
+            guard let url = URL(string: APIConstants.Auth.apple),
                   let data = try? JSONEncoder().encode(dto) else {
                 return Disposables.create()
             }
