@@ -29,6 +29,13 @@ final class GatherListViewController: BaseViewController {
         
         return tableView
     }()
+    
+    lazy var emptyView: EmptyNoticeView = {
+        let view = EmptyNoticeView(frame: .zero, type: .participatingGather)
+        
+        return view
+    }()
+
 
     var disposeBag = DisposeBag()
     
@@ -52,6 +59,7 @@ final class GatherListViewController: BaseViewController {
     private func addSubviews() {
         view.addSubview(segmentView)
         view.addSubview(contentTableView)
+        view.addSubview(emptyView)
     }
     
     private func configureLayout() {
@@ -64,7 +72,12 @@ final class GatherListViewController: BaseViewController {
             contentTableView.topAnchor.constraint(equalTo: segmentView.bottomAnchor),
             contentTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             contentTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            contentTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            contentTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            
+            emptyView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            emptyView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            emptyView.heightAnchor.constraint(equalToConstant: 250),
+            emptyView.widthAnchor.constraint(equalToConstant: 250)
         ])
     }
     
@@ -88,6 +101,15 @@ final class GatherListViewController: BaseViewController {
     
     private func bindState(with reactor: GatherListReactor) {
         disposeBag.insert {
+            reactor.state
+                .map { ($0.gatherType, $0.gatherListInfo.hasNotClub) }
+                .asDriver(onErrorJustReturn: (.participating, true))
+                .drive(with: self,
+                       onNext: { this, data in
+                    this.emptyView.isHidden = !data.1
+                    this.emptyView.switchType(type: data.0)
+                })
+        
             reactor.state
                 .map { $0.gatherListInfo.clubInfos?.content ?? [] }
                 .observe(on: MainScheduler.instance)

@@ -17,11 +17,12 @@ final class GatherListReactor: Reactor {
     }
     
     enum Mutation {
-        case readyToListInfo(GatherListInfo)
+        case readyToListInfo(Gather, GatherListInfo)
     }
     
     struct State {
-        var gatherListInfo = GatherListInfo(hasNotClub: false)
+        var gatherListInfo: GatherListInfo
+        var gatherType: Gather
     }
     
     private let disposeBag = DisposeBag()
@@ -29,11 +30,12 @@ final class GatherListReactor: Reactor {
     private let keychainUseCase: KeychainUseCaseInterface
     internal var readyToDetailGather = PublishSubject<Int>()
     init(gatherListRepository: GatherListRepositoryInterface, keychainUseCase: KeychainUseCaseInterface) {
+        self.initialState = State(gatherListInfo: GatherListInfo(hasNotClub: true), gatherType: .participating)
         self.gatherListRepository = gatherListRepository
         self.keychainUseCase = keychainUseCase
     }
     
-    let initialState = State()
+    let initialState: State
     
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
@@ -54,8 +56,9 @@ final class GatherListReactor: Reactor {
         var newState = state
         
         switch mutation {
-        case .readyToListInfo(let data):
+        case .readyToListInfo(let gatherType, let data):
             newState.gatherListInfo = data
+            newState.gatherType = gatherType
         }
         
         return newState
@@ -75,7 +78,7 @@ final class GatherListReactor: Reactor {
                         .subscribe { result in
                         switch result {
                         case .success(let gatherListInfo):
-                            observer.onNext(Mutation.readyToListInfo(gatherListInfo))
+                            observer.onNext(Mutation.readyToListInfo(gather, gatherListInfo))
                         case .failure(let error):
                             print("RESULT FAILURE: ", error.localizedDescription)
                         }
