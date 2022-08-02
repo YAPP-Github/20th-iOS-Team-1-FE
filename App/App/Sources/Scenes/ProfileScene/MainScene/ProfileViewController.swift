@@ -24,6 +24,9 @@ final class ProfileViewController: BaseViewController {
     private lazy var contentView = UIView()
     private lazy var profileContentView = ProfileContentView()
     
+    private let withdrawal = PublishSubject<Void>()
+    private let logout = PublishSubject<Void>()
+    
     init(reactor: ProfileReactor) {
         super.init(nibName: nil, bundle: nil)
         self.reactor = reactor
@@ -89,6 +92,14 @@ final class ProfileViewController: BaseViewController {
                 .map { Reactor.Action.settingButtonDidTap }
                 .bind(to: reactor.action)
             
+            withdrawal
+                .map { Reactor.Action.withdrawalDidTap}
+                .bind(to: reactor.action)
+
+            logout
+                .map { Reactor.Action.logoutDidTap }
+                .bind(to: reactor.action)
+
             profileContentView.introduceView.rx.tapGesture()
                 .when(.recognized)
                 .map { _ in Reactor.Action.introductionEditButtonDidTap(text: self.profileContentView.introduceLabel.text ?? "") }
@@ -150,8 +161,20 @@ final class ProfileViewController: BaseViewController {
     private func presentAlertSheet() {
         let alertController = UIAlertController(title: "내 메뉴", message: nil, preferredStyle: .actionSheet)
 
-        let logoutAction = UIAlertAction(title: "로그아웃", style: .default, handler: nil)
-        let withdrawalAction = UIAlertAction(title: "투개더 탈퇴", style: .default, handler: nil)
+        let logoutAction = UIAlertAction(
+            title: "로그아웃",
+            style: .default,
+            handler: { [weak self] _ in
+                self?.logout.onNext(())
+        })
+        
+        let withdrawalAction = UIAlertAction(
+            title: "투개더 탈퇴",
+            style: .default,
+            handler: { [weak self] _ in
+                self?.withdrawal.onNext(())
+        })
+        
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
 
         alertController.addAction(logoutAction)
