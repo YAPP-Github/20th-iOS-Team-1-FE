@@ -16,7 +16,7 @@ struct AccountSummaryInfoDTO: Codable {
     
     let id: Int
     let nickname: String
-    let imageURL: String
+    let imageURL: String?
     
     func toDomain() -> AccountSummaryInfo {
         AccountSummaryInfo(id: id, nickname: nickname, imageURL: imageURL)
@@ -26,5 +26,5 @@ struct AccountSummaryInfoDTO: Codable {
 struct AccountSummaryInfo: Equatable {
     let id: Int
     let nickname: String
-    let imageURL: String
+    let imageURL: String?
 }

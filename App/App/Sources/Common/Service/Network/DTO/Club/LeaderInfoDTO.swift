@@ -15,7 +15,7 @@ struct LeaderInfoDTO: Codable {
     }
     let id: Int
     let nickname: String
-    let imageURL: String
+    let imageURL: String?
     
     func toDomain() -> LeaderInfo {
         LeaderInfo(id: id, nickname: nickname, imageURL: imageURL)
