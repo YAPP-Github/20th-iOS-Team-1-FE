@@ -16,6 +16,7 @@ final class SearchReactor: Reactor {
         case mapViewVisibleRegionDidChanged(CLLocationCoordinate2D, CLLocationCoordinate2D)
         case annotationViewDidSelect(Int, CLLocation)
         case searchButtonTapped
+        case bottomSheetTapped
         case createGatherButtonTapped(String, CLLocation)
     }
     
@@ -42,7 +43,8 @@ final class SearchReactor: Reactor {
     private let gatherRepository: GatherRepositoryInterface
     internal var readyToSearchGather = PublishSubject<Void>()
     internal var readyToCreateGather = PublishSubject<(String, CLLocation)>()
-    
+    internal var readyToDetailGather = PublishSubject<Int>()
+
     init(gatherRepository: GatherRepositoryInterface) {
         self.initialState = State()
         self.gatherRepository = gatherRepository
@@ -66,6 +68,11 @@ final class SearchReactor: Reactor {
                 gatherID: gatherID,
                 userLocation: location
             )
+            
+        case .bottomSheetTapped:
+            readyToDetailGather.onNext(currentState.selectedGather?.clubID ?? 0)
+            return Observable.empty()
+        
         case .createGatherButtonTapped(let address, let location):            readyToCreateGather.onNext((address, location))
             return Observable.empty()
         }

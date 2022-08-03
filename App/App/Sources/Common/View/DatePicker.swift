@@ -24,7 +24,7 @@ final class TextFieldWithDatePicker: UITextField {
     
     private lazy var timeText: String = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm:s"
+        formatter.dateFormat = "HH:mm:ss"
         let date = formatter.string(from: Date())
         
         return date
@@ -76,7 +76,7 @@ final class TextFieldWithDatePicker: UITextField {
     
     @objc private func timePickerValueDidChange(_ datePicker: UIDatePicker) {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm:s"
+        dateFormatter.dateFormat = "HH:mm:ss"
         text = dateFormatter.string(from: datePicker.date)
     }
     

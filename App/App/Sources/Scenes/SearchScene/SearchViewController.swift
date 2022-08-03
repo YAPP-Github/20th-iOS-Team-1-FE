@@ -305,6 +305,11 @@ final class SearchViewController: BaseViewController {
                     )
                 },
             
+            bottomSheet.rx.tapGesture()
+                .when(.recognized)
+                .map { _ in Reactor.Action.bottomSheetTapped }
+                .bind(to: reactor.action ),
+            
             createGatherButton.rx.throttleTap
                 .map { [unowned self] in
                     let coordinate = mapView.selectedCoordinate(point: self.selectLocationPinImageView.center)

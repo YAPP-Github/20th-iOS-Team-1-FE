@@ -27,6 +27,15 @@ final class SearchCoordinator: SceneCoordinator {
         let searchReactor = SearchReactor(gatherRepository: gatherRepository)
         let viewController = SearchViewController(reactor: searchReactor, locationManager: locationManger)
         
+        searchReactor.readyToDetailGather
+            .asDriver(onErrorJustReturn: 0)
+            .drive(with: self,
+                   onNext: { this, clubID in
+                this.pushDetailGatherViewController(clubID: clubID)
+            })
+            .disposed(by: disposeBag)
+        
+        
         searchReactor.readyToCreateGather
             .asDriver(onErrorJustReturn: ("", CLLocation.init()))
             .drive(with: self,
@@ -46,6 +55,48 @@ final class SearchCoordinator: SceneCoordinator {
             .disposed(by: disposeBag)
         
         navigationController.setViewControllers([viewController], animated: false)
+    }
+    
+    func pushDetailGatherViewController(clubID: Int) {
+        let networkManager = NetworkManager.shared
+        let keychainProvider = KeychainProvider.shared
+        let keychainUseCase = KeychainUsecase(keychainProvider: keychainProvider, networkManager: networkManager)
+        let profileMainRepository = ProfileRespository(networkManager: networkManager)
+        let detailGatherRepository = DetailGatherRepository(networkManager: networkManager)
+        
+        let reactor = DetailGatherReactor(clubID: clubID, detailGatherRepository: detailGatherRepository, profileMainRepository: profileMainRepository, keychainUseCase: keychainUseCase)
+        let viewController = DetailGatherViewController(reactor: reactor)
+        
+        reactor.readyToProfile
+            .asDriver(onErrorJustReturn: "")
+            .drive(with: self,
+                   onNext: { this, nickname in
+                this.pushProfileViewController(nickname: nickname)
+            })
+            .disposed(by:disposeBag)
+        
+        reactor.readyToDismiss
+            .asDriver(onErrorJustReturn: ())
+            .drive(with: self,
+                   onNext: { this, nickname in
+                this.navigationController.popViewController(animated: true)
+            })
+            .disposed(by:disposeBag)
+        
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func pushProfileViewController(nickname: String) {
+        let networkManager = NetworkManager.shared
+        let profileMainRepository = ProfileRespository(networkManager: networkManager)
+        let keychain = KeychainQueryRequester()
+        let keychainProvider = KeychainProvider(keyChain: keychain)
+        let keychainUseCase = KeychainUsecase(keychainProvider: keychainProvider, networkManager: networkManager)
+        let reactor = ProfileReactor(nickname: nickname, keychainProvider: keychainProvider, keychainUseCase: keychainUseCase, profileMainRepository: profileMainRepository)
+        let viewController = ProfileViewController(reactor: reactor)
+        
+        
+        navigationController.pushViewController(viewController, animated: true)
     }
     
     func pushSearchGatherViewController() {
