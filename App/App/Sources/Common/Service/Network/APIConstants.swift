@@ -33,7 +33,7 @@ struct APIConstants {
     struct Auth {
         private static let `default` = "\(baseURL)/auth"
         
-        public static let apple = "/apple"
+        public static let apple = "\(`default`)/apple"
     }
 
     /// 댓글 관련 API를 제공합니다.
