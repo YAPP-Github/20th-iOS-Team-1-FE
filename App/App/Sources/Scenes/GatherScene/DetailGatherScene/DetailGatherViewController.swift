@@ -525,7 +525,7 @@ final class DetailGatherViewController: BaseViewController {
                     self.gatherTitleLabel.text = club.clubDetailInfo.title
                     self.gatherDayLabel.text = startDate.toDateLabelText() + " - " + endDate.toDateLabelText()
 
-                    self.leaderProfileImageView.imageWithURL(club.leaderInfo.imageURL)
+                    self.leaderProfileImageView.imageWithURL(club.leaderInfo.imageURL ?? "")
                     self.leaderNicknameLabel.text = club.leaderInfo.nickname
                     self.gatherDescriptionLabel.text = club.clubDetailInfo.description
                     self.gatherAddressDescriptionLabel.text = club.clubDetailInfo.meetingPlace
@@ -547,7 +547,7 @@ final class DetailGatherViewController: BaseViewController {
                 .distinctUntilChanged()
                 .observe(on: MainScheduler.instance)
                 .bind(to: participantCollectionView.rx.items(cellIdentifier: ParticipantCollectionViewCell.identifier, cellType: ParticipantCollectionViewCell.self)) { index, data, cell in
-                    cell.configure(imageURLString: data.imageURL, nickname: data.nickname)
+                    cell.configure(imageURLString: data.imageURL ?? "", nickname: data.nickname)
                 }
 
             reactor.state
@@ -577,7 +577,7 @@ final class DetailGatherViewController: BaseViewController {
                 })
                 .bind(to: commentTableView.rx.items(cellIdentifier: CommentCell.identifier, cellType: CommentCell.self)) { index, data, cell in
                     cell.configure(id: data.id,
-                                   imageURLString: data.imageURL,
+                                   imageURLString: data.imageURL ?? "",
                                    nickname: data.author,
                                    isLeader: data.leader,
                                    dog: data.breeds.first ?? "",

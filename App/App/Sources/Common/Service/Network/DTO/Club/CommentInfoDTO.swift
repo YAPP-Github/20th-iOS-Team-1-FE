@@ -24,7 +24,7 @@ struct CommentInfoDTO: Codable {
     let leader: Bool
     let updatedTime: String
     let breeds: [String]
-    let imageURL: String
+    let imageURL: String?
     
     func toDomain() -> CommentInfo {
         CommentInfo(id: id,

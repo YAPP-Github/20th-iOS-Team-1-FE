@@ -14,5 +14,5 @@ struct CommentInfo: Equatable {
     let leader: Bool
     let updatedTime: String
     let breeds: [String]
-    let imageURL: String
+    let imageURL: String?
 }
