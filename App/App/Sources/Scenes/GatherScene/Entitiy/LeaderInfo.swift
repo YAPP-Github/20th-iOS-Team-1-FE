@@ -10,5 +10,5 @@ import Foundation
 struct LeaderInfo {
     internal let id: Int
     internal let nickname: String
-    internal let imageURL: String
+    internal let imageURL: String?
 }
