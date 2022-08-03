@@ -24,7 +24,7 @@ extension Date {
        }
     
     func monthDayWeekDay() -> String {
-        "\(self.get(.month))월 \(self.get(.day))일(\(Weekday.init(rawValue: self.get(.weekday))?.korean ?? "월"))"
+        "\(self.get(.year))/\(self.get(.month))/\(self.get(.day))(\(Weekday.init(rawValue: self.get(.weekday))?.korean ?? "월"))"
     }
     
     func hourMinute() -> String {
