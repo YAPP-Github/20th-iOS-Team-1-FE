@@ -35,6 +35,7 @@ final class TabCoordinator: Coordinator {
         let fourthCoordinator = ProfileCoordinator()
         childCoordinators.append(fourthCoordinator)
         fourthCoordinator.parentCoordinator = self
+        fourthCoordinator.delegate = self.delegate
         fourthCoordinator.start()
         let fourthViewController = fourthCoordinator.navigationController
         fourthViewController.tabBarItem = UITabBarItem(title: "마이페이지", image: .Togaether.myPageIcon, selectedImage: .Togaether.myPageIconFill)
