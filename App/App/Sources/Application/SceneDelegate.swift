@@ -21,50 +21,56 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         window = UIWindow(windowScene: windowScene)
-     startCoordinate(window: window, start: .tapBar)
-//        let networkManager = NetworkManager.shared
-//        let keychain = KeychainQueryRequester.shared
-//        let keychainProvider = KeychainProvider(keyChain: keychain)
-//        let appleIDProvider = ASAuthorizationAppleIDProvider()
-//        let userIdentifierData = (try? keychainProvider.read(service: KeychainService.apple, account: KeychainAccount.identifier)) ?? Data()
-//        let userIdentifier = String(decoding: userIdentifierData, as: UTF8.self)
+     //startCoordinate(window: window, start: .tapBar)
+        let networkManager = NetworkManager.shared
+        let KeychainQueryRequester = KeychainQueryRequester.shared
+        let keychainProvider = KeychainProvider(keyChain: KeychainQueryRequester)
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let userIdentifierData = (try? keychainProvider.read(service: KeychainService.apple, account: KeychainAccount.identifier)) ?? Data()
+        let userIdentifier = String(decoding: userIdentifierData, as: UTF8.self)
+
+        appleIDProvider.getCredentialState(forUserID: userIdentifier) { [weak self] (credentialState, error) in
+            guard let self = self else {
+                return
+            }
+
+            switch credentialState {
+            case .authorized:
+//        let keychainUseCase = KeychainUsecase(keychainProvider: keychainProvider, networkManager: networkManager)
+//        let profileRepository = ProfileRespository(networkManager: networkManager)
+//        let keychain = keychainUseCase.getAccessToken()
 //
-//        appleIDProvider.getCredentialState(forUserID: userIdentifier) { [weak self] (credentialState, error) in
-//            guard let self = self else {
-//                return
-//            }
+//        keychain.subscribe(
+//            onSuccess: { token in
+//                let profile = profileRepository.requestProfileInfo(accessToken: token)
 //
-//            switch credentialState {
-//            case .authorized:
-//                let keychainUseCase = KeychainUsecase(keychainProvider: keychainProvider, networkManager: networkManager)
-//                let profileRepository = ProfileRespository(networkManager: networkManager)
-//                let keychain = keychainUseCase.getAccessToken()
-//                
-//                keychain.subscribe(
-//                    onSuccess: { token in
-//                        let profile = profileRepository.requestProfileInfo(accessToken: token)
-//            
-//                        profile.subscribe { result in
-//                            switch result {
-//                            case .success(_):
-//                                self.startCoordinate(window: self.window, start: .tapBar)
-//                                return
-//                            case .failure(_):
-//                                self.startCoordinate(window: self.window, start: .agreement)
-//                                return
-//                            }
-//                        }.disposed(by: self.disposeBag)
-//                    },
-//                    onFailure: { _ in
-//                        self.startCoordinate(window: self.window, start: .login)
+//                profile.subscribe { result in
+//                    switch result {
+//                    case .success(_):
+                        self.startCoordinate(window: self.window, start: .tapBar)
+//                        return
+//                    case .failure(_):
+//                        self.startCoordinate(window: self.window, start: .agreement)
+//                        return
 //                    }
-//                ).disposed(by: self.disposeBag)
+//                }.disposed(by: self.disposeBag)
+//            },
+//            onFailure: { _ in
+            //    self.startCoordinate(window: self.window, start: .login)
+           // }
+            case .revoked:
+                self.startCoordinate(window: self.window, start: .agreement)
+            default:
+                self.startCoordinate(window: self.window, start: .login)
+            }
+        //).disposed(by: self.disposeBag)
 //            case .revoked:
 //                self.startCoordinate(window: self.window, start: .login)
 //            default:
 //                self.startCoordinate(window: self.window, start: .login)
 //            }
-//        }
+        }
+        
     }
     
     private func startCoordinate(window: UIWindow?, start: Start) {
