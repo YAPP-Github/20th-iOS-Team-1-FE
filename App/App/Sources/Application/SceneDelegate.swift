@@ -44,7 +44,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //            onSuccess: { token in
 //                let profile = profileRepository.requestProfileInfo(accessToken: token)
 //
-//                profile.subscribe { result in
+//                profile.subscribe { result inz
 //                    switch result {
 //                    case .success(_):
                         self.startCoordinate(window: self.window, start: .tapBar)
@@ -58,8 +58,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //            onFailure: { _ in
             //    self.startCoordinate(window: self.window, start: .login)
            // }
-            case .revoked:
-                self.startCoordinate(window: self.window, start: .agreement)
             default:
                 self.startCoordinate(window: self.window, start: .login)
             }

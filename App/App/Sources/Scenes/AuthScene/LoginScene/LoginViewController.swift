@@ -89,7 +89,7 @@ final class LoginViewController: BaseViewController {
     
     private func bindAction(with reactor: LoginReactor) {
         disposeBag.insert {
-            signInWithAppleButton.rx.tap(scopes: [.email])
+            signInWithAppleButton.rx.tap(scopes: [])
                 .map { LoginReactor.Action.signInWithApple(authorization: $0) }
                 .bind(to: reactor.action)
         }
