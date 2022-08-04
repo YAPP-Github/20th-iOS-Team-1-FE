@@ -36,37 +36,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
             switch credentialState {
             case .authorized:
-//        let keychainUseCase = KeychainUsecase(keychainProvider: keychainProvider, networkManager: networkManager)
-//        let profileRepository = ProfileRespository(networkManager: networkManager)
-//        let keychain = keychainUseCase.getAccessToken()
-//
-//        keychain.subscribe(
-//            onSuccess: { token in
-//                let profile = profileRepository.requestProfileInfo(accessToken: token)
-//
-//                profile.subscribe { result inz
-//                    switch result {
-//                    case .success(_):
-                        self.startCoordinate(window: self.window, start: .tapBar)
-//                        return
-//                    case .failure(_):
-//                        self.startCoordinate(window: self.window, start: .agreement)
-//                        return
-//                    }
-//                }.disposed(by: self.disposeBag)
-//            },
-//            onFailure: { _ in
-            //    self.startCoordinate(window: self.window, start: .login)
-           // }
+                self.startCoordinate(window: self.window, start: .tapBar)
             default:
                 self.startCoordinate(window: self.window, start: .login)
             }
-        //).disposed(by: self.disposeBag)
-//            case .revoked:
-//                self.startCoordinate(window: self.window, start: .login)
-//            default:
-//                self.startCoordinate(window: self.window, start: .login)
-//            }
+
         }
         
     }
