@@ -24,35 +24,57 @@ final class AuthCoordinator: SceneCoordinator {
         let networkManager = NetworkManager.shared
         let appleLoginRepository = AppleLoginRepository(networkManager: networkManager)
         let keychainProvider = KeychainProvider.shared
-        let loginReactor = LoginReactor(appleLoginRepository: appleLoginRepository, keychainProvider: keychainProvider)
+        let keychainUseCase = KeychainUsecase(keychainProvider: keychainProvider, networkManager: networkManager)
+        let profileMainRepository = ProfileRespository(networkManager: networkManager)
+        let loginReactor = LoginReactor(appleLoginRepository: appleLoginRepository, keychainProvider: keychainProvider, keychainUseCase: keychainUseCase, profileRepository: profileMainRepository)
         let loginViewController = LoginViewController(reactor: loginReactor)
  
+        
+        
+        
+        
         loginReactor.readyToProceedWithSignUp
             .asDriver(onErrorJustReturn: ())
             .drive(with: self,
                    onNext: { this, _ in
-                let keychainUseCase = KeychainUsecase(keychainProvider: keychainProvider, networkManager: networkManager)
-                let profileMainRepository = ProfileRespository(networkManager: networkManager)
-                keychainUseCase.getAccessToken()
-                    .subscribe(with: self,
-                       onSuccess: { this, token in
-                        profileMainRepository.requestProfileInfo(accessToken: token)
-                            .subscribe { result in
-                                switch result {
-                                case .success(_):
-                                    this.delegate?.switchToTabBar()
-                                    return
-                                case .failure(_):
-                                    this.pushSignUpAgreementViewController()
-                                    return
-                                }
-                            }.disposed(by: this.disposeBag)
-                        },
-                       onFailure: { this, _ in
-                        this.pushSignUpAgreementViewController()
-                    }).disposed(by: self.disposeBag)
-            })
-            .disposed(by:disposeBag)
+                this.pushSignUpAgreementViewController()
+            }) .disposed(by:disposeBag)
+                
+        loginReactor.readyToTogeather
+            .asDriver(onErrorJustReturn: ())
+            .drive(with: self,
+                   onNext: { this, _ in
+                this.delegate?.switchToTabBar()
+            }) .disposed(by:disposeBag)
+                
+                
+//
+//                    keychainUseCase.getAccessToken()
+//                    .subscribe(with: self,
+//                       onSuccess: { this, token in
+//                        profileMainRepository.requestProfileInfo(accessToken: token)
+//                            .subscribe { result in
+//                                switch result {
+//                                case .success(_):
+//                                    DispatchQueue.main.async {
+//                                        this.delegate?.switchToTabBar()
+//                                    }
+//                                    return
+//                                case .failure(_):
+//                                    DispatchQueue.main.async {
+//                                        this.pushSignUpAgreementViewController()
+//                                    }
+//                                    return
+//                                }
+//                            }.disposed(by: this.disposeBag)
+//                        },
+//                       onFailure: { this, _ in
+//                        DispatchQueue.main.async {
+//                            this.pushSignUpAgreementViewController()
+//                        }
+//                    }).disposed(by: self.disposeBag)
+//            })
+//            .disposed(by:disposeBag)
         
         navigationController.setViewControllers([loginViewController], animated: false)
         window?.rootViewController = navigationController

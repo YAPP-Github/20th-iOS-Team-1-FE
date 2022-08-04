@@ -27,11 +27,15 @@ final class LoginReactor: Reactor {
     private let disposeBag = DisposeBag()
     private let appleLoginRepository: AppleLoginRepositoryInterface
     private let keychainProvider: KeychainProvidable
+    private let keychainUseCase: KeychainUsecase
+    private let profileRepository: ProfileRespository
     internal var readyToProceedWithSignUp = PublishSubject<Void>()
-    
-    init(appleLoginRepository: AppleLoginRepositoryInterface, keychainProvider: KeychainProvidable) {
+    internal var readyToTogeather = PublishSubject<Void>()
+    init(appleLoginRepository: AppleLoginRepositoryInterface, keychainProvider: KeychainProvidable, keychainUseCase: KeychainUsecase, profileRepository: ProfileRespository) {
         self.appleLoginRepository = appleLoginRepository
         self.keychainProvider = keychainProvider
+        self.keychainUseCase = keychainUseCase
+        self.profileRepository = profileRepository
     }
     
     func mutate(action: Action) -> Observable<Mutation> {
@@ -51,11 +55,35 @@ final class LoginReactor: Reactor {
         return newState
     }
     
+    private func asd() {
+        keychainUseCase.getAccessToken()
+            .subscribe(with: self,
+               onSuccess: { this, token in
+                this.profileRepository.requestProfileInfo(accessToken: token)
+                    .subscribe { result in
+                        switch result {
+                        case .success(let profileInfo):
+                            this.readyToTogeather.onNext(()) //로그아웃하고 로그인 다시한거
+                        case .failure(let error):
+                            this.readyToProceedWithSignUp.onNext(())
+                        }
+                    }.disposed(by: self.disposeBag)
+                },
+      
+               onFailure: { this,_ in
+                    // 첫로그인
+               // this.asd(authorization: authorization)
+               })
+            .disposed(by: self.disposeBag)
+    }
+        
+        
+        
     private func signInWithApple(authorization: ASAuthorization) {
         guard let appleCrendential = getAppleCrendential(for: authorization) else {
             return
         }
-        print(appleCrendential.identifier)
+        
         appleLoginRepository.requestAppleLogin(appleCredential: appleCrendential)
             .subscribe { [weak self] result in
                 switch result {
@@ -67,19 +95,15 @@ final class LoginReactor: Reactor {
                     }
                     
                     try? self?.keychainProvider.delete(service: KeychainService.apple, account: KeychainAccount.identifier)
-                    print(11)
                     try? self?.keychainProvider.delete(service: KeychainService.apple, account: KeychainAccount.accessToken)
-                    print(21)
                     try? self?.keychainProvider.delete(service: KeychainService.apple, account: KeychainAccount.refreshToken)
-                    print(31)
                     try? self?.keychainProvider.create(accessToken, service: KeychainService.apple, account: KeychainAccount.accessToken)
-                    print(41)
                     try? self?.keychainProvider.create(refreshToken, service: KeychainService.apple, account: KeychainAccount.refreshToken)
-                    print(51)
                     try? self?.keychainProvider.create(identifier, service: KeychainService.apple, account: KeychainAccount.identifier)
-                    print(61)
-                    self?.readyToProceedWithSignUp.onNext(())
-                    print(71)
+                    
+                    
+                    
+                    self?.asd()
                     
             case .failure(_):
                 #warning("애플로그인 실패하면 예외처리")
@@ -90,14 +114,28 @@ final class LoginReactor: Reactor {
     private func getAppleCrendential(for authorization: ASAuthorization) -> AppleCredential? {
         guard let crendential = authorization.credential as? ASAuthorizationAppleIDCredential,
               let code = crendential.authorizationCode,
-              let token = crendential.identityToken,
-              let email = crendential.email else {
+              let token = crendential.identityToken else {
             return nil
         }
         
         let identifier = crendential.user
-        let appleCredential = AppleCredential(authorizationCode: code, identityToken: token, email: email, identifier: identifier)
+        let appleCredential = AppleCredential(authorizationCode: code, identityToken: token, email: UIDevice.current.identifierForVendor!.uuidString, identifier: identifier)
         
         return appleCredential
+    }
+    
+    private func randomAlphaNumericString() -> String {
+        let allowedChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        let allowedCharsCount = UInt32(allowedChars.count)
+        var randomString = ""
+
+        for _ in 0 ..< 32 {
+            let randomNum = Int(arc4random_uniform(allowedCharsCount))
+            let randomIndex = allowedChars.index(allowedChars.startIndex, offsetBy: randomNum)
+            let newCharacter = allowedChars[randomIndex]
+            randomString += String(newCharacter)
+        }
+
+        return randomString
     }
 }
