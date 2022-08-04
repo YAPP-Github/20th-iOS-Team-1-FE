@@ -60,15 +60,15 @@ final class SearchViewController: BaseViewController {
         return button
     }()
     
-    private lazy var searchButton: CircularButton =  {
-        let button = CircularButton()
-        
-        button.setImage(UIImage.Togaether.magnifyingglass, for: .normal)
-        button.tintColor = .white
-        button.backgroundColor = UIColor.Togaether.mainYellow
-        
-        return button
-    }()
+//    private lazy var searchButton: CircularButton =  {
+//        let button = CircularButton()
+//
+//        button.setImage(UIImage.Togaether.magnifyingglass, for: .normal)
+//        button.tintColor = .white
+//        button.backgroundColor = UIColor.Togaether.mainYellow
+//
+//        return button
+//    }()
     
     private lazy var addCloseBarButtonItem: UIBarButtonItem = {
         let barButtonItem = UIBarButtonItem(
@@ -176,7 +176,7 @@ final class SearchViewController: BaseViewController {
         view.addSubview(mapView)
         view.addSubview(currentLocationButton)
         view.addSubview(bottomSheet)
-        mapView.addSubview(searchButton)
+//        mapView.addSubview(searchButton)
         mapView.addSubview(addButon)
         bottomSheet.addSubview(bottomSheetContentView)
         bottomSheet.addSubview(setLocationBottomSheet)
@@ -194,15 +194,18 @@ final class SearchViewController: BaseViewController {
             mapView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             mapView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             //searchButton
-            searchButton.heightAnchor.constraint(equalToConstant: 56),
-            searchButton.widthAnchor.constraint(equalToConstant: 56),
-            searchButton.topAnchor.constraint(equalTo: mapView.topAnchor, constant: 22),
-            searchButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -22),
+//            searchButton.heightAnchor.constraint(equalToConstant: 56),
+//            searchButton.widthAnchor.constraint(equalToConstant: 56),
+//            searchButton.topAnchor.constraint(equalTo: mapView.topAnchor, constant: 22),
+//            searchButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -22),
             //addButton
             addButon.heightAnchor.constraint(equalToConstant: 56),
             addButon.widthAnchor.constraint(equalToConstant: 56),
-            addButon.topAnchor.constraint(equalTo: searchButton.bottomAnchor, constant: 22),
-            addButon.trailingAnchor.constraint(equalTo: searchButton.trailingAnchor),
+            addButon.topAnchor.constraint(equalTo: mapView.topAnchor, constant: 40),
+            addButon.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -22),
+
+//            addButon.topAnchor.constraint(equalTo: searchButton.bottomAnchor, constant: 22),
+//            addButon.trailingAnchor.constraint(equalTo: searchButton.trailingAnchor),
             //currentLocationButton
             currentLocationButton.widthAnchor.constraint(equalToConstant: 44),
             currentLocationButton.heightAnchor.constraint(equalToConstant: 44),
@@ -262,9 +265,9 @@ final class SearchViewController: BaseViewController {
     
     private func bindAction(with reactor: SearchReactor) {
         disposeBag.insert (
-            searchButton.rx.throttleTap
-                .map { Reactor.Action.searchButtonTapped }
-                .bind(to: reactor.action),
+//            searchButton.rx.throttleTap
+//                .map { Reactor.Action.searchButtonTapped }
+//                .bind(to: reactor.action),
             
             currentLocationButton.rx.throttleTap
                 .bind { [unowned self] in
@@ -379,7 +382,7 @@ final class SearchViewController: BaseViewController {
         navigationController?.navigationBar.isHidden = false
         navigationItem.rightBarButtonItem = addCloseBarButtonItem
         navigationItem.title = "반려견 모임 생성"
-        searchButton.isHidden = true
+//        searchButton.isHidden = true
         addButon.isHidden = true
         gatherInformationBottomSheetHeightConstraint.constant = 250
         bottomSheetContentView.isHidden = true
@@ -391,7 +394,7 @@ final class SearchViewController: BaseViewController {
         mapType = .search
         self.navigationController?.navigationBar.isHidden = true
         navigationItem.title = nil
-        searchButton.isHidden = false
+//        searchButton.isHidden = false
         addButon.isHidden = false
         gatherInformationBottomSheetHeightConstraint.constant = 0
         bottomSheetContentView.isHidden = true
