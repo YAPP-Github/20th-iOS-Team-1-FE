@@ -75,7 +75,7 @@
 ## 팀원 소개
 ### YAPP 20기 iOS 1팀
 |  PM   | Designer | iOS | iOS | iOS | Backend | Backend |
-| :---: | :------: | :Hani-Levenshtein: | :--: | :--: | :-----: | :-----: |
+| :---: | :------: | :--: | :--: | :--: | :-----: | :-----: |
 | [김준수](https://github.com/junsubenkim) |  박소현 | [이하원](https://github.com/Hani-Levenshtein) | [김나희](https://github.com/k-nh) | [유한준](https://github.com/hj56775) |  [이지훈](https://github.com/znftm97) | [김현우](https://github.com/java-saeng) |
 
 ## 기술 스택
