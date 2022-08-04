@@ -41,6 +41,7 @@ final class DetailGatherViewController: BaseViewController {
         label.layer.cornerRadius = 10
         label.layer.masksToBounds = true
         label.font = .customFont(size: 14)
+        label.textColor = .white
         label.backgroundColor = .Togaether.mainGreen
         
         return label
@@ -57,7 +58,7 @@ final class DetailGatherViewController: BaseViewController {
         
     private var gatherDayLabel: UILabel = {
         let label = UILabel()
-        label.font = .customFont(size: 16)
+        label.font = .customFont(size: 16, style: .Bold)
         label.textColor = .Togaether.mainGreen
         
         return label
@@ -129,13 +130,16 @@ final class DetailGatherViewController: BaseViewController {
     
     private lazy var mapView: MKMapView = {
         let mapView = MKMapView()
-        
         mapView.isPitchEnabled = false
+        mapView.isZoomEnabled = false
         mapView.isScrollEnabled = false
         mapView.setCameraZoomRange(
-            MKMapView.CameraZoomRange(minCenterCoordinateDistance: 1000, maxCenterCoordinateDistance: 10000),
+            MKMapView.CameraZoomRange(minCenterCoordinateDistance: 500, maxCenterCoordinateDistance: 500),
             animated: false
         )
+        mapView.delegate = self
+        mapView.register(AnnotationView.self, forAnnotationViewWithReuseIdentifier: AnnotationView.identifier)
+
         return mapView
     }()
     
@@ -223,6 +227,8 @@ final class DetailGatherViewController: BaseViewController {
         textField.backgroundColor = .Togaether.divider
         textField.layer.cornerRadius = 10
         textField.layer.masksToBounds = true
+        textField.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 16.0, height: 0.0))
+        textField.leftViewMode = .always
         
         return textField
     }()
@@ -492,6 +498,11 @@ final class DetailGatherViewController: BaseViewController {
                 .map { Reactor.Action.gatherButtonDidTap }
                 .bind(to: reactor.action)
             
+            mapView.rx.tapGesture()
+                .when(.recognized)
+                .map { _ in Reactor.Action.mapDidTap }
+                .bind(to: reactor.action)
+
 //            RxKeyboard.instance.visibleHeight
 //          //      .skip(1)
 //                .drive(with: self,
@@ -517,11 +528,11 @@ final class DetailGatherViewController: BaseViewController {
                         return
                     }
 
-                    self.eligiblePetSizeView.reactor = TagCollectionViewReactor(state: club.clubDetailInfo.eligiblePetSizeTypes)
-                    self.eligibleSexView.reactor = TagCollectionViewReactor(state: [club.clubDetailInfo.eligibleSex])
+                    self.eligiblePetSizeView.reactor = TagCollectionViewReactor(state: club.clubDetailInfo.eligiblePetSizeTypes.map { $0.toKorean() })
+                    self.eligibleSexView.reactor = TagCollectionViewReactor(state: [club.clubDetailInfo.eligibleSex?.toKorean() ?? ""])
                     self.eligiblePetBreedView.reactor = TagCollectionViewReactor(state: club.clubDetailInfo.eligibleBreeds)
 
-                    self.gatherCategoryLabel.text = "  " + club.clubDetailInfo.category + "  "
+                    self.gatherCategoryLabel.text = "  " + (club.clubDetailInfo.category?.korean ?? "") + "  "
                     self.gatherTitleLabel.text = club.clubDetailInfo.title
                     self.gatherDayLabel.text = startDate.toDateLabelText() + " - " + endDate.toDateLabelText()
 
@@ -531,15 +542,19 @@ final class DetailGatherViewController: BaseViewController {
                     self.gatherAddressDescriptionLabel.text = club.clubDetailInfo.meetingPlace
                     self.participantDescriptionLabel.text = "\(club.clubDetailInfo.participants)/\(club.clubDetailInfo.maximumPeople)"
 
-                    let pLocation = CLLocationCoordinate2DMake(club.clubDetailInfo.latitude, club.clubDetailInfo.longitude)
+                    let latitude = club.clubDetailInfo.latitude
+                    let longitude = club.clubDetailInfo.longitude
+                    let pLocation = CLLocationCoordinate2DMake(latitude, longitude)
                     let pSpanValue = MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1)
                     let pRegion = MKCoordinateRegion(center: pLocation, span: pSpanValue)
                     self.mapView.setRegion(pRegion, animated: false)
-
-                    let annotation = MKPointAnnotation()
-                    annotation.coordinate = pLocation
-                    self.mapView.addAnnotation(annotation)
         
+                    let annotation = GatherConfigurationForAnnotation(id: club.clubDetailInfo.id, coordinate: Coordinate(latitude: latitude, longitude: longitude), category: club.clubDetailInfo.category ?? .walk)
+                    
+                    let mapViewAnnotation = annotation.toAnnotation()
+                    if self.mapView.view(for: mapViewAnnotation) == nil {
+                        self.mapView.addAnnotation(mapViewAnnotation)
+                    }
                 })
             
             reactor.state
@@ -560,6 +575,7 @@ final class DetailGatherViewController: BaseViewController {
                     }
                     
                     self.commentTableViewHeightConstraint?.constant = CGFloat($0.count * 120)
+                    self.commentTextField.text = ""
 //                    UIView.animate(withDuration: 0.3,
 //                                   delay: 0.0,
 //                                   options: [.curveEaseOut],
@@ -693,4 +709,15 @@ enum GatherButtonState {
     case enabled
     case disabled
     case warning
+}
+
+extension DetailGatherViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard let annotation = annotation as? Annotation
+        else { return nil }
+        
+        let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: AnnotationView.identifier, for: annotation) as? AnnotationView
+
+        return annotationView
+    }
 }

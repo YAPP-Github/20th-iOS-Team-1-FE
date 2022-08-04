@@ -170,8 +170,6 @@ final class SearchViewController: BaseViewController {
         addSubviews()
         configureLayout()
         configureUI()
-        configureLocationManager()
-        
     }
     
     private func addSubviews() {
@@ -343,7 +341,25 @@ final class SearchViewController: BaseViewController {
                 .asDriver(onErrorJustReturn: nil)
                 .drive(onNext: { selectedGather in
                     self.bottomSheetContentView.configure(gatherConfiguration: selectedGather)
-                })
+                }),
+            
+            reactor.state
+                .map { $0.visibleCoordinate }
+                .distinctUntilChanged()
+                .asDriver(onErrorJustReturn: Coordinate.seoulCityHall)
+                .drive(with: self,
+                       onNext: { this, coordinate in
+                           switch coordinate {
+                           case .seoulCityHall:
+                               this.configureLocationManager()
+                           default:
+                               this.mapView.centerCoordinate = coordinate.toCLLocationCoordinate2D()
+                               this.mapView.setCameraZoomRange(
+                                   MKMapView.CameraZoomRange(minCenterCoordinateDistance: 500, maxCenterCoordinateDistance: 500),
+                                   animated: false
+                               )
+                           }
+                       })
         )
     }
     
