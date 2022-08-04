@@ -169,6 +169,7 @@
 		37ECC53C2871B4B000CFE8E9 /* UIImagePickerViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ECC53B2871B4B000CFE8E9 /* UIImagePickerViewController+Rx.swift */; };
 		37ECC53E2871BA9300CFE8E9 /* RxImagePickerDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ECC53D2871BA9300CFE8E9 /* RxImagePickerDelegateProxy.swift */; };
 		37F67CC5286A1C270073FE8C /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F67CC4286A1C270073FE8C /* AuthCoordinator.swift */; };
+		37F87626289BCE4200CE3FBE /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F87625289BCE4200CE3FBE /* APIConstants.swift */; };
 		37FB852B289419C300328F90 /* CommentRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FB852A289419C300328F90 /* CommentRequestDTO.swift */; };
 		FD0870BE287DB15600DF3553 /* EmptyNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0870BD287DB15600DF3553 /* EmptyNoticeView.swift */; };
 		FD0870D028805B4200DF3553 /* EditProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0870CF28805B4200DF3553 /* EditProfileRepository.swift */; };
@@ -217,7 +218,6 @@
 		FDBC1230286C95D000FCADF4 /* ProfileResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC122F286C95D000FCADF4 /* ProfileResponseDTO.swift */; };
 		FDBC1232286C983E00FCADF4 /* AccountInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC1231286C983E00FCADF4 /* AccountInfoDTO.swift */; };
 		FDBC1234286C986700FCADF4 /* PetInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC1233286C986700FCADF4 /* PetInfoDTO.swift */; };
-		FDBC1237286D6A6600FCADF4 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC1236286D6A6600FCADF4 /* APIConstants.swift */; };
 		FDD2266F2875F4840042F488 /* TagCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD2266E2875F4840042F488 /* TagCollectionView.swift */; };
 		FDD226712875F4900042F488 /* TagCollectionViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD226702875F4900042F488 /* TagCollectionViewReactor.swift */; };
 		FDD2267C287873730042F488 /* NSMutableData+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD2267B287873730042F488 /* NSMutableData+Extension.swift */; };
@@ -399,6 +399,7 @@
 		37ECC53B2871B4B000CFE8E9 /* UIImagePickerViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImagePickerViewController+Rx.swift"; sourceTree = "<group>"; };
 		37ECC53D2871BA9300CFE8E9 /* RxImagePickerDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxImagePickerDelegateProxy.swift; sourceTree = "<group>"; };
 		37F67CC4286A1C270073FE8C /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
+		37F87625289BCE4200CE3FBE /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		37FB852A289419C300328F90 /* CommentRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRequestDTO.swift; sourceTree = "<group>"; };
 		FD0870BD287DB15600DF3553 /* EmptyNoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyNoticeView.swift; sourceTree = "<group>"; };
 		FD0870CF28805B4200DF3553 /* EditProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileRepository.swift; sourceTree = "<group>"; };
@@ -447,7 +448,6 @@
 		FDBC122F286C95D000FCADF4 /* ProfileResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponseDTO.swift; sourceTree = "<group>"; };
 		FDBC1231286C983E00FCADF4 /* AccountInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInfoDTO.swift; sourceTree = "<group>"; };
 		FDBC1233286C986700FCADF4 /* PetInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetInfoDTO.swift; sourceTree = "<group>"; };
-		FDBC1236286D6A6600FCADF4 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		FDD2266E2875F4840042F488 /* TagCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionView.swift; sourceTree = "<group>"; };
 		FDD226702875F4900042F488 /* TagCollectionViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewReactor.swift; sourceTree = "<group>"; };
 		FDD2267B287873730042F488 /* NSMutableData+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableData+Extension.swift"; sourceTree = "<group>"; };
@@ -998,7 +998,6 @@
 			children = (
 				37438093284FD8A300CB02A5 /* DTO */,
 				37C14519284DF23400D11CC3 /* Network */,
-				FDBC1235286D6A5000FCADF4 /* APIConstants */,
 				37C14514284DC86300D11CC3 /* HTTPMethod */,
 				37C14513284DC85100D11CC3 /* NetworkError */,
 			);
@@ -1026,6 +1025,7 @@
 			children = (
 				37C1451A284E06E400D11CC3 /* NetworkManager.swift */,
 				37C1451C284F9D6500D11CC3 /* NetworkManageable.swift */,
+				37F87625289BCE4200CE3FBE /* APIConstants.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1286,14 +1286,6 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
-		FDBC1235286D6A5000FCADF4 /* APIConstants */ = {
-			isa = PBXGroup;
-			children = (
-				FDBC1236286D6A6600FCADF4 /* APIConstants.swift */,
-			);
-			name = APIConstants;
-			sourceTree = "<group>";
-		};
 		FDD2266D2875F4530042F488 /* Tag */ = {
 			isa = PBXGroup;
 			children = (
@@ -1514,7 +1506,6 @@
 				37499039287720E100D07211 /* DetailGatherRepository.swift in Sources */,
 				FD0870D028805B4200DF3553 /* EditProfileRepository.swift in Sources */,
 				37912CA0281449230087B95E /* Coordinator.swift in Sources */,
-				FDBC1237286D6A6600FCADF4 /* APIConstants.swift in Sources */,
 				375558BE2866E0AC00D13208 /* SignUpAreaViewController.swift in Sources */,
 				379B1A77285A4F7700E58A34 /* AppleCredentialRequestDTO.swift in Sources */,
 				374F41E1286619C90074F04B /* Area.swift in Sources */,
@@ -1645,6 +1636,7 @@
 				37AC3106284930E6003C3FA2 /* SignUpInfomationReactor.swift in Sources */,
 				294A0C29287B085800D1CEB3 /* CategorySelectButtonView.swift in Sources */,
 				FDBC1226286C309C00FCADF4 /* ProfileRespository.swift in Sources */,
+				37F87626289BCE4200CE3FBE /* APIConstants.swift in Sources */,
 				37DA2520287317EE002E4D67 /* DetailGatherViewController.swift in Sources */,
 				3797D9482888611E0068C831 /* CommentInfo.swift in Sources */,
 				37C14518284DC94A00D11CC3 /* NetworkError.swift in Sources */,
