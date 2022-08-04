@@ -9,11 +9,8 @@ import UIKit
 
 import RxSwift
 
-protocol SendBreed: AnyObject {
-    func sendData(data: [String])
-}
-
 final class ProfileCoordinator: SceneCoordinator {
+    weak var delegate: TabBarCoordinatorDelegate?
     weak var parentCoordinator: Coordinator?
     var navigationController: UINavigationController
     var childCoordinators = [Coordinator]()
@@ -32,6 +29,14 @@ final class ProfileCoordinator: SceneCoordinator {
         let reactor = ProfileReactor(nickname: nil, keychainProvider: keychainProvider, keychainUseCase: keychainUseCase, profileMainRepository: profileMainRepository)
         let viewController = ProfileViewController(reactor: reactor)
         
+        reactor.readyToRoot
+            .asDriver(onErrorJustReturn: ())
+            .drive(with: self,
+                   onNext: { this, _ in
+                this.delegate?.switchToAuth()
+            })
+            .disposed(by: disposeBag)
+            
         reactor.readyToProceedEditProfile
             .asDriver(onErrorJustReturn: "")
             .drive(with: self,
@@ -131,4 +136,8 @@ final class ProfileCoordinator: SceneCoordinator {
 
         navigationController.pushViewController(viewController, animated: true)
     }
+}
+
+protocol SendBreed: AnyObject {
+    func sendData(data: [String])
 }
