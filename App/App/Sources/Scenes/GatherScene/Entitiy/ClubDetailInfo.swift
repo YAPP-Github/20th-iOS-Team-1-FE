@@ -11,15 +11,15 @@ struct ClubDetailInfo {
     let id: Int
     let title: String
     let description: String
-    let category: String
+    let category: GatherCategory?
     let meetingPlace: String
     let latitude: Double
     let longitude: Double
     let startDate: String
     let endDate: String
-    let eligiblePetSizeTypes: [String]
+    let eligiblePetSizeTypes: [PetSizeType]
     let eligibleBreeds: [String]
-    let eligibleSex: String
+    let eligibleSex: OwnerSex?
     let maximumPeople: Int
     let participants: Int
 }

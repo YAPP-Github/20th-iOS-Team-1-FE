@@ -8,6 +8,7 @@
 import UIKit
 
 import RxSwift
+import CoreLocation
 
 final class GatherListCoordinator: SceneCoordinator {
     weak var parentCoordinator: Coordinator?
@@ -64,6 +65,13 @@ final class GatherListCoordinator: SceneCoordinator {
             })
             .disposed(by:disposeBag)
         
+        reactor.readyToMapView
+            .asDriver(onErrorJustReturn: ((0, Coordinate.seoulCityHall)))
+            .drive(onNext: { clubID, coordinate in
+                self.pushMapViewController(clubID: clubID, visibleCoordinate: coordinate)
+            })
+            .disposed(by:disposeBag)
+        
         navigationController.pushViewController(viewController, animated: true)
     }
     
@@ -76,6 +84,15 @@ final class GatherListCoordinator: SceneCoordinator {
         let reactor = ProfileReactor(nickname: nickname, keychainProvider: keychainProvider, keychainUseCase: keychainUseCase, profileMainRepository: profileMainRepository)
         let viewController = ProfileViewController(reactor: reactor)
         
+        
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func pushMapViewController(clubID: Int, visibleCoordinate: Coordinate) {
+        let locationManger = CLLocationManager()
+        let gatherRepository = GatherRepository(networkManager: NetworkManager.shared)
+        let searchReactor = SearchReactor(gatherRepository: gatherRepository, visibleCoordinate: visibleCoordinate)
+        let viewController = SearchViewController(reactor: searchReactor, locationManager: locationManger)
         
         navigationController.pushViewController(viewController, animated: true)
     }

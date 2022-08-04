@@ -44,15 +44,15 @@ struct ClubDetailInfoDTO: Codable {
         ClubDetailInfo(id: id,
                        title: title,
                        description: description,
-                       category: category,
+                       category: GatherCategory.init(rawValue: category),
                        meetingPlace: meetingPlace,
                        latitude: latitude,
                        longitude: longitude,
                        startDate: startDate,
                        endDate: endDate,
-                       eligiblePetSizeTypes: eligiblePetSizeTypes,
+                       eligiblePetSizeTypes: eligiblePetSizeTypes.map { PetSizeType(rawValue: $0) ?? .all },
                        eligibleBreeds: eligibleBreeds,
-                       eligibleSex: eligibleSex,
+                       eligibleSex: OwnerSex.init(rawValue: eligibleSex),
                        maximumPeople: maximumPeople,
                        participants: participants)
     }

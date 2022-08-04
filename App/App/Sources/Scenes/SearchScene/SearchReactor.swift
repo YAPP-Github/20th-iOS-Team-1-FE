@@ -30,7 +30,7 @@ final class SearchReactor: Reactor {
     }
     
     struct State {
-        var visibleCorrdinate: Coordinate = .seoulCityHall
+        var visibleCoordinate: Coordinate
         var currentSpan: Double = 0.005
         var annotations: [GatherConfigurationForAnnotation] = []
         var selectedGather: GatherConfigurationForSheet?
@@ -45,8 +45,8 @@ final class SearchReactor: Reactor {
     internal var readyToCreateGather = PublishSubject<(String, CLLocation)>()
     internal var readyToDetailGather = PublishSubject<Int>()
 
-    init(gatherRepository: GatherRepositoryInterface) {
-        self.initialState = State()
+    init(gatherRepository: GatherRepositoryInterface, visibleCoordinate: Coordinate = .seoulCityHall) {
+        self.initialState = State(visibleCoordinate: visibleCoordinate)
         self.gatherRepository = gatherRepository
     }
     
@@ -84,7 +84,7 @@ final class SearchReactor: Reactor {
         switch mutation {
             
         case .setVisibleCoordinate(let newCoordinate):
-            newState.visibleCorrdinate = Coordinate(
+            newState.visibleCoordinate = Coordinate(
                 latitude: newCoordinate.latitude,
                 longitude: newCoordinate.longitude
             )
