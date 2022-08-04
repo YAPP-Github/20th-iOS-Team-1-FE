@@ -29,7 +29,7 @@ struct ClubFIndDetailResponseDTO: Codable {
     func toDomain() -> ClubFindDetail {
         ClubFindDetail(participating: participating,
                        leader: leader,
-                       accountSex: accountSex,
+                       accountSex: OwnerSex(rawValue: accountSex) ?? .all,
                        clubDetailInfo: clubDetailInfo.toDomain(),
                        leaderInfo: leaderInfo.toDomain(),
                        accountInfos: accountInfos.map { $0.toDomain() },
@@ -41,7 +41,7 @@ struct ClubFIndDetailResponseDTO: Codable {
 struct ClubFindDetail {
     let participating: Bool
     let leader: Bool
-    let accountSex: String
+    let accountSex: OwnerSex
     let clubDetailInfo: ClubDetailInfo
     let leaderInfo: LeaderInfo
     let accountInfos: [AccountSummaryInfo]

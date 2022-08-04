@@ -5,6 +5,7 @@
 //  Created by Hani on 2022/07/04.
 //
 
+import CoreLocation
 import Foundation
 
 import ReactorKit
@@ -20,6 +21,7 @@ final class DetailGatherReactor: Reactor {
         case textFieldDidEndEditing(String)
         case addCommentButtonDidTap
         case gatherButtonDidTap
+        case mapDidTap
     }
     
     enum Mutation {
@@ -53,6 +55,7 @@ final class DetailGatherReactor: Reactor {
     private let keychainUseCase: KeychainUseCaseInterface
     internal var readyToProfile = PublishSubject<String>()
     internal var readyToDismiss = PublishSubject<Void>()
+    internal var readyToMapView = PublishSubject<(Int, Coordinate)>()
     init(clubID: Int, detailGatherRepository: DetailGatherRepositoryInterface, profileMainRepository: ProfileMainRepositoryInterface, keychainUseCase: KeychainUseCaseInterface) {
         initialState = State(clubID: clubID)
         self.detailGatherRepository = detailGatherRepository
@@ -91,6 +94,13 @@ final class DetailGatherReactor: Reactor {
             return leaveClub(clubID: currentState.clubID)
         case .clubDeleteDidOccur:
             return deleteClub(clubID: currentState.clubID)
+        case .mapDidTap:
+            let clubID = currentState.clubID
+            let latitude = currentState.clubFindDetail?.clubDetailInfo.latitude ?? Coordinate.seoulCityHall.latitude
+            let longitude = currentState.clubFindDetail?.clubDetailInfo.longitude ?? Coordinate.seoulCityHall.longitude
+            let coordinate = Coordinate(latitude: latitude, longitude: longitude)
+            readyToMapView.onNext((clubID, coordinate))
+            return Observable.empty()
         }
     }
     
@@ -112,11 +122,11 @@ final class DetailGatherReactor: Reactor {
             } else if clubFindDetail.clubDetailInfo.maximumPeople <= clubFindDetail.clubDetailInfo.participants {
                 newState.gatherButtonState = .disabled
                 newState.gatherButtonText = "꽉찬 방이에요."
-            } else if clubFindDetail.clubDetailInfo.eligibleSex == "ALL" ||
+            } else if clubFindDetail.clubDetailInfo.eligibleSex == .all ||
                    clubFindDetail.accountSex == clubFindDetail.clubDetailInfo.eligibleSex {
                 newState.gatherButtonState = .enabled
                 newState.gatherButtonText = "참여할래요."
-            } else if clubFindDetail.clubDetailInfo.eligibleSex == "WOMAN" {
+            } else if clubFindDetail.clubDetailInfo.eligibleSex == .woman {
                 newState.gatherButtonState = .disabled
                 newState.gatherButtonText = "여성 견주만 참여할 수 있어요."
             } else {
