@@ -562,7 +562,7 @@ final class DetailGatherViewController: BaseViewController {
                 .distinctUntilChanged()
                 .observe(on: MainScheduler.instance)
                 .bind(to: participantCollectionView.rx.items(cellIdentifier: ParticipantCollectionViewCell.identifier, cellType: ParticipantCollectionViewCell.self)) { index, data, cell in
-                    cell.configure(imageURLString: data.imageURL ?? "", nickname: data.nickname)
+                    cell.configure(imageURLString: data.imageURL ?? "", nickname: data.nickname, id: data.id)
                 }
 
             reactor.state
