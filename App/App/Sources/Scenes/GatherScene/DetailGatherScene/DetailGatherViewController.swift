@@ -177,6 +177,15 @@ final class DetailGatherViewController: BaseViewController {
         return label
     }()
     
+    private lazy var participantReportLabel: UILabel = {
+        let label = UILabel()
+        label.text = "부적절한 유저가 있다면 프로필을 눌러 신고해주세요."
+        label.font = .customFont(size: 13, style: .Medium)
+        label.textColor = .Togaether.mainGreen
+        
+        return label
+    }()
+    
     private lazy var participantCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
@@ -313,6 +322,7 @@ final class DetailGatherViewController: BaseViewController {
         
         contentView.addSubview(participantLabel)
         contentView.addSubview(participantDescriptionLabel)
+        contentView.addSubview(participantReportLabel)
         contentView.addSubview(participantCollectionView)
         contentView.addSubview(divider4)
         
@@ -412,7 +422,10 @@ final class DetailGatherViewController: BaseViewController {
             participantDescriptionLabel.leadingAnchor.constraint(equalTo: participantLabel.trailingAnchor, constant: 12),
             participantDescriptionLabel.centerYAnchor.constraint(equalTo: participantLabel.centerYAnchor),
             
-            participantCollectionView.topAnchor.constraint(equalTo: participantLabel.bottomAnchor, constant: 12),
+            participantReportLabel.topAnchor.constraint(equalTo: participantLabel.bottomAnchor, constant: 10),
+            participantReportLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            
+            participantCollectionView.topAnchor.constraint(equalTo: participantReportLabel.bottomAnchor, constant: 12),
             participantCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             participantCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             participantCollectionView.heightAnchor.constraint(equalToConstant: 100),
