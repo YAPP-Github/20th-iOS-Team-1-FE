@@ -87,6 +87,10 @@ final class GatherListViewController: BaseViewController {
     
     private func bindAction(with reactor: GatherListReactor) {
         disposeBag.insert {
+            rx.viewWillAppear
+                .map { _ in Reactor.Action.viewWillAppear }
+                .bind(to: reactor.action)
+        
             segmentView.segmentControl.rx.selectedSegmentIndex
                 .map { index in
                     Reactor.Action.segmentIndex(index: index) }

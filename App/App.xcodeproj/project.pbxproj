@@ -227,6 +227,7 @@
 		FDE18E1F2873598E00A7369D /* GatherListRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE18E1E2873598E00A7369D /* GatherListRepositoryInterface.swift */; };
 		FDE6F146285215BD005E4783 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE6F145285215BD005E4783 /* UIFont+Extension.swift */; };
 		FDE6F14C285234A3005E4783 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE6F14B285234A3005E4783 /* NSObject+Extension.swift */; };
+		FDF075DD289E2C1B00CB3F70 /* ParticipateDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF075DC289E2C1B00CB3F70 /* ParticipateDTO.swift */; };
 		FDFD017028735DA300C625B1 /* GatherListResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFD016F28735DA300C625B1 /* GatherListResponseDTO.swift */; };
 		FDFD017228735DBB00C625B1 /* GatherConfigurationForSheetResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFD017128735DBB00C625B1 /* GatherConfigurationForSheetResponseDTO.swift */; };
 /* End PBXBuildFile section */
@@ -457,6 +458,7 @@
 		FDE18E1E2873598E00A7369D /* GatherListRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListRepositoryInterface.swift; sourceTree = "<group>"; };
 		FDE6F145285215BD005E4783 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		FDE6F14B285234A3005E4783 /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
+		FDF075DC289E2C1B00CB3F70 /* ParticipateDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipateDTO.swift; sourceTree = "<group>"; };
 		FDFD016F28735DA300C625B1 /* GatherListResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherListResponseDTO.swift; sourceTree = "<group>"; };
 		FDFD017128735DBB00C625B1 /* GatherConfigurationForSheetResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatherConfigurationForSheetResponseDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -631,6 +633,7 @@
 				3749904D28772F5600D07211 /* ClubCreateRequestDTO.swift */,
 				FD6D48902890F4AF005D9669 /* CreateClubRequestDTO.swift */,
 				37FB852A289419C300328F90 /* CommentRequestDTO.swift */,
+				FDF075DC289E2C1B00CB3F70 /* ParticipateDTO.swift */,
 			);
 			path = Club;
 			sourceTree = "<group>";
@@ -1525,6 +1528,7 @@
 				FD6F4DC32882A2C70031F747 /* PetTag.swift in Sources */,
 				FDBC120C2868BF6200FCADF4 /* InitialIntroductionView.swift in Sources */,
 				37C3F4F8284C70E40006CB02 /* KeychainQueryRequestable.swift in Sources */,
+				FDF075DD289E2C1B00CB3F70 /* ParticipateDTO.swift in Sources */,
 				37C14516284DC90900D11CC3 /* HTTPMethod.swift in Sources */,
 				37C3F4FA284C71030006CB02 /* KeychainQueryRequester.swift in Sources */,
 				FD5AEE8A286DDD5100001838 /* EditProflieReactor.swift in Sources */,
@@ -1811,12 +1815,13 @@
 				CODE_SIGN_ENTITLEMENTS = App/App.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = SQ5T25W9V5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = App/Info.plist;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "내 위치 확인을 위해 위치 정보가 필요합니다.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "내 라이브러리에 접근하기 위한 권한이 필요합니다.";
+				INFOPLIST_KEY_CFBundleDisplayName = "투개더";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "내 주변 모임 정보를 불러오려면 현재 위치가 필요합니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1844,12 +1849,13 @@
 				CODE_SIGN_ENTITLEMENTS = App/App.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = SQ5T25W9V5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = App/Info.plist;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "내 위치 확인을 위해 위치 정보가 필요합니다.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "내 라이브러리에 접근하기 위한 권한이 필요합니다.";
+				INFOPLIST_KEY_CFBundleDisplayName = "투개더";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "내 주변 모임 정보를 불러오려면 현재 위치가 필요합니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1862,10 +1868,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yapp.togather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = TogaetherDistribution;
+				PROVISIONING_PROFILE_SPECIFIER = TogatherDistribution;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

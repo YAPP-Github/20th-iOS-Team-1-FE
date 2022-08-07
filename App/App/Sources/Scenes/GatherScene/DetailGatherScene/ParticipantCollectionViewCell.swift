@@ -57,7 +57,9 @@ final class ParticipantCollectionViewCell: UICollectionViewCell {
             profileImageButton.heightAnchor.constraint(equalToConstant: contentView.frame.width),
             
             nicknameLabel.centerXAnchor.constraint(equalTo: profileImageButton.centerXAnchor),
-            nicknameLabel.topAnchor.constraint(equalTo: profileImageButton.bottomAnchor, constant: 8)
+            nicknameLabel.topAnchor.constraint(equalTo: profileImageButton.bottomAnchor, constant: 8),
+            nicknameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            nicknameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
     }
     
@@ -138,6 +140,7 @@ final class ParticipantCollectionViewCell: UICollectionViewCell {
         alertController.addAction(cancelAction)
         UIApplication.shared.keyWindow?.rootViewController?.present(alertController, animated: true, completion: nil)
     }
+    
     func configure(imageURLString: String, nickname: String, id: Int) {
         profileImageButton.imageWithURL(imageURLString)
         nicknameLabel.text = nickname

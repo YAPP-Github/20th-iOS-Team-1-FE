@@ -74,8 +74,8 @@ final class DetailGatherRepository: DetailGatherRepositoryInterface {
             urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
             urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
             
-            let response: Single<Int> = self.networkManager.requestDataTask(with: urlRequest)
-            
+            let response: Single<ParticipateDTO> = self.networkManager.requestDataTask(with: urlRequest)
+            print(response)
             response.subscribe { result in
                 switch result {
                 case .success(_):

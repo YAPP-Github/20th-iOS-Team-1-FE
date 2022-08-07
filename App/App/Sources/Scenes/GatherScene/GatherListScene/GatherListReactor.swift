@@ -12,15 +12,18 @@ import RxSwift
 
 final class GatherListReactor: Reactor {
     enum Action {
+        case viewWillAppear
         case segmentIndex(index: Int)
         case gatherListCellDidTap(clubID: Int)
     }
     
     enum Mutation {
         case readyToListInfo(Gather, GatherListInfo)
+        case currentIdx(Int)
     }
     
     struct State {
+        var currentIdx: Int = 0
         var gatherListInfo: GatherListInfo
         var gatherType: Gather
     }
@@ -39,13 +42,19 @@ final class GatherListReactor: Reactor {
     
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
+        case .viewWillAppear:
+            guard let gatherCondition = Gather.init(rawValue: currentState.currentIdx) else {
+                return Observable.empty()
+            }
+            return getGatherList(gatherCondition)
         case .segmentIndex(index: let index):
-            
             guard let gatherCondition = Gather.init(rawValue: index) else {
                 return Observable.empty()
             }
-            
-            return getGatherList(gatherCondition)
+            return Observable.concat([
+                getGatherList(gatherCondition),
+                Observable.just(.currentIdx(index))
+            ])
         case .gatherListCellDidTap(clubID: let clubID):
             readyToDetailGather.onNext(clubID)
             return Observable.empty()
@@ -59,6 +68,8 @@ final class GatherListReactor: Reactor {
         case .readyToListInfo(let gatherType, let data):
             newState.gatherListInfo = data
             newState.gatherType = gatherType
+        case .currentIdx(let idx):
+            newState.currentIdx = idx
         }
         
         return newState

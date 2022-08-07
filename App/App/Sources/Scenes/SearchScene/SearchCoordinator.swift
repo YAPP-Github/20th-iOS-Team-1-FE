@@ -23,8 +23,14 @@ final class SearchCoordinator: SceneCoordinator {
     
     func start() {
         //TODO: KeyChainProvider
-        let gatherRepository = GatherRepository(networkManager: NetworkManager.shared)
-        let searchReactor = SearchReactor(gatherRepository: gatherRepository)
+        let networkManager = NetworkManager.shared
+        let keychainProvider = KeychainProvider.shared
+        let keychainUseCase = KeychainUsecase(keychainProvider: keychainProvider, networkManager: networkManager)
+        let profileMainRepository = ProfileRespository(networkManager: networkManager)
+        let gatherRepository = GatherRepository(networkManager: networkManager)
+        let searchReactor = SearchReactor(gatherRepository: gatherRepository,
+                                          keychainUseCase: keychainUseCase,
+                                          profileMainRepository: profileMainRepository)
         let viewController = SearchViewController(reactor: searchReactor, locationManager: locationManger)
         
         searchReactor.readyToDetailGather

@@ -21,7 +21,7 @@ final class SearchViewController: BaseViewController {
         mapView.showsCompass = false
         mapView.isPitchEnabled = false
         mapView.setCameraZoomRange(
-            MKMapView.CameraZoomRange(minCenterCoordinateDistance: 1000, maxCenterCoordinateDistance: 10000),
+            MKMapView.CameraZoomRange(minCenterCoordinateDistance: 500, maxCenterCoordinateDistance: 500),
             animated: false
         )
         mapView.delegate = self
@@ -128,13 +128,15 @@ final class SearchViewController: BaseViewController {
         return label
     }()
     
-    private lazy var createGatherButton: UIButton = {
-        let button = UIButton()
+    private lazy var createGatherButton: EnableButton = {
+        let button = EnableButton()
         button.layer.cornerRadius = 10
         button.setTitle("여기서 모임을 만들래요", for: .normal)
+        button.setTitle("반려견을 등록해야 합니다.", for: .disabled)
         button.titleLabel?.font = button.titleLabel?.font.withSize(20)
-        button.backgroundColor = UIColor.Togaether.mainGreen
         button.tintColor = UIColor.white
+        button.isEnabled = false
+        
         return button
     }()
     
@@ -265,6 +267,9 @@ final class SearchViewController: BaseViewController {
     
     private func bindAction(with reactor: SearchReactor) {
         disposeBag.insert (
+            rx.viewWillAppear
+                .map { _ in Reactor.Action.viewWillAppear }
+                .bind(to: reactor.action),
 //            searchButton.rx.throttleTap
 //                .map { Reactor.Action.searchButtonTapped }
 //                .bind(to: reactor.action),
@@ -362,7 +367,13 @@ final class SearchViewController: BaseViewController {
                                    animated: false
                                )
                            }
-                       })
+                       }),
+            
+            reactor.state
+                .map { $0.isCreateGatherButtonEnabled }
+                .distinctUntilChanged()
+                .asDriver(onErrorJustReturn: false)
+                .drive(createGatherButton.rx.isEnabled)
         )
     }
     

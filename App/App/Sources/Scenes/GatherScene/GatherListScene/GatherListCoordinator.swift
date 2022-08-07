@@ -90,8 +90,14 @@ final class GatherListCoordinator: SceneCoordinator {
     
     func pushMapViewController(clubID: Int, visibleCoordinate: Coordinate) {
         let locationManger = CLLocationManager()
-        let gatherRepository = GatherRepository(networkManager: NetworkManager.shared)
-        let searchReactor = SearchReactor(gatherRepository: gatherRepository, visibleCoordinate: visibleCoordinate)
+        let networkManager = NetworkManager.shared
+        let keychainProvider = KeychainProvider.shared
+        let keychainUseCase = KeychainUsecase(keychainProvider: keychainProvider, networkManager: networkManager)
+        let profileMainRepository = ProfileRespository(networkManager: networkManager)
+        let gatherRepository = GatherRepository(networkManager: networkManager)
+        let searchReactor = SearchReactor(gatherRepository: gatherRepository,
+                                          keychainUseCase: keychainUseCase,
+                                          profileMainRepository: profileMainRepository)
         let viewController = SearchViewController(reactor: searchReactor, locationManager: locationManger)
         
         navigationController.pushViewController(viewController, animated: true)

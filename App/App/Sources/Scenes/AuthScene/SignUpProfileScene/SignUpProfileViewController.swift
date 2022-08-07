@@ -169,6 +169,7 @@ final class SignUpProfileViewController: BaseViewController {
     private func configureUI() {
         view.backgroundColor = .Togaether.background
     }
+
     
     private func bindAction(with reactor: Reactor) {
         disposeBag.insert {

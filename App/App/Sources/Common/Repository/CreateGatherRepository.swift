@@ -44,7 +44,7 @@ final class CreateGatherRepository: CreateGatherRepositoryInterface {
             urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
             
             let response: Single<Int> = self.networkManager.requestDataTask(with: urlRequest)
-            
+
             response.subscribe { result in
                 switch result {
                 case .success(_):
