@@ -9,7 +9,7 @@
 </p>
 
 ## 설치 방법 (Install)
-- 투개더(Togaether)는 8월 중 iOS App Store에서 만나보실 수 있도록 공개 예정입니다.
+[투개더(Togaether) 앱스토어 설치하기](https://apps.apple.com/app/%ED%88%AC%EA%B0%9C%EB%8D%94/id1638130744)
 
 ## 주요 기능 (Features)
 ### 🧭 내 주변 모임 찾기
