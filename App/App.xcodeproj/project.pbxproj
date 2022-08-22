@@ -176,6 +176,7 @@
 		FD0870D228805B6E00DF3553 /* AddPetRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0870D128805B6E00DF3553 /* AddPetRepository.swift */; };
 		FD0870D428805BC300DF3553 /* AddPetRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0870D328805BC300DF3553 /* AddPetRepositoryInterface.swift */; };
 		FD0870D62880631A00DF3553 /* EditProfileRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0870D52880631A00DF3553 /* EditProfileRepositoryInterface.swift */; };
+		FD0BA06B28A26E3D0039A89E /* TempSignUpPrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0BA06A28A26E3D0039A89E /* TempSignUpPrivacyPolicyViewController.swift */; };
 		FD47593E2892BDE700E33B84 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD47593D2892BDE700E33B84 /* Date+Extension.swift */; };
 		FD47594C2897C1EE00E33B84 /* Parent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD47594B2897C1EE00E33B84 /* Parent.swift */; };
 		FD5AEE86286DDC2A00001838 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5AEE85286DDC2A00001838 /* EditProfileViewController.swift */; };
@@ -407,6 +408,7 @@
 		FD0870D128805B6E00DF3553 /* AddPetRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPetRepository.swift; sourceTree = "<group>"; };
 		FD0870D328805BC300DF3553 /* AddPetRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPetRepositoryInterface.swift; sourceTree = "<group>"; };
 		FD0870D52880631A00DF3553 /* EditProfileRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileRepositoryInterface.swift; sourceTree = "<group>"; };
+		FD0BA06A28A26E3D0039A89E /* TempSignUpPrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempSignUpPrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		FD47593D2892BDE700E33B84 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		FD47594B2897C1EE00E33B84 /* Parent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parent.swift; sourceTree = "<group>"; };
 		FD5AEE85286DDC2A00001838 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
@@ -576,6 +578,7 @@
 			isa = PBXGroup;
 			children = (
 				3719183D286E235E00169FC2 /* SignUpPrivacyPolicyViewController.swift */,
+				FD0BA06A28A26E3D0039A89E /* TempSignUpPrivacyPolicyViewController.swift */,
 			);
 			path = SignUpPrivacyPolicyScene;
 			sourceTree = "<group>";
@@ -1632,6 +1635,7 @@
 				37C1451D284F9D6500D11CC3 /* NetworkManageable.swift in Sources */,
 				FDBC1232286C983E00FCADF4 /* AccountInfoDTO.swift in Sources */,
 				37D1E509287716FA00A955C4 /* FileManagerUseCase.swift in Sources */,
+				FD0BA06B28A26E3D0039A89E /* TempSignUpPrivacyPolicyViewController.swift in Sources */,
 				FDD2267C287873730042F488 /* NSMutableData+Extension.swift in Sources */,
 				FDE18E1C2873596300A7369D /* GatherListInfo.swift in Sources */,
 				37AA7E1A2850B1B600B4B5C2 /* EligibleSexDTO.swift in Sources */,
@@ -1815,11 +1819,12 @@
 				CODE_SIGN_ENTITLEMENTS = App/App.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SQ5T25W9V5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "투개더";
+				INFOPLIST_KEY_NSLocationUsageDescription = "내 주변 모임 정보를 불러오려면 현재 위치가 필요합니다.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "내 주변 모임 정보를 불러오려면 현재 위치가 필요합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1831,7 +1836,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yapp.togather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = TogaetherDev;
@@ -1849,11 +1854,12 @@
 				CODE_SIGN_ENTITLEMENTS = App/App.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SQ5T25W9V5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "투개더";
+				INFOPLIST_KEY_NSLocationUsageDescription = "내 주변 모임 정보를 불러오려면 현재 위치가 필요합니다.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "내 주변 모임 정보를 불러오려면 현재 위치가 필요합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1865,7 +1871,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yapp.togather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = TogatherDistribution;

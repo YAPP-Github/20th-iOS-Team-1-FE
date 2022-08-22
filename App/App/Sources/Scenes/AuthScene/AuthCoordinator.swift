@@ -152,7 +152,7 @@ final class AuthCoordinator: SceneCoordinator {
     }
     
     func pushSignUpPrivacyPolicyViewController() {
-        let signUpPrivacyPolicyViewController = SignUpPrivacyPolicyViewController()
+        let signUpPrivacyPolicyViewController = TempSignUpPrivacyPolicyViewController()
         
         navigationController.present(signUpPrivacyPolicyViewController, animated: true)
     }
