@@ -84,7 +84,7 @@ final class SignUpProfileReactor: Reactor {
             newState.isNextButtonEnabled = (checkedNickname != nil)
             newState.alertLabel = (checkedNickname == nil) ? "중복된 닉네임이 존재합니다." : ""
         case .updateNickname(let nickname):
-            if nickname.count >= 4 {
+            if nickname.count >= 1 {
                 newState.isNicknameLengthReached = true
             }
             newState.nickname = nickname
