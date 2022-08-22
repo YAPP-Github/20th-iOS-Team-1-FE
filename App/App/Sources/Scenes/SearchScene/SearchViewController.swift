@@ -20,10 +20,8 @@ final class SearchViewController: BaseViewController {
         mapView.showsUserLocation = true
         mapView.showsCompass = false
         mapView.isPitchEnabled = false
-        mapView.setCameraZoomRange(
-            MKMapView.CameraZoomRange(minCenterCoordinateDistance: 500, maxCenterCoordinateDistance: 500),
-            animated: false
-        )
+        mapView.isZoomEnabled = true
+        mapView.region.span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         mapView.delegate = self
         
         mapView.register(AnnotationView.self, forAnnotationViewWithReuseIdentifier: AnnotationView.identifier)
