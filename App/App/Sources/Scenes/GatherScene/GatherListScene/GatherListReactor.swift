@@ -19,7 +19,6 @@ final class GatherListReactor: Reactor {
     
     enum Mutation {
         case readyToListInfo(Gather, GatherListInfo)
-        case currentIdx(Int)
     }
     
     struct State {
@@ -43,7 +42,7 @@ final class GatherListReactor: Reactor {
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .viewWillAppear:
-            guard let gatherCondition = Gather.init(rawValue: currentState.currentIdx) else {
+            guard let gatherCondition = Gather.init(rawValue: 0) else {
                 return Observable.empty()
             }
             return getGatherList(gatherCondition)
@@ -51,10 +50,7 @@ final class GatherListReactor: Reactor {
             guard let gatherCondition = Gather.init(rawValue: index) else {
                 return Observable.empty()
             }
-            return Observable.concat([
-                getGatherList(gatherCondition),
-                Observable.just(.currentIdx(index))
-            ])
+            return getGatherList(gatherCondition)
         case .gatherListCellDidTap(clubID: let clubID):
             readyToDetailGather.onNext(clubID)
             return Observable.empty()
@@ -68,11 +64,9 @@ final class GatherListReactor: Reactor {
         case .readyToListInfo(let gatherType, let data):
             newState.gatherListInfo = data
             newState.gatherType = gatherType
-        case .currentIdx(let idx):
-            newState.currentIdx = idx
-        }
-        
+            
         return newState
+        }
     }
     
     
