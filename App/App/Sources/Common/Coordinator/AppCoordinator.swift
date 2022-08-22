@@ -74,4 +74,10 @@ extension AppCoordinator: TabBarCoordinatorDelegate {
         childCoordinators.removeAll()
         moveToAuth()
     }
+    
+    func switchToAgreement() {
+        startFrom = .agreement
+        childCoordinators.removeAll()
+        moveToAgreement()
+    }
 }
