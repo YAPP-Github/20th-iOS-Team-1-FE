@@ -100,5 +100,10 @@ final class SegmentView: UIView {
             leadingDistance,
             underLineView.widthAnchor.constraint(equalTo: segmentControl.widthAnchor, multiplier: 1 / CGFloat(segmentControl.numberOfSegments))
             ])
-    }           
+    }
+    
+    internal func settingInitialSegmentView() {
+        segmentControl.selectedSegmentIndex = 0
+        changeUnderLinePosition()
+    }
 }
