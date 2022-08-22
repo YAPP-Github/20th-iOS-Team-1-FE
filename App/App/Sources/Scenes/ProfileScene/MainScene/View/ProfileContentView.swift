@@ -244,7 +244,13 @@ final class ProfileContentView: UIView {
         
         switch profileType {
         case .owner(introduction: let introduction, pet: let pet):
-            introduction?.isEmpty ?? true ? introduceView.removeFromSuperview() : initialIntroduceView.removeFromSuperview()
+            if introduction != nil {
+                introduceView.isHidden = false
+                initialIntroduceView.isHidden = true
+            } else {
+                introduceView.isHidden = true
+                initialIntroduceView.isHidden = false
+            }
             pet?.isEmpty ?? true ? nil : emptyPetView.removeFromSuperview()
         case .other:
             initialIntroduceView.removeFromSuperview()
