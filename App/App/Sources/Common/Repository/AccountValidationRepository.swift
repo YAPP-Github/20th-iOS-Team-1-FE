@@ -23,7 +23,9 @@ final class AccountValidationRepository: AccountValidationRepositoryInterface {
                 return Disposables.create()
             }
             
-            guard let url = URL(string: APIConstants.Account.nicknameCheck + "/\(nickname)") else {
+            let urlString = APIConstants.Account.nicknameCheck + "/\(nickname)"
+            let encodingString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+            guard let url = URL(string: encodingString) else {
                 return Disposables.create()
             }
             
