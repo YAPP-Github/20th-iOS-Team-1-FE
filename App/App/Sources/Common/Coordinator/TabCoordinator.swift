@@ -51,5 +51,6 @@ final class TabCoordinator: Coordinator {
 
 protocol TabBarCoordinatorDelegate: AnyObject {
     func switchToAuth()
+    func switchToAgreement()
 }
 

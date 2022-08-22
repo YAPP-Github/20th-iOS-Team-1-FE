@@ -29,6 +29,29 @@ final class ProfileCoordinator: SceneCoordinator {
         let reactor = ProfileReactor(nickname: nil, keychainProvider: keychainProvider, keychainUseCase: keychainUseCase, profileMainRepository: profileMainRepository)
         let viewController = ProfileViewController(reactor: reactor)
         
+        keychainUseCase.getAccessToken()
+            .subscribe(with: self,
+               onSuccess: { this, token in
+                profileMainRepository.requestProfileInfo(accessToken: token, nickname: nil)
+                    .subscribe { result in
+                        switch result {
+                        case .success(_):
+                            break
+                        case .failure(_):
+                            DispatchQueue.main.async { [weak self] in
+                                self?.delegate?.switchToAgreement()                                
+                            }
+                        }
+                    }.disposed(by: self.disposeBag)
+               },
+               onFailure: { _, _ in
+                DispatchQueue.main.async { [weak self] in
+                    self?.delegate?.switchToAuth()
+                }
+            })
+            .disposed(by: disposeBag)
+                    
+        
         reactor.readyToRoot
             .asDriver(onErrorJustReturn: ())
             .drive(with: self,

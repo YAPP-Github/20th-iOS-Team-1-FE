@@ -21,7 +21,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         window = UIWindow(windowScene: windowScene)
-     //startCoordinate(window: window, start: .tapBar)
         let networkManager = NetworkManager.shared
         let KeychainQueryRequester = KeychainQueryRequester.shared
         let keychainProvider = KeychainProvider(keyChain: KeychainQueryRequester)
@@ -42,7 +41,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
 
         }
-        
     }
     
     private func startCoordinate(window: UIWindow?, start: Start) {
