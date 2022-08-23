@@ -56,8 +56,8 @@ final class DetailGatherRepository: DetailGatherRepositoryInterface {
         }
     }
     
-    internal func participateGather(accessToken: Data, clubID: Int) -> Single<Void> {
-        return Single<Void>.create { [weak self] observer in
+    internal func participateGather(accessToken: Data, clubID: Int) -> Single<String?> {
+        return Single<String?>.create { [weak self] observer in
             guard let self = self else {
                 return Disposables.create()
             }
@@ -75,11 +75,10 @@ final class DetailGatherRepository: DetailGatherRepositoryInterface {
             urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
             
             let response: Single<ParticipateDTO> = self.networkManager.requestDataTask(with: urlRequest)
-            print(response)
             response.subscribe { result in
                 switch result {
-                case .success(_):
-                    observer(.success(()))
+                case .success(let dto):
+                    observer(.success(dto.rejectReason))
                 case .failure(let error):
                     observer(.failure(error))
                 }

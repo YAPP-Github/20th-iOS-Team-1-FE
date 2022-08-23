@@ -32,6 +32,7 @@ final class DetailGatherReactor: Reactor {
         case empty
         case deleteClubCall
         case quitClubCall
+        case hasNotPet
     }
     
     struct State {
@@ -41,6 +42,7 @@ final class DetailGatherReactor: Reactor {
         var deleteClubCallCount = 0
         var quitClubCallCount = 0
         var isCommentReportSuccess = false
+        var alertHasNotPet = false
         
         var gatherButtonText = ""
         var gatherButtonState = GatherButtonState.disabled
@@ -147,6 +149,8 @@ final class DetailGatherReactor: Reactor {
             newState.deleteClubCallCount += 1
         case .quitClubCall:
             newState.quitClubCallCount += 1
+        case .hasNotPet:
+            newState.alertHasNotPet = true
         }
         return newState
     }
@@ -189,16 +193,20 @@ final class DetailGatherReactor: Reactor {
                     this.detailGatherRepository.participateGather(accessToken: token, clubID: clubID)
                         .subscribe { result in
                         switch result {
-                        case .success(_):
-                            this.detailGatherRepository.requestDetailGather(accessToken: token, clubID: clubID)
-                                .subscribe { result in
-                                    switch result {
-                                    case .success(let clubFindDetail):
-                                        observer.onNext(Mutation.updateDetailGather(clubFindDetail))
-                                    case .failure(let error):
-                                        print("RESULT FAILURE: ", error.localizedDescription)
-                                    }
-                                }.disposed(by: self.disposeBag)
+                        case .success(let reason):
+                            if reason == "HAS_NOT_PET" {
+                                observer.onNext(Mutation.hasNotPet)
+                            } else {
+                                this.detailGatherRepository.requestDetailGather(accessToken: token, clubID: clubID)
+                                    .subscribe { result in
+                                        switch result {
+                                        case .success(let clubFindDetail):
+                                            observer.onNext(Mutation.updateDetailGather(clubFindDetail))
+                                        case .failure(let error):
+                                            print("RESULT FAILURE: ", error.localizedDescription)
+                                        }
+                                    }.disposed(by: self.disposeBag)
+                            }
                         case .failure(let error):
                             print("RESULT FAILURE: ", error.localizedDescription)
                         }
