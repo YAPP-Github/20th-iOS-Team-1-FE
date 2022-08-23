@@ -94,8 +94,8 @@ final class AddPetReactor: Reactor {
         case .dateDidEndEditing(let date):
             if date == "" { return Observable.empty() }
             let birth = date.components(separatedBy: "-").map{ Int($0)! }
-            let year = birth.first!
-            let month = birth.last!
+            let year = birth[0]
+            let month = birth[1]
             return Observable.concat([
                 Observable.just(.updateYearOfBirth(year)),
                 Observable.just(.updateMonthOfBirth(month))])
