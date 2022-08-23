@@ -17,6 +17,6 @@ protocol DetailGatherRepositoryInterface {
     func addComment(accessToken: Data, comment: CommentRequest) -> Single<ClubFindDetail>
     func leaveClub(accessToken: Data, clubID: Int) -> Single<Void>
     func deleteClub(accessToken: Data, clubID: Int) -> Single<Void>
-    func participateGather(accessToken: Data, clubID: Int) -> Single<Void>
+    func participateGather(accessToken: Data, clubID: Int) -> Single<String?>
 }
 

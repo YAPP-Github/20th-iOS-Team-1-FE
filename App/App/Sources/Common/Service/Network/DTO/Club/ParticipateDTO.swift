@@ -10,7 +10,8 @@ import Foundation
 struct ParticipateDTO: Codable {
     let eligible: Bool
     let rejectReason: String?
-    let clubID, accountClubID: Int
+    let clubID: Int
+    let accountClubID: Int?
 
     enum CodingKeys: String, CodingKey {
         case eligible, rejectReason
