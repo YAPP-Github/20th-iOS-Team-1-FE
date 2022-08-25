@@ -554,7 +554,8 @@ final class DetailGatherViewController: BaseViewController {
 
                     self.eligiblePetSizeView.reactor = TagCollectionViewReactor(state: club.clubDetailInfo.eligiblePetSizeTypes.map { $0.toKorean() })
                     self.eligibleSexView.reactor = TagCollectionViewReactor(state: [club.clubDetailInfo.eligibleSex?.toKorean() ?? ""])
-                    self.eligiblePetBreedView.reactor = TagCollectionViewReactor(state: club.clubDetailInfo.eligibleBreeds)
+                    let eligibleBreeds = club.clubDetailInfo.eligibleBreeds.count == 0 ? ["모든 견종"] : club.clubDetailInfo.eligibleBreeds
+                    self.eligiblePetBreedView.reactor = TagCollectionViewReactor(state: eligibleBreeds)
 
                     self.gatherCategoryLabel.text = "  " + (club.clubDetailInfo.category?.korean ?? "") + "  "
                     self.gatherTitleLabel.text = club.clubDetailInfo.title

@@ -19,7 +19,7 @@ enum OwnerSex: String {
         case .woman:
             return "여성 Only"
         case .all:
-            return "상관없음"
+            return "모든 성별"
         }
     }
 }

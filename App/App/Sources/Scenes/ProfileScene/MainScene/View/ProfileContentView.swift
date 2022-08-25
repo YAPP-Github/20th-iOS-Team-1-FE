@@ -88,6 +88,14 @@ final class ProfileContentView: UIView {
         return view
     }()
     
+    private lazy var indicator: UIButton = {
+        let button = UIButton()
+        button.setImage(.Togaether.rightArrow, for: .normal)
+        button.tintColor = .white
+        
+        return button
+    }()
+    
     internal lazy var introduceLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
@@ -156,6 +164,7 @@ final class ProfileContentView: UIView {
         profileHeaderView.addSubview(initialIntroduceView)
         profileHeaderView.addSubview(introduceView)
         introduceView.addSubview(introduceLabel)
+        introduceView.addSubview(indicator)
         addSubview(petListView)
         profileFooterView.addSubview(emptyPetView)
         profileFooterView.addSubview(addPuppyButton)
@@ -199,8 +208,12 @@ final class ProfileContentView: UIView {
             
             introduceLabel.topAnchor.constraint(equalTo: introduceView.topAnchor, constant: 10),
             introduceLabel.leadingAnchor.constraint(equalTo: introduceView.leadingAnchor, constant: 10),
-            introduceLabel.trailingAnchor.constraint(equalTo: introduceView.trailingAnchor, constant: -10),
+            introduceLabel.trailingAnchor.constraint(equalTo: introduceView.trailingAnchor, constant: -40),
             introduceLabel.bottomAnchor.constraint(equalTo: introduceView.bottomAnchor, constant: -10),
+            
+            indicator.topAnchor.constraint(equalTo: introduceView.topAnchor, constant: 20),
+            indicator.trailingAnchor.constraint(equalTo: introduceView.trailingAnchor, constant: -20),
+            indicator.bottomAnchor.constraint(equalTo: introduceView.bottomAnchor, constant: -20),
             
             petListView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             petListView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),

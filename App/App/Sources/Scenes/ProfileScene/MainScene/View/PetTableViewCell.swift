@@ -139,7 +139,7 @@ final class PetTableViewCell: UITableViewCell {
         dogNameLabel.text = data.nickName
         breedLabel.text = data.breed
         ageLabel.text = data.age
-        genderImageView.image = data.sex.genderImage()
+        genderImageView.image = data.sex.genderImage().withTintColor(.Togaether.primaryLabel)
         tagCollectionView.reactor = TagCollectionViewReactor(state: data.tags ?? [])
     }
 
