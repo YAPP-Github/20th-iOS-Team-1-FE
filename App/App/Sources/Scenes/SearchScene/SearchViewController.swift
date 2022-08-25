@@ -383,6 +383,8 @@ final class SearchViewController: BaseViewController {
     private func moveToCurrentLocation() {
         if let location = locationManager.location {
             mapView.setCenter(location.coordinate, animated: true)
+        } else {
+            configureSetting()
         }
     }
     
@@ -448,6 +450,23 @@ final class SearchViewController: BaseViewController {
                 }
             })
         }
+    }
+    
+    func configureSetting() {
+        let alert = UIAlertController(title: "위치 권한 요청", message: "내 주변 모임 정보를 불러오려면 현재 위치가 필요합니다.", preferredStyle: .alert)
+        let settingAction = UIAlertAction(title: "설정", style: .default) { action in
+            guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url)
+            }
+        }
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel) { UIAlertAction in
+        }
+        
+        alert.addAction(settingAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
     }
 }
 
