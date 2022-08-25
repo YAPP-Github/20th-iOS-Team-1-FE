@@ -680,13 +680,12 @@ final class DetailGatherViewController: BaseViewController {
                 })
             
             reactor.state
-                .map { $0.alertHasNotPet }
+                .map { $0.participateError }
                 .distinctUntilChanged()
-                .asDriver(onErrorJustReturn: false)
-                .filter { $0 == true }
+                .asDriver(onErrorJustReturn: "")
                 .drive(with: self,
-                       onNext: { this, _ in
-                    this.presentHasNoPetAlert()
+                       onNext: { this, error in
+                    this.presentParticipateError(message: error)
                 })
             
             reactor.state
@@ -748,8 +747,8 @@ final class DetailGatherViewController: BaseViewController {
         present(alertController, animated: true, completion: nil)
     }
     
-    private func presentHasNoPetAlert() {
-        let alertController = UIAlertController(title: "반려견을 등록해야합니다.", message: nil, preferredStyle: .alert)
+    private func presentParticipateError(message: String) {
+        let alertController = UIAlertController(title: "참여 불가", message: message, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "확인", style: .default, handler: nil)
         alertController.addAction(cancelAction)
         present(alertController, animated: true, completion: nil)
@@ -757,7 +756,7 @@ final class DetailGatherViewController: BaseViewController {
     
     private func presentClubError() {
         let alertController = UIAlertController(title: "종료된 모임입니다.", message: nil, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "확인", style: .default, handler: { _ in 
+        let cancelAction = UIAlertAction(title: "확인", style: .default, handler: { _ in
             self.navigationController?.popViewController(animated: true)
         })
         alertController.addAction(cancelAction)
