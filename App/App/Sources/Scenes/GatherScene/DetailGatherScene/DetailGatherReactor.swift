@@ -33,6 +33,7 @@ final class DetailGatherReactor: Reactor {
         case deleteClubCall
         case quitClubCall
         case hasNotPet
+        case detailError(Bool)
     }
     
     struct State {
@@ -43,6 +44,7 @@ final class DetailGatherReactor: Reactor {
         var quitClubCallCount = 0
         var isCommentReportSuccess = false
         var alertHasNotPet = false
+        var clubDetailError = false
         
         var gatherButtonText = ""
         var gatherButtonState = GatherButtonState.disabled
@@ -151,6 +153,8 @@ final class DetailGatherReactor: Reactor {
             newState.quitClubCallCount += 1
         case .hasNotPet:
             newState.alertHasNotPet = true
+        case .detailError(let hasError):
+            newState.clubDetailError = hasError
         }
         return newState
     }
@@ -169,12 +173,15 @@ final class DetailGatherReactor: Reactor {
                         switch result {
                         case .success(let clubFindDetail):
                             observer.onNext(Mutation.updateDetailGather(clubFindDetail))
+                            observer.onNext(Mutation.detailError(false))
                         case .failure(let error):
                             print("RESULT FAILURE: ", error.localizedDescription)
+                            observer.onNext(Mutation.detailError(true))
                         }
                     }.disposed(by: self.disposeBag)
                 },
                 onFailure: { _,_ in
+                    observer.onNext(Mutation.detailError(true))
                      return
                 }).disposed(by: self.disposeBag)
             return Disposables.create()

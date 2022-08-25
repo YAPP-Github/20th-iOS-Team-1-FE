@@ -688,6 +688,16 @@ final class DetailGatherViewController: BaseViewController {
                        onNext: { this, _ in
                     this.presentHasNoPetAlert()
                 })
+            
+            reactor.state
+                .map { $0.clubDetailError }
+                .distinctUntilChanged()
+                .asDriver(onErrorJustReturn: false)
+                .filter { $0 == true }
+                .drive(with: self,
+                       onNext: { this, _ in
+                    this.presentClubError()
+                })
         }
     }
     
@@ -741,6 +751,15 @@ final class DetailGatherViewController: BaseViewController {
     private func presentHasNoPetAlert() {
         let alertController = UIAlertController(title: "반려견을 등록해야합니다.", message: nil, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    private func presentClubError() {
+        let alertController = UIAlertController(title: "종료된 모임입니다.", message: nil, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "확인", style: .default, handler: { _ in 
+            self.navigationController?.popViewController(animated: true)
+        })
         alertController.addAction(cancelAction)
         present(alertController, animated: true, completion: nil)
     }
