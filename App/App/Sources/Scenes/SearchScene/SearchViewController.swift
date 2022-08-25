@@ -478,9 +478,11 @@ extension SearchViewController: MKMapViewDelegate {
             mapView.deselectAnnotation(view.annotation, animated: false)
         }
         else if let view = view as? AnnotationView,
-                let annotation = view.annotation as? Annotation,
-                let location = locationManager.location
+                let annotation = view.annotation as? Annotation
         {
+            let defaultCoordinate = Coordinate.seoulCityHall
+            let location = locationManager.location ?? CLLocation(latitude: defaultCoordinate.latitude, longitude: defaultCoordinate.longitude)
+            
             view.select()
             reactor?.action
                 .onNext(
