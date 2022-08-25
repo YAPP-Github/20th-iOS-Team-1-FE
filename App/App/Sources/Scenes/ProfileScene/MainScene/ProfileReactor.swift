@@ -188,9 +188,9 @@ final class ProfileReactor: Reactor {
                     .subscribe { result in
                         switch result {
                         case .success:
-                                self.readyToRoot.onNext(())
                             try? self.keychainProvider.delete(service: KeychainService.apple, account: KeychainAccount.accessToken)
                             try? self.keychainProvider.delete(service: KeychainService.apple, account: KeychainAccount.refreshToken)
+                            self.readyToRoot.onNext(())
                             return
                         case .failure(let error):
                             print("RESULT FAILURE: ", error.localizedDescription)
