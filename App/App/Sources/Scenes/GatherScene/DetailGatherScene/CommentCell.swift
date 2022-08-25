@@ -64,8 +64,9 @@ final class CommentCell: UITableViewCell {
     
     private let reportButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage.Togaether.setting, for: .normal)
-        
+        let image = UIImage.Togaether.setting.withTintColor(UIColor.Togaether.primaryLabel)
+        button.setImage(image, for: .normal)
+
         return button
     }()
     

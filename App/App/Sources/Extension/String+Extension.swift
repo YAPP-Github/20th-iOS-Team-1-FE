@@ -22,4 +22,16 @@ extension String {
             return nil
         }
     }
+    
+    func commentDateStringToDate() -> Date? {
+        let dateFormatter = DateFormatter()
+        // 2022-08-06T05:39:02.066839Z
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'"
+        dateFormatter.timeZone = TimeZone(identifier: "UTC")
+        if let date = dateFormatter.date(from: self) {
+            return date
+        } else {
+            return nil
+        }
+    }
 }

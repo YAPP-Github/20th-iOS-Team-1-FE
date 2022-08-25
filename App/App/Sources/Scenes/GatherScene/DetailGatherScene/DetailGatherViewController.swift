@@ -51,7 +51,9 @@ final class DetailGatherViewController: BaseViewController {
         let label = UILabel()
         label.font = .customFont(size: 20)
         label.textColor = .Togaether.primaryLabel
-        label.numberOfLines = 0
+        label.numberOfLines = 1
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.1
         
         return label
     }()
@@ -281,16 +283,24 @@ final class DetailGatherViewController: BaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardUp), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDown), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         addSubviews()
         configureLayout()
         configureUI()
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        commentTextField.resignFirstResponder()
+        
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:))))
     }
     
     private func addSubviews() {
@@ -351,6 +361,7 @@ final class DetailGatherViewController: BaseViewController {
             
             gatherCategoryLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 40),
             gatherCategoryLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            gatherTitleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
             gatherTitleLabel.topAnchor.constraint(equalTo: gatherCategoryLabel.bottomAnchor, constant: 8),
             gatherTitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             gatherDayLabel.topAnchor.constraint(equalTo: gatherTitleLabel.bottomAnchor, constant: 8),
@@ -610,7 +621,7 @@ final class DetailGatherViewController: BaseViewController {
                                    nickname: data.author,
                                    isLeader: data.leader,
                                    dog: data.breeds.first ?? "",
-                                   date: data.updatedTime.toDate()?.toDateLabelText() ?? "",
+                                   date: data.updatedTime.commentDateStringToDate()?.toDateLabelText() ?? "",
                                    comment: data.content)
                 }
 
@@ -732,6 +743,30 @@ final class DetailGatherViewController: BaseViewController {
         let cancelAction = UIAlertAction(title: "확인", style: .default, handler: nil)
         alertController.addAction(cancelAction)
         present(alertController, animated: true, completion: nil)
+    }
+    
+    @objc func keyboardUp(notification:NSNotification) {
+        if let keyboardFrame:NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+           let keyboardRectangle = keyboardFrame.cgRectValue
+       
+            UIView.animate(
+                withDuration: 0.3
+                , animations: {
+                    self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardRectangle.height)
+                }
+            )
+        }
+    }
+    
+    @objc func keyboardDown() {
+        self.view.transform = .identity
+    }
+    
+    @objc func handleTap(sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            view.endEditing(true)
+        }
+        sender.cancelsTouchesInView = false
     }
 }
 

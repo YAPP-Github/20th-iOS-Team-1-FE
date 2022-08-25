@@ -21,7 +21,7 @@ extension UILabel {
     func countIcon(countString: String) {
         let attributedString = NSMutableAttributedString(string: countString)
         let imageAttachment = NSTextAttachment()
-        imageAttachment.image = .Togaether.participantIcon
+        imageAttachment.image = .Togaether.participantIcon?.withTintColor(UIColor.Togaether.primaryLabel)
         attributedString.append(NSAttributedString(attachment: imageAttachment))
         self.attributedText = attributedString
     }
