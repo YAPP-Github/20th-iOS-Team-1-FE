@@ -22,7 +22,7 @@ enum PetSizeType: String {
         case .small:
             return "소형견"
         case .all:
-            return "상관없음"
+            return "모든 크기"
         }
     }
 }
