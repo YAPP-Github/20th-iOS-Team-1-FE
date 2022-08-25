@@ -32,7 +32,7 @@ final class DetailGatherReactor: Reactor {
         case empty
         case deleteClubCall
         case quitClubCall
-        case hasNotPet
+        case participateError(RejectReason)
         case detailError(Bool)
     }
     
@@ -43,7 +43,7 @@ final class DetailGatherReactor: Reactor {
         var deleteClubCallCount = 0
         var quitClubCallCount = 0
         var isCommentReportSuccess = false
-        var alertHasNotPet = false
+        var participateError = ""
         var clubDetailError = false
         
         var gatherButtonText = ""
@@ -151,8 +151,8 @@ final class DetailGatherReactor: Reactor {
             newState.deleteClubCallCount += 1
         case .quitClubCall:
             newState.quitClubCallCount += 1
-        case .hasNotPet:
-            newState.alertHasNotPet = true
+        case .participateError(let error):
+            newState.participateError = error.toKorean()
         case .detailError(let hasError):
             newState.clubDetailError = hasError
         }
@@ -201,8 +201,9 @@ final class DetailGatherReactor: Reactor {
                         .subscribe { result in
                         switch result {
                         case .success(let reason):
-                            if reason == "HAS_NOT_PET" {
-                                observer.onNext(Mutation.hasNotPet)
+                            if let reason = reason,
+                               let error = RejectReason(rawValue: reason) {
+                                observer.onNext(Mutation.participateError(error))
                             } else {
                                 this.detailGatherRepository.requestDetailGather(accessToken: token, clubID: clubID)
                                     .subscribe { result in
